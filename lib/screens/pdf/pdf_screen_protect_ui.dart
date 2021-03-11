@@ -3,15 +3,20 @@ import 'dart:io';
 import 'package:align_positioned/align_positioned.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:flutter/material.dart';
+import 'package:forte_life/notification_plugin.dart';
+import 'package:forte_life/providers/app_provider.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path/path.dart' as path;
 
 class PDFScreenProtectUI extends StatefulWidget {
-  PDFScreenProtectUI({this.pdf});
+  PDFScreenProtectUI({this.pdf, this.scaffoldKey});
 
   final pw.Document pdf;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
   _PDFScreenProtectUIState createState() => _PDFScreenProtectUIState();
@@ -25,7 +30,13 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
   @override
   void initState() {
     super.initState();
+    notificationPlugin.setListenerForLowerVersion(onNotificationLowerVersion);
     showPDF();
+  }
+
+  onNotificationLowerVersion(ReceivedNotification receivedNotification) {}
+  onNotificationClicked(String payload) {
+    OpenFile.open(payload);
   }
 
   Future<Directory> _getDownloadDirectory() async {
@@ -98,17 +109,66 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
             onPressed: () async {
               if (fileName.text.isNotEmpty) {
                 final saveDir = await _getDownloadDirectory();
-                final newFileName = fileName.text + ".pdf";
+                final newFileName = "Protect- " + fileName.text + ".pdf";
                 final newFilePath = path.join(saveDir.path, newFileName);
                 File newFile = new File(newFilePath);
                 if (await newFile.exists()) {
-                  print("File Already Exists");
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                          title: Image.asset("assets/icons/attention.png",
+                              width: 60, height: 60),
+                          content: Text(
+                            "File Named $newFileName Already Exists",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontFamily: "Kano",
+                            ),
+                          ));
+                    },
+                  );
                 } else {
                   savePDF(newFile, widget.pdf);
+                  await notificationPlugin.setOnSelectNotification(
+                      onNotificationClicked(newFilePath));
+                  await notificationPlugin.showNotification();
                   Navigator.of(context).pop();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                          title: Image.asset("assets/icons/check.png",
+                              width: 60, height: 60),
+                          content: Text(
+                            "File Named $newFileName Saved Successfully",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontFamily: "Kano",
+                            ),
+                          ));
+                    },
+                  );
                 }
               } else
-                print("Error No File Name");
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                        title: Image.asset("assets/icons/attention.png",
+                            width: 60, height: 60),
+                        content: Text(
+                          "File Name Can't Be Empty",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontFamily: "Kano",
+                          ),
+                        ));
+                  },
+                );
             },
           ),
           FlatButton(
@@ -169,9 +229,15 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
   Future getPDF() async {
     file = File(
         "/storage/emulated/0/Android/data/com.reahu.forte_life/files/fortelife.pdf");
-    setState(() {
-      _isLoading = false;
-    });
+    if (this.mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  void dispose() {
+    super.dispose();
   }
 
   //Save PDF in local storage

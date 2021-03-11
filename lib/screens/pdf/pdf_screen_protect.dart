@@ -43,8 +43,9 @@ class _PDFScreenProtectState extends State<PDFScreenProtect> {
     ParametersProvider parametersProvider =
         Provider.of<ParametersProvider>(context);
     AppProvider appProvider = Provider.of<AppProvider>(context);
+    GlobalKey<ScaffoldState> scaffoldKey;
     pdf = PDFWidget().createPDF(
-        "Forte Protect",
+        "Forte Life Protect",
         appProvider.addRider,
         appProvider.differentPerson,
         parametersProvider.lpName,
@@ -62,8 +63,12 @@ class _PDFScreenProtectState extends State<PDFScreenProtect> {
         parametersProvider.premiumRider,
         parametersProvider.riderSA,
         parametersProvider.isOnPolicy);
-    return PDFScreenProtectUI(
-      pdf: pdf,
+    return Scaffold(
+      key: scaffoldKey,
+      body: PDFScreenProtectUI(
+        scaffoldKey: scaffoldKey,
+        pdf: pdf,
+      ),
     );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:forte_life/screens/pdf/pdf_screen.dart';
+import 'package:forte_life/widgets/custom_alert_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/app_provider.dart';
@@ -31,13 +34,64 @@ class _MainFlowState extends State<MainFlow> {
       });
     }
 
+    void _showExitDialog(BuildContext context) {
+      showDialog(
+          context: context,
+          builder: (context) => Center(
+                child: CustomAlertDialog(
+                  title: "Exit",
+                  icon: Image.asset("assets/icons/attention.png",
+                      width: 60, height: 60),
+                  details: "Are you sure you want to leave this page?",
+                  actionButtonTitle: "No",
+                  actionButtonTitleTwo: "Yes",
+                  isPrompt: true,
+                  onActionButtonPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  onActionButtonPressedTwo: () {
+                    Navigator.of(context).pop();
+                    appProvider.categoriesTabIndex = 0;
+                  },
+                ),
+              ));
+    }
+
+    void _showLeaveDialog(BuildContext context) {
+      showDialog(
+          context: context,
+          builder: (context) => Center(
+                child: CustomAlertDialog(
+                  title: "Exit",
+                  icon: Image.asset("assets/icons/off.png",
+                      width: 60, height: 60),
+                  details: "Are you sure you want to exit the app?",
+                  actionButtonTitle: "No",
+                  actionButtonTitleTwo: "Yes",
+                  isPrompt: true,
+                  onActionButtonPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  onActionButtonPressedTwo: () {
+                    Navigator.of(context).pop();
+                    SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                  },
+                ),
+              ));
+    }
+
     return WillPopScope(
       onWillPop: () async {
         if (appProvider.activeTabIndex != 0) {
           appProvider.activeTabIndex = 0;
-          return false;
+          return true;
+        } else {
+          if (appProvider.categoriesTabIndex != 0) {
+            _showExitDialog(context);
+          } else
+            _showLeaveDialog(context);
         }
-        return true;
+        return false;
       },
       child: Scaffold(
         body: IndexedStack(

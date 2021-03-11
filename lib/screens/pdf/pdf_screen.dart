@@ -17,12 +17,19 @@ class _PDFScreenState extends State<PDFScreen> {
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
 
-    //TODO Add Local Notification
-
-    return SafeArea(
-      child: Container(
-        child: Scaffold(
-          body: tabs[appProvider.pdfScreenIndex],
+    return WillPopScope(
+      onWillPop: () async {
+        setState(() {
+          appProvider.activeTabIndex = 0;
+        });
+        Navigator.popAndPushNamed(context, "/main_flow");
+        return true;
+      },
+      child: SafeArea(
+        child: Container(
+          child: Scaffold(
+            body: tabs[appProvider.pdfScreenIndex],
+          ),
         ),
       ),
     );

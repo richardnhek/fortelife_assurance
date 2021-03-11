@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:align_positioned/align_positioned.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:forte_life/plugins/notification_plugin.dart';
+import 'package:open_file/open_file.dart';
+import 'file:///D:/Richard/Jobs/Startups/Project/ForteCalculatorApp/Development/forte_life_alpha/forte_life/lib/notification_plugin.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -26,7 +26,6 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
   void initState() {
     super.initState();
     notificationPlugin.setListenerForLowerVersion(onNotificationLowerVersion);
-    notificationPlugin.setOnSelectNotification(onNotificationClicked);
     showPDF();
   }
 
@@ -38,11 +37,14 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
   }
 
   onNotificationLowerVersion(ReceivedNotification receivedNotification) {}
-  onNotificationClicked(String payload) {}
+  onNotificationClicked(String payload) {
+    OpenFile.open(payload);
+  }
 
   @override
   Widget build(BuildContext context) {
     TextEditingController fileName = new TextEditingController();
+
     showAlertDialog(BuildContext context) {
       AlertDialog alert = AlertDialog(
         contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
@@ -103,19 +105,66 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
             onPressed: () async {
               if (fileName.text.isNotEmpty) {
                 final saveDir = await _getDownloadDirectory();
-                final newFileName = fileName.text + ".pdf";
+                final newFileName = "Education- " + fileName.text + ".pdf";
                 final newFilePath = path.join(saveDir.path, newFileName);
                 File newFile = new File(newFilePath);
                 if (await newFile.exists()) {
-                  print("File Already Exists");
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                          title: Image.asset("assets/icons/attention.png",
+                              width: 60, height: 60),
+                          content: Text(
+                            "File Named $newFileName Already Exists",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontFamily: "Kano",
+                            ),
+                          ));
+                    },
+                  );
                 } else {
                   savePDF(newFile, widget.pdf);
-                  // _showNotification(newFilePath);
+                  await notificationPlugin.setOnSelectNotification(
+                      onNotificationClicked(newFilePath));
                   await notificationPlugin.showNotification();
                   Navigator.of(context).pop();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                          title: Image.asset("assets/icons/check.png",
+                              width: 60, height: 60),
+                          content: Text(
+                            "File Named $newFileName Saved Successfully",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontFamily: "Kano",
+                            ),
+                          ));
+                    },
+                  );
                 }
               } else
-                print("Error No File Name");
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                        title: Image.asset("assets/icons/attention.png",
+                            width: 60, height: 60),
+                        content: Text(
+                          "File Name Can't Be Empty",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontFamily: "Kano",
+                          ),
+                        ));
+                  },
+                );
             },
           ),
           FlatButton(
@@ -176,9 +225,15 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
   Future getPDF() async {
     file = File(
         "/storage/emulated/0/Android/data/com.reahu.forte_life/files/fortelife-education.pdf");
-    setState(() {
-      _isLoading = false;
-    });
+    if (this.mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  void dispose() {
+    super.dispose();
   }
 
   //Save PDF in local storage

@@ -42,7 +42,7 @@ class DisabledField extends StatelessWidget {
             style: TextStyle(
               color: Colors.black,
               fontSize: 15,
-              fontFamily: "Biko",
+              fontFamily: "Kano",
             ),
             autovalidateMode: AutovalidateMode.always,
           ),

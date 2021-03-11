@@ -21,6 +21,8 @@ class ProfileScreenUI extends StatelessWidget {
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     final appProvider = Provider.of<AppProvider>(context);
+    final GlobalKey mainContainer = GlobalKey();
+
     void _showExitDialog() {
       showDialog(
           context: context,
@@ -227,7 +229,6 @@ class ProfileScreenUI extends StatelessWidget {
     }
 
     void _showContactDialog() {
-      print(appProvider.userName);
       showDialog(
           context: context,
           builder: (ctx) => Material(
@@ -357,186 +358,177 @@ class ProfileScreenUI extends StatelessWidget {
               ));
     }
 
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            child: Stack(alignment: Alignment.topCenter, children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  decoration: new BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Color(0xFF92C04A), Color(0xFF6ABFBC)])),
-                  height: mq.size.height / 3,
-                  width: mq.size.width,
+    return Stack(alignment: Alignment.center, children: [
+      Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          decoration: new BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xFF92C04A), Color(0xFF6ABFBC)])),
+          height: 400,
+          width: mq.size.width,
+        ),
+      ),
+      Align(
+        alignment: Alignment(0.0, 0.05),
+        child: Container(
+          key: mainContainer,
+          margin: EdgeInsets.symmetric(horizontal: 30),
+          padding: EdgeInsets.only(top: 50),
+          constraints: BoxConstraints(
+            maxHeight: 315,
+            minHeight: 305,
+          ),
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7.5),
+              color: Color(0xFFFFFFFF),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.16),
+                    blurRadius: 15,
+                    spreadRadius: 1,
+                    offset: Offset(3, 6)),
+              ]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "Username: ${appProvider.userName}",
+                style: TextStyle(
+                    color: Colors.grey, fontSize: 15, fontFamily: "Kano"),
+              ),
+              Text(
+                "Last Active: 2 Hours Ago",
+                style: TextStyle(
+                    color: Colors.grey, fontSize: 15, fontFamily: "Kano"),
+              ),
+              SizedBox(height: 10),
+              Divider(
+                color: Colors.grey.withOpacity(0.5),
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Language",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontFamily: "Kano"),
+                    ),
+                    Icon(Icons.language, color: Color(0xFF92C04A))
+                  ],
                 ),
               ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 600, minWidth: 500),
+              SizedBox(height: 20),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: _showChangePassword,
                 child: Container(
-                  margin: EdgeInsets.only(
-                      top: mq.size.height / 4, left: 30, right: 30),
-                  padding: EdgeInsets.only(top: 50),
-                  width: double.infinity,
-                  height: mq.size.height / 2,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7.5),
-                      color: Color(0xFFFFFFFF),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.16),
-                            blurRadius: 15,
-                            spreadRadius: 1,
-                            offset: Offset(3, 6)),
-                      ]),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Username: ${appProvider.userName}",
+                        "Change Password",
                         style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
+                            color: Colors.black,
+                            fontSize: 18,
                             fontFamily: "Kano"),
                       ),
-                      Text(
-                        "Last Active: 2 Hours Ago",
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
-                            fontFamily: "Kano"),
-                      ),
-                      SizedBox(height: 10),
-                      Divider(
-                        color: Colors.grey.withOpacity(0.5),
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Language",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: "Kano"),
-                            ),
-                            Icon(Icons.language, color: Color(0xFF92C04A))
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: _showChangePassword,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 25),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Change Password",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontFamily: "Kano"),
-                              ),
-                              Icon(Icons.lock_outline, color: Color(0xFF92C04A))
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: _showContactDialog,
-                        child: Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 25),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                "Contact Us",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontFamily: "Kano"),
-                              ),
-                              Icon(Icons.contact_page_outlined,
-                                  color: Color(0xFF92C04A))
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      RaisedButton(
-                          onPressed: _showExitDialog,
-                          padding: EdgeInsets.all(10),
-                          disabledColor: Color(0xFFD31145),
-                          color: Color(0xFFD31145),
-                          disabledElevation: 2.5,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Log Out",
-                                style: TextStyle(
-                                    fontSize: 17.5,
-                                    color: Colors.white,
-                                    fontFamily: "Kano",
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(width: 10),
-                              Icon(
-                                Icons.logout,
-                                size: 21,
-                                color: Colors.white,
-                              )
-                            ],
-                          ))
+                      Icon(Icons.lock_outline, color: Color(0xFF92C04A))
                     ],
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: mq.size.height / 5.5),
-                decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.16),
-                          blurRadius: 10,
-                          offset: Offset(3, 6),
-                          spreadRadius: 1.5)
-                    ]),
-                child: CircleAvatar(
-                  maxRadius: 40,
-                  minRadius: 35,
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.white,
-                  child: Image(
-                    alignment: Alignment.bottomCenter,
-                    image: AssetImage("assets/icons/agent.png"),
-                    width: 60,
-                    height: 60,
+              SizedBox(height: 20),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: _showContactDialog,
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        "Contact Us",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: "Kano"),
+                      ),
+                      Icon(Icons.contact_page_outlined,
+                          color: Color(0xFF92C04A))
+                    ],
                   ),
                 ),
               ),
-            ]),
+              SizedBox(height: 20),
+              RaisedButton(
+                  onPressed: _showExitDialog,
+                  padding: EdgeInsets.all(8.5),
+                  disabledColor: Color(0xFFD31145),
+                  color: Color(0xFFD31145),
+                  disabledElevation: 2.5,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Log Out",
+                        style: TextStyle(
+                            fontSize: 17.5,
+                            color: Colors.white,
+                            fontFamily: "Kano",
+                            fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(width: 10),
+                      Icon(
+                        Icons.logout,
+                        size: 21,
+                        color: Colors.white,
+                      )
+                    ],
+                  ))
+            ],
           ),
-        ],
+        ),
       ),
-    );
+      Align(
+        alignment: Alignment(0.0, -0.5),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.transparent,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.16),
+                    blurRadius: 10,
+                    offset: Offset(3, 6),
+                    spreadRadius: 1.5)
+              ]),
+          child: CircleAvatar(
+            maxRadius: 40,
+            minRadius: 35,
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.white,
+            child: Image(
+              alignment: Alignment.bottomCenter,
+              image: AssetImage("assets/icons/agent.png"),
+              width: 50,
+              height: 50,
+            ),
+          ),
+        ),
+      ),
+    ]);
   }
 }

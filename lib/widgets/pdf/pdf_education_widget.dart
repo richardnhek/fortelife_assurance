@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:forte_life/widgets/pdf/pdf_subtitle.dart';
+import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'dart:io';
@@ -38,6 +39,10 @@ class PDFWidgetEdu {
     final boldData = boldFont.buffer.asByteData();
     final regularF = Font.ttf(regularData);
     final boldF = Font.ttf(boldData);
+    var myFormat = DateFormat('dd /MM /yyyy');
+    var dateNow = DateTime.now();
+    final currentDate = myFormat.format(dateNow);
+    RegExp regExpNum = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
     final Map<int, TableColumnWidth> columnWidthVal = {
       0: FlexColumnWidth(0.45),
       1: FlexColumnWidth(1.85),
@@ -70,31 +75,37 @@ class PDFWidgetEdu {
     String cashValueStr = cashValue.toStringAsFixed(2);
     //
 
-    double getPremiumPayment(String paymentMode) {
+    List<double> getPremiumPayment(String paymentMode) {
       double premiumPayment = 0;
+      double truePremium = 0;
       switch (paymentMode) {
         case "Yearly":
           {
+            truePremium = yearlyNum;
             premiumPayment = yearlyNum;
             break;
           }
         case "Half-yearly":
           {
+            truePremium = halfPNum;
             premiumPayment = halfPNum * 2;
             break;
           }
         case "Quarterly":
           {
+            truePremium = quarterlyPNum;
             premiumPayment = quarterlyPNum * 4;
             break;
           }
         case "Monthly":
           {
+            truePremium = monthlyPNum;
             premiumPayment = monthlyPNum * 12;
             break;
           }
       }
-      return premiumPayment;
+      List<double> premiumAndSale = [premiumPayment, truePremium];
+      return premiumAndSale;
     }
 
     double getGSB() {
@@ -110,7 +121,7 @@ class PDFWidgetEdu {
       List<List<dynamic>> dynamicRow = List();
       int i = 1;
       double cashValPercentage = 0;
-      premiumNum = getPremiumPayment(paymentMode);
+      premiumNum = getPremiumPayment(paymentMode)[0];
       accumulatedPremium += premiumNum;
       accumulatedPremiumForCV += yearlyNum;
       if (isOnPolicy == false) {
@@ -124,8 +135,8 @@ class PDFWidgetEdu {
             dynamicRow = [
               [
                 "$i",
-                "$premiumNum            ${accumulatedPremium.toStringAsFixed(2)}",
-                "${allCauses.toStringAsFixed(2)}",
+                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "-",
                 "          -                              -                             -         "
               ],
@@ -136,8 +147,8 @@ class PDFWidgetEdu {
             accumulatedPremiumForCV += yearlyNum;
             dynamicRow.add([
               "$i",
-              "$premiumNum            ${accumulatedPremium.toStringAsFixed(2)}",
-              "${allCauses.toStringAsFixed(2)}",
+              "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+              "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
               "-",
               "          -                              -                             -         "
             ]);
@@ -150,8 +161,8 @@ class PDFWidgetEdu {
             dynamicRow = [
               [
                 "$i",
-                "$premiumNum            ${accumulatedPremium.toStringAsFixed(2)}",
-                "${allCauses.toStringAsFixed(2)}",
+                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "-",
                 "          -                              -                             -         "
               ],
@@ -162,8 +173,8 @@ class PDFWidgetEdu {
             accumulatedPremiumForCV += yearlyNum;
             dynamicRow.add([
               "$i",
-              "$premiumNum            ${accumulatedPremium.toStringAsFixed(2)}",
-              "${allCauses.toStringAsFixed(2)}",
+              "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+              "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
               "-",
               "          -                              -                             -         "
             ]);
@@ -176,8 +187,8 @@ class PDFWidgetEdu {
             dynamicRow = [
               [
                 "$i",
-                "$premiumNum            ${accumulatedPremium.toStringAsFixed(2)}",
-                "${allCauses.toStringAsFixed(2)}",
+                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "-",
                 "          -                              -                             -         "
               ],
@@ -192,8 +203,8 @@ class PDFWidgetEdu {
             dynamicRow = [
               [
                 "$i",
-                "$premiumNum            ${accumulatedPremium.toStringAsFixed(2)}",
-                "${allCauses.toStringAsFixed(2)}",
+                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "-",
                 "          -                              -                             -         "
               ]
@@ -218,14 +229,16 @@ class PDFWidgetEdu {
               cashValPercentage += 0.1;
           }
           cashValue = accumulatedPremiumForCV * cashValPercentage;
-          cashValueStr = cashValue.toStringAsFixed(2);
+          cashValueStr = cashValue
+              .toStringAsFixed(2)
+              .replaceAllMapped(regExpNum, (Match m) => '${m[1]},');
         } else
           cashValueStr = "-";
         if (i < policyYear) {
           dynamicRow.add([
             "$i",
-            "$premiumNum            ${accumulatedPremium.toStringAsFixed(2)} ",
-            "${allCauses.toStringAsFixed(2)}",
+            "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+            "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
             cashValueStr,
             "          -                              -                             -         "
           ]);
@@ -233,10 +246,13 @@ class PDFWidgetEdu {
         } else {
           dynamicRow.add([
             "$i",
-            "$premiumNum            ${accumulatedPremium.toStringAsFixed(2)}",
-            "${allCauses.toStringAsFixed(2)}",
-            cashValue.round().toStringAsFixed(2),
-            "${basicSANum.toStringAsFixed(2)}               ${getGSB().toStringAsFixed(2)}               ${(basicSANum + getGSB()).toStringAsFixed(2)}"
+            "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+            "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+            cashValue
+                .round()
+                .toStringAsFixed(2)
+                .replaceAllMapped(regExpNum, (Match m) => '${m[1]},'),
+            "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}               ${getGSB().toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}               ${(basicSANum + getGSB()).toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
           ]);
           i++;
         }
@@ -247,7 +263,7 @@ class PDFWidgetEdu {
 
     List<String> getDynamicHeaders() {
       List<String> dynamicHeader = [
-        "End of Policy Year",
+        " End of \n Policy \n  Year",
         "                Premium (USD)\n\n       Annualized     Accumulated",
         "               Death/TPD (USD)\n\n                    All Causes",
         "      Cash\n      Value",
@@ -260,7 +276,7 @@ class PDFWidgetEdu {
 
     Document pdf = Document();
     pdf.addPage(Page(
-        margin: EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
+        margin: EdgeInsets.symmetric(horizontal: 20),
         pageFormat: PdfPageFormat.a4,
         build: (Context context) {
           return Container(
@@ -318,6 +334,7 @@ class PDFWidgetEdu {
                                       padding: EdgeInsets.only(left: 5),
                                       child: Container(width: 100),
                                     ),
+                                    SizedBox(width: 25),
                                     PDFSubtitle(title: "Name", font: boldF),
                                     PDFSubtitle(title: "Age", font: boldF),
                                     PDFSubtitle(title: "Gender", font: boldF),
@@ -343,6 +360,7 @@ class PDFWidgetEdu {
                                               style: TextStyle(
                                                   font: regularF,
                                                   fontSize: 8.25)))),
+                                  SizedBox(width: 25),
                                   PDFSubtitle(title: lpName, font: regularF),
                                   PDFSubtitle(title: lpAge, font: regularF),
                                   PDFSubtitle(title: lpGender, font: regularF),
@@ -365,6 +383,7 @@ class PDFWidgetEdu {
                                               style: TextStyle(
                                                   font: regularF,
                                                   fontSize: 8.25)))),
+                                  SizedBox(width: 25),
                                   PDFSubtitle(title: pName, font: regularF),
                                   PDFSubtitle(title: pAge, font: regularF),
                                   PDFSubtitle(title: pGender, font: regularF),
@@ -389,9 +408,9 @@ class PDFWidgetEdu {
                                                 font: boldF, fontSize: 8.25)))),
                                 Padding(
                                     padding: EdgeInsets.only(
-                                        left: 5, bottom: 2.5, top: 2.5),
+                                        left: 45, bottom: 2.5, top: 2.5),
                                     child: PDFSubtitle(
-                                        title: "Sum Insured", font: boldF)),
+                                        title: "Sum Assured", font: boldF)),
                                 PDFSubtitle(title: "Policy Term", font: boldF),
                                 PDFSubtitle(
                                     title: "Premium Paying Term", font: boldF),
@@ -415,26 +434,23 @@ class PDFWidgetEdu {
                                             padding: EdgeInsets.only(
                                                 left: 5, bottom: 2.5, top: 2.5),
                                             child: Container(
-                                                width: 117,
+                                                width: 140,
                                                 child: Text(
                                                     "Basic Plan : $title",
                                                     style: TextStyle(
                                                         font: regularF,
                                                         fontSize: 8.25)))),
+                                        SizedBox(width: 6.5),
                                         SizedBox(
                                             width: 100,
                                             child: PDFSubtitle(
                                                 title:
-                                                    "USD ${basicSANum.toStringAsFixed(2)}",
+                                                    "USD ${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                                                 font: regularF)),
-                                        SizedBox(width: 15),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 2),
-                                          child: PDFSubtitle(
-                                              title: policyTerm,
-                                              font: regularF),
-                                        ),
-                                        SizedBox(width: 22),
+                                        SizedBox(width: 6),
+                                        PDFSubtitle(
+                                            title: policyTerm, font: regularF),
+                                        SizedBox(width: 11),
                                         PDFSubtitle(
                                             title: policyTerm, font: regularF)
                                       ]),
@@ -467,7 +483,7 @@ class PDFWidgetEdu {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                      width: 120,
+                                      width: 140,
                                       child: Text("Basic Plan : $title",
                                           style: TextStyle(
                                               font: regularF, fontSize: 8.25))),
@@ -475,7 +491,7 @@ class PDFWidgetEdu {
                                     padding: EdgeInsets.only(left: 50),
                                     child: PDFSubtitle(
                                         title:
-                                            "USD ${getPremiumPayment(paymentMode).toStringAsFixed(2)}",
+                                            "USD ${getPremiumPayment(paymentMode)[1].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                                         font: regularF),
                                   )
                                 ]),
@@ -494,10 +510,10 @@ class PDFWidgetEdu {
                                             style: TextStyle(
                                                 font: boldF, fontSize: 8.25)))),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 50),
+                                  padding: EdgeInsets.only(left: 70),
                                   child: PDFSubtitle(
                                       title:
-                                          "USD ${getPremiumPayment(paymentMode).toStringAsFixed(2)}",
+                                          "USD ${getPremiumPayment(paymentMode)[1].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                                       font: regularF),
                                 )
                               ])
@@ -550,7 +566,7 @@ class PDFWidgetEdu {
                                   ]))
                         ])
                       ]),
-                  SizedBox(height: 15),
+                  SizedBox(height: 12.5),
                   Table.fromTextArray(
                       headers: getDynamicHeaders(),
                       headerAlignment: Alignment.center,
@@ -558,9 +574,9 @@ class PDFWidgetEdu {
                       headerHeight: 20,
                       headerPadding: const EdgeInsets.only(
                           right: 1.5, bottom: 1.5, left: 1.5, top: 1.5),
-                      cellHeight: 1.5,
+                      cellHeight: 0.1,
                       cellPadding: EdgeInsets.only(
-                          top: 3.5, right: 2.5, left: 2.5, bottom: 1.5),
+                          top: 2, right: 2.5, left: 2.5, bottom: 1.5),
                       headerStyle: TextStyle(font: boldF, fontSize: 8.25),
                       cellStyle: TextStyle(font: regularF, fontSize: 7.6),
                       cellAlignment: Alignment.topCenter,
@@ -579,15 +595,23 @@ class PDFWidgetEdu {
                     padding: EdgeInsets.only(top: 5),
                     child: Flexible(
                         child: Text(
-                            "1.	This is a Non-participating Endowment plan with premium payables throughout the term of the Policy." +
+                            "1.	This is a Non-participating Endowment plan with premiums payable throughout the term of the policy." +
                                 "\n" +
-                                "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term with entry age below 50 years last birthday and 1% of Basic Sum Assured multiplied by the policy term with age 50 years last birthday and above." +
+                                "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term for Payor with entry age below 50 years last birthday and 1% of Basic Sum Assured multiplied by the policy term for Payor age 50 years last birthday and above." +
                                 "\n" +
-                                "3.	This Policy will acquire a Cash Value after it has been in-force for a minimum of two years." +
+                                "3.	The Guaranteed Maturity Benefit will be payable at the end of the policy term." +
                                 "\n" +
-                                "4. 	The above is for illustration purposes only. The benefits described herein are subject to all terms and conditions contained in the Policy contract."
-                                    "\n" +
-                                "5.	Pays the earlier of either Death due to All Causes, TBD due too All Causes, Death due to Accident or TPD due to Accident.",
+                                "4. This policy will acquire a Cash Value after it has been in-force for a minimum of two (2) years" +
+                                "\n" +
+                                "5.	Upon the Life Assured attaining the age of 12, an Education Cash Allowance of USD 100 will be available to the policy owner." +
+                                "\n" +
+                                "6. Upon the death or total and permanent disablement (as defined in the policy) of the Payor and subject to the terms and conditions in the policy contract, all premiums will be waived until the policy matures." +
+                                "\n" +
+                                "7. The above are for illustration purposes only. The benefits described herein are subject to all the terms and conditions contained in the policy contract." +
+                                "\n\n" +
+                                "Note: This Sales Illustration shall be expired 30 days after print date below." +
+                                "\n\n\n" +
+                                "Print Date               : $currentDate",
                             style: TextStyle(fontSize: 8.25, font: regularF))),
                   ),
                 ]))

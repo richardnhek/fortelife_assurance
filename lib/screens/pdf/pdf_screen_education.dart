@@ -40,8 +40,9 @@ class _PDFScreenEduState extends State<PDFScreenEdu> {
   w.Widget build(BuildContext context) {
     ParametersProvider parametersProvider =
         Provider.of<ParametersProvider>(context);
+    GlobalKey<ScaffoldState> scaffoldKey;
     pdf = PDFWidgetEdu().createPDF(
-      "Forte Education-18",
+      "Forte Life Education-18",
       parametersProvider.lpName,
       parametersProvider.lpAge,
       parametersProvider.lpGender,
@@ -56,8 +57,11 @@ class _PDFScreenEduState extends State<PDFScreenEdu> {
       parametersProvider.annualP,
       parametersProvider.isOnPolicy,
     );
-    return PDFScreenEducationUI(
-      pdf: pdf,
+    return Scaffold(
+      key: scaffoldKey,
+      body: PDFScreenEducationUI(
+        pdf: pdf,
+      ),
     );
   }
 }

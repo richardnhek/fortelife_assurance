@@ -11,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
@@ -27,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     AppProvider appProvider = Provider.of<AppProvider>(context);
 
     return Scaffold(
+      key: _scaffoldKey,
       body: homeTab[appProvider.categoriesTabIndex],
     );
   }

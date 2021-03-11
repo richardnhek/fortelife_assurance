@@ -59,15 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
         User agent = await authProvider.login(
             username: _accountController.text,
             password: _passwordController.text);
-
-        // TODO: Prompt user to change password if password is default password (123456)
-        if (_passwordController.text == "123456") {}
-
-        Navigator.of(loadingModalContext).pop();
-        Navigator.of(context).popUntil((route) => route.isFirst);
-        Navigator.of(context).pushReplacementNamed('/main_flow');
         prefs.setString(AGENT_USERNAME, agent.username);
         prefs.setString(AGENT_ID, agent.id);
+        if (_passwordController.text == "12345678") {
+          Navigator.popAndPushNamed(context, "/change_pass");
+        } else {
+          Navigator.of(loadingModalContext).pop();
+          Navigator.of(context).popUntil((route) => route.isFirst);
+          Navigator.of(context).pushReplacementNamed('/main_flow');
+        }
       } catch (error) {
         Navigator.of(loadingModalContext).pop();
         _showErrorDialog(error.message);

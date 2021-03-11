@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forte_life/constants/constants.dart';
+import 'package:forte_life/notification_plugin.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
@@ -131,6 +132,7 @@ class _SplashScreenState extends State<SplashScreen>
     await getApplicationDocumentsDirectory();
     await getImageFileFromAssets("assets/pictures/android/logo/logo.png");
     await getFontFileFromAssets();
+    await notificationPlugin.init();
     await determineInitialRoute();
   }
 

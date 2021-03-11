@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 class ParametersProvider extends ChangeNotifier {
   //Parameters
   //Life Proposed's Name
-  String _lpName = " ";
+  String _lpName = "Name";
   String get lpName => _lpName;
 
   set lpName(String i) {
-    _lpName = i.toUpperCase();
+    _lpName = i;
     notifyListeners();
   }
 
   //
   //Proposer's Name
-  String _pName = " ";
+  String _pName = "Name";
   String get pName => _pName;
 
   set pName(String i) {
-    _pName = i.toUpperCase();
+    _pName = i;
     notifyListeners();
   }
   //
@@ -49,7 +49,8 @@ class ParametersProvider extends ChangeNotifier {
   String get lpGender => _lpGender;
 
   set lpGender(String i) {
-    _lpGender = i.toUpperCase();
+    i[0].toUpperCase();
+    _lpGender = i;
     notifyListeners();
   }
 
@@ -59,27 +60,28 @@ class ParametersProvider extends ChangeNotifier {
   String get pGender => _pGender;
 
   set pGender(String i) {
-    _pGender = i.toUpperCase();
+    i[0].toUpperCase();
+    _pGender = i;
     notifyListeners();
   }
 
   //
   //Proposer's Occupation
-  String _pOccupation = " ";
+  String _pOccupation = "Occupation";
   String get pOccupation => _pOccupation;
 
   set pOccupation(String i) {
-    _pOccupation = i.toUpperCase();
+    _pOccupation = i;
     notifyListeners();
   }
   //
 
   //Life Proposed's Occupation
-  String _lpOccupation = " ";
+  String _lpOccupation = "Occupation";
   String get lpOccupation => _lpOccupation;
 
   set lpOccupation(String i) {
-    _lpOccupation = i.toUpperCase();
+    _lpOccupation = i;
     notifyListeners();
   }
   //

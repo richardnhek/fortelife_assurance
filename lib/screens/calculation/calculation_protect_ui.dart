@@ -17,40 +17,86 @@ import 'package:forte_life/widgets/reset_button.dart';
 import 'package:intl/intl.dart';
 import 'package:forte_life/widgets/disabled_field.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CalculationProtectUI extends StatefulWidget {
+  CalculationProtectUI({this.scaffoldKey});
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   _CalculationProtectUIState createState() => _CalculationProtectUIState();
 }
 
 class _CalculationProtectUIState extends State<CalculationProtectUI> {
-  FocusNode premiumFocusNode;
-
   @override
   void initState() {
     super.initState();
+    initializeCalculator();
   }
 
+  Future<void> initializeCalculator() async {
+    await getValues();
+    premium.addListener(getAmountValues);
+    sumAssured.addListener(getAmountValues);
+  }
+
+  Future<void> getValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    String fName = prefs.getString("fName");
+    String lName = prefs.getString("lName");
+    String lOcc = prefs.getString("lOcc");
+    String premVal = prefs.getString("premVal");
+    String sumVal = prefs.getString("sumVal");
+    String pName = prefs.getString("pName");
+    String pLName = prefs.getString("pLName");
+    String pOcc = prefs.getString("pOcc");
+    int selYear = prefs.getInt("selYearInt");
+    firstName.text = fName == null ? '' : fName;
+    lastName.text = lName == null ? '' : lName;
+    lOccupation.text = lOcc == null ? '' : lOcc;
+    setState(() {
+      selectedYear = (selYear == null) == false ? selYear : 10;
+    });
+    premium.text = premVal == null ? '' : premVal;
+    premiumNum = (premium.text == null) ? '' : double.tryParse(premium.text);
+    sumAssured.text = sumVal == null ? '' : sumVal;
+    sumAssuredNum =
+        (sumAssured.text == null) ? '' : double.tryParse(sumAssured.text);
+    pFirstName.text = pName == null ? '' : pName;
+    pLastName.text = pLName == null ? '' : pLName;
+    pOccupation.text = pOcc == null ? '' : pOcc;
+  }
+
+  Future<void> getAmountValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("premVal", premium.text);
+    prefs.setString("sumVal", sumAssured.text);
+    prefs.setInt("selYearInt", selectedYear);
+  }
+
+  FocusNode premiumFocusNode;
   //Proposer
-  TextEditingController pFirstName = TextEditingController();
-  TextEditingController pLastName = TextEditingController();
-  TextEditingController pAge = TextEditingController();
-  TextEditingController pDob = TextEditingController();
-  TextEditingController pGender = TextEditingController();
-  TextEditingController pOccupation = TextEditingController();
+  final pFirstName = TextEditingController();
+  final pLastName = TextEditingController();
+  final pAge = TextEditingController();
+  final pDob = TextEditingController();
+  final pGender = TextEditingController();
+  final pOccupation = TextEditingController();
   //
 
   //Life Proposed
-  TextEditingController firstName = TextEditingController();
-  TextEditingController lastName = TextEditingController();
-  TextEditingController age = new TextEditingController();
-  TextEditingController dob = new TextEditingController();
-  TextEditingController sumAssured = new TextEditingController();
-  TextEditingController premium = new TextEditingController();
-  TextEditingController gender = TextEditingController();
-  TextEditingController lOccupation = TextEditingController();
-  TextEditingController policyYear = TextEditingController();
-  TextEditingController riderAdded = new TextEditingController();
+  final firstName = TextEditingController();
+  final lastName = TextEditingController();
+  final age = TextEditingController();
+  final dob = TextEditingController();
+  final sumAssured = TextEditingController();
+  final premium = TextEditingController();
+  final gender = TextEditingController();
+  final lOccupation = TextEditingController();
+  final policyYear = TextEditingController();
+  final riderAdded = TextEditingController();
   //
 
   String lSelectedGender;
@@ -97,7 +143,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         ),
         value: "Female")
   ];
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   List<DropdownMenuItem> paymentMode = [
     DropdownMenuItem(
@@ -138,8 +183,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   @override
   Widget build(BuildContext context) {
     ParametersProvider parametersProvider =
-        Provider.of<ParametersProvider>(context, listen: false);
-    AppProvider appProvider = Provider.of<AppProvider>(context);
+        Provider.of<ParametersProvider>(context, listen: true);
+    AppProvider appProvider =
+        Provider.of<AppProvider>(widget.scaffoldKey.currentContext);
+
     final mq = MediaQuery.of(context);
     showAlertDialog(BuildContext context) {
       AlertDialog alert = AlertDialog(
@@ -234,33 +281,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     }
     //
 
-    // //Get each value of each Payment Mode
-    // List<double> paymentModeValue(String selectedMode) {
-    //   switch (selectedMode) {
-    //     case "Yearly":
-    //       {
-    //         return [1, 1];
-    //       }
-    //     case "Half-yearly":
-    //       {
-    //         return [2, 0.5178];
-    //       }
-    //     case "Quarterly":
-    //       {
-    //         return [4, 0.2635];
-    //       }
-    //     case "Monthly":
-    //       {
-    //         return [12, 0.0888];
-    //       }
-    //     default:
-    //       {
-    //         return [1, 1];
-    //       }
-    //   }
-    // }
-    // //
-
     //Calculate and Generate PDF
     void calculateAndPDF() {
       if (appProvider.differentPerson == false) {
@@ -283,7 +303,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
         //Life Proposed
         parametersProvider.lpName =
-            lastName.text.toString() + " " + firstName.text.toString();
+            firstName.text.toString() + " " + lastName.text.toString();
         parametersProvider.lpAge = age.text.toString();
         parametersProvider.lpGender = lSelectedGender.toString();
         parametersProvider.lpOccupation = lOccupation.text.toString();
@@ -310,6 +330,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       setState(() {
         appProvider.activeTabIndex = 1;
         appProvider.pdfScreenIndex = 0;
+        appProvider.calculationPage = 0;
       });
       Navigator.pushNamedAndRemoveUntil(context, '/main_flow', (_) => false);
     }
@@ -322,7 +343,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
           padding: EdgeInsets.symmetric(
               horizontal: 20, vertical: mq.size.height / 9.5),
           child: Form(
-            key: _formKey,
+            key: widget._formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -659,10 +680,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5),
                       child: CalculateButton(onPressed: () async {
-                        if (_formKey.currentState.validate()) {
+                        if (widget._formKey.currentState.validate()) {
                           counter = 0;
                           customDialogChildren.clear();
-                          _formKey.currentState.save();
+                          widget._formKey.currentState.save();
+                          await saveTextValues();
                           if (appProvider.differentPerson == true) {
                             if (appProvider.addRider) {
                               sumAssuredValidation(
@@ -777,6 +799,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   // Date Picker Function
   _selectDate(BuildContext context, TextEditingController tec,
       TextEditingController tecAge, bool isLpAge) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("premVal", premium.text);
+    prefs.setString("sumVal", sumAssured.text);
+    String premVal = prefs.getString("premVal");
+    String sumVal = prefs.getString("sumVal");
     DateTime newSelectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
@@ -798,17 +825,33 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         });
 
     if (newSelectedDate != null) {
-      setState(() {
-        _selectedDate = newSelectedDate;
-        String dateTime = _selectedDate.toString();
-        tec.text = convertDateTimeDisplay(dateTime);
-        tec.selection = TextSelection.fromPosition(TextPosition(
-            offset: dob.text.length, affinity: TextAffinity.upstream));
-        tecAge.text = calculateAge(_selectedDate, isLpAge);
-      });
+      _selectedDate = newSelectedDate;
+      String dateTime = _selectedDate.toString();
+      tec.text = convertDateTimeDisplay(dateTime);
+      tec.selection = TextSelection.fromPosition(TextPosition(
+          offset: dob.text.length, affinity: TextAffinity.upstream));
+      tecAge.text = calculateAge(_selectedDate, isLpAge);
     }
+
+    premium.text = premVal.isNotEmpty ? premVal : '';
+    sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
   }
+
 //
+
+  //Save Text Values
+  Future<void> saveTextValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("fName", firstName.text);
+    prefs.setString("lName", lastName.text);
+    prefs.setString("lOcc", lOccupation.text);
+    prefs.setString("premVal", premiumNum.toString());
+    prefs.setString("sumVal", sumAssuredNum.toString());
+    prefs.setString("pName", pFirstName.text);
+    prefs.setString("pLName", pLastName.text);
+    prefs.setString("pOcc", pOccupation.text);
+  }
+  //
 
 // Calculate age from datepicker
   calculateAge(DateTime birthDate, bool isLpAge) {
@@ -1050,10 +1093,15 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   //Validate Sum Assured
   void premiumValidation(String premiumAmount) {
-    if (premiumAmount.isEmpty) {
-      customDialogChildren.add(CustomDialogText(
-        description: "Premium can't be empty",
-      ));
+    if (premiumAmount.isEmpty || premiumAmount == null) {
+      if (premiumAmount.isEmpty) {
+        customDialogChildren.add(CustomDialogText(
+          description: "Premium can't be empty",
+        ));
+      } else
+        customDialogChildren.add(CustomDialogText(
+          description: "Premium can't be null",
+        ));
     } else {
       if (regExpNum.hasMatch(premiumAmount) == false) {
         customDialogChildren.add(CustomDialogText(

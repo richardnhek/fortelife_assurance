@@ -35,10 +35,13 @@ class AuthProvider extends ChangeNotifier {
         throw HttpException("This Account Has Been Suspended");
       }
 
-      final token = response['token'];
-      sharedPreferences = await SharedPreferences.getInstance();
-      sharedPreferences.setString(APP_ACCESS_TOKEN, token);
-      _accessToken = response['token'];
+      if (password != "12345678") {
+        final token = response['token'];
+        sharedPreferences = await SharedPreferences.getInstance();
+        sharedPreferences.setString(APP_ACCESS_TOKEN, token);
+        print("Token Set");
+        _accessToken = response['token'];
+      }
       notifyListeners();
       return _user;
     } on DioError catch (error) {

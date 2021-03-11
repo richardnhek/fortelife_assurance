@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forte_life/screens/auth/change_password_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'screens/home/home_screen.dart';
 import 'main_flow.dart';
@@ -16,6 +17,7 @@ class _AppControllerState extends State<AppController> {
     "/login": LoginScreen(),
     "/main_flow": MainFlow(),
     "/home": HomeScreen(),
+    "/change_pass": ChangePasswordScreen()
   };
 
   @override
@@ -37,7 +39,7 @@ class _AppControllerState extends State<AppController> {
             case '/main_flow':
               return PageTransition(
                 child: routes[settings.name],
-                type: PageTransitionType.rightToLeftWithFade,
+                type: PageTransitionType.fade,
                 settings: settings,
                 duration: Duration(milliseconds: 500),
                 curve: Interval(0.1, 0.3, curve: Curves.linear),

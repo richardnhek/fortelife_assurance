@@ -21,11 +21,11 @@ class _CalculationEducationState extends State<CalculationEducation> {
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     final mq = MediaQuery.of(context);
-
-    void _showExitDialog() {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    void _showExitDialog(BuildContext context) {
       showDialog(
           context: context,
-          builder: (ctx) => Center(
+          builder: (context) => Center(
                 child: CustomAlertDialog(
                   title: "Exit",
                   icon: Image.asset("assets/icons/attention.png",
@@ -45,78 +45,75 @@ class _CalculationEducationState extends State<CalculationEducation> {
               ));
     }
 
-    return WillPopScope(
-        onWillPop: () async {
-          _showExitDialog();
-        },
-        child: Scaffold(
-          body: Stack(children: [
-            tabs[appProvider.calculationPageEdu],
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              height: mq.size.height / 7,
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.16),
-                    spreadRadius: 1,
-                    blurRadius: 5)
-              ]),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      child: TabButton(
-                        tabTitle: "Calculator",
-                        width: mq.size.width / 2,
-                        height: mq.size.height / 10,
-                        icon: Icons.calculate_outlined,
-                        isActive: appProvider.calculationPageEdu == 0,
-                        onPressed: () {
-                          setState(() {
-                            appProvider.calculationPageEdu = 0;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: TabButton(
-                        width: mq.size.width / 2,
-                        height: mq.size.height / 10,
-                        tabTitle: "Information",
-                        icon: Icons.info_outline,
-                        isActive: appProvider.calculationPageEdu == 1,
-                        onPressed: () {
-                          setState(() {
-                            appProvider.calculationPageEdu = 1;
-                          });
-                        },
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )
+    return Scaffold(
+      key: _scaffoldKey,
+      body: Stack(children: [
+        tabs[appProvider.calculationPageEdu],
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          height: mq.size.height / 7,
+          decoration: BoxDecoration(color: Colors.white, boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.16),
+                spreadRadius: 1,
+                blurRadius: 5)
           ]),
-          floatingActionButton: AlignPositioned(
-            alignment: Alignment.topLeft,
-            dy: mq.size.height / 13.5,
-            dx: mq.size.width / 20,
-            child: FloatingActionButton(
-              heroTag: "backBtn",
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: 32,
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  child: TabButton(
+                    tabTitle: "Calculator",
+                    width: mq.size.width / 2,
+                    height: mq.size.height / 10,
+                    icon: Icons.calculate_outlined,
+                    isActive: appProvider.calculationPageEdu == 0,
+                    onPressed: () {
+                      setState(() {
+                        appProvider.calculationPageEdu = 0;
+                      });
+                    },
+                  ),
+                ),
               ),
-              onPressed: () {
-                _showExitDialog();
-              },
-            ),
+              Expanded(
+                child: Container(
+                  child: TabButton(
+                    width: mq.size.width / 2,
+                    height: mq.size.height / 10,
+                    tabTitle: "Information",
+                    icon: Icons.info_outline,
+                    isActive: appProvider.calculationPageEdu == 1,
+                    onPressed: () {
+                      setState(() {
+                        appProvider.calculationPageEdu = 1;
+                      });
+                    },
+                  ),
+                ),
+              )
+            ],
           ),
-        ));
+        )
+      ]),
+      floatingActionButton: AlignPositioned(
+        alignment: Alignment.topLeft,
+        dy: mq.size.height / 13.5,
+        dx: mq.size.width / 20,
+        child: FloatingActionButton(
+          heroTag: "backBtn",
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+            size: 32,
+          ),
+          onPressed: () {
+            _showExitDialog(_scaffoldKey.currentContext);
+          },
+        ),
+      ),
+    );
   }
 }

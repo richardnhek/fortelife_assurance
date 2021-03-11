@@ -55,7 +55,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     void _onChangePassword(scaffoldContext) async {
       if (_newPasswordController.text.isNotEmpty) {
-        if (_confirmController.text != _newPasswordController.text) {
+        if (_newPasswordController.text == "12345678") {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                  title: Image.asset("assets/icons/attention.png",
+                      width: 60, height: 60),
+                  content: Text(
+                    "Password Can't Be Default",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "Kano",
+                      fontSize: 22,
+                      color: Color(0xFFD31145),
+                    ),
+                  ));
+            },
+          );
+        } else if (_confirmController.text != _newPasswordController.text) {
           showDialog(
             context: context,
             builder: (BuildContext context) {

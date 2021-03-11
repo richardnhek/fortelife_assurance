@@ -14,8 +14,6 @@ class CalculationProtect extends StatefulWidget {
 }
 
 class _CalculationProtectState extends State<CalculationProtect> {
-  final tabs = [CalculationProtectUI(), InfoScreen()];
-
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
@@ -45,82 +43,85 @@ class _CalculationProtectState extends State<CalculationProtect> {
               ));
     }
 
-    return WillPopScope(
-        onWillPop: () async {
-          _showExitDialog(_scaffoldKey.currentContext);
-        },
-        child: Scaffold(
-          key: _scaffoldKey,
-          body: Stack(children: [
-            tabs[appProvider.calculationPage],
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              height: mq.size.height / 7,
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.16),
-                    spreadRadius: 1,
-                    blurRadius: 5)
-              ]),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      child: TabButton(
-                        tabTitle: "Calculator",
-                        width: mq.size.width / 2,
-                        height: mq.size.height / 10,
-                        icon: Icons.calculate_outlined,
-                        isActive: appProvider.calculationPage == 0,
-                        onPressed: () {
-                          setState(() {
-                            appProvider.calculationPage = 0;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: TabButton(
-                        width: mq.size.width / 2,
-                        height: mq.size.height / 10,
-                        tabTitle: "Information",
-                        icon: Icons.info_outline,
-                        isActive: appProvider.calculationPage == 1,
-                        onPressed: () {
-                          setState(() {
-                            appProvider.calculationPage = 1;
-                          });
-                        },
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )
+    final tabs = [
+      CalculationProtectUI(
+        scaffoldKey: _scaffoldKey,
+      ),
+      InfoScreen()
+    ];
+
+    return Scaffold(
+      key: _scaffoldKey,
+      body: Stack(children: [
+        tabs[appProvider.calculationPage],
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          height: mq.size.height / 7,
+          decoration: BoxDecoration(color: Colors.white, boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.16),
+                spreadRadius: 1,
+                blurRadius: 5)
           ]),
-          floatingActionButton: AlignPositioned(
-            alignment: Alignment.topLeft,
-            dy: mq.size.height / 13.5,
-            dx: mq.size.width / 20,
-            child: FloatingActionButton(
-              splashColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightElevation: 0,
-              heroTag: "backBtn",
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: 32,
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  child: TabButton(
+                    tabTitle: "Calculator",
+                    width: mq.size.width / 2,
+                    height: mq.size.height / 10,
+                    icon: Icons.calculate_outlined,
+                    isActive: appProvider.calculationPage == 0,
+                    onPressed: () {
+                      setState(() {
+                        appProvider.calculationPage = 0;
+                      });
+                    },
+                  ),
+                ),
               ),
-              onPressed: () {
-                _showExitDialog(_scaffoldKey.currentContext);
-              },
-            ),
+              Expanded(
+                child: Container(
+                  child: TabButton(
+                    width: mq.size.width / 2,
+                    height: mq.size.height / 10,
+                    tabTitle: "Information",
+                    icon: Icons.info_outline,
+                    isActive: appProvider.calculationPage == 1,
+                    onPressed: () {
+                      setState(() {
+                        appProvider.calculationPage = 1;
+                      });
+                    },
+                  ),
+                ),
+              )
+            ],
           ),
-        ));
+        )
+      ]),
+      floatingActionButton: AlignPositioned(
+        alignment: Alignment.topLeft,
+        dy: mq.size.height / 13.5,
+        dx: mq.size.width / 20,
+        child: FloatingActionButton(
+          splashColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightElevation: 0,
+          heroTag: "backBtn",
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+            size: 32,
+          ),
+          onPressed: () {
+            _showExitDialog(_scaffoldKey.currentContext);
+          },
+        ),
+      ),
+    );
   }
 }

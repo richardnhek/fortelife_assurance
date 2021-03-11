@@ -17,15 +17,16 @@ class NotificationPlugin {
 
   init() async {
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    print("notification initialized");
     if (Platform.isIOS) {
       _requestIOSPermission();
     }
+    initializePlatformSpecific();
   }
 
   initializePlatformSpecific() {
-    // var initializeAndroidSettings =
-    //     AndroidInitializationSettings();
-    var initializeAndroidSettings = AndroidInitializationSettings("");
+    var initializeAndroidSettings =
+        AndroidInitializationSettings('@mipmap/forte');
     var initializeIOSSettings = IOSInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
@@ -61,7 +62,13 @@ class NotificationPlugin {
 
   Future<void> showNotification() async {
     var androidChannelSpecifics = AndroidNotificationDetails(
-        "CHANNEL_ID", "CHANNEL_NAME", "CHANNEL_DESCRIPTION");
+      "CHANNEL_ID",
+      "CHANNEL_NAME",
+      "CHANNEL_DESCRIPTION",
+      importance: Importance.low,
+      priority: Priority.max,
+      timeoutAfter: 6000,
+    );
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         android: androidChannelSpecifics, iOS: iosChannelSpecifics);

@@ -15,6 +15,7 @@ import 'package:forte_life/widgets/reset_button.dart';
 import 'package:intl/intl.dart';
 import 'package:forte_life/widgets/disabled_field.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CalculationEducationUI extends StatefulWidget {
   @override
@@ -29,26 +30,53 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     super.initState();
   }
 
+  Future<void> getValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    String fName = prefs.getString("fNameEdu");
+    String lName = prefs.getString("lNameEdu");
+    String premVal = prefs.getString("premValEdu");
+    String sumVal = prefs.getString("sumValEdu");
+    String pName = prefs.getString("pNameEdu");
+    String pLName = prefs.getString("pLNameEdu");
+    String pOcc = prefs.getString("pOccEdu");
+    firstName.text = fName == null ? '' : fName;
+    lastName.text = lName == null ? '' : lName;
+    premium.text = premVal == null ? '' : premVal;
+    premiumNum = (premium.text == null) ? '' : double.tryParse(premium.text);
+    sumAssured.text = sumVal == null ? '' : sumVal;
+    sumAssuredNum =
+        (sumAssured.text == null) ? '' : double.tryParse(sumAssured.text);
+    pFirstName.text = pName == null ? '' : pName;
+    pLastName.text = pLName == null ? '' : pLName;
+    pOccupation.text = pOcc == null ? '' : pOcc;
+  }
+
+  Future<void> getAmountValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("premValEdu", premium.text);
+    prefs.setString("sumValEdu", sumAssured.text);
+  }
+
   //Payor
-  TextEditingController pFirstName = TextEditingController();
-  TextEditingController pLastName = TextEditingController();
-  TextEditingController pAge = TextEditingController();
-  TextEditingController pDob = TextEditingController();
-  TextEditingController pGender = TextEditingController();
-  TextEditingController pOccupation = TextEditingController();
+  final pFirstName = TextEditingController();
+  final pLastName = TextEditingController();
+  final pAge = TextEditingController();
+  final pDob = TextEditingController();
+  final pGender = TextEditingController();
+  final pOccupation = TextEditingController();
   //
 
   //Child
-  TextEditingController firstName = TextEditingController();
-  TextEditingController lastName = TextEditingController();
-  TextEditingController age = TextEditingController();
-  TextEditingController dob = TextEditingController();
-  TextEditingController sumAssured = TextEditingController();
-  TextEditingController premium = TextEditingController();
-  TextEditingController gender = TextEditingController();
-  TextEditingController lOccupation = TextEditingController();
-  TextEditingController policyYear = TextEditingController();
-  TextEditingController riderAdded = TextEditingController();
+  final firstName = TextEditingController();
+  final lastName = TextEditingController();
+  final age = TextEditingController();
+  final dob = TextEditingController();
+  final sumAssured = TextEditingController();
+  final premium = TextEditingController();
+  final gender = TextEditingController();
+  final lOccupation = TextEditingController(text: "Child");
+  final policyYear = TextEditingController();
+  final riderAdded = TextEditingController();
   //
 
   String lSelectedGender;
@@ -82,6 +110,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         value: "Female")
   ];
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   List<DropdownMenuItem> paymentMode = [
     DropdownMenuItem(
@@ -209,7 +238,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
 
       //Child
       parametersProvider.lpName =
-          lastName.text.toString() + " " + firstName.text.toString();
+          firstName.text.toString() + " " + lastName.text.toString();
       parametersProvider.lpAge = age.text.toString();
       parametersProvider.lpGender = lSelectedGender.toString();
       parametersProvider.lpOccupation = lOccupation.text.toString();
@@ -220,13 +249,17 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
       parametersProvider.annualP = premiumNum.toString();
       parametersProvider.basicSA = sumAssuredNum.toString();
       parametersProvider.isOnPolicy = isOnPolicy;
-      appProvider.pdfScreenIndex = 1;
-      appProvider.activeTabIndex = 1;
-      Navigator.of(context).pushNamed("/main_flow");
+      setState(() {
+        appProvider.pdfScreenIndex = 1;
+        appProvider.activeTabIndex = 1;
+        appProvider.calculationPageEdu = 0;
+      });
+      Navigator.pushNamedAndRemoveUntil(context, '/main_flow', (_) => false);
     }
     //
 
     return SafeArea(
+      key: _scaffoldKey,
       child: SingleChildScrollView(
         controller: ScrollController(),
         child: Container(
@@ -422,13 +455,9 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             SizedBox(width: 5),
                             Expanded(
                               flex: 2,
-                              child: CustomTextField(
-                                formInputType: TextInputType.text,
-                                formLabel: "Occupation",
-                                maxLength: 10,
-                                isRequired: false,
+                              child: DisabledField(
                                 formController: lOccupation,
-                                errorVisible: false,
+                                title: "Occupation",
                               ),
                             )
                           ],
@@ -525,6 +554,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           counter = 0;
                           customDialogChildren.clear();
                           _formKey.currentState.save();
+                          await saveTextValues();
                           policyYearValidation(policyYear.text);
                           sumAssuredValidation(
                               sumAssured.text, premium.text, policyYear.text);
@@ -587,6 +617,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   // Date Picker Function
   _selectDate(BuildContext context, TextEditingController tec,
       TextEditingController tecAge, bool isLpAge) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("premValEdu", premium.text);
+    prefs.setString("sumValEdu", sumAssured.text);
+    String premVal = prefs.getString("premValEdu");
+    String sumVal = prefs.getString("sumValEdu");
     DateTime newSelectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
@@ -617,6 +652,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         tecAge.text = calculateAge(_selectedDate, isLpAge);
       });
     }
+    premium.text = premVal.isNotEmpty ? premVal : '';
+    sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
   }
 //
 
@@ -809,6 +846,19 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         }
       }
     }
+  }
+  //
+
+  //Save Text Values
+  Future<void> saveTextValues() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("fNameEdu", firstName.text);
+    prefs.setString("lNameEdu", lastName.text);
+    prefs.setString("premValEdu", premium.text);
+    prefs.setString("sumValEdu", sumAssured.text);
+    prefs.setString("pNameEdu", pFirstName.text);
+    prefs.setString("pLNameEdu", pLastName.text);
+    prefs.setString("pOccEdu", pOccupation.text);
   }
   //
 

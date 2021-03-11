@@ -4,17 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField(
-      {this.formLabel,
-      this.formInputType,
-      this.formController,
-      this.onChange,
-      this.onSaved,
-      this.validateFunc,
-      this.errorVisible,
-      this.isRequired,
-      this.onSubmitted,
-      this.maxLength});
+  CustomTextField({
+    this.formLabel,
+    this.formInputType,
+    this.formController,
+    this.onChange,
+    this.onSaved,
+    this.validateFunc,
+    this.errorVisible,
+    this.isRequired,
+    this.onSubmitted,
+    this.maxLength,
+  });
 
   final String formLabel;
   final TextInputType formInputType;
@@ -42,6 +43,7 @@ class CustomTextField extends StatelessWidget {
                       ? Color(0xFFB8B8B8)
                       : Color(0xFFD31145))),
           child: TextFormField(
+            textCapitalization: TextCapitalization.words,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: validateFunc,
             inputFormatters: [
