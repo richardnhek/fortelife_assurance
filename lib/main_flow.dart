@@ -1,9 +1,7 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forte_life/screens/pdf/pdf_screen.dart';
 import 'package:forte_life/widgets/custom_alert_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/app_provider.dart';

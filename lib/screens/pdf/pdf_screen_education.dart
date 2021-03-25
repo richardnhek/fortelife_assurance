@@ -42,21 +42,21 @@ class _PDFScreenEduState extends State<PDFScreenEdu> {
         Provider.of<ParametersProvider>(context);
     GlobalKey<ScaffoldState> scaffoldKey;
     pdf = PDFWidgetEdu().createPDF(
-      "Forte Life Education-18",
-      parametersProvider.lpName,
-      parametersProvider.lpAge,
-      parametersProvider.lpGender,
-      parametersProvider.lpOccupation,
-      parametersProvider.pName,
-      parametersProvider.pAge,
-      parametersProvider.pGender,
-      parametersProvider.pOccupation,
-      parametersProvider.basicSA,
-      parametersProvider.policyTerm,
-      parametersProvider.paymentMode,
-      parametersProvider.annualP,
-      parametersProvider.isOnPolicy,
-    );
+        "Forte Life Education-18",
+        parametersProvider.lpName,
+        parametersProvider.lpAge,
+        parametersProvider.lpGender,
+        parametersProvider.lpOccupation,
+        parametersProvider.pName,
+        parametersProvider.pAge,
+        parametersProvider.pGender,
+        parametersProvider.pOccupation,
+        parametersProvider.basicSA,
+        parametersProvider.policyTerm,
+        parametersProvider.paymentMode,
+        parametersProvider.annualP,
+        parametersProvider.isOnPolicy,
+        parametersProvider.isKhmerSI);
     return Scaffold(
       key: scaffoldKey,
       body: PDFScreenEducationUI(

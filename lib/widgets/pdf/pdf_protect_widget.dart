@@ -37,10 +37,15 @@ class PDFWidget {
     final Uint8List boldFont = File(
             '/storage/emulated/0/Android/data/com.reahu.forte_life/files/LiberationSans-Bold.ttf')
         .readAsBytesSync();
+    final Uint8List khmerFont = File(
+            "/storage/emulated/0/Android/data/com.reahu.forte_life/files/KhmerOS.ttf")
+        .readAsBytesSync();
     final regularData = regularFont.buffer.asByteData();
     final boldData = boldFont.buffer.asByteData();
+    final khmerData = khmerFont.buffer.asByteData();
     final regularF = Font.ttf(regularData);
     final boldF = Font.ttf(boldData);
+    final khmerF = Font.ttf(khmerData);
     var myFormat = DateFormat('dd /MM /yyyy');
     var dateNow = DateTime.now();
     final currentDate = myFormat.format(dateNow);
@@ -128,12 +133,14 @@ class PDFWidget {
       double premiumPayment = 0;
       double truePremium = 0;
       double premiumWithR = 0;
+      double premiumRiderPM = 0;
       switch (paymentMode) {
         case "Yearly":
           {
             truePremium = yearlyNum;
             premiumPayment = yearlyNum;
             premiumWithR = totalPremium;
+            premiumRiderPM = premiumRiderNum;
             break;
           }
         case "Half-yearly":
@@ -141,6 +148,7 @@ class PDFWidget {
             truePremium = halfPNum;
             premiumPayment = halfPNum * 2;
             premiumWithR = halfPNumR;
+            premiumRiderPM = premiumRiderNum * 0.5178;
             break;
           }
         case "Quarterly":
@@ -148,6 +156,7 @@ class PDFWidget {
             truePremium = quarterlyPNum;
             premiumPayment = quarterlyPNum * 4;
             premiumWithR = quarterlyPNumR;
+            premiumRiderPM = premiumRiderNum * 0.2635;
             break;
           }
         case "Monthly":
@@ -155,6 +164,7 @@ class PDFWidget {
             truePremium = monthlyPNum;
             premiumPayment = monthlyPNum * 12;
             premiumWithR = monthlyPNumR;
+            premiumRiderPM = premiumRiderNum * 0.0888;
             break;
           }
       }
@@ -163,7 +173,8 @@ class PDFWidget {
         premiumPayment,
         totalPremiumDisplay,
         truePremium,
-        premiumWithR
+        premiumWithR,
+        premiumRiderPM
       ];
 
       return premiumAndSale;
@@ -632,7 +643,7 @@ class PDFWidget {
                                             padding: EdgeInsets.only(top: 2.5),
                                             child: PDFSubtitle(
                                                 title: addRider == true
-                                                    ? "USD ${premiumRiderNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
+                                                    ? "USD ${getPremiumPayment(paymentMode)[4].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
                                                     : "",
                                                 font: regularF)),
                                       ])

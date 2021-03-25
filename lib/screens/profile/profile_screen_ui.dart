@@ -400,11 +400,6 @@ class ProfileScreenUI extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.grey, fontSize: 15, fontFamily: "Kano"),
               ),
-              Text(
-                "Last Active: 2 Hours Ago",
-                style: TextStyle(
-                    color: Colors.grey, fontSize: 15, fontFamily: "Kano"),
-              ),
               SizedBox(height: 10),
               Divider(
                 color: Colors.grey.withOpacity(0.5),

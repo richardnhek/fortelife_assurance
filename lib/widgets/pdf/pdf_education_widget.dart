@@ -8,21 +8,21 @@ import 'dart:io';
 
 class PDFWidgetEdu {
   Document createPDF(
-    String title,
-    String lpName,
-    String lpAge,
-    String lpGender,
-    String lpOccupation,
-    String pName,
-    String pAge,
-    String pGender,
-    String pOccupation,
-    String basicSA,
-    String policyTerm,
-    String paymentMode,
-    String premium,
-    bool isOnPolicy,
-  ) {
+      String title,
+      String lpName,
+      String lpAge,
+      String lpGender,
+      String lpOccupation,
+      String pName,
+      String pAge,
+      String pGender,
+      String pOccupation,
+      String basicSA,
+      String policyTerm,
+      String paymentMode,
+      String premium,
+      bool isOnPolicy,
+      bool isKhmer) {
     //Final variables
     final file = File(
             "/storage/emulated/0/Android/data/com.reahu.forte_life/files/logo.png")
@@ -31,14 +31,29 @@ class PDFWidgetEdu {
     final Uint8List regularFont = File(
             '/storage/emulated/0/Android/data/com.reahu.forte_life/files/LiberationSans-Regular.ttf')
         .readAsBytesSync();
-
     final Uint8List boldFont = File(
             '/storage/emulated/0/Android/data/com.reahu.forte_life/files/LiberationSans-Bold.ttf')
         .readAsBytesSync();
+    final Uint8List khmerFont = File(
+            "/storage/emulated/0/Android/data/com.reahu.forte_life/files/KhmerOS.ttf")
+        .readAsBytesSync();
+    final Uint8List khmerFont2 = File(
+            "/storage/emulated/0/Android/data/com.reahu.forte_life/files/NiDAChenla.ttf")
+        .readAsBytesSync();
+    final Uint8List khmerFont3 = File(
+            "/storage/emulated/0/Android/data/com.reahu.forte_life/files/Kantumruy-Regular.ttf")
+        .readAsBytesSync();
+
     final regularData = regularFont.buffer.asByteData();
     final boldData = boldFont.buffer.asByteData();
+    final khmerData = khmerFont.buffer.asByteData();
+    final khmerData2 = khmerFont2.buffer.asByteData();
+    final khmerData3 = khmerFont3.buffer.asByteData();
     final regularF = Font.ttf(regularData);
     final boldF = Font.ttf(boldData);
+    final khmerF = Font.ttf(khmerData);
+    final khmerF2 = Font.ttf(khmerData2);
+    final khmerF3 = Font.ttf(khmerData3);
     var myFormat = DateFormat('dd /MM /yyyy');
     var dateNow = DateTime.now();
     final currentDate = myFormat.format(dateNow);
@@ -69,9 +84,15 @@ class PDFWidgetEdu {
     double halfPNum = premiumNum * 0.5178;
     double quarterlyPNum = premiumNum * 0.2635;
     double monthlyPNum = premiumNum * 0.0888;
-    String halfP = halfPNum.toStringAsFixed(2);
-    String quarterlyP = quarterlyPNum.toStringAsFixed(2);
-    String monthlyP = monthlyPNum.toStringAsFixed(2);
+    String halfP = halfPNum
+        .toStringAsFixed(2)
+        .replaceAllMapped(regExpNum, (Match m) => '${m[1]},');
+    String quarterlyP = quarterlyPNum
+        .toStringAsFixed(2)
+        .replaceAllMapped(regExpNum, (Match m) => '${m[1]},');
+    String monthlyP = monthlyPNum
+        .toStringAsFixed(2)
+        .replaceAllMapped(regExpNum, (Match m) => '${m[1]},');
     String cashValueStr = cashValue.toStringAsFixed(2);
     //
 
@@ -291,17 +312,22 @@ class PDFWidgetEdu {
                   Padding(
                     padding: EdgeInsets.only(top: 20),
                     child: Flexible(
-                        child: Text(
-                            "Forte Life Assurance (Cambodia) Plc." +
-                                "\n" +
-                                "Vattanac Capital, Level 18 No.66 Monivong Blvd, Sangkat Wat Phnom," +
-                                "\n" +
-                                "Khan Daun Penh, Phnom Penh, Cambodia." +
-                                "\n" +
-                                "Tel: (+855) 23 885 077/ 066 Fax: (+855) 23 986 922" +
-                                "\n" +
-                                "Email: info@fortelifeassurance.com",
-                            style: TextStyle(fontSize: 6.5, font: regularF))),
+                        child: isKhmer == false
+                            ? Text(
+                                "Forte Life Assurance (Cambodia) Plc." +
+                                    "\n" +
+                                    "Vattanac Capital, Level 18 No.66 Monivong Blvd, Sangkat Wat Phnom," +
+                                    "\n" +
+                                    "Khan Daun Penh, Phnom Penh, Cambodia." +
+                                    "\n" +
+                                    "Tel: (+855) 23 885 077/ 066 Fax: (+855) 23 986 922" +
+                                    "\n" +
+                                    "Email: info@fortelifeassurance.com",
+                                style: TextStyle(fontSize: 6.5, font: regularF))
+                            : Text(
+                                "៖ តារាងសម្គាល់បង្ហាញពីផលិតផលនេះនឹងត្រូវអស់សុពលភាពរយៈពេល៣០ថ្ងៃក្រោយកាលប",
+                                style: TextStyle(fontSize: 7, font: khmerF3),
+                              )),
                   ),
                 ]),
                 SizedBox(height: 20),
@@ -546,7 +572,9 @@ class PDFWidgetEdu {
                                     Column(children: [
                                       PDFSubtitle(
                                           title: "Yearly", font: regularF),
-                                      PDFSubtitle(title: "USD $premiumNum")
+                                      PDFSubtitle(
+                                          title:
+                                              "USD ${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}")
                                     ]),
                                     Column(children: [
                                       PDFSubtitle(

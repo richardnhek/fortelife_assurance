@@ -112,14 +112,30 @@ class _SplashScreenState extends State<SplashScreen>
         await rootBundle.load("assets/fonts/LiberationSans-Regular.ttf");
     final dataBold =
         await rootBundle.load("assets/fonts/LiberationSans-Bold.ttf");
+    final khmerData = await rootBundle.load("assets/fonts/KhmerOS.ttf");
+    final khmerData2 = await rootBundle.load("assets/fonts/NiDAChenla.ttf");
+    final khmerData3 =
+        await rootBundle.load("assets/fonts/Kantumruy-Regular.ttf");
     final font = new File(
         "/storage/emulated/0/Android/data/com.reahu.forte_life/files/LiberationSans-Regular.ttf");
     final fontBold = new File(
         "/storage/emulated/0/Android/data/com.reahu.forte_life/files/LiberationSans-Bold.ttf");
+    final khmerFont = new File(
+        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/KhmerOS.ttf");
+    final khmerFont2 = new File(
+        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/NiDAChenla.ttf");
+    final khmerFont3 = new File(
+        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/Kantumruy-Regular.ttf");
     await font.writeAsBytes(
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
     await fontBold.writeAsBytes(dataBold.buffer
         .asUint8List(dataBold.offsetInBytes, dataBold.lengthInBytes));
+    await khmerFont.writeAsBytes(khmerData.buffer
+        .asUint8List(khmerData.offsetInBytes, khmerData.lengthInBytes));
+    await khmerFont2.writeAsBytes(khmerData2.buffer
+        .asUint8List(khmerData2.offsetInBytes, khmerData2.lengthInBytes));
+    await khmerFont3.writeAsBytes(khmerData3.buffer
+        .asUint8List(khmerData3.offsetInBytes, khmerData3.lengthInBytes));
   }
 
   void runAppInitialization() async {

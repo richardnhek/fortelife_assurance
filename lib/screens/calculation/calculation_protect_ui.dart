@@ -40,10 +40,27 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     await getValues();
     premium.addListener(getAmountValues);
     sumAssured.addListener(getAmountValues);
+    firstName.addListener(getAmountValues);
+    lastName.addListener(getAmountValues);
+    lOccupation.addListener(getAmountValues);
+    pFirstName.addListener(getAmountValues);
+    pLastName.addListener(getAmountValues);
+    pOccupation.addListener(getAmountValues);
+    await checkNullValues();
+  }
+
+  Future<void> checkNullValues() async {
+    if (sumAssuredNum == null || sumAssured.text == null) {
+      sumAssured.clear();
+    }
+    if (premiumNum == null || premium.text == null) {
+      premium.clear();
+    }
   }
 
   Future<void> getValues() async {
     final prefs = await SharedPreferences.getInstance();
+    print(sumAssuredNum);
     String fName = prefs.getString("fName");
     String lName = prefs.getString("lName");
     String lOcc = prefs.getString("lOcc");
@@ -52,18 +69,45 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     String pName = prefs.getString("pName");
     String pLName = prefs.getString("pLName");
     String pOcc = prefs.getString("pOcc");
+    String dobProtect = prefs.getString("lpDobProtect");
+    String pDobProtect = prefs.getString("pDobProtect");
+    String pAgeProtect = prefs.getString("pAgeProtect");
+    String dobProtectDate = prefs.getString("lpDobProtectDate");
+    String ageProtect = prefs.getString("ageProtect");
+    String lpGenderProtect = prefs.getString("lpGenderProtect");
+    String pGenderProtect = prefs.getString("pGenderProtect");
+    String selectedModeProtect = prefs.getString("selectedModeProtect");
     int selYear = prefs.getInt("selYearInt");
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
     lOccupation.text = lOcc == null ? '' : lOcc;
+    lSelectedGender = lpGenderProtect == null ? null : lpGenderProtect;
+    pSelectedGender = pSelectedGender == null ? null : pGenderProtect;
+    dob.text = dobProtect == null ? '' : dobProtect;
+    pDob.text = pDobProtect == null ? '' : pDobProtect;
+    pAge.text = pAgeProtect == null ? '' : pAgeProtect;
+    lpBirthDate = dobProtectDate == null
+        ? DateTime.tryParse('')
+        : DateTime.tryParse(dobProtectDate);
+
+    age.text = ageProtect == null ? '' : ageProtect;
     setState(() {
       selectedYear = (selYear == null) == false ? selYear : 10;
     });
-    premium.text = premVal == null ? '' : premVal;
-    premiumNum = (premium.text == null) ? '' : double.tryParse(premium.text);
-    sumAssured.text = sumVal == null ? '' : sumVal;
+    setState(() {
+      selectedMode = (selectedModeProtect == null) == false
+          ? selectedModeProtect
+          : "Yearly";
+    });
+    premium.text = premVal != null ? double.tryParse(premVal).toString() : null;
+    premiumNum = (premVal == null) ? null : double.tryParse(premVal);
+    sumAssured.text =
+        sumVal != null ? double.tryParse(sumVal).toString() : null;
     sumAssuredNum =
-        (sumAssured.text == null) ? '' : double.tryParse(sumAssured.text);
+        (sumAssured.text == null) ? null : double.tryParse(sumAssured.text);
+    if (sumAssuredNum == null) {
+      sumAssured.clear();
+    }
     pFirstName.text = pName == null ? '' : pName;
     pLastName.text = pLName == null ? '' : pLName;
     pOccupation.text = pOcc == null ? '' : pOcc;
@@ -71,9 +115,21 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   Future<void> getAmountValues() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString("premVal", premium.text);
-    prefs.setString("sumVal", sumAssured.text);
+    if (premiumNum != null)
+      prefs.setString("premVal", premiumNum.toString());
+    else
+      prefs.setString("premVal", '');
+    if (sumAssuredNum != null)
+      prefs.setString("sumVal", sumAssuredNum.toString());
+    else
+      prefs.setString("sumVal", '');
     prefs.setInt("selYearInt", selectedYear);
+    prefs.setString("fName", firstName.text);
+    prefs.setString("lName", lastName.text);
+    prefs.setString("lOcc", lOccupation.text);
+    prefs.setString("pName", pFirstName.text);
+    prefs.setString("pLName", pLastName.text);
+    prefs.setString("pOcc", pOccupation.text);
   }
 
   FocusNode premiumFocusNode;
@@ -95,7 +151,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   final premium = TextEditingController();
   final gender = TextEditingController();
   final lOccupation = TextEditingController();
-  final policyYear = TextEditingController();
   final riderAdded = TextEditingController();
   //
 
@@ -128,8 +183,25 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   double premiumRider;
   DateTime lpBirthDate;
   bool isOnPolicy = false;
+  bool isKhmer = false;
 
   List<Widget> customDialogChildren = List();
+  List<DropdownMenuItem> languageSI = [
+    DropdownMenuItem(
+        child: Image(
+          image: AssetImage("assets/icons/english.png"),
+          width: 45,
+          height: 30,
+        ),
+        value: false),
+    DropdownMenuItem(
+        child: Image(
+          image: AssetImage("assets/icons/khmer.png"),
+          width: 45,
+          height: 30,
+        ),
+        value: true)
+  ];
 
   List<DropdownMenuItem> genderTypes = [
     DropdownMenuItem(
@@ -188,40 +260,91 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         Provider.of<AppProvider>(widget.scaffoldKey.currentContext);
 
     final mq = MediaQuery.of(context);
-    showAlertDialog(BuildContext context) {
-      AlertDialog alert = AlertDialog(
-        contentPadding: EdgeInsets.only(top: 25, left: 10, right: 10),
-        title: Center(
-            child: Container(
-                child: Text(
-          "Error Inputs",
-          style: TextStyle(
-              color: Colors.red,
-              fontFamily: "Kano",
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
-        ))),
-        content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: customDialogChildren),
-        actions: [
-          FlatButton(
-            child: Text("OK"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          )
-        ],
-      );
 
-      // show the dialog
+    showAlertDialog(BuildContext context) {
       showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        },
-      );
+          context: context,
+          builder: (context) => Center(
+                  child: Material(
+                type: MaterialType.transparency,
+                child: Center(
+                  child: Container(
+                      width: 300,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Align(
+                            child: Image.asset("assets/icons/wrong.png",
+                                width: 60, height: 60),
+                            alignment: Alignment.center,
+                          ),
+                          SizedBox(height: 20),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 150,
+                              child: Text(
+                                "Error Inputs",
+                                style: TextStyle(
+                                    color: Color(0xFFD31145),
+                                    fontSize: 22,
+                                    fontFamily: "Kano",
+                                    fontWeight: FontWeight.w600),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: customDialogChildren,
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FlatButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      Navigator.of(context).pop();
+                                      appProvider.calculationPage = 1;
+                                    });
+                                  },
+                                  child: Text(
+                                    "INFO",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: "Kano",
+                                        color: Colors.blueAccent),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    "OK",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: "Kano",
+                                        color: Colors.blueAccent),
+                                  ),
+                                ),
+                              ]),
+                        ],
+                      )),
+                ),
+              )));
     }
 
     //Derive rate
@@ -331,6 +454,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         appProvider.activeTabIndex = 1;
         appProvider.pdfScreenIndex = 0;
         appProvider.calculationPage = 0;
+        parametersProvider.isKhmerSI = isKhmer;
       });
       Navigator.pushNamedAndRemoveUntil(context, '/main_flow', (_) => false);
     }
@@ -434,9 +558,13 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                       isRequired: true,
                                       errorVisible: emptyGenderFieldP,
                                       items: genderTypes,
-                                      onChange: (value) {
+                                      onChange: (value) async {
+                                        final prefs = await SharedPreferences
+                                            .getInstance();
                                         setState(() {
                                           pSelectedGender = value;
+                                          prefs.setString(
+                                              "pGenderProtect", value);
                                         });
                                       },
                                     )),
@@ -532,9 +660,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               items: genderTypes,
                               isRequired: true,
                               errorVisible: emptyGenderField,
-                              onChange: (value) {
+                              onChange: (value) async {
+                                final prefs =
+                                    await SharedPreferences.getInstance();
                                 setState(() {
                                   lSelectedGender = value;
+                                  prefs.setString("lpGenderProtect", value);
                                 });
                               },
                             )),
@@ -567,9 +698,13 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                 isRequired: true,
                                 errorVisible: false,
                                 items: paymentMode,
-                                onChange: (value) {
+                                onChange: (value) async {
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
                                   setState(() {
                                     selectedMode = value;
+                                    prefs.setString(
+                                        "selectedModeProtect", value);
                                   });
                                 },
                               ),
@@ -674,6 +809,37 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                         errorVisible: false,
                       ),
                     )),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                          flex: 3,
+                          child: Text("Language",
+                              style: TextStyle(
+                                  fontFamily: "Kano",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black.withOpacity(0.5)))),
+                      Expanded(
+                        flex: 1,
+                        child: CustomDropDown(
+                          title: "Language",
+                          errorVisible: false,
+                          isRequired: false,
+                          value: isKhmer,
+                          items: languageSI,
+                          onChange: (value) async {
+                            setState(() {
+                              isKhmer = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -696,7 +862,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                   riderAdded.text, sumAssured.text);
                               genderValidation(
                                   lSelectedGender, pSelectedGender, true);
-                              print(counter);
                               if (counter == 6) {
                                 await getRate(isMale(lSelectedGender),
                                     int.parse(age.text), selectedYear);
@@ -758,12 +923,15 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     Padding(
                         padding: EdgeInsets.all(5),
                         child: ResetButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            final prefs = await SharedPreferences.getInstance();
                             //Proposer
                             pFirstName.clear();
                             pLastName.clear();
                             pAge.clear();
                             pDob.clear();
+                            prefs.remove("pDobProtect");
+                            prefs.remove("pAgeProtect");
                             pGender.clear();
                             pOccupation.clear();
                             //
@@ -773,11 +941,18 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             lastName.clear();
                             age.clear();
                             dob.clear();
+                            if (age.text.isNotEmpty) {
+                              prefs.remove("ageProtect");
+                            }
+                            if (dob.text.isNotEmpty) {
+                              prefs.remove("lpDobProtect");
+                            }
                             sumAssured.clear();
+                            sumAssuredNum = 0;
                             premium.clear();
+                            premiumNum = 0;
                             gender.clear();
                             lOccupation.clear();
-                            policyYear.clear();
 
                             riderAdded.clear();
 
@@ -800,10 +975,16 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   _selectDate(BuildContext context, TextEditingController tec,
       TextEditingController tecAge, bool isLpAge) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString("premVal", premium.text);
-    prefs.setString("sumVal", sumAssured.text);
     String premVal = prefs.getString("premVal");
     String sumVal = prefs.getString("sumVal");
+    if (premiumNum != null) {
+      prefs.setString("premVal", premiumNum.toString());
+      premVal = prefs.getString("premVal");
+    }
+    if (sumAssuredNum != null) {
+      prefs.setString("sumVal", sumAssuredNum.toString());
+      sumVal = prefs.getString("sumVal");
+    }
     DateTime newSelectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
@@ -831,10 +1012,29 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       tec.selection = TextSelection.fromPosition(TextPosition(
           offset: dob.text.length, affinity: TextAffinity.upstream));
       tecAge.text = calculateAge(_selectedDate, isLpAge);
+      if (isLpAge) {
+        prefs.setString("lpDobProtectDate", dateTime);
+        prefs.setString("lpDobProtect", dob.text);
+        prefs.setString("ageProtect", age.text);
+      } else {
+        prefs.setString("pDobProtectDate", dateTime);
+        prefs.setString("pDobProtect", pDob.text);
+        prefs.setString("pAgeProtect", pAge.text);
+      }
     }
 
-    premium.text = premVal.isNotEmpty ? premVal : '';
-    sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
+    premium.text = (premVal.isEmpty || premVal == null)
+        ? ''
+        : double.tryParse(premVal).toString();
+    if (premVal == null) {
+      premium.clear();
+    }
+    sumAssured.text = (sumVal.isEmpty || sumVal == null)
+        ? ''
+        : double.tryParse(sumVal).toString();
+    if (sumVal == null) {
+      sumAssured.clear();
+    }
   }
 
 //
@@ -845,6 +1045,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     prefs.setString("fName", firstName.text);
     prefs.setString("lName", lastName.text);
     prefs.setString("lOcc", lOccupation.text);
+    prefs.setString("lpDobProtect", dob.text);
     prefs.setString("premVal", premiumNum.toString());
     prefs.setString("sumVal", sumAssuredNum.toString());
     prefs.setString("pName", pFirstName.text);
@@ -868,7 +1069,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       }
     }
     if (isLpAge) {
-      policyYear.text = (18 - age).toString();
       lpBirthDate = birthDate;
       sumAssured.clear();
       premium.clear();

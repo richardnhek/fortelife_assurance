@@ -6,9 +6,12 @@ class CustomDialogText extends StatelessWidget {
   final String description;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "- $description",
-      style: TextStyle(color: Colors.black, fontFamily: "Kano", fontSize: 15),
+    return Padding(
+      padding: EdgeInsets.only(top: 5),
+      child: Text(
+        "- $description",
+        style: TextStyle(color: Colors.black, fontFamily: "Kano", fontSize: 15),
+      ),
     );
   }
 }

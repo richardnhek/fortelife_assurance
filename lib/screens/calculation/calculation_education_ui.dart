@@ -28,6 +28,14 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   @override
   void initState() {
     super.initState();
+    initializeCalculator();
+  }
+
+  Future<void> initializeCalculator() async {
+    await getValues();
+    policyYear.addListener(getAmountValues);
+    premium.addListener(getAmountValues);
+    sumAssured.addListener(getAmountValues);
   }
 
   Future<void> getValues() async {
@@ -39,13 +47,41 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     String pName = prefs.getString("pNameEdu");
     String pLName = prefs.getString("pLNameEdu");
     String pOcc = prefs.getString("pOccEdu");
+    String pDobEdu = prefs.getString("pDobEdu");
+    String pDobDateEdu = prefs.getString("pDobDateEdu");
+    String pAgeEdu = prefs.getString("pAgeEdu");
+    String dobEdu = prefs.getString("dobEdu");
+    String dobDateEdu = prefs.getString("lpDobEduDate");
+    String ageEdu = prefs.getString("ageEdu");
+    String selYear = prefs.getString("selYearIntEdu");
+    String selectedModeEdu = prefs.get("selectedModeEdu");
+    String lpGenderEdu = prefs.getString("lpGenderEdu");
+    String pGenderEdu = prefs.getString("pGenderEdu");
+    print(pDobEdu);
+    print(pDobDateEdu);
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
+    dob.text = dobEdu == null ? '' : dobEdu;
+    setState(() {
+      lSelectedGender = (lpGenderEdu == null) == false ? lpGenderEdu : null;
+    });
+    setState(() {
+      pSelectedGender = (pGenderEdu == null) == false ? pGenderEdu : null;
+    });
+    lpBirthDate = dobDateEdu == null
+        ? DateTime.tryParse('')
+        : DateTime.tryParse(dobDateEdu);
+    age.text = ageEdu == null ? '' : ageEdu;
+    policyYear.text = (selYear == null) == false ? selYear : "";
+    selectedMode =
+        (selectedModeEdu == null) == false ? selectedModeEdu : "Yearly";
     premium.text = premVal == null ? '' : premVal;
     premiumNum = (premium.text == null) ? '' : double.tryParse(premium.text);
-    sumAssured.text = sumVal == null ? '' : sumVal;
+    sumAssured.text = sumVal != null ? double.tryParse(sumVal).toString() : '';
     sumAssuredNum =
         (sumAssured.text == null) ? '' : double.tryParse(sumAssured.text);
+    pDob.text = pDobEdu == null ? '' : pDobEdu;
+    pAge.text = pAgeEdu == null ? '' : pAgeEdu;
     pFirstName.text = pName == null ? '' : pName;
     pLastName.text = pLName == null ? '' : pLName;
     pOccupation.text = pOcc == null ? '' : pOcc;
@@ -53,6 +89,9 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
 
   Future<void> getAmountValues() async {
     final prefs = await SharedPreferences.getInstance();
+    prefs.setString("dobEdu", dob.text);
+    prefs.setString("ageEdu", age.text);
+    prefs.setString("selYearIntEdu", policyYear.text);
     prefs.setString("premValEdu", premium.text);
     prefs.setString("sumValEdu", sumAssured.text);
   }
@@ -86,6 +125,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   double sumAssuredNum;
   DateTime lpBirthDate;
   bool isOnPolicy = false;
+  bool isKhmer = false;
 
   //Necessary error variables
   int counter;
@@ -96,6 +136,22 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   //
 
   List<Widget> customDialogChildren = List();
+  List<DropdownMenuItem> languageSI = [
+    DropdownMenuItem(
+        child: Image(
+          image: AssetImage("assets/icons/english.png"),
+          width: 45,
+          height: 30,
+        ),
+        value: false),
+    DropdownMenuItem(
+        child: Image(
+          image: AssetImage("assets/icons/khmer.png"),
+          width: 45,
+          height: 30,
+        ),
+        value: true)
+  ];
 
   List<DropdownMenuItem> genderTypes = [
     DropdownMenuItem(
@@ -146,45 +202,89 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     final mq = MediaQuery.of(context);
     showAlertDialog(BuildContext context) {
-      AlertDialog alert = AlertDialog(
-        contentPadding: EdgeInsets.only(top: 25, left: 10, right: 10),
-        title: Center(
-            child: Container(
-                child: Text(
-          "Error Inputs",
-          style: TextStyle(
-              color: Colors.red,
-              fontFamily: "Kano",
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
-        ))),
-        content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: customDialogChildren),
-        actions: [
-          FlatButton(
-            child: Text(
-              "OK",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF8AB84B)),
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          )
-        ],
-      );
-
-      // show the dialog
       showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        },
-      );
+          context: context,
+          builder: (context) => Center(
+                  child: Material(
+                type: MaterialType.transparency,
+                child: Center(
+                  child: Container(
+                      width: 300,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Align(
+                            child: Image.asset("assets/icons/wrong.png",
+                                width: 60, height: 60),
+                            alignment: Alignment.center,
+                          ),
+                          SizedBox(height: 20),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 150,
+                              child: Text(
+                                "Error Inputs",
+                                style: TextStyle(
+                                    color: Color(0xFFD31145),
+                                    fontSize: 22,
+                                    fontFamily: "Kano",
+                                    fontWeight: FontWeight.w600),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: customDialogChildren,
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FlatButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      Navigator.of(context).pop();
+                                      appProvider.calculationPageEdu = 1;
+                                    });
+                                  },
+                                  child: Text(
+                                    "INFO",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: "Kano",
+                                        color: Colors.blueAccent),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    "OK",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: "Kano",
+                                        color: Colors.blueAccent),
+                                  ),
+                                ),
+                              ]),
+                        ],
+                      )),
+                ),
+              )));
     }
 
     //Validate Policy Year
@@ -253,6 +353,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         appProvider.pdfScreenIndex = 1;
         appProvider.activeTabIndex = 1;
         appProvider.calculationPageEdu = 0;
+        parametersProvider.isKhmerSI = isKhmer;
       });
       Navigator.pushNamedAndRemoveUntil(context, '/main_flow', (_) => false);
     }
@@ -346,9 +447,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                     errorVisible: false,
                                     isRequired: true,
                                     items: genderTypes,
-                                    onChange: (value) {
+                                    onChange: (value) async {
+                                      final prefs =
+                                          await SharedPreferences.getInstance();
                                       setState(() {
                                         pSelectedGender = value;
+                                        prefs.setString("pGenderEdu", value);
                                       });
                                     },
                                   )),
@@ -426,8 +530,9 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                   dob: dob,
                                   onTap: () async {
                                     await _selectDate(context, dob, age, true);
-                                    checkPolicyYear(int.parse(policyYear.text),
-                                        int.parse(age.text));
+                                    checkPolicyYear(
+                                        int.tryParse(policyYear.text),
+                                        int.tryParse(age.text));
                                   },
                                 )),
                           ],
@@ -446,9 +551,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               isRequired: true,
                               items: genderTypes,
                               errorVisible: false,
-                              onChange: (value) {
+                              onChange: (value) async {
+                                final prefs =
+                                    await SharedPreferences.getInstance();
                                 setState(() {
                                   lSelectedGender = value;
+                                  prefs.setString("lpGenderEdu", value);
                                 });
                               },
                             )),
@@ -477,9 +585,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 isRequired: true,
                                 errorVisible: false,
                                 items: paymentMode,
-                                onChange: (value) {
+                                onChange: (value) async {
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
                                   setState(() {
                                     selectedMode = value;
+                                    prefs.setString("selectedModeEdu", value);
                                   });
                                 },
                               ),
@@ -524,7 +635,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                         maxLength: 10,
                         errorVisible: false,
                         onChange: (text) {
-                          print(policyYear.text);
                           if (int.parse(policyYear.text) != null) {
                             if (text == "") {
                               premium.text = "";
@@ -534,7 +644,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             premium.text = premiumNum.toStringAsFixed(2);
                             sumAssuredNum = double.parse(text);
                             premiumNum = double.parse(premium.text);
-                            print(sumAssuredNum);
                           } else {
                             premium.text = null;
                           }
@@ -544,6 +653,37 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                   ),
                 ),
                 SizedBox(height: 5),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                          flex: 3,
+                          child: Text("Language",
+                              style: TextStyle(
+                                  fontFamily: "Kano",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black.withOpacity(0.5)))),
+                      Expanded(
+                        flex: 1,
+                        child: CustomDropDown(
+                          title: "Language",
+                          errorVisible: false,
+                          isRequired: false,
+                          value: isKhmer,
+                          items: languageSI,
+                          onChange: (value) async {
+                            setState(() {
+                              isKhmer = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -618,10 +758,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   _selectDate(BuildContext context, TextEditingController tec,
       TextEditingController tecAge, bool isLpAge) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString("premValEdu", premium.text);
-    prefs.setString("sumValEdu", sumAssured.text);
-    String premVal = prefs.getString("premValEdu");
-    String sumVal = prefs.getString("sumValEdu");
+    String sumVal = sumAssured.text;
+    String premVal = premium.text;
     DateTime newSelectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
@@ -646,14 +784,50 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
       setState(() {
         _selectedDate = newSelectedDate;
         String dateTime = _selectedDate.toString();
+        if (isLpAge) {
+          prefs.setString("lpDobEduDate", dateTime);
+        } else {
+          prefs.setString("pDobEduDate", dateTime);
+        }
         tec.text = convertDateTimeDisplay(dateTime);
         tec.selection = TextSelection.fromPosition(TextPosition(
             offset: dob.text.length, affinity: TextAffinity.upstream));
         tecAge.text = calculateAge(_selectedDate, isLpAge);
+        if (!isLpAge) {
+          prefs.setString("pAgeEdu", tecAge.text);
+          prefs.setString("pDobEdu", tec.text);
+        }
       });
+
+      if (int.tryParse(policyYear.text) > 0) {
+        prefs.setString("dobEdu", dob.text);
+        prefs.setString("ageEdu", age.text);
+        prefs.setString("selYearIntEdu", policyYear.text);
+        if (sumVal.isNotEmpty || premVal.isNotEmpty) {
+          if (premVal.isNotEmpty) {
+            sumVal = (double.parse(premVal) * double.parse(policyYear.text))
+                .toString();
+          } else {
+            premVal = (double.parse(sumVal) / double.parse(policyYear.text))
+                .toString();
+          }
+        } else if (sumVal.isNotEmpty && premVal.isNotEmpty) {
+          sumVal = (double.parse(premVal) * double.parse(policyYear.text))
+              .toString();
+        }
+        sumAssuredNum = double.tryParse(sumVal);
+        premiumNum = double.tryParse(premVal);
+        prefs.setString("sumValEdu", sumVal);
+        prefs.setString("premValEdu", premVal);
+        premium.text = premVal.isNotEmpty ? premVal : '';
+        sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
+      } else {
+        prefs.setString("sumValEdu", sumVal);
+        prefs.setString("premValEdu", premVal);
+        premium.text = premVal.isNotEmpty ? premVal : '';
+        sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
+      }
     }
-    premium.text = premVal.isNotEmpty ? premVal : '';
-    sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
   }
 //
 
@@ -854,6 +1028,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("fNameEdu", firstName.text);
     prefs.setString("lNameEdu", lastName.text);
+    prefs.setString("lpDobEduDate", lpBirthDate.toString());
     prefs.setString("premValEdu", premium.text);
     prefs.setString("sumValEdu", sumAssured.text);
     prefs.setString("pNameEdu", pFirstName.text);
