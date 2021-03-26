@@ -61,6 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
             password: _passwordController.text);
         prefs.setString(AGENT_USERNAME, agent.username);
         prefs.setString(AGENT_ID, agent.id);
+        print(agent);
         if (_passwordController.text == "12345678") {
           Navigator.popAndPushNamed(context, "/change_pass");
         } else {
@@ -69,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.of(context).pushReplacementNamed('/main_flow');
         }
       } catch (error) {
+        print(error);
         Navigator.of(loadingModalContext).pop();
         _showErrorDialog(error.message);
       }
