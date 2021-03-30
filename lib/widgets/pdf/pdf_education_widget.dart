@@ -22,37 +22,23 @@ class PDFWidgetEdu {
       String paymentMode,
       String premium,
       bool isOnPolicy,
-      bool isKhmer) {
+      bool isKhmer,
+      String rootPath) {
     //Final variables
-    final file = File(
-            "/storage/emulated/0/Android/data/com.reahu.forte_life/files/logo.png")
-        .readAsBytesSync();
+    final file = File("${rootPath}/logo.png").readAsBytesSync();
     final image = MemoryImage(file);
-    final Uint8List regularFont = File(
-            '/storage/emulated/0/Android/data/com.reahu.forte_life/files/LiberationSans-Regular.ttf')
-        .readAsBytesSync();
-    final Uint8List boldFont = File(
-            '/storage/emulated/0/Android/data/com.reahu.forte_life/files/LiberationSans-Bold.ttf')
-        .readAsBytesSync();
-    final Uint8List khmerFont = File(
-            "/storage/emulated/0/Android/data/com.reahu.forte_life/files/KhmerOS.ttf")
-        .readAsBytesSync();
-    final Uint8List khmerFont2 = File(
-            "/storage/emulated/0/Android/data/com.reahu.forte_life/files/NiDAChenla.ttf")
-        .readAsBytesSync();
-    final Uint8List khmerFont3 = File(
-            "/storage/emulated/0/Android/data/com.reahu.forte_life/files/Kantumruy-Regular.ttf")
-        .readAsBytesSync();
+    final Uint8List regularFont =
+        File('${rootPath}/LiberationSans-Regular.ttf').readAsBytesSync();
+    final Uint8List boldFont =
+        File('${rootPath}/LiberationSans-Bold.ttf').readAsBytesSync();
+    final Uint8List khmerFont3 =
+        File("${rootPath}/Kantumruy-Regular.ttf").readAsBytesSync();
 
     final regularData = regularFont.buffer.asByteData();
     final boldData = boldFont.buffer.asByteData();
-    final khmerData = khmerFont.buffer.asByteData();
-    final khmerData2 = khmerFont2.buffer.asByteData();
     final khmerData3 = khmerFont3.buffer.asByteData();
     final regularF = Font.ttf(regularData);
     final boldF = Font.ttf(boldData);
-    final khmerF = Font.ttf(khmerData);
-    final khmerF2 = Font.ttf(khmerData2);
     final khmerF3 = Font.ttf(khmerData3);
     var myFormat = DateFormat('dd /MM /yyyy');
     var dateNow = DateTime.now();

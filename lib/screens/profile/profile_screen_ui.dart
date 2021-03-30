@@ -376,10 +376,10 @@ class ProfileScreenUI extends StatelessWidget {
         child: Container(
           key: mainContainer,
           margin: EdgeInsets.symmetric(horizontal: 30),
-          padding: EdgeInsets.only(top: 50),
+          padding: EdgeInsets.only(top: 15),
           constraints: BoxConstraints(
-            maxHeight: 315,
-            minHeight: 305,
+            maxHeight: 280,
+            minHeight: 270,
           ),
           width: double.infinity,
           decoration: BoxDecoration(
@@ -494,33 +494,6 @@ class ProfileScreenUI extends StatelessWidget {
                     ],
                   ))
             ],
-          ),
-        ),
-      ),
-      Align(
-        alignment: Alignment(0.0, -0.5),
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.transparent,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.16),
-                    blurRadius: 10,
-                    offset: Offset(3, 6),
-                    spreadRadius: 1.5)
-              ]),
-          child: CircleAvatar(
-            maxRadius: 40,
-            minRadius: 35,
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.white,
-            child: Image(
-              alignment: Alignment.bottomCenter,
-              image: AssetImage("assets/icons/agent.png"),
-              width: 50,
-              height: 50,
-            ),
           ),
         ),
       ),

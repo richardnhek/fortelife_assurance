@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:align_positioned/align_positioned.dart';
-import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'file:///D:/Richard/Jobs/Startups/Project/ForteCalculatorApp/Development/forte_life_alpha/forte_life/lib/notification_plugin.dart';

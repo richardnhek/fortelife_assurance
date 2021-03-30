@@ -8,6 +8,7 @@ import 'package:forte_life/widgets/pdf/pdf_protect_widget.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PDFScreenProtect extends StatefulWidget {
   @override
@@ -25,19 +26,21 @@ class _PDFScreenProtectState extends State<PDFScreenProtect> {
   //Get old PDF and throw it to savePDF
   Future getPDF() async {
     await Future.delayed(const Duration(milliseconds: 1000));
-    savePDF(file, pdf);
+    savePDF(pdf);
   }
   //
 
   //Save PDF in local storage
-  Future savePDF(File file, pw.Document pdf) async {
+  Future savePDF(pw.Document pdf) async {
+    final prefs = await SharedPreferences.getInstance();
+    final rootPath = prefs.getString("ROOT_PATH");
+    final file = File("$rootPath/fortelife.pdf");
     await file.writeAsBytes(pdf.save());
   }
   //
 
   pw.Document pdf = pw.Document();
-  final file = File(
-      "/storage/emulated/0/Android/data/com.reahu.forte_life/files/fortelife.pdf");
+
   @override
   Widget build(BuildContext context) {
     ParametersProvider parametersProvider =
@@ -62,7 +65,8 @@ class _PDFScreenProtectState extends State<PDFScreenProtect> {
         parametersProvider.annualP,
         parametersProvider.premiumRider,
         parametersProvider.riderSA,
-        parametersProvider.isOnPolicy);
+        parametersProvider.isOnPolicy,
+        appProvider.rootPath);
     return Scaffold(
       key: scaffoldKey,
       body: PDFScreenProtectUI(

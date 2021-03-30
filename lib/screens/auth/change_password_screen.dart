@@ -19,7 +19,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     if (_newPasswordController.text.isNotEmpty) {
       if (_newPasswordController.text == "12345678" ||
           _newPasswordController.text != _confirmController.text ||
-          _newPasswordController.text.length < 8) {
+          _newPasswordController.text.length < 4) {
         if (_newPasswordController.text == "12345678") {
           showDialog(
             context: context,
@@ -38,7 +38,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ));
             },
           );
-        } else if (_newPasswordController.text.length < 8) {
+        } else if (_newPasswordController.text.length < 4) {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -46,7 +46,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   title: Image.asset("assets/icons/attention.png",
                       width: 60, height: 60),
                   content: Text(
-                    "Password Must Be At Least\n8 Characters",
+                    "Password Must Be At Least\n4 Characters",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Kano",

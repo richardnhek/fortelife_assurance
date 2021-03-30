@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:align_positioned/align_positioned.dart';
-import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:forte_life/notification_plugin.dart';
+import 'package:forte_life/providers/app_provider.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path/path.dart' as path;
@@ -21,8 +24,7 @@ class PDFScreenProtectUI extends StatefulWidget {
 }
 
 class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
-  File file = File(
-      "/storage/emulated/0/Android/data/com.reahu.forte_life/files/fortelife.pdf");
+  File file;
   bool _isLoading = true;
 
   @override
@@ -47,6 +49,8 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
   @override
   Widget build(BuildContext context) {
     TextEditingController fileName = new TextEditingController();
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+    file = File("${appProvider.rootPath}/fortelife.pdf");
     showAlertDialog(BuildContext context) {
       AlertDialog alert = AlertDialog(
         contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
@@ -225,8 +229,9 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
   }
 
   Future getPDF() async {
-    file = File(
-        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/fortelife.pdf");
+    final prefs = await SharedPreferences.getInstance();
+    final rootPath = prefs.getString("ROOT_PATH");
+    file = File("$rootPath/fortelife.pdf");
     if (this.mounted) {
       setState(() {
         _isLoading = false;

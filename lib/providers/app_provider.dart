@@ -123,4 +123,14 @@ class AppProvider extends ChangeNotifier {
   }
   //
 
+  //Get Root Path
+  String _rootPath = " ";
+  String get rootPath => _rootPath;
+
+  set rootPath(String i) {
+    _rootPath = i;
+    notifyListeners();
+  }
+//
+
 }

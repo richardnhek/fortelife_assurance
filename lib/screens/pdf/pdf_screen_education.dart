@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/providers/parameters_provider.dart';
 import 'package:forte_life/screens/pdf/pdf_screen_education_ui.dart';
 import 'package:forte_life/widgets/pdf/pdf_education_widget.dart';
 import 'package:flutter/widgets.dart' as w;
 import 'package:pdf/widgets.dart' as pw;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PDFScreenEdu extends StatefulWidget {
   @override
@@ -23,23 +25,26 @@ class _PDFScreenEduState extends State<PDFScreenEdu> {
   //Get old PDF and throw it to savePDF
   Future getPDF() async {
     await Future.delayed(const Duration(milliseconds: 1000));
-    savePDF(file, pdf);
+    savePDF(pdf);
   }
   //
 
   //Save PDF in local storage
-  Future savePDF(File file, pw.Document pdf) async {
+  Future savePDF(pw.Document pdf) async {
+    final prefs = await SharedPreferences.getInstance();
+    final rootPath = prefs.getString("ROOT_PATH");
+    final file = File("$rootPath/fortelife-education.pdf");
     await file.writeAsBytes(pdf.save());
   }
   //
 
   pw.Document pdf = pw.Document();
-  final file = File(
-      "/storage/emulated/0/Android/data/com.reahu.forte_life/files/fortelife-education.pdf");
+
   @override
   w.Widget build(BuildContext context) {
     ParametersProvider parametersProvider =
         Provider.of<ParametersProvider>(context);
+    AppProvider appProvider = Provider.of<AppProvider>(context);
     GlobalKey<ScaffoldState> scaffoldKey;
     pdf = PDFWidgetEdu().createPDF(
         "Forte Life Education-18",
@@ -56,7 +61,8 @@ class _PDFScreenEduState extends State<PDFScreenEdu> {
         parametersProvider.paymentMode,
         parametersProvider.annualP,
         parametersProvider.isOnPolicy,
-        parametersProvider.isKhmerSI);
+        parametersProvider.isKhmerSI,
+        appProvider.rootPath);
     return Scaffold(
       key: scaffoldKey,
       body: PDFScreenEducationUI(

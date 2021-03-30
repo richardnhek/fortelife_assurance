@@ -98,42 +98,46 @@ class _SplashScreenState extends State<SplashScreen>
   // }
   //
 
+  Future<void> setExternalDirectory() async {
+    Directory platformDirectory;
+    final prefs = await SharedPreferences.getInstance();
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    if (Platform.isAndroid) {
+      platformDirectory = await getExternalStorageDirectory();
+    } else {
+      platformDirectory = await getApplicationDocumentsDirectory();
+      print(Platform.operatingSystem + "&" + platformDirectory.path);
+    }
+    await prefs.setString("ROOT_PATH", platformDirectory.path);
+    await Future.delayed(const Duration(milliseconds: 1000));
+    appProvider.rootPath = prefs.getString("ROOT_PATH");
+  }
+
   Future<void> getImageFileFromAssets(String path) async {
     final byteData = await rootBundle.load(path);
-
-    final file = new File(
-        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/logo.png");
+    final prefs = await SharedPreferences.getInstance();
+    final rootPath = prefs.getString("ROOT_PATH");
+    final file = new File("${rootPath}/logo.png");
     await file.writeAsBytes(byteData.buffer
         .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
   }
 
   Future<void> getFontFileFromAssets() async {
+    final prefs = await SharedPreferences.getInstance();
+    final rootPath = prefs.getString("ROOT_PATH");
     final data =
         await rootBundle.load("assets/fonts/LiberationSans-Regular.ttf");
     final dataBold =
         await rootBundle.load("assets/fonts/LiberationSans-Bold.ttf");
-    final khmerData = await rootBundle.load("assets/fonts/KhmerOS.ttf");
-    final khmerData2 = await rootBundle.load("assets/fonts/NiDAChenla.ttf");
     final khmerData3 =
         await rootBundle.load("assets/fonts/Kantumruy-Regular.ttf");
-    final font = new File(
-        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/LiberationSans-Regular.ttf");
-    final fontBold = new File(
-        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/LiberationSans-Bold.ttf");
-    final khmerFont = new File(
-        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/KhmerOS.ttf");
-    final khmerFont2 = new File(
-        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/NiDAChenla.ttf");
-    final khmerFont3 = new File(
-        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/Kantumruy-Regular.ttf");
+    final font = new File("${rootPath}/LiberationSans-Regular.ttf");
+    final fontBold = new File("${rootPath}/LiberationSans-Bold.ttf");
+    final khmerFont3 = new File("${rootPath}/Kantumruy-Regular.ttf");
     await font.writeAsBytes(
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
     await fontBold.writeAsBytes(dataBold.buffer
         .asUint8List(dataBold.offsetInBytes, dataBold.lengthInBytes));
-    await khmerFont.writeAsBytes(khmerData.buffer
-        .asUint8List(khmerData.offsetInBytes, khmerData.lengthInBytes));
-    await khmerFont2.writeAsBytes(khmerData2.buffer
-        .asUint8List(khmerData2.offsetInBytes, khmerData2.lengthInBytes));
     await khmerFont3.writeAsBytes(khmerData3.buffer
         .asUint8List(khmerData3.offsetInBytes, khmerData3.lengthInBytes));
   }
@@ -142,10 +146,9 @@ class _SplashScreenState extends State<SplashScreen>
     AppProvider appProvider = Provider.of(context, listen: false);
     appProvider.setAppOrientation();
     await Future.delayed(const Duration(milliseconds: 4600));
-    // await isFirstTime();
     await appProvider.requestPermissions();
-    await getExternalStorageDirectory();
-    await getApplicationDocumentsDirectory();
+    // await isFirstTime();
+    await setExternalDirectory();
     await getImageFileFromAssets("assets/pictures/android/logo/logo.png");
     await getFontFileFromAssets();
     await notificationPlugin.init();

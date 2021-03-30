@@ -40,7 +40,7 @@ dependencies:
   page_transition: ^1.1.7+6
   permission_handler: 5.1.0+2
   open_file: ^3.0.3
-  downloads_path_provider_28: ^0.1.0
+  downloads_path_provider: ^0.1.0
   flutter_local_notifications: ^4.0.1+1
   rxdart: ^0.25.0
 
