@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:align_positioned/align_positioned.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:forte_life/providers/app_provider.dart';
 import 'package:open_file/open_file.dart';
 import 'file:///D:/Richard/Jobs/Startups/Project/ForteCalculatorApp/Development/forte_life_alpha/forte_life/lib/notification_plugin.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path/path.dart' as path;
@@ -19,8 +22,7 @@ class PDFScreenEducationUI extends StatefulWidget {
 }
 
 class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
-  File file = File(
-      "/storage/emulated/0/Android/data/com.reahu.forte_life/files/fortelife-education.pdf");
+  File file;
   bool _isLoading = true;
   @override
   void initState() {
@@ -44,7 +46,8 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
   @override
   Widget build(BuildContext context) {
     TextEditingController fileName = new TextEditingController();
-
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+    file = File("${appProvider.rootPath}/fortelife-education.pdf");
     showAlertDialog(BuildContext context) {
       AlertDialog alert = AlertDialog(
         contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
@@ -223,8 +226,9 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
   }
 
   Future getPDF() async {
-    file = File(
-        "/storage/emulated/0/Android/data/com.reahu.forte_life/files/fortelife-education.pdf");
+    final prefs = await SharedPreferences.getInstance();
+    final rootPath = prefs.getString("ROOT_PATH");
+    file = File("$rootPath/fortelife-education.pdf");
     if (this.mounted) {
       setState(() {
         _isLoading = false;
