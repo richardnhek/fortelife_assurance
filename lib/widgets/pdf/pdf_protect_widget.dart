@@ -28,14 +28,14 @@ class PDFWidget {
       bool isOnPolicy,
       String rootPath) {
     //Final variables
-    final file = File("${rootPath}/logo.png").readAsBytesSync();
+    final file = File("$rootPath/logo.png").readAsBytesSync();
     final image = MemoryImage(file);
     final Uint8List regularFont =
-        File('${rootPath}/LiberationSans-Regular.ttf').readAsBytesSync();
+        File('$rootPath/LiberationSans-Regular.ttf').readAsBytesSync();
     final Uint8List boldFont =
-        File('${rootPath}/LiberationSans-Bold.ttf').readAsBytesSync();
+        File('$rootPath/LiberationSans-Bold.ttf').readAsBytesSync();
     final Uint8List khmerFont =
-        File("${rootPath}/Kantumruy-Regular.ttf").readAsBytesSync();
+        File("$rootPath/Kantumruy-Regular.ttf").readAsBytesSync();
     final regularData = regularFont.buffer.asByteData();
     final boldData = boldFont.buffer.asByteData();
     final khmerData = khmerFont.buffer.asByteData();

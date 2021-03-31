@@ -117,7 +117,7 @@ class _SplashScreenState extends State<SplashScreen>
     final byteData = await rootBundle.load(path);
     final prefs = await SharedPreferences.getInstance();
     final rootPath = prefs.getString("ROOT_PATH");
-    final file = new File("${rootPath}/logo.png");
+    final file = new File("$rootPath/logo.png");
     await file.writeAsBytes(byteData.buffer
         .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
   }
@@ -131,9 +131,9 @@ class _SplashScreenState extends State<SplashScreen>
         await rootBundle.load("assets/fonts/LiberationSans-Bold.ttf");
     final khmerData3 =
         await rootBundle.load("assets/fonts/Kantumruy-Regular.ttf");
-    final font = new File("${rootPath}/LiberationSans-Regular.ttf");
-    final fontBold = new File("${rootPath}/LiberationSans-Bold.ttf");
-    final khmerFont3 = new File("${rootPath}/Kantumruy-Regular.ttf");
+    final font = new File("$rootPath/LiberationSans-Regular.ttf");
+    final fontBold = new File("$rootPath/LiberationSans-Bold.ttf");
+    final khmerFont3 = new File("$rootPath/Kantumruy-Regular.ttf");
     await font.writeAsBytes(
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
     await fontBold.writeAsBytes(dataBold.buffer

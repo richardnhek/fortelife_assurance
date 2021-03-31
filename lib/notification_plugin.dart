@@ -1,5 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'dart:io' show File, Platform;
+import 'dart:io' show Platform;
 
 import 'package:rxdart/subjects.dart';
 
