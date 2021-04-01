@@ -2,9 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:forte_life/constants/constants.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/widgets/custom_alert_dialog.dart';
+import 'package:forte_life/widgets/customizable_alert_dialog.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreenUI extends StatelessWidget {
   ProfileScreenUI(
@@ -22,21 +25,76 @@ class ProfileScreenUI extends StatelessWidget {
     final mq = MediaQuery.of(context);
     final appProvider = Provider.of<AppProvider>(context);
     final GlobalKey mainContainer = GlobalKey();
+    Map<String, dynamic> lang = appProvider.lang;
+
+    onSwitchLanguage(String languageCode) async {
+      final prefs = await SharedPreferences.getInstance();
+      AppProvider appProvider =
+          Provider.of<AppProvider>(context, listen: false);
+      print(languageCode);
+      prefs.setString(APP_LANGUAGE, languageCode);
+      appProvider.language = languageCode;
+    }
+
+    void _showSwitchLanguageDialog() {
+      showDialog(
+          context: context,
+          builder: (ctx) => Center(
+                child: CustomizableAlertDialog(
+                  title: lang['app_language'],
+                  icon: Icon(
+                    Icons.language,
+                    size: 60,
+                    color: Color(0xFF8AB84B),
+                  ),
+                  // firstWidget: Container(
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //       image: DecorationImage(
+                  //           image: AssetImage("assets/icons/khmer.png"),
+                  //           fit: BoxFit.contain)),
+                  // ),
+                  firstWidget: Image(
+                    image: AssetImage("assets/icons/khmer.png"),
+                    width: 70,
+                    height: 45,
+                    fit: BoxFit.cover,
+                  ),
+                  firstHeight: 45,
+                  secondWidget: Image(
+                    image: AssetImage("assets/icons/english.png"),
+                    width: 70,
+                    height: 45,
+                    fit: BoxFit.cover,
+                  ),
+                  secondHeight: 45,
+                  details: lang['applanguage_text'],
+                  onActionButtonPressed: () {
+                    onSwitchLanguage(LANGUAGE_KHMER);
+                    Navigator.of(context).pop();
+                  },
+                  onActionButtonPressedTwo: () {
+                    onSwitchLanguage(LANGUAGE_ENGLISH);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ));
+    }
 
     void _showExitDialog() {
       showDialog(
           context: context,
           builder: (ctx) => Center(
                 child: CustomAlertDialog(
-                  title: "Log Out",
+                  title: lang['log_out'],
                   icon: Icon(
                     Icons.logout,
                     size: 60,
                     color: Color(0xFFD31145),
                   ),
-                  details: "Are you sure you want to log out?",
-                  actionButtonTitle: "No",
-                  actionButtonTitleTwo: "Yes",
+                  details: lang['logout_text'],
+                  actionButtonTitle: lang['no'],
+                  actionButtonTitleTwo: lang['yes'],
                   isPrompt: true,
                   onActionButtonPressed: () {
                     Navigator.of(context).pop();
@@ -84,7 +142,7 @@ class ProfileScreenUI extends StatelessWidget {
                           child: Container(
                             width: 180,
                             child: Text(
-                              "Change Password",
+                              lang['change_pass'],
                               style: TextStyle(
                                   color: Color(0xFFD31145),
                                   fontSize: 22,
@@ -101,13 +159,14 @@ class ProfileScreenUI extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "New Password: ",
+                                lang['new_pass'] + ": ",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontFamily: "Kano"),
                               ),
-                              SizedBox(width: 5),
+                              SizedBox(
+                                  width: appProvider.language == 'kh' ? 11 : 5),
                               Expanded(
                                 child: Container(
                                   margin: EdgeInsets.only(left: 21),
@@ -127,7 +186,7 @@ class ProfileScreenUI extends StatelessWidget {
                                         contentPadding:
                                             EdgeInsets.only(left: 5, top: 15),
                                         isDense: true,
-                                        hintText: "New Password",
+                                        hintText: lang['new_pass'],
                                         hintStyle: TextStyle(
                                             fontFamily: "Kano",
                                             fontSize: 15,
@@ -146,7 +205,7 @@ class ProfileScreenUI extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "Confirm Password: ",
+                                lang['confirm_pass'] + ": ",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
@@ -171,7 +230,7 @@ class ProfileScreenUI extends StatelessWidget {
                                         contentPadding:
                                             EdgeInsets.only(left: 5, top: 15),
                                         isDense: true,
-                                        hintText: "Confirm Password",
+                                        hintText: lang['confirm_pass'],
                                         hintStyle: TextStyle(
                                             fontFamily: "Kano",
                                             fontSize: 15,
@@ -197,7 +256,7 @@ class ProfileScreenUI extends StatelessWidget {
                                     Navigator.of(context).pop();
                                   },
                                   child: Text(
-                                    "Cancel",
+                                    lang['cancel'],
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontFamily: "Kano",
@@ -212,7 +271,7 @@ class ProfileScreenUI extends StatelessWidget {
                                   color: Color(0xFF8AB84B),
                                   onPressed: () => onChangePassword(context),
                                   child: Text(
-                                    "Confirm",
+                                    lang['confirm'],
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontFamily: "Kano",
@@ -236,7 +295,7 @@ class ProfileScreenUI extends StatelessWidget {
                 child: Center(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxHeight: 270,
+                        maxHeight: 280,
                         minHeight: 250,
                         minWidth: 250,
                         maxWidth: 300),
@@ -260,7 +319,7 @@ class ProfileScreenUI extends StatelessWidget {
                             width: 125,
                           ),
                           Text(
-                            "About Us",
+                            lang['about'],
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
@@ -275,7 +334,7 @@ class ProfileScreenUI extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Phone No",
+                                  lang['phone'],
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
@@ -298,7 +357,7 @@ class ProfileScreenUI extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Fax",
+                                  lang['fax'],
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
@@ -321,7 +380,7 @@ class ProfileScreenUI extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Email",
+                                  lang['email'],
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
@@ -405,20 +464,23 @@ class ProfileScreenUI extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.5),
               ),
               SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Language",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontFamily: "Kano"),
-                    ),
-                    Icon(Icons.language, color: Color(0xFF92C04A))
-                  ],
+              GestureDetector(
+                onTap: _showSwitchLanguageDialog,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        lang['language'],
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: "Kano"),
+                      ),
+                      Icon(Icons.language, color: Color(0xFF92C04A))
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -431,7 +493,7 @@ class ProfileScreenUI extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Change Password",
+                        lang['change_pass'],
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -454,7 +516,7 @@ class ProfileScreenUI extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
-                        "Contact Us",
+                        lang['contact_us'],
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -478,7 +540,7 @@ class ProfileScreenUI extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Log Out",
+                        lang['log_out'],
                         style: TextStyle(
                             fontSize: 17.5,
                             color: Colors.white,

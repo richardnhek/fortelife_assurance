@@ -22,7 +22,8 @@ class _MainFlowState extends State<MainFlow> {
 
   @override
   Widget build(BuildContext context) {
-    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+    Map<String, dynamic> lang = appProvider.lang;
     void onTappedBar(int index) {
       if (appProvider.activeTabIndex == 0) {
         appProvider.categoriesTabIndex = 0;
@@ -37,12 +38,12 @@ class _MainFlowState extends State<MainFlow> {
           context: context,
           builder: (context) => Center(
                 child: CustomAlertDialog(
-                  title: "Exit",
+                  title: lang['exit'],
                   icon: Image.asset("assets/icons/attention.png",
                       width: 60, height: 60),
-                  details: "Are you sure you want to leave this page?",
-                  actionButtonTitle: "No",
-                  actionButtonTitleTwo: "Yes",
+                  details: lang['exit_page'],
+                  actionButtonTitle: lang['no'],
+                  actionButtonTitleTwo: lang['yes'],
                   isPrompt: true,
                   onActionButtonPressed: () {
                     Navigator.of(context).pop();
@@ -60,12 +61,12 @@ class _MainFlowState extends State<MainFlow> {
           context: context,
           builder: (context) => Center(
                 child: CustomAlertDialog(
-                  title: "Exit",
+                  title: lang['exit'],
                   icon: Image.asset("assets/icons/off.png",
                       width: 60, height: 60),
-                  details: "Are you sure you want to exit the app?",
-                  actionButtonTitle: "No",
-                  actionButtonTitleTwo: "Yes",
+                  details: lang['exit_app'],
+                  actionButtonTitle: lang['no'],
+                  actionButtonTitleTwo: lang['yes'],
                   isPrompt: true,
                   onActionButtonPressed: () {
                     Navigator.of(context).pop();

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:forte_life/configs/language.dart';
+import 'package:forte_life/constants/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppProvider extends ChangeNotifier {
   // Bottom Navigation Index
@@ -91,6 +94,39 @@ class AppProvider extends ChangeNotifier {
 
   Future<void> getDeviceType(double shortestSide) async {
     _isTablet = shortestSide >= 500.0;
+    notifyListeners();
+  }
+  //
+
+  //Languages
+  String _language = LANGUAGE_KHMER;
+  String get language => _language;
+  set language(String l) {
+    _language = l;
+    notifyListeners();
+  }
+
+  Map<String, String> _lang = {};
+  Map<String, String> get lang => LANGUAGE_MAP.map(
+        (key, value) {
+          return MapEntry(key, LANGUAGE_MAP[key][_language]);
+        },
+      );
+
+  Future<void> getLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      String appLanguage = prefs.getString(APP_LANGUAGE);
+
+      if (appLanguage == null) throw Exception("undefined language");
+
+      _language = appLanguage;
+      print("language found: $appLanguage");
+    } catch (e) {
+      print("undefined language, set to english");
+      _language = LANGUAGE_KHMER;
+    }
+    // _language = LANGUAGE_ENGLISH;
     notifyListeners();
   }
   //

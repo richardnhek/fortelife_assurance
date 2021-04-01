@@ -1,4 +1,3 @@
-import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -77,34 +76,6 @@ class CustomTextField extends StatelessWidget {
               color: Colors.black,
               fontSize: 15,
               fontFamily: "Kano",
-            ),
-          ),
-        ),
-        AlignPositioned(
-          alignment: Alignment.bottomLeft,
-          maxChildHeight: 15,
-          minChildHeightRatio: 0.4,
-          minChildWidth: 15,
-          maxChildWidthRatio: 0.9,
-          dx: 5,
-          dy: 2,
-          child: Visibility(
-            visible: errorVisible,
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  border: Border.all(color: Color(0xFFD31145)),
-                  color: Color(0xFFFEEBE9)),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 5),
-                  child: Text(
-                    "Error : $formLabel can't be empty",
-                    style: TextStyle(fontFamily: "Kano", fontSize: 10.5),
-                  ),
-                ),
-              ),
             ),
           ),
         ),

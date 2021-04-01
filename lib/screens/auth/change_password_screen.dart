@@ -17,10 +17,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   void _onChangePassword(scaffoldContext) async {
     BuildContext loadingModalContext;
     if (_newPasswordController.text.isNotEmpty) {
-      if (_newPasswordController.text == "12345678" ||
+      if (_newPasswordController.text == "1234" ||
           _newPasswordController.text != _confirmController.text ||
           _newPasswordController.text.length < 4) {
-        if (_newPasswordController.text == "12345678") {
+        if (_newPasswordController.text == "1234") {
           showDialog(
             context: context,
             builder: (BuildContext context) {

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:forte_life/providers/app_provider.dart';
+import 'package:provider/provider.dart';
 
 class CustomDatePicker extends StatelessWidget {
-  CustomDatePicker({this.focusNode, this.dob, this.onTap});
+  CustomDatePicker({this.focusNode, this.dob, this.onTap, this.title});
 
   final FocusNode focusNode;
   final TextEditingController dob;
   final Function onTap;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,8 +20,8 @@ class CustomDatePicker extends StatelessWidget {
             focusedBorder: InputBorder.none,
             isDense: true,
             contentPadding: EdgeInsets.only(left: 5, top: 10, bottom: 10),
-            hintText: "Date of Birth",
-            labelText: "Date of Birth",
+            hintText: title,
+            labelText: title,
             labelStyle: TextStyle(
                 fontFamily: "Kano",
                 fontSize: 15,

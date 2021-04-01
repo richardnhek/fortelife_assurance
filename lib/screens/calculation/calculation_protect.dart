@@ -17,6 +17,7 @@ class _CalculationProtectState extends State<CalculationProtect> {
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
+    Map<String, dynamic> lang = appProvider.lang;
     final mq = MediaQuery.of(context);
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -25,12 +26,12 @@ class _CalculationProtectState extends State<CalculationProtect> {
           context: context,
           builder: (context) => Center(
                 child: CustomAlertDialog(
-                  title: "Exit",
+                  title: lang['exit'],
                   icon: Image.asset("assets/icons/attention.png",
                       width: 60, height: 60),
-                  details: "Are you sure you want to leave this page?",
-                  actionButtonTitle: "No",
-                  actionButtonTitleTwo: "Yes",
+                  details: lang['exit_page'],
+                  actionButtonTitle: lang['no'],
+                  actionButtonTitleTwo: lang['yes'],
                   isPrompt: true,
                   onActionButtonPressed: () {
                     Navigator.of(context).pop();
@@ -68,7 +69,7 @@ class _CalculationProtectState extends State<CalculationProtect> {
               Expanded(
                 child: Container(
                   child: TabButton(
-                    tabTitle: "Calculator",
+                    tabTitle: lang['calculator_screen'],
                     width: mq.size.width / 2,
                     height: mq.size.height / 10,
                     icon: Icons.calculate_outlined,
@@ -86,7 +87,7 @@ class _CalculationProtectState extends State<CalculationProtect> {
                   child: TabButton(
                     width: mq.size.width / 2,
                     height: mq.size.height / 10,
-                    tabTitle: "Information",
+                    tabTitle: lang['info_screen'],
                     icon: Icons.info_outline,
                     isActive: appProvider.calculationPage == 1,
                     onPressed: () {

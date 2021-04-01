@@ -151,6 +151,7 @@ class _SplashScreenState extends State<SplashScreen>
     await setExternalDirectory();
     await getImageFileFromAssets("assets/pictures/android/logo/logo.png");
     await getFontFileFromAssets();
+    await appProvider.getLanguage();
     await notificationPlugin.init();
     await determineInitialRoute();
   }

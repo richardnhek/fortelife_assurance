@@ -36,13 +36,13 @@ dependencies:
   align_positioned: ^1.2.15
   dio: 3.0.9
   shared_preferences: 0.5.12
-  double_back_to_close_app: ^1.2.0
   page_transition: ^1.1.7+6
   permission_handler: 5.1.0+2
   open_file: ^3.0.3
   downloads_path_provider: ^0.1.0
   flutter_local_notifications: ^4.0.1+1
   rxdart: ^0.25.0
+  collection: 1.15.0-nullsafety.3
 
 
 

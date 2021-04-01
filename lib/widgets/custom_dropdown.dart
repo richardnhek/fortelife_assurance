@@ -1,5 +1,6 @@
-import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
+import 'package:forte_life/providers/app_provider.dart';
+import 'package:provider/provider.dart';
 
 class CustomDropDown extends StatelessWidget {
   CustomDropDown(
@@ -18,6 +19,7 @@ class CustomDropDown extends StatelessWidget {
   final bool isRequired;
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 60, minHeight: 40),
       child: Stack(children: [
@@ -29,7 +31,7 @@ class CustomDropDown extends StatelessWidget {
                   iconSize: 17.5,
                   value: value,
                   isExpanded: true,
-                  itemHeight: 53,
+                  itemHeight: appProvider.language == 'kh' ? 55 : 53,
                   hint: Text(
                     title,
                     style: TextStyle(
@@ -46,34 +48,6 @@ class CustomDropDown extends StatelessWidget {
                   color: isRequired == false
                       ? Color(0xFFB8B8B8)
                       : Color(0xFFD31145))),
-        ),
-        AlignPositioned(
-          alignment: Alignment.bottomLeft,
-          maxChildHeight: 15,
-          minChildHeightRatio: 0.4,
-          minChildWidth: 15,
-          maxChildWidthRatio: 0.9,
-          dx: 5,
-          dy: 2,
-          child: Visibility(
-            visible: errorVisible,
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  border: Border.all(color: Color(0xFFD31145)),
-                  color: Color(0xFFFEEBE9)),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 5),
-                  child: Text(
-                    "Error : $title can't be empty",
-                    style: TextStyle(fontFamily: "Kano", fontSize: 10.5),
-                  ),
-                ),
-              ),
-            ),
-          ),
         ),
       ]),
     );

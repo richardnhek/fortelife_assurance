@@ -255,10 +255,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   @override
   Widget build(BuildContext context) {
     ParametersProvider parametersProvider =
-        Provider.of<ParametersProvider>(context, listen: true);
+        Provider.of<ParametersProvider>(context);
     AppProvider appProvider =
         Provider.of<AppProvider>(widget.scaffoldKey.currentContext);
-
+    Map<String, dynamic> lang = appProvider.lang;
     final mq = MediaQuery.of(context);
 
     showAlertDialog(BuildContext context) {
@@ -473,7 +473,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               children: [
                 CustomSwitch(
                   value: appProvider.differentPerson,
-                  title: "Buying For Someone Else",
+                  title: lang['buy_for_someone'],
                   onChanged: (bool) {
                     setState(() {
                       appProvider.differentPerson = bool;
@@ -487,7 +487,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             FieldTitle(
-                              fieldTitle: "Proposer",
+                              fieldTitle: lang['payor'],
                             ),
                             SizedBox(height: 10),
                             Container(
@@ -498,7 +498,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                 children: [
                                   Expanded(
                                     child: CustomTextField(
-                                      formLabel: "First Name",
+                                      formLabel: lang['first_name'],
                                       formInputType: TextInputType.name,
                                       formController: pFirstName,
                                       isRequired: false,
@@ -509,7 +509,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                   SizedBox(width: 5),
                                   Expanded(
                                     child: CustomTextField(
-                                      formLabel: "Last Name",
+                                      formLabel: lang['last_name'],
                                       maxLength: 10,
                                       isRequired: false,
                                       formInputType: TextInputType.name,
@@ -520,6 +520,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                 ],
                               ),
                             ),
+                            SizedBox(height: 5),
                             Container(
                               width: mq.size.width,
                               child: Row(
@@ -529,11 +530,13 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                   Expanded(
                                       flex: 1,
                                       child: DisabledField(
-                                          formController: pAge, title: "Age")),
+                                          formController: pAge,
+                                          title: lang['age'])),
                                   SizedBox(width: 5),
                                   Expanded(
                                       flex: 2,
                                       child: CustomDatePicker(
+                                        title: lang['dob'],
                                         focusNode: AlwaysDisabledFocusNode(),
                                         dob: pDob,
                                         onTap: () {
@@ -553,7 +556,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                   children: [
                                     Expanded(
                                         child: CustomDropDown(
-                                      title: "Gender",
+                                      title: lang['gender'],
                                       value: pSelectedGender,
                                       isRequired: true,
                                       errorVisible: emptyGenderFieldP,
@@ -573,7 +576,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                       flex: 2,
                                       child: CustomTextField(
                                         formInputType: TextInputType.text,
-                                        formLabel: "Occupation",
+                                        formLabel: lang['occupation'],
                                         maxLength: 10,
                                         isRequired: false,
                                         formController: pOccupation,
@@ -592,7 +595,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FieldTitle(
-                        fieldTitle: "Life Proposed",
+                        fieldTitle: lang['life_proposed'],
                       ),
                       SizedBox(height: 10),
                       Container(
@@ -602,7 +605,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           children: [
                             Expanded(
                               child: CustomTextField(
-                                formLabel: "First Name",
+                                formLabel: lang['first_name'],
                                 formInputType: TextInputType.name,
                                 isRequired: false,
                                 formController: firstName,
@@ -613,7 +616,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             SizedBox(width: 5),
                             Expanded(
                               child: CustomTextField(
-                                formLabel: "Last Name",
+                                formLabel: lang['last_name'],
                                 formInputType: TextInputType.name,
                                 formController: lastName,
                                 isRequired: false,
@@ -624,6 +627,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 5),
                       Container(
                         width: mq.size.width,
                         child: Row(
@@ -633,11 +637,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             Expanded(
                                 flex: 1,
                                 child: DisabledField(
-                                    formController: age, title: "Age")),
+                                    formController: age, title: lang['age'])),
                             SizedBox(width: 5),
                             Expanded(
                                 flex: 2,
                                 child: CustomDatePicker(
+                                  title: lang['dob'],
                                   focusNode: AlwaysDisabledFocusNode(),
                                   dob: dob,
                                   onTap: () {
@@ -655,7 +660,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           children: [
                             Expanded(
                                 child: CustomDropDown(
-                              title: "Gender",
+                              title: lang['gender'],
                               value: lSelectedGender,
                               items: genderTypes,
                               isRequired: true,
@@ -674,7 +679,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               flex: 2,
                               child: CustomTextField(
                                 formInputType: TextInputType.text,
-                                formLabel: "Occupation",
+                                formLabel: lang['occupation'],
                                 maxLength: 10,
                                 isRequired: false,
                                 formController: lOccupation,
@@ -684,6 +689,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 5),
                       Container(
                         width: mq.size.width,
                         child: Row(
@@ -744,8 +750,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 5),
                       CustomTextField(
-                        formLabel: "Premium Payable",
+                        formLabel: lang['premium'],
                         formInputType: TextInputType.number,
                         formController: premium,
                         maxLength: 9,
@@ -764,8 +771,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           }
                         },
                       ),
+                      SizedBox(height: 5),
                       CustomTextField(
-                        formLabel: "Sum Assured",
+                        formLabel: lang['sum_assured'],
                         formInputType: TextInputType.number,
                         formController: sumAssured,
                         isRequired: true,
@@ -789,7 +797,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                 ),
                 CustomSwitch(
                   value: appProvider.addRider,
-                  title: "Add Rider",
+                  title: lang['add_rider'],
                   onChanged: (bool) {
                     setState(() {
                       appProvider.addRider = bool;
@@ -802,7 +810,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                       padding: EdgeInsets.only(left: 5, right: 5, bottom: 5),
                       child: CustomTextField(
                         formInputType: TextInputType.number,
-                        formLabel: "Added Rider",
+                        formLabel: lang['add_rider'],
                         isRequired: true,
                         maxLength: 10,
                         formController: riderAdded,
@@ -816,7 +824,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     children: [
                       Expanded(
                           flex: 3,
-                          child: Text("Language",
+                          child: Text(lang['language'],
                               style: TextStyle(
                                   fontFamily: "Kano",
                                   fontSize: 15,

@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
         prefs.setString(AGENT_USERNAME, agent.username);
         prefs.setString(AGENT_ID, agent.id);
         print(agent);
-        if (_passwordController.text == "12345678") {
+        if (_passwordController.text == "1234") {
           Navigator.popAndPushNamed(context, "/change_pass");
         } else {
           Navigator.of(loadingModalContext).pop();

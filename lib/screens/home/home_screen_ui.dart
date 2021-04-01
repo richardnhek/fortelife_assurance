@@ -25,7 +25,8 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
 
   @override
   Widget build(BuildContext context) {
-    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+    Map<String, dynamic> lang = appProvider.lang;
 
     final mq = MediaQuery.of(context);
     return SingleChildScrollView(
@@ -61,7 +62,7 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                       Padding(
                         padding: EdgeInsets.only(left: 15),
                         child: FieldTitle(
-                          fieldTitle: "Insurance Calculator",
+                          fieldTitle: lang['forte_title'],
                         ),
                       ),
                       SizedBox(height: 25),
@@ -72,16 +73,16 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CalculatorButton(
-                              calculatorTitle: "Forte Life Protect",
-                              calculatorDesc: "Insurance Plan",
+                              calculatorTitle: lang['forte_protect'],
+                              calculatorDesc: lang['insurance_plan'],
                               calculatorOnTap: () =>
                                   {appProvider.categoriesTabIndex = 1},
                               calculatorImg:
                                   AssetImage("assets/icons/shield.png"),
                             ),
                             CalculatorButton(
-                              calculatorTitle: "Forte Life Education",
-                              calculatorDesc: "Insurance Plan",
+                              calculatorTitle: lang['forte_edu'],
+                              calculatorDesc: lang['insurance_plan'],
                               calculatorOnTap: () =>
                                   {appProvider.categoriesTabIndex = 2},
                               calculatorImg:
@@ -96,7 +97,7 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                       Padding(
                         padding: EdgeInsets.only(left: 15),
                         child: FieldTitle(
-                          fieldTitle: "Forte Life Videos",
+                          fieldTitle: lang['forte_videos'],
                         ),
                       ),
                       Padding(

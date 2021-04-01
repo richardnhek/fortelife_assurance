@@ -50,6 +50,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
   Widget build(BuildContext context) {
     TextEditingController fileName = new TextEditingController();
     AppProvider appProvider = Provider.of<AppProvider>(context);
+    Map<String, dynamic> lang = appProvider.lang;
     file = File("${appProvider.rootPath}/fortelife.pdf");
     showAlertDialog(BuildContext context) {
       AlertDialog alert = AlertDialog(
@@ -57,7 +58,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
         title: Center(
             child: Container(
                 child: Text(
-          "Save PDF",
+          lang['save_pdf'],
           style: TextStyle(
               color: Color(0xFF8AB84B),
               fontFamily: "Kano",
@@ -70,7 +71,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
             children: [
               Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Text(
-                  "File Name: ",
+                  lang['file_name'] + ": ",
                   style: TextStyle(
                       color: Colors.black, fontSize: 14, fontFamily: "Kano"),
                 ),
@@ -107,7 +108,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
             ]),
         actions: [
           FlatButton(
-            child: Text("Save"),
+            child: Text(lang['save']),
             onPressed: () async {
               if (fileName.text.isNotEmpty) {
                 final saveDir = await _getDownloadDirectory();
@@ -174,7 +175,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
             },
           ),
           FlatButton(
-            child: Text("Cancel"),
+            child: Text(lang['cancel']),
             onPressed: () {
               Navigator.of(context).pop();
             },

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/widgets/bullet_point.dart';
 import 'package:forte_life/widgets/field_title.dart';
 import 'package:forte_life/widgets/info_table.dart';
 import 'package:forte_life/widgets/info_tablerow.dart';
+import 'package:provider/provider.dart';
 
 class InfoScreen extends StatefulWidget {
   @override
@@ -28,6 +30,8 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+    Map<String, dynamic> lang = appProvider.lang;
     return SafeArea(
       child: SingleChildScrollView(
           child: Container(
@@ -39,7 +43,7 @@ class _InfoScreenState extends State<InfoScreen> {
             Padding(
               padding: EdgeInsets.only(top: mq.size.height / 36),
               child: FieldTitle(
-                fieldTitle: "For Life Proposed",
+                fieldTitle: lang['for_life_proposed'],
               ),
             ),
             SizedBox(height: 10),
@@ -69,7 +73,7 @@ class _InfoScreenState extends State<InfoScreen> {
             ),
             SizedBox(height: 20),
             FieldTitle(
-              fieldTitle: "Benefits",
+              fieldTitle: lang['benefits'],
             ),
             SizedBox(height: 10),
             InfoTable(

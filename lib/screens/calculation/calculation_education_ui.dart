@@ -200,6 +200,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     ParametersProvider parametersProvider =
         Provider.of<ParametersProvider>(context, listen: false);
     AppProvider appProvider = Provider.of<AppProvider>(context);
+    Map<String, dynamic> lang = appProvider.lang;
     final mq = MediaQuery.of(context);
     showAlertDialog(BuildContext context) {
       showDialog(
@@ -377,7 +378,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           FieldTitle(
-                            fieldTitle: "Payor",
+                            fieldTitle: lang['payor'],
                           ),
                           SizedBox(height: 10),
                           Container(
@@ -387,7 +388,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               children: [
                                 Expanded(
                                   child: CustomTextField(
-                                    formLabel: "First Name",
+                                    formLabel: lang['first_name'],
                                     formInputType: TextInputType.name,
                                     formController: pFirstName,
                                     maxLength: 10,
@@ -398,7 +399,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 SizedBox(width: 5),
                                 Expanded(
                                   child: CustomTextField(
-                                    formLabel: "Last Name",
+                                    formLabel: lang['last_name'],
                                     maxLength: 10,
                                     formInputType: TextInputType.name,
                                     formController: pLastName,
@@ -409,6 +410,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               ],
                             ),
                           ),
+                          SizedBox(height: 5),
                           Container(
                             width: mq.size.width,
                             child: Row(
@@ -418,12 +420,13 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                     flex: 1,
                                     child: DisabledField(
                                       formController: pAge,
-                                      title: "Age",
+                                      title: lang['age'],
                                     )),
                                 SizedBox(width: 5),
                                 Expanded(
                                     flex: 2,
                                     child: CustomDatePicker(
+                                      title: lang['dob'],
                                       focusNode: AlwaysDisabledFocusNode(),
                                       dob: pDob,
                                       onTap: () {
@@ -442,7 +445,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 children: [
                                   Expanded(
                                       child: CustomDropDown(
-                                    title: "Gender",
+                                    title: lang['gender'],
                                     value: pSelectedGender,
                                     errorVisible: false,
                                     isRequired: true,
@@ -461,7 +464,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                     flex: 2,
                                     child: CustomTextField(
                                       formInputType: TextInputType.text,
-                                      formLabel: "Occupation",
+                                      formLabel: lang['occupation'],
                                       maxLength: 10,
                                       isRequired: false,
                                       formController: pOccupation,
@@ -478,7 +481,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FieldTitle(
-                        fieldTitle: "Life Proposed",
+                        fieldTitle: lang['life_proposed_edu'],
                       ),
                       SizedBox(height: 10),
                       Container(
@@ -488,7 +491,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           children: [
                             Expanded(
                               child: CustomTextField(
-                                formLabel: "First Name",
+                                formLabel: lang['first_name'],
                                 formInputType: TextInputType.name,
                                 maxLength: 10,
                                 isRequired: false,
@@ -499,7 +502,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             SizedBox(width: 5),
                             Expanded(
                               child: CustomTextField(
-                                formLabel: "Last Name",
+                                formLabel: lang['last_name'],
                                 formInputType: TextInputType.name,
                                 formController: lastName,
                                 isRequired: false,
@@ -510,6 +513,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 5),
                       Container(
                         width: mq.size.width,
                         child: Row(
@@ -520,12 +524,13 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 flex: 1,
                                 child: DisabledField(
                                   formController: age,
-                                  title: "Age",
+                                  title: lang['age'],
                                 )),
                             SizedBox(width: 5),
                             Expanded(
                                 flex: 2,
                                 child: CustomDatePicker(
+                                  title: lang['dob'],
                                   focusNode: AlwaysDisabledFocusNode(),
                                   dob: dob,
                                   onTap: () async {
@@ -546,7 +551,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           children: [
                             Expanded(
                                 child: CustomDropDown(
-                              title: "Gender",
+                              title: lang['gender'],
                               value: lSelectedGender,
                               isRequired: true,
                               items: genderTypes,
@@ -565,12 +570,13 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               flex: 2,
                               child: DisabledField(
                                 formController: lOccupation,
-                                title: "Occupation",
+                                title: lang['occupation'],
                               ),
                             )
                           ],
                         ),
                       ),
+                      SizedBox(height: 5),
                       Container(
                         width: mq.size.width,
                         child: Row(
@@ -599,14 +605,15 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             Expanded(
                                 flex: 1,
                                 child: DisabledField(
-                                  title: "Policy Year",
+                                  title: lang['policy_year'],
                                   formController: policyYear,
                                 )),
                           ],
                         ),
                       ),
+                      SizedBox(height: 5),
                       CustomTextField(
-                        formLabel: "Premium Payable",
+                        formLabel: lang['premium'],
                         formInputType: TextInputType.number,
                         formController: premium,
                         maxLength: 9,
@@ -627,8 +634,9 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           }
                         },
                       ),
+                      SizedBox(height: 5),
                       CustomTextField(
-                        formLabel: "Sum Assured",
+                        formLabel: lang['sum_assured'],
                         formInputType: TextInputType.number,
                         formController: sumAssured,
                         isRequired: true,
