@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forte_life/constants/constants.dart';
 import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:forte_life/widgets/custom_alert_dialog.dart';
 import 'package:forte_life/widgets/customizable_alert_dialog.dart';
 import 'package:provider/provider.dart';
@@ -417,148 +418,159 @@ class ProfileScreenUI extends StatelessWidget {
               ));
     }
 
-    return Stack(alignment: Alignment.center, children: [
-      Align(
-        alignment: Alignment.topCenter,
-        child: Container(
-          decoration: new BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Color(0xFF92C04A), Color(0xFF6ABFBC)])),
-          height: 400,
-          width: mq.size.width,
-        ),
-      ),
-      Align(
-        alignment: Alignment(0.0, 0.05),
-        child: Container(
-          key: mainContainer,
-          margin: EdgeInsets.symmetric(horizontal: 30),
-          padding: EdgeInsets.only(top: 15),
-          constraints: BoxConstraints(
-            maxHeight: 280,
-            minHeight: 270,
+    return SingleChildScrollView(
+      physics: NeverScrollableScrollPhysics(),
+      child: Container(
+        height: mq.size.height,
+        child: Stack(alignment: Alignment.center, children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              decoration: new BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Color(0xFF92C04A), Color(0xFF6ABFBC)])),
+              height: 400,
+              width: mq.size.width,
+            ),
           ),
-          width: double.infinity,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(7.5),
-              color: Color(0xFFFFFFFF),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.16),
-                    blurRadius: 15,
-                    spreadRadius: 1,
-                    offset: Offset(3, 6)),
-              ]),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                "Username: ${appProvider.userName}",
-                style: TextStyle(
-                    color: Colors.grey, fontSize: 15, fontFamily: "Kano"),
-              ),
-              SizedBox(height: 10),
-              Divider(
-                color: Colors.grey.withOpacity(0.5),
-              ),
-              SizedBox(height: 10),
-              GestureDetector(
-                onTap: _showSwitchLanguageDialog,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        lang['language'],
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontFamily: "Kano"),
-                      ),
-                      Icon(Icons.language, color: Color(0xFF92C04A))
-                    ],
+          Align(
+            child: Container(
+              key: mainContainer,
+              margin: EdgeInsets.symmetric(horizontal: 30),
+              padding: EdgeInsets.only(top: 15),
+              width: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 300.0,
+                  onTablet: 550.0),
+              height: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 280.0,
+                  onTablet: 600.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7.5),
+                  color: Color(0xFFFFFFFF),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.16),
+                        blurRadius: 15,
+                        spreadRadius: 1,
+                        offset: Offset(3, 6)),
+                  ]),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Username: ${appProvider.userName}",
+                    style: TextStyle(
+                        color: Colors.grey, fontSize: 15, fontFamily: "Kano"),
                   ),
-                ),
-              ),
-              SizedBox(height: 20),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: _showChangePassword,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        lang['change_pass'],
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontFamily: "Kano"),
-                      ),
-                      Icon(Icons.lock_outline, color: Color(0xFF92C04A))
-                    ],
+                  SizedBox(height: 10),
+                  Divider(
+                    color: Colors.grey.withOpacity(0.5),
                   ),
-                ),
-              ),
-              SizedBox(height: 20),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: _showContactDialog,
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        lang['contact_us'],
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontFamily: "Kano"),
+                  SizedBox(height: 10),
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: _showSwitchLanguageDialog,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            lang['language'],
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: "Kano"),
+                          ),
+                          Icon(Icons.language, color: Color(0xFF92C04A))
+                        ],
                       ),
-                      Icon(Icons.contact_page_outlined,
-                          color: Color(0xFF92C04A))
-                    ],
+                    ),
                   ),
-                ),
-              ),
-              SizedBox(height: 20),
-              RaisedButton(
-                  onPressed: _showExitDialog,
-                  padding: EdgeInsets.all(8.5),
-                  disabledColor: Color(0xFFD31145),
-                  color: Color(0xFFD31145),
-                  disabledElevation: 2.5,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        lang['log_out'],
-                        style: TextStyle(
-                            fontSize: 17.5,
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: _showChangePassword,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            lang['change_pass'],
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: "Kano"),
+                          ),
+                          Icon(Icons.lock_outline, color: Color(0xFF92C04A))
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: _showContactDialog,
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            lang['contact_us'],
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: "Kano"),
+                          ),
+                          Icon(Icons.contact_page_outlined,
+                              color: Color(0xFF92C04A))
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  RaisedButton(
+                      onPressed: _showExitDialog,
+                      padding: EdgeInsets.all(8.5),
+                      disabledColor: Color(0xFFD31145),
+                      color: Color(0xFFD31145),
+                      disabledElevation: 2.5,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            lang['log_out'],
+                            style: TextStyle(
+                                fontSize: 17.5,
+                                color: Colors.white,
+                                fontFamily: "Kano",
+                                fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(width: 10),
+                          Icon(
+                            Icons.logout,
+                            size: 21,
                             color: Colors.white,
-                            fontFamily: "Kano",
-                            fontWeight: FontWeight.w600),
-                      ),
-                      SizedBox(width: 10),
-                      Icon(
-                        Icons.logout,
-                        size: 21,
-                        color: Colors.white,
-                      )
-                    ],
-                  ))
-            ],
+                          )
+                        ],
+                      ))
+                ],
+              ),
+            ),
           ),
-        ),
+        ]),
       ),
-    ]);
+    );
   }
 }

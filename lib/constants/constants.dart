@@ -12,3 +12,6 @@ const String LANGUAGE_ENGLISH = "en";
 const String FONT_KANTUMRUY = "Kantumruy-Regular";
 const String FONT_KANO = "Kano";
 const String THEME_LIGHT = "light";
+
+//Offline Status
+const String APP_STATUS = "online";

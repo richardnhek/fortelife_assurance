@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 
 import 'package:forte_life/widgets/username_field.dart';
 import 'package:forte_life/widgets/password_field.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreenUI extends StatelessWidget {
   LoginScreenUI(
@@ -19,6 +22,7 @@ class LoginScreenUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
+    AppProvider appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -31,24 +35,66 @@ class LoginScreenUI extends StatelessWidget {
                 gaplessPlayback: true),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: mq.size.width / 8),
+            padding: EdgeInsets.symmetric(
+                horizontal: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: mq.size.width / 8,
+                    onTablet: mq.size.width / 4)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ConstrainedBox(
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                                "assets/pictures/android/logo/logo.png"),
-                            fit: BoxFit.contain)),
-                  ),
-                  constraints: BoxConstraints(maxWidth: 300, maxHeight: 52),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  width: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 300.0,
+                      onTablet: 600.0),
+                  height: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 52.0,
+                      onTablet: 150.0),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                              "assets/pictures/android/logo/logo.png"),
+                          fit: BoxFit.contain)),
                 ),
                 SizedBox(height: 50),
                 UserNameField(
+                  fieldHeight: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 50.0,
+                      onTablet: 75.0),
+                  fieldWidth: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 300.0,
+                      onTablet: 600.0),
+                  iconSize: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 16.0,
+                      onTablet: 32.0),
+                  fontSize: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 14.0,
+                      onTablet: 24.0),
+                  extraPad: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 2.0,
+                      onTablet: 4.0),
+                  ctnPadding: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 15.0,
+                      onTablet: 20.0),
                   hintText: "Username",
                   tec: usernameController,
                 ),
@@ -56,6 +102,36 @@ class LoginScreenUI extends StatelessWidget {
                   height: 15,
                 ),
                 PasswordField(
+                  fieldHeight: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 50.0,
+                      onTablet: 75.0),
+                  fieldWidth: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 300.0,
+                      onTablet: 600.0),
+                  iconSize: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 16.0,
+                      onTablet: 32.0),
+                  fontSize: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 14.0,
+                      onTablet: 24.0),
+                  extraPad: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 2.0,
+                      onTablet: 4.0),
+                  ctnPadding: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 15.0,
+                      onTablet: 20.0),
                   hintText: "Password",
                   tec: passwordController,
                 ),
@@ -63,8 +139,16 @@ class LoginScreenUI extends StatelessWidget {
                   height: 30,
                 ),
                 Container(
-                  width: 100,
-                  height: 40,
+                  width: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 100.0,
+                      onTablet: 200.0),
+                  height: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 40.0,
+                      onTablet: 80.0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       gradient: LinearGradient(
@@ -81,7 +165,11 @@ class LoginScreenUI extends StatelessWidget {
                     child: Text(
                       "Login",
                       style: TextStyle(
-                          fontSize: 17.5,
+                          fontSize: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 17.5,
+                              onTablet: 30.0),
                           fontFamily: "Kano",
                           fontWeight: FontWeight.w600,
                           color: Colors.white),

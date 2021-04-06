@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:forte_life/widgets/calculator_button.dart';
 import 'package:forte_life/widgets/field_title.dart';
 import 'package:provider/provider.dart';
@@ -38,10 +39,24 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: mq.size.height / 8, left: 25),
+                padding: EdgeInsets.only(
+                    top: mq.size.height / 8,
+                    left: DeviceUtils.getResponsive(
+                        appProvider: appProvider,
+                        mq: mq,
+                        onPhone: 25.0,
+                        onTablet: 50.0)),
                 child: Container(
-                  width: 200,
-                  height: 50,
+                  width: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 200.0,
+                      onTablet: 400.0),
+                  height: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 50.0,
+                      onTablet: 100.0),
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -55,17 +70,32 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                   top: mq.size.height / 6,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 15.0,
+                          onTablet: 50.0)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 15),
                         child: FieldTitle(
+                          fontSize: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 21.0,
+                              onTablet: 42.0),
                           fieldTitle: lang['forte_title'],
                         ),
                       ),
-                      SizedBox(height: 25),
+                      SizedBox(
+                          height: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 25.0,
+                              onTablet: 50.0)),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: Row(
@@ -73,6 +103,21 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CalculatorButton(
+                              fontSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 14.0,
+                                  onTablet: 28.0),
+                              btnSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 140.0,
+                                  onTablet: 280.0),
+                              imgSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 60.0,
+                                  onTablet: 120.0),
                               calculatorTitle: lang['forte_protect'],
                               calculatorDesc: lang['insurance_plan'],
                               calculatorOnTap: () =>
@@ -81,6 +126,21 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                                   AssetImage("assets/icons/shield.png"),
                             ),
                             CalculatorButton(
+                              fontSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 14.0,
+                                  onTablet: 28.0),
+                              btnSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 140.0,
+                                  onTablet: 280.0),
+                              imgSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 60.0,
+                                  onTablet: 120.0),
                               calculatorTitle: lang['forte_edu'],
                               calculatorDesc: lang['insurance_plan'],
                               calculatorOnTap: () =>
@@ -92,11 +152,20 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                         ),
                       ),
                       SizedBox(
-                        height: 50,
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 50.0,
+                            onTablet: 75.0),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 15),
                         child: FieldTitle(
+                          fontSize: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 21.0,
+                              onTablet: 42.0),
                           fieldTitle: lang['forte_videos'],
                         ),
                       ),

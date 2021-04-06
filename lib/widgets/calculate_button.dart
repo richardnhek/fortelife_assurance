@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 
 class CalculateButton extends StatelessWidget {
-  CalculateButton({this.onPressed});
+  CalculateButton(
+      {this.onPressed,
+      this.btnHeight,
+      this.btnWidth,
+      this.calcTitle,
+      this.fontSize});
 
   final Function onPressed;
+  final double btnHeight;
+  final double btnWidth;
+  final String calcTitle;
+  final double fontSize;
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context);
     return Container(
-      width: 100,
-      height: mq.size.height / 16,
+      width: btnWidth,
+      height: btnHeight,
       decoration: BoxDecoration(
           color: Color(0xFF8AB84B),
           borderRadius: BorderRadius.circular(2.5),
@@ -23,9 +31,11 @@ class CalculateButton extends StatelessWidget {
         padding: EdgeInsets.all(10),
         onPressed: onPressed,
         child: Text(
-          "Calculate",
+          calcTitle,
           style: TextStyle(
-              fontSize: 15, fontFamily: "Kano", fontWeight: FontWeight.bold),
+              fontSize: fontSize,
+              fontFamily: "Kano",
+              fontWeight: FontWeight.bold),
         ),
       ),
     );

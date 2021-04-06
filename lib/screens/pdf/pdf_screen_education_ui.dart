@@ -4,6 +4,7 @@ import 'package:align_positioned/align_positioned.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:open_file/open_file.dart';
 import '../../notification_plugin.dart';
 import 'package:path_provider/path_provider.dart';
@@ -47,6 +48,7 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
   Widget build(BuildContext context) {
     TextEditingController fileName = new TextEditingController();
     AppProvider appProvider = Provider.of<AppProvider>(context);
+    final mq = MediaQuery.of(context);
     Map<String, dynamic> lang = appProvider.lang;
     file = File("${appProvider.rootPath}/fortelife-education.pdf");
     showAlertDialog(BuildContext context) {
@@ -209,7 +211,8 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
         child: FloatingActionButton(
           child: Icon(
             Icons.save_alt_outlined,
-            size: 24,
+            size: DeviceUtils.getResponsive(
+                mq: mq, appProvider: appProvider, onPhone: 24, onTablet: 48),
             color: Colors.white,
           ),
           backgroundColor: Color(0xFF8AB84B),

@@ -7,7 +7,9 @@ class TabButton extends StatefulWidget {
       this.onPressed,
       this.tabTitle,
       this.height,
-      this.width});
+      this.width,
+      this.iconSize,
+      this.fontSize});
 
   final bool isActive;
   final IconData icon;
@@ -15,6 +17,8 @@ class TabButton extends StatefulWidget {
   final Function onPressed;
   final double height;
   final double width;
+  final double iconSize;
+  final double fontSize;
 
   @override
   _TabButtonState createState() => _TabButtonState();
@@ -34,7 +38,7 @@ class _TabButtonState extends State<TabButton>
           children: [
             Icon(
               widget.icon,
-              size: 28,
+              size: widget.iconSize,
               color: widget.isActive
                   ? Color(0xFF8AB84B)
                   : Colors.black.withOpacity(0.5),
@@ -43,7 +47,7 @@ class _TabButtonState extends State<TabButton>
               widget.tabTitle,
               style: TextStyle(
                   fontFamily: "Kano",
-                  fontSize: 18,
+                  fontSize: widget.fontSize,
                   color: widget.isActive
                       ? Color(0xFF8AB84B)
                       : Colors.black.withOpacity(0.5)),

@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 
 class UserNameField extends StatelessWidget {
-  UserNameField({this.hintText, this.tec});
+  UserNameField(
+      {this.hintText,
+      this.tec,
+      this.fieldHeight,
+      this.fieldWidth,
+      this.ctnPadding,
+      this.iconSize,
+      this.fontSize,
+      this.extraPad});
 
   final String hintText;
   final TextEditingController tec;
+  final double fieldHeight;
+  final double fieldWidth;
+  final double ctnPadding;
+  final double fontSize;
+  final double iconSize;
+  final double extraPad;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 50,
-        width: 300,
+        height: fieldHeight,
+        width: fieldWidth,
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(
               color: Colors.black.withOpacity(0.16),
@@ -26,15 +40,17 @@ class UserNameField extends StatelessWidget {
             enabledBorder: InputBorder.none,
             errorBorder: InputBorder.none,
             disabledBorder: InputBorder.none,
-            contentPadding: EdgeInsets.all(15),
+            contentPadding: EdgeInsets.all(ctnPadding),
             hintText: hintText,
             hintStyle: TextStyle(
-                fontFamily: "Kano", fontSize: 14, color: Color(0xFFBBBBBB)),
+                fontFamily: "Kano",
+                fontSize: fontSize,
+                color: Color(0xFFBBBBBB)),
             prefixIcon: Padding(
-              padding: EdgeInsets.only(bottom: 2),
+              padding: EdgeInsets.only(bottom: extraPad),
               child: Icon(
                 Icons.person_outline,
-                size: 16,
+                size: iconSize,
                 color: Color(0xFFBBBBBB),
               ),
             ),

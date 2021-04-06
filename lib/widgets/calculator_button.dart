@@ -6,12 +6,18 @@ class CalculatorButton extends StatelessWidget {
       {this.calculatorTitle,
       this.calculatorImg,
       this.calculatorDesc,
-      this.calculatorOnTap});
+      this.calculatorOnTap,
+      this.fontSize,
+      this.btnSize,
+      this.imgSize});
 
   final String calculatorTitle;
   final AssetImage calculatorImg;
   final String calculatorDesc;
   final Function calculatorOnTap;
+  final double btnSize;
+  final double imgSize;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +31,8 @@ class CalculatorButton extends StatelessWidget {
       padding: EdgeInsets.zero,
       child: Container(
         padding: EdgeInsets.all(10),
-        height: 140,
-        width: 140,
+        height: btnSize,
+        width: btnSize,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(5),
@@ -43,20 +49,20 @@ class CalculatorButton extends StatelessWidget {
           children: [
             Text(calculatorTitle,
                 style: TextStyle(
-                    fontSize: 14,
+                    fontSize: fontSize,
                     fontFamily: "Kano",
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF6ABFBC))),
             Image(
               image: calculatorImg,
-              width: 60,
-              height: 60,
+              width: imgSize,
+              height: imgSize,
             ),
             Text(
               calculatorDesc,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 12,
+                  fontSize: fontSize - 2,
                   fontFamily: "Kano",
                   fontStyle: FontStyle.italic,
                   color: Colors.black.withOpacity(0.5)),

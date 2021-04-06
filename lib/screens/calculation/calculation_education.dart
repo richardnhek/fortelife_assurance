@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/screens/calculation/calculation_education_ui.dart';
 import 'package:forte_life/screens/info/info_screen_two.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:forte_life/widgets/custom_alert_dialog.dart';
 import 'package:forte_life/widgets/tab_button.dart';
 
@@ -67,6 +68,16 @@ class _CalculationEducationState extends State<CalculationEducation> {
                     tabTitle: lang['calculator_screen'],
                     width: mq.size.width / 2,
                     height: mq.size.height / 10,
+                    fontSize: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 18.0,
+                        onTablet: 32.0),
+                    iconSize: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 28.0,
+                        onTablet: 48.0),
                     icon: Icons.calculate_outlined,
                     isActive: appProvider.calculationPageEdu == 0,
                     onPressed: () {
@@ -84,6 +95,16 @@ class _CalculationEducationState extends State<CalculationEducation> {
                     height: mq.size.height / 10,
                     tabTitle: lang['info_screen'],
                     icon: Icons.info_outline,
+                    fontSize: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 18.0,
+                        onTablet: 32.0),
+                    iconSize: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 28.0,
+                        onTablet: 48.0),
                     isActive: appProvider.calculationPageEdu == 1,
                     onPressed: () {
                       setState(() {
@@ -108,7 +129,11 @@ class _CalculationEducationState extends State<CalculationEducation> {
           child: Icon(
             Icons.arrow_back,
             color: Colors.black,
-            size: 32,
+            size: DeviceUtils.getResponsive(
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 32.0,
+                onTablet: 48.0),
           ),
           onPressed: () {
             _showExitDialog(_scaffoldKey.currentContext);

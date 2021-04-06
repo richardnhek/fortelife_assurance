@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forte_life/screens/pdf/pdf_screen.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:forte_life/widgets/custom_alert_dialog.dart';
 import 'screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +26,7 @@ class _MainFlowState extends State<MainFlow> {
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
+    final mq = MediaQuery.of(context);
     Map<String, dynamic> lang = appProvider.lang;
     void onTappedBar(int index) {
       if (appProvider.activeTabIndex == 0) {
@@ -109,7 +113,11 @@ class _MainFlowState extends State<MainFlow> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [Color(0xFF92C04A), Color(0xFF6ABFBC)])),
-          height: 60.0,
+          height: DeviceUtils.getResponsive(
+              mq: mq,
+              appProvider: appProvider,
+              onPhone: Platform.isIOS ? 85.0 : 60.0,
+              onTablet: 120.0),
           width: double.infinity,
           child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
@@ -121,7 +129,11 @@ class _MainFlowState extends State<MainFlow> {
                 left: tabWidth * appProvider.activeTabIndex,
                 bottom: 0,
                 child: Container(
-                  height: 3.5,
+                  height: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 3.5,
+                      onTablet: 7.0),
                   width: tabWidth,
                   color: Colors.white,
                 ),
@@ -136,7 +148,11 @@ class _MainFlowState extends State<MainFlow> {
                 showSelectedLabels: false,
                 unselectedItemColor: Colors.white,
                 selectedItemColor: Colors.white,
-                iconSize: 25.0,
+                iconSize: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: Platform.isIOS ? 25.0 : 25.0,
+                    onTablet: 50.0),
                 items: [
                   BottomNavigationBarItem(
                     icon: Icon(Icons.home_outlined),

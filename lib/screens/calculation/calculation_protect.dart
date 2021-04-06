@@ -2,6 +2,7 @@ import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:forte_life/widgets/custom_alert_dialog.dart';
 import 'package:forte_life/widgets/tab_button.dart';
 import 'calculation_protect_ui.dart';
@@ -73,6 +74,16 @@ class _CalculationProtectState extends State<CalculationProtect> {
                     width: mq.size.width / 2,
                     height: mq.size.height / 10,
                     icon: Icons.calculate_outlined,
+                    fontSize: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 18.0,
+                        onTablet: 32.0),
+                    iconSize: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 28.0,
+                        onTablet: 48.0),
                     isActive: appProvider.calculationPage == 0,
                     onPressed: () {
                       setState(() {
@@ -89,6 +100,16 @@ class _CalculationProtectState extends State<CalculationProtect> {
                     height: mq.size.height / 10,
                     tabTitle: lang['info_screen'],
                     icon: Icons.info_outline,
+                    fontSize: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 18.0,
+                        onTablet: 32.0),
+                    iconSize: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 28.0,
+                        onTablet: 48.0),
                     isActive: appProvider.calculationPage == 1,
                     onPressed: () {
                       setState(() {

@@ -112,6 +112,10 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Payor",
     LANGUAGE_KHMER: "អ្នកបង់បុព្វលាភធានារ៉ាប់រង"
   },
+  "proposer": {
+    LANGUAGE_ENGLISH: "Proposer",
+    LANGUAGE_KHMER: "អ្នកបង់បុព្វលាភធានារ៉ាប់រង"
+  },
   "life_proposed_edu": {
     LANGUAGE_ENGLISH: "Life Proposed (Child)",
     LANGUAGE_KHMER: "អ្នកត្រូវបានធានារ៉ាប់រងលើអាយុជីវិត(កូន)"

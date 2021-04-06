@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/providers/parameters_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:forte_life/widgets/calculate_button.dart';
 import 'package:forte_life/widgets/custom_datepicker.dart';
 import 'package:forte_life/widgets/custom_dialogtext.dart';
@@ -465,7 +466,16 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         controller: ScrollController(),
         child: Container(
           padding: EdgeInsets.symmetric(
-              horizontal: 20, vertical: mq.size.height / 9.5),
+              horizontal: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 20.0,
+                  onTablet: mq.size.width / 10),
+              vertical: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: mq.size.height / 8,
+                  onTablet: mq.size.height / 7)),
           child: Form(
             key: widget._formKey,
             child: Column(
@@ -480,6 +490,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     });
                   },
                 ),
+                SizedBox(
+                    height: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 0.0,
+                        onTablet: 25.0)),
                 Visibility(
                   child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5),
@@ -487,7 +503,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             FieldTitle(
-                              fieldTitle: lang['payor'],
+                              fontSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 21.0,
+                                  onTablet: 42.0),
+                              fieldTitle: lang['proposer'],
                             ),
                             SizedBox(height: 10),
                             Container(
@@ -577,7 +598,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                       child: CustomTextField(
                                         formInputType: TextInputType.text,
                                         formLabel: lang['occupation'],
-                                        maxLength: 10,
+                                        maxLength: 9,
                                         isRequired: false,
                                         formController: pOccupation,
                                         errorVisible: false,
@@ -595,6 +616,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FieldTitle(
+                        fontSize: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 21.0,
+                            onTablet: 42.0),
                         fieldTitle: lang['life_proposed'],
                       ),
                       SizedBox(height: 10),
@@ -680,7 +706,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               child: CustomTextField(
                                 formInputType: TextInputType.text,
                                 formLabel: lang['occupation'],
-                                maxLength: 10,
+                                maxLength: 9,
                                 isRequired: false,
                                 formController: lOccupation,
                                 errorVisible: false,
@@ -753,7 +779,8 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                       SizedBox(height: 5),
                       CustomTextField(
                         formLabel: lang['premium'],
-                        formInputType: TextInputType.number,
+                        formInputType: TextInputType.numberWithOptions(
+                            signed: true, decimal: true),
                         formController: premium,
                         maxLength: 9,
                         isRequired: true,
@@ -774,7 +801,8 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                       SizedBox(height: 5),
                       CustomTextField(
                         formLabel: lang['sum_assured'],
-                        formInputType: TextInputType.number,
+                        formInputType: TextInputType.numberWithOptions(
+                            signed: true, decimal: true),
                         formController: sumAssured,
                         isRequired: true,
                         maxLength: 10,
@@ -809,7 +837,8 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 5, right: 5, bottom: 5),
                       child: CustomTextField(
-                        formInputType: TextInputType.number,
+                        formInputType: TextInputType.numberWithOptions(
+                            signed: true, decimal: true),
                         formLabel: lang['add_rider'],
                         isRequired: true,
                         maxLength: 10,
@@ -853,84 +882,117 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: CalculateButton(onPressed: () async {
-                        if (widget._formKey.currentState.validate()) {
-                          counter = 0;
-                          customDialogChildren.clear();
-                          widget._formKey.currentState.save();
-                          await saveTextValues();
-                          if (appProvider.differentPerson == true) {
-                            if (appProvider.addRider) {
-                              sumAssuredValidation(
-                                  sumAssured.text, selectedYear);
-                              premiumValidation(premium.text);
-                              ageValidation(age.text, pAge.text, selectedYear,
-                                  true, true);
-                              addedRiderValidation(
-                                  riderAdded.text, sumAssured.text);
-                              genderValidation(
-                                  lSelectedGender, pSelectedGender, true);
-                              if (counter == 6) {
-                                await getRate(isMale(lSelectedGender),
-                                    int.parse(age.text), selectedYear);
-                                calculateAndPDF();
-                              } else
-                                showAlertDialog(context);
+                      child: CalculateButton(
+                          calcTitle: lang['calculate_button'],
+                          fontSize: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 15.0,
+                              onTablet: 21.0),
+                          btnWidth: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 100.0,
+                              onTablet: 140.0),
+                          btnHeight: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 50.0,
+                              onTablet: 70.0),
+                          onPressed: () async {
+                            if (widget._formKey.currentState.validate()) {
+                              counter = 0;
+                              customDialogChildren.clear();
+                              widget._formKey.currentState.save();
+                              await saveTextValues();
+                              if (appProvider.differentPerson == true) {
+                                if (appProvider.addRider) {
+                                  sumAssuredValidation(
+                                      sumAssured.text, selectedYear);
+                                  premiumValidation(premium.text);
+                                  ageValidation(age.text, pAge.text,
+                                      selectedYear, true, true);
+                                  addedRiderValidation(
+                                      riderAdded.text, sumAssured.text);
+                                  genderValidation(
+                                      lSelectedGender, pSelectedGender, true);
+                                  if (counter == 6) {
+                                    await getRate(isMale(lSelectedGender),
+                                        int.parse(age.text), selectedYear);
+                                    calculateAndPDF();
+                                  } else
+                                    showAlertDialog(context);
+                                } else {
+                                  sumAssuredValidation(
+                                      sumAssured.text, selectedYear);
+                                  premiumValidation(premium.text);
+                                  ageValidation(age.text, pAge.text,
+                                      selectedYear, true, false);
+                                  genderValidation(
+                                      lSelectedGender, pSelectedGender, true);
+                                  if (counter == 5) {
+                                    calculateAndPDF();
+                                  } else
+                                    showAlertDialog(context);
+                                }
+                              } else {
+                                if (appProvider.addRider) {
+                                  sumAssuredValidation(
+                                      sumAssured.text, selectedYear);
+                                  premiumValidation(premium.text);
+                                  ageValidation(age.text, pAge.text,
+                                      selectedYear, false, true);
+                                  addedRiderValidation(
+                                      riderAdded.text, sumAssured.text);
+                                  genderValidation(
+                                      lSelectedGender, pSelectedGender, false);
+                                  if (counter == 5) {
+                                    await getRate(isMale(lSelectedGender),
+                                        int.parse(age.text), selectedYear);
+                                    calculateAndPDF();
+                                  } else
+                                    showAlertDialog(context);
+                                } else {
+                                  sumAssuredValidation(
+                                      sumAssured.text, selectedYear);
+                                  premiumValidation(premium.text);
+                                  ageValidation(age.text, pAge.text,
+                                      selectedYear, false, false);
+                                  genderValidation(
+                                      lSelectedGender, pSelectedGender, false);
+                                  if (counter == 4) {
+                                    calculateAndPDF();
+                                  } else
+                                    showAlertDialog(context);
+                                }
+                              }
                             } else {
-                              sumAssuredValidation(
-                                  sumAssured.text, selectedYear);
-                              premiumValidation(premium.text);
-                              ageValidation(age.text, pAge.text, selectedYear,
-                                  true, false);
-                              genderValidation(
-                                  lSelectedGender, pSelectedGender, true);
-                              if (counter == 5) {
-                                calculateAndPDF();
-                              } else
-                                showAlertDialog(context);
+                              customDialogChildren.add(CustomDialogText(
+                                description: "No Inputs",
+                              ));
+                              showAlertDialog(context);
                             }
-                          } else {
-                            if (appProvider.addRider) {
-                              sumAssuredValidation(
-                                  sumAssured.text, selectedYear);
-                              premiumValidation(premium.text);
-                              ageValidation(age.text, pAge.text, selectedYear,
-                                  false, true);
-                              addedRiderValidation(
-                                  riderAdded.text, sumAssured.text);
-                              genderValidation(
-                                  lSelectedGender, pSelectedGender, false);
-                              if (counter == 5) {
-                                await getRate(isMale(lSelectedGender),
-                                    int.parse(age.text), selectedYear);
-                                calculateAndPDF();
-                              } else
-                                showAlertDialog(context);
-                            } else {
-                              sumAssuredValidation(
-                                  sumAssured.text, selectedYear);
-                              premiumValidation(premium.text);
-                              ageValidation(age.text, pAge.text, selectedYear,
-                                  false, false);
-                              genderValidation(
-                                  lSelectedGender, pSelectedGender, false);
-                              if (counter == 4) {
-                                calculateAndPDF();
-                              } else
-                                showAlertDialog(context);
-                            }
-                          }
-                        } else {
-                          customDialogChildren.add(CustomDialogText(
-                            description: "No Inputs",
-                          ));
-                          showAlertDialog(context);
-                        }
-                      }),
+                          }),
                     ),
                     Padding(
                         padding: EdgeInsets.all(5),
                         child: ResetButton(
+                          calcTitle: lang['reset_button'],
+                          fontSize: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 15.0,
+                              onTablet: 21.0),
+                          btnWidth: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 100.0,
+                              onTablet: 140.0),
+                          btnHeight: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 50.0,
+                              onTablet: 70.0),
                           onPressed: () async {
                             final prefs = await SharedPreferences.getInstance();
                             //Proposer

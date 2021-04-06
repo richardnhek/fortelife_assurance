@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/providers/parameters_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:forte_life/widgets/calculate_button.dart';
 import 'package:forte_life/widgets/custom_datepicker.dart';
 import 'package:forte_life/widgets/custom_dialogtext.dart';
@@ -366,7 +367,16 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         controller: ScrollController(),
         child: Container(
           padding: EdgeInsets.symmetric(
-              horizontal: 20, vertical: mq.size.height / 8),
+              horizontal: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 20.0,
+                  onTablet: mq.size.width / 10),
+              vertical: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: mq.size.height / 8,
+                  onTablet: mq.size.height / 7)),
           child: Form(
             key: _formKey,
             child: Column(
@@ -378,6 +388,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           FieldTitle(
+                            fontSize: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 21.0,
+                                onTablet: 42.0),
                             fieldTitle: lang['payor'],
                           ),
                           SizedBox(height: 10),
@@ -465,7 +480,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                     child: CustomTextField(
                                       formInputType: TextInputType.text,
                                       formLabel: lang['occupation'],
-                                      maxLength: 10,
+                                      maxLength: 9,
                                       isRequired: false,
                                       formController: pOccupation,
                                       errorVisible: false,
@@ -481,6 +496,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FieldTitle(
+                        fontSize: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 21.0,
+                            onTablet: 42.0),
                         fieldTitle: lang['life_proposed_edu'],
                       ),
                       SizedBox(height: 10),
@@ -614,7 +634,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                       SizedBox(height: 5),
                       CustomTextField(
                         formLabel: lang['premium'],
-                        formInputType: TextInputType.number,
+                        formInputType: TextInputType.numberWithOptions(
+                            signed: true, decimal: true),
                         formController: premium,
                         maxLength: 9,
                         isRequired: true,
@@ -637,10 +658,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                       SizedBox(height: 5),
                       CustomTextField(
                         formLabel: lang['sum_assured'],
-                        formInputType: TextInputType.number,
+                        formInputType: TextInputType.numberWithOptions(
+                            signed: true, decimal: true),
                         formController: sumAssured,
                         isRequired: true,
-                        maxLength: 10,
+                        maxLength: 9,
                         errorVisible: false,
                         onChange: (text) {
                           if (int.parse(policyYear.text) != null) {
@@ -697,33 +719,68 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: CalculateButton(onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          counter = 0;
-                          customDialogChildren.clear();
-                          _formKey.currentState.save();
-                          await saveTextValues();
-                          policyYearValidation(policyYear.text);
-                          sumAssuredValidation(
-                              sumAssured.text, premium.text, policyYear.text);
-                          premiumValidation(premium.text);
-                          ageValidation(age.text, pAge.text, policyYear.text);
-                          genderValidation(lSelectedGender, pSelectedGender);
-                          if (counter == 5) {
-                            calculateAndPDF();
-                          } else
-                            showAlertDialog(context);
-                        } else {
-                          customDialogChildren.add(CustomDialogText(
-                            description: "No Inputs",
-                          ));
-                          showAlertDialog(context);
-                        }
-                      }),
+                      child: CalculateButton(
+                          calcTitle: lang['calculate_button'],
+                          fontSize: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 15.0,
+                              onTablet: 21.0),
+                          btnWidth: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 100.0,
+                              onTablet: 140.0),
+                          btnHeight: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 50.0,
+                              onTablet: 70.0),
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              counter = 0;
+                              customDialogChildren.clear();
+                              _formKey.currentState.save();
+                              await saveTextValues();
+                              policyYearValidation(policyYear.text);
+                              sumAssuredValidation(sumAssured.text,
+                                  premium.text, policyYear.text);
+                              premiumValidation(premium.text);
+                              ageValidation(
+                                  age.text, pAge.text, policyYear.text);
+                              genderValidation(
+                                  lSelectedGender, pSelectedGender);
+                              if (counter == 5) {
+                                calculateAndPDF();
+                              } else
+                                showAlertDialog(context);
+                            } else {
+                              customDialogChildren.add(CustomDialogText(
+                                description: "No Inputs",
+                              ));
+                              showAlertDialog(context);
+                            }
+                          }),
                     ),
                     Padding(
                         padding: EdgeInsets.all(5),
                         child: ResetButton(
+                          calcTitle: lang['reset_button'],
+                          fontSize: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 15.0,
+                              onTablet: 21.0),
+                          btnWidth: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 100.0,
+                              onTablet: 140.0),
+                          btnHeight: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 50.0,
+                              onTablet: 70.0),
                           onPressed: () {
                             //Proposer
                             pFirstName.clear();
