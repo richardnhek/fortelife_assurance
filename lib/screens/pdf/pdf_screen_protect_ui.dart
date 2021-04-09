@@ -246,7 +246,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
 
   //Save PDF in local storage
   Future savePDF(File file, pw.Document pdf) async {
-    await file.writeAsBytes(pdf.save());
+    await file.writeAsBytes(await pdf.save());
   }
   //
 }

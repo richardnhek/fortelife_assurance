@@ -152,4 +152,92 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   "file_name": {LANGUAGE_ENGLISH: "File Name", LANGUAGE_KHMER: "ឈ្មោះ​ឯកសារ"},
   "save": {LANGUAGE_ENGLISH: "Save", LANGUAGE_KHMER: "រក្សាទុក"},
   //
+
+  //Info Screen 1
+  "maturity_benefits": {
+    LANGUAGE_ENGLISH: "Maturity Benefits",
+    LANGUAGE_KHMER: "អត្ថប្រយោជន៍ដល់កាលកំណត់សរុប"
+  },
+  "line_1": {
+    LANGUAGE_ENGLISH: "Term From:  10 Years \nTo:  35 Years",
+    LANGUAGE_KHMER: "កាលកំណត់ធានារ៉ាប់រងចាប់ពី: 10ឆ្នាំ \nទៅ: 35ឆ្នាំ"
+  },
+  "line_2": {
+    LANGUAGE_ENGLISH: "Entry Age From:  1 Years Old \nTo:  59 Years Old",
+    LANGUAGE_KHMER:
+        "អាយុចាប់ផ្តើមធានាចាប់ពី:        1ឆ្នាំ \nទៅ: 59ឆ្នាំ (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ) "
+  },
+  "line_3": {
+    LANGUAGE_ENGLISH: "Maximum Maturity Age:\n69 Years Old",
+    LANGUAGE_KHMER: "អាយុផុតកំណត់: \n69ឆ្នាំ (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)"
+  },
+  //Table
+  "row_1_lead": {
+    LANGUAGE_ENGLISH: "Death due to all causes benefits:",
+    LANGUAGE_KHMER: "អត្ថប្រយោជន៍មរណភាពបណ្តាលមកពីគ្រប់មូលហេតុ:"
+  },
+  "row_1_trial": {
+    LANGUAGE_ENGLISH: "100% of Sum Assured",
+    LANGUAGE_KHMER: "100%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង"
+  },
+  "row_2_lead": {
+    LANGUAGE_ENGLISH: "TPD due to all causes benefits:",
+    LANGUAGE_KHMER:
+        "អត្ថប្រយោជន៍ពិការភាពទាំងស្រុងនិងជាអចិន្រ្តៃយ៍បណ្តាលមកពីគ្រប់មូលហេតុ:"
+  },
+
+  "row_3_lead": {
+    LANGUAGE_ENGLISH: "Accidental Death benefits:",
+    LANGUAGE_KHMER: "អត្ថប្រយោជន៍មរណភាពបណ្តាលមកពីគ្រោះថ្នាក់:"
+  },
+  "row_3_trial": {
+    LANGUAGE_ENGLISH: "200% of Sum Assured",
+    LANGUAGE_KHMER: "200%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង"
+  },
+  "row_4_lead": {
+    LANGUAGE_ENGLISH: "Accidental TPD benefit:",
+    LANGUAGE_KHMER:
+        "អត្ថប្រយោជន៍ពិការភាពទាំងស្រុងនិងជាអចិន្រ្តៃយ៍បណ្តាលមកពីគ្រោះថ្នាក់:"
+  },
+  //
+
+  //Maturity Benefits
+  "maturity_benefits_details": {
+    LANGUAGE_ENGLISH:
+        "Sum Assured + 2% of Sum Assured x Term\nIf Entry Age below 50\n\nSum Assured + 1% of Sum assured x Term\nIf entry age 50 or above",
+    LANGUAGE_KHMER:
+        "ទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង + 2%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង x កាលកំណត់ធានារ៉ាប់រង \nប្រសិនអាយុចាប់ផ្តើមធានារបស់អ្នកត្រូវបានធានារ៉ាប់រងលើអាយុជីវិតក្រោម 50ឆ្នាំ(គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ) \n\nទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង + 1%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង x កាលកំណត់ធានារ៉ាប់រង \nប្រសិនអាយុចាប់ផ្តើមធានារបស់អ្នកត្រូវបានធានារ៉ាប់រងលើអាយុជីវិតចាប់ពី 50ឆ្នាំ(គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)"
+  },
+  //
+  //
+
+  //Info Screen 2
+  "for_life_assured": {
+    LANGUAGE_ENGLISH: "For Life Assured (Child)",
+    LANGUAGE_KHMER: "សម្រាប់អ្នកត្រូវបានធានារ៉ាប់រងលើអាយុជីវិត (កូន)"
+  },
+  "for_payor": {
+    LANGUAGE_ENGLISH: "For Payor (Parent)",
+    LANGUAGE_KHMER: "សម្រាប់អ្នកបង់បុព្វលាភធានារ៉ាប់រង"
+  },
+  "line_1_edu": {
+    LANGUAGE_ENGLISH: "Term From:  10 Years \nTo:  17 Years",
+    LANGUAGE_KHMER: "កាលកំណត់ធានារ៉ាប់រងចាប់ពី: 10ឆ្នាំ \nទៅ: 17ឆ្នាំ"
+  },
+  "line_2_edu": {
+    LANGUAGE_ENGLISH: "Entry Age From:  1 Years Old \nTo:  8 Years Old",
+    LANGUAGE_KHMER:
+        "អាយុចាប់ផ្តើមធានាចាប់ពី: 1ឆ្នាំ \nទៅ: 8ឆ្នាំ  (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)"
+  },
+  "line_3_edu": {
+    LANGUAGE_ENGLISH: "Entry Age From:  18 Years Old \nTo:  59 Years Old",
+    LANGUAGE_KHMER:
+        "អាយុចាប់ផ្តើមធានាចាប់ពី: 18ឆ្នាំ \nទៅ: 59ឆ្នាំ (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)"
+  },
+  "waive_edu": {
+    LANGUAGE_ENGLISH: "Waive premium due to Death/TPD of Payor",
+    LANGUAGE_KHMER:
+        "លើកលែងការបង់បុព្វលាភធានារ៉ាប់រងប្រសិនអ្នកបង់បុព្វលាភធានារ៉ាប់រងទទួលមរណភាពឬពិការភាពបណ្តាលមកពីគ្រប់មូលហេតុ"
+  },
+  //
 };

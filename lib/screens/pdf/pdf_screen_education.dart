@@ -34,7 +34,7 @@ class _PDFScreenEduState extends State<PDFScreenEdu> {
     final prefs = await SharedPreferences.getInstance();
     final rootPath = prefs.getString("ROOT_PATH");
     final file = File("$rootPath/fortelife-education.pdf");
-    await file.writeAsBytes(pdf.save());
+    await file.writeAsBytes(await pdf.save());
   }
   //
 

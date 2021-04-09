@@ -212,7 +212,10 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
           child: Icon(
             Icons.save_alt_outlined,
             size: DeviceUtils.getResponsive(
-                mq: mq, appProvider: appProvider, onPhone: 24, onTablet: 48),
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 24.0,
+                onTablet: 48.0),
             color: Colors.white,
           ),
           backgroundColor: Color(0xFF8AB84B),
@@ -246,7 +249,7 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
 
   //Save PDF in local storage
   Future savePDF(File file, pw.Document pdf) async {
-    await file.writeAsBytes(pdf.save());
+    await file.writeAsBytes(await pdf.save());
   }
   //
 }

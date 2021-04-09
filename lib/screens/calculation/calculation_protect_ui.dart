@@ -47,6 +47,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     pFirstName.addListener(getAmountValues);
     pLastName.addListener(getAmountValues);
     pOccupation.addListener(getAmountValues);
+    riderAdded.addListener(getAmountValues);
     await checkNullValues();
   }
 
@@ -56,6 +57,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     }
     if (premiumNum == null || premium.text == null) {
       premium.clear();
+    }
+    if (riderAdded.text == null) {
+      riderAdded.clear();
     }
   }
 
@@ -67,6 +71,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     String lOcc = prefs.getString("lOcc");
     String premVal = prefs.getString("premVal");
     String sumVal = prefs.getString("sumVal");
+    String riderVal = prefs.getString("riderVal");
     String pName = prefs.getString("pName");
     String pLName = prefs.getString("pLName");
     String pOcc = prefs.getString("pOcc");
@@ -83,7 +88,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     lastName.text = lName == null ? '' : lName;
     lOccupation.text = lOcc == null ? '' : lOcc;
     lSelectedGender = lpGenderProtect == null ? null : lpGenderProtect;
-    pSelectedGender = pSelectedGender == null ? null : pGenderProtect;
+    pSelectedGender = pGenderProtect == null ? null : pGenderProtect;
     dob.text = dobProtect == null ? '' : dobProtect;
     pDob.text = pDobProtect == null ? '' : pDobProtect;
     pAge.text = pAgeProtect == null ? '' : pAgeProtect;
@@ -109,6 +114,8 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     if (sumAssuredNum == null) {
       sumAssured.clear();
     }
+    riderAdded.text =
+        riderVal != null ? double.tryParse(riderVal).toString() : null;
     pFirstName.text = pName == null ? '' : pName;
     pLastName.text = pLName == null ? '' : pLName;
     pOccupation.text = pOcc == null ? '' : pOcc;
@@ -125,6 +132,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     else
       prefs.setString("sumVal", '');
     prefs.setInt("selYearInt", selectedYear);
+    prefs.setString("riderVal", riderAdded.text);
+    prefs.setString("pGenderProtect", pSelectedGender);
+    prefs.setString("lpGenderProtect", lSelectedGender);
     prefs.setString("fName", firstName.text);
     prefs.setString("lName", lastName.text);
     prefs.setString("lOcc", lOccupation.text);
@@ -598,7 +608,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                       child: CustomTextField(
                                         formInputType: TextInputType.text,
                                         formLabel: lang['occupation'],
-                                        maxLength: 9,
+                                        maxLength: 22,
                                         isRequired: false,
                                         formController: pOccupation,
                                         errorVisible: false,
@@ -706,7 +716,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               child: CustomTextField(
                                 formInputType: TextInputType.text,
                                 formLabel: lang['occupation'],
-                                maxLength: 9,
+                                maxLength: 22,
                                 isRequired: false,
                                 formController: lOccupation,
                                 errorVisible: false,

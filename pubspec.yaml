@@ -26,7 +26,7 @@ dependencies:
   provider: ^4.3.2+3
   smart_select: ^4.3.2
   excel: ^1.1.5
-  pdf: ^1.13.0
+  pdf: ^2.0.0
   path_provider: 1.6.27
   syncfusion_flutter_pdfviewer: ^18.4.32-beta
   flutter_datetime_picker: ^1.5.0

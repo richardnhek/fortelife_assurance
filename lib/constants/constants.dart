@@ -14,4 +14,6 @@ const String FONT_KANO = "Kano";
 const String THEME_LIGHT = "light";
 
 //Offline Status
-const String APP_STATUS = "online";
+const String ONLINE_STATUS = "online";
+const String OFFLINE_STATUS = "offline";
+const String OFFLINE_DATE = "OFFLINE_DATE";

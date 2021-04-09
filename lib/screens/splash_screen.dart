@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'dart:io';
+
+import 'package:data_connection_checker/data_connection_checker.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,8 @@ class _SplashScreenState extends State<SplashScreen>
   CurvedAnimation curveAnimation;
   SharedPreferences prefs;
   AppProvider appProvider;
+  StreamSubscription<DataConnectionStatus> listener;
+
   final splashDelay = 8;
 
   @override
@@ -50,35 +55,73 @@ class _SplashScreenState extends State<SplashScreen>
     });
 
     animationController.forward();
+    userConnectionStatus();
     runAppInitialization();
     super.initState();
   }
 
+  userConnectionStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    listener = DataConnectionChecker().onStatusChange.listen((status) {
+      switch (status) {
+        case DataConnectionStatus.connected:
+          print("Connected");
+          prefs.remove(OFFLINE_DATE);
+          prefs.remove("OFFLINE_STATUS");
+          break;
+        case DataConnectionStatus.disconnected:
+          print("Disconnected");
+          if (prefs.containsKey(OFFLINE_DATE)) {
+            final offlineDateString = prefs.getString(OFFLINE_DATE);
+            final offlineDate = DateTime.parse(offlineDateString);
+            final currentDate = DateTime.now();
+            final offlineDuration = currentDate.difference(offlineDate).inHours;
+            print(offlineDuration);
+            if (offlineDuration >= 24) {
+              prefs.setString("OFFLINE_STATUS", OFFLINE_STATUS);
+              prefs.remove(APP_ACCESS_TOKEN);
+            }
+          } else {
+            prefs.setString(OFFLINE_DATE, DateTime.now().toString());
+            print(prefs.getString(OFFLINE_DATE));
+          }
+          break;
+      }
+    });
+    return await DataConnectionChecker().connectionStatus;
+  }
+
   Future<void> determineInitialRoute() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    //TODO if the user is offline for 1 full day: remove token
-    // prefs.remove(APP_ACCESS_TOKEN);
-    //
     String accessToken = prefs.getString(APP_ACCESS_TOKEN) ?? '';
 
-    if (accessToken.isEmpty) {
-      Future.delayed(Duration(milliseconds: 500));
-      Navigator.of(context).pushReplacementNamed('/login');
-    } else {
-      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    if (!prefs.containsKey(OFFLINE_DATE)) {
+      if (accessToken.isEmpty) {
+        Future.delayed(Duration(milliseconds: 500));
+        Navigator.of(context).pushReplacementNamed('/login');
+      } else {
+        final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
-      try {
-        await authProvider.getCurrentUser(token: accessToken);
-        Navigator.pushNamedAndRemoveUntil(context, '/main_flow', (_) => false);
-      } on DioError catch (error) {
-        print('error $error');
+        try {
+          await authProvider.getCurrentUser(token: accessToken);
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/main_flow', (_) => false);
+        } on DioError catch (error) {
+          print('error $error');
+        }
+      }
+    } else {
+      if (prefs.containsKey("OFFLINE_STATUS")) {
+        Navigator.of(context).pushReplacementNamed('/login');
+      } else {
+        if (accessToken.isNotEmpty) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/main_flow', (_) => false);
+        } else
+          Navigator.pushReplacementNamed(context, '/login');
       }
     }
   }
-
-  //TODO check if the user is offline for 1 full day
-  Future<DateTime> getOfflineDateTime() async {}
 
   Future<void> setExternalDirectory() async {
     Directory platformDirectory;

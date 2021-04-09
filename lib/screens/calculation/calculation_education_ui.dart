@@ -58,8 +58,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     String selectedModeEdu = prefs.get("selectedModeEdu");
     String lpGenderEdu = prefs.getString("lpGenderEdu");
     String pGenderEdu = prefs.getString("pGenderEdu");
-    print(pDobEdu);
-    print(pDobDateEdu);
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
     dob.text = dobEdu == null ? '' : dobEdu;
@@ -95,6 +93,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     prefs.setString("selYearIntEdu", policyYear.text);
     prefs.setString("premValEdu", premium.text);
     prefs.setString("sumValEdu", sumAssured.text);
+    prefs.setString("lpGenderEdu", lSelectedGender);
+    prefs.setString("pGenderEdu", pSelectedGender);
   }
 
   //Payor
@@ -480,7 +480,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                     child: CustomTextField(
                                       formInputType: TextInputType.text,
                                       formLabel: lang['occupation'],
-                                      maxLength: 9,
+                                      maxLength: 22,
                                       isRequired: false,
                                       formController: pOccupation,
                                       errorVisible: false,

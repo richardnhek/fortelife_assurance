@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:forte_life/widgets/bullet_point.dart';
 import 'package:forte_life/widgets/field_title.dart';
 import 'package:forte_life/widgets/info_table.dart';
 import 'package:forte_life/widgets/info_tablerow.dart';
+import 'package:provider/provider.dart';
 
 class InfoScreenEdu extends StatefulWidget {
   @override
@@ -10,18 +13,22 @@ class InfoScreenEdu extends StatefulWidget {
 }
 
 class _InfoScreenEduState extends State<InfoScreenEdu> {
-  List<InfoTableRow> tableChildren = [
-    InfoTableRow(
-        leadingString: "Death due to all causes benefits:",
-        trailingString: "100% of Sum Assured"),
-    InfoTableRow(
-        leadingString: "TPD due to all causes benefit:",
-        trailingString: "100% of Sum Assured"),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+    Map<String, dynamic> lang = appProvider.lang;
+
     final mq = MediaQuery.of(context);
+
+    List<InfoTableRow> tableChildren = [
+      InfoTableRow(
+          leadingString: lang['row_1_lead'],
+          trailingString: lang['row_1_trial']),
+      InfoTableRow(
+          leadingString: lang['row_2_lead'],
+          trailingString: lang['row_1_trial']),
+    ];
+
     return SafeArea(
       child: SingleChildScrollView(
           child: Container(
@@ -33,7 +40,12 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
             Padding(
               padding: EdgeInsets.only(top: mq.size.height / 36),
               child: FieldTitle(
-                fieldTitle: "For Life Assured (Child)",
+                fontSize: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 21.0,
+                    onTablet: 42.0),
+                fieldTitle: lang['for_life_assured'],
               ),
             ),
             SizedBox(height: 10),
@@ -49,21 +61,22 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
               child: Column(
                 children: [
                   BulletPoint(
-                    bulletTitle: "Term From:  10 Years \nTo:  17 Years",
+                    bulletTitle: lang['line_1_edu'],
                   ),
                   BulletPoint(
-                    bulletTitle:
-                        "Entry Age From:  1 Years Old \nTo:  8 Years Old",
+                    bulletTitle: lang['line_2_edu'],
                   ),
-                  BulletPoint(
-                    bulletTitle: "Maximum Maturity Age:\n69 Years Old",
-                  )
                 ],
               ),
             ),
             SizedBox(height: 20),
             FieldTitle(
-              fieldTitle: "For Payor (Parent)",
+              fontSize: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 21.0,
+                  onTablet: 42.0),
+              fieldTitle: lang['for_payor'],
             ),
             SizedBox(height: 10),
             Container(
@@ -78,22 +91,26 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
               child: Column(
                 children: [
                   BulletPoint(
-                    bulletTitle:
-                        "Entry Age From:  18 Years Old \nTo:  59 Years Old",
+                    bulletTitle: lang['line_3_edu'],
                   ),
                   BulletPoint(
-                    bulletTitle: "Maximum Maturity Age:\n69 Years Old",
+                    bulletTitle: lang['line_3'],
                   )
                 ],
               ),
             ),
             SizedBox(height: 20),
             FieldTitle(
-              fieldTitle: "Benefits",
+              fontSize: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 21.0,
+                  onTablet: 42.0),
+              fieldTitle: lang['benefits'],
             ),
             SizedBox(height: 15),
             Text(
-              "For Life Assured (Child)",
+              lang['for_life_assured'],
               style: TextStyle(
                   fontSize: 18,
                   fontFamily: "Kano",
@@ -107,7 +124,7 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
             ),
             SizedBox(height: 15),
             Text(
-              "For Payor (Parent)",
+              lang['for_payor'],
               style: TextStyle(
                   fontSize: 18,
                   fontFamily: "Kano",
@@ -117,13 +134,18 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
             ),
             SizedBox(height: 10),
             Text(
-              "Waive premium due to Death/TPD of Payor",
+              lang['waive_edu'],
               style: TextStyle(
                   fontSize: 15, fontFamily: "Kano", color: Colors.black),
             ),
             SizedBox(height: 20),
             FieldTitle(
-              fieldTitle: "Maturity Benefits",
+              fontSize: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 21.0,
+                  onTablet: 42.0),
+              fieldTitle: lang['maturity_benefits'],
             ),
             SizedBox(height: 10),
             Container(
@@ -134,7 +156,7 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
                 ),
                 child: Center(
                   child: Text(
-                    "Sum Assured + 2% of Sum Assured x Term\nIf Entry Age below 50\n\nSum Assured + 1% of Sum assured x Term\nIf entry age 50 or above",
+                    lang['maturity_benefits_details'],
                     style: TextStyle(
                         color: Color(0xFF4D4D4D),
                         fontSize: 15,

@@ -357,8 +357,7 @@ class PDFWidget {
               child: Expanded(
                   child: Column(children: [
                 Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Image.provider(image,
-                      width: 150, height: 80, fit: BoxFit.contain),
+                  Image(image, width: 150, height: 80, fit: BoxFit.contain),
                   SizedBox(width: 15),
                   Padding(
                     padding: EdgeInsets.only(top: 20),
@@ -386,7 +385,7 @@ class PDFWidget {
                 Center(
                     child: Column(children: [
                   Table(
-                      border: TableBorder.ex(
+                      border: TableBorder(
                           horizontalInside: BorderSide(),
                           bottom: BorderSide(),
                           top: BorderSide(),
@@ -676,7 +675,7 @@ class PDFWidget {
                             style: TextStyle(font: regularF, fontSize: 8.25))),
                   ),
                   Table(
-                      border: TableBorder.ex(
+                      border: TableBorder(
                           horizontalInside: BorderSide(),
                           bottom: BorderSide(),
                           top: BorderSide(),
@@ -731,7 +730,7 @@ class PDFWidget {
                       headerStyle: TextStyle(font: boldF, fontSize: 8.25),
                       cellStyle: TextStyle(font: regularF, fontSize: 7.6),
                       cellAlignment: Alignment.topCenter,
-                      border: TableBorder.ex(
+                      border: TableBorder(
                           verticalInside: BorderSide(),
                           top: BorderSide(),
                           bottom: BorderSide(),

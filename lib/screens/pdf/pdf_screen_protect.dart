@@ -35,7 +35,7 @@ class _PDFScreenProtectState extends State<PDFScreenProtect> {
     final prefs = await SharedPreferences.getInstance();
     final rootPath = prefs.getString("ROOT_PATH");
     final file = File("$rootPath/fortelife.pdf");
-    await file.writeAsBytes(pdf.save());
+    await file.writeAsBytes(await pdf.save());
   }
   //
 

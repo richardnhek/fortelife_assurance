@@ -1,10 +1,14 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forte_life/screens/pdf/pdf_screen.dart';
 import 'package:forte_life/utils/device_utils.dart';
 import 'package:forte_life/widgets/custom_alert_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'constants/constants.dart';
 import 'screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/app_provider.dart';
@@ -17,10 +21,53 @@ class MainFlow extends StatefulWidget {
 
 class _MainFlowState extends State<MainFlow> {
   final tabs = [HomeScreen(), PDFScreen(), ProfileScreen()];
+  StreamSubscription<DataConnectionStatus> listener;
 
   @override
   void initState() {
     super.initState();
+    reLoginPrompt();
+  }
+
+  void reLoginPrompt() async {
+    print("Relogin Prompt");
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey(OFFLINE_DATE)) {
+      final offlineDateString = prefs.getString(OFFLINE_DATE);
+      final offlineDate = DateTime.parse(offlineDateString);
+      final currentDate = DateTime.now();
+      final offlineDuration = currentDate.difference(offlineDate).inHours;
+      print(offlineDuration);
+      if (offlineDuration >= 24) {
+        prefs.setString("OFFLINE_STATUS", OFFLINE_STATUS);
+        prefs.remove(APP_ACCESS_TOKEN);
+      }
+    }
+
+    if (prefs.containsKey("OFFLINE_STATUS")) {
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) => Center(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/', (route) => false);
+                  },
+                  child: CustomAlertDialog(
+                    title: "Exit",
+                    icon: Image.asset("assets/icons/off.png",
+                        width: 60, height: 60),
+                    details:
+                        "You've Been Offline For 24 Hours Please Log In Again",
+                    actionButtonTitle: "No",
+                    actionButtonTitleTwo: "Yes",
+                    isPrompt: false,
+                  ),
+                ),
+              ));
+    }
   }
 
   @override
