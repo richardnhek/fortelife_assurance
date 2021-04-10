@@ -29,57 +29,50 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxHeight: 60,
-        minHeight: 40,
-      ),
-      child: Stack(children: [
-        Container(
-          decoration: BoxDecoration(
-              border: Border.all(
-                  color: isRequired == false
-                      ? Color(0xFFB8B8B8)
-                      : Color(0xFFD31145))),
-          child: TextFormField(
-            textCapitalization: TextCapitalization.words,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: validateFunc,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(maxLength),
-            ],
-            onFieldSubmitted: onSubmitted,
-            onSaved: onSaved,
-            maxLines: 1,
-            onChanged: onChange,
-            textAlignVertical: TextAlignVertical.bottom,
-            controller: formController,
-            decoration: InputDecoration(
-                disabledBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 5, top: 10, bottom: 10),
-                isDense: true,
-                labelText: formLabel,
-                labelStyle: TextStyle(
-                    fontFamily: "Kano",
-                    fontSize: 15,
-                    color: Colors.black.withOpacity(0.5)),
-                hintText: formLabel,
-                hintStyle: TextStyle(
-                    fontFamily: "Kano",
-                    fontSize: 15,
-                    color: Colors.black.withOpacity(0.5))),
-            keyboardType: formInputType,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 15,
-              fontFamily: "Kano",
-            ),
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+              color:
+                  isRequired == false ? Color(0xFFB8B8B8) : Color(0xFFD31145))),
+      child: Center(
+        child: TextFormField(
+          textCapitalization: TextCapitalization.words,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validateFunc,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(maxLength),
+          ],
+          onFieldSubmitted: onSubmitted,
+          onSaved: onSaved,
+          maxLines: 1,
+          onChanged: onChange,
+          textAlignVertical: TextAlignVertical.bottom,
+          controller: formController,
+          decoration: InputDecoration(
+              disabledBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              contentPadding: EdgeInsets.only(left: 5, top: 10, bottom: 10),
+              isDense: true,
+              labelText: formLabel,
+              labelStyle: TextStyle(
+                  fontFamily: "Kano",
+                  fontSize: 15,
+                  color: Colors.black.withOpacity(0.5)),
+              hintText: formLabel,
+              hintStyle: TextStyle(
+                  fontFamily: "Kano",
+                  fontSize: 15,
+                  color: Colors.black.withOpacity(0.5))),
+          keyboardType: formInputType,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 15,
+            fontFamily: "Kano",
           ),
         ),
-      ]),
+      ),
     );
   }
 }

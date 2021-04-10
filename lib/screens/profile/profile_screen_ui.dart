@@ -42,33 +42,56 @@ class ProfileScreenUI extends StatelessWidget {
           context: context,
           builder: (ctx) => Center(
                 child: CustomizableAlertDialog(
+                  appProvider: appProvider,
+                  mq: mq,
                   title: lang['app_language'],
                   icon: Icon(
                     Icons.language,
-                    size: 60,
+                    size: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 60.0,
+                        onTablet: 120.0),
                     color: Color(0xFF8AB84B),
                   ),
-                  // firstWidget: Container(
-                  //   decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.all(Radius.circular(5)),
-                  //       image: DecorationImage(
-                  //           image: AssetImage("assets/icons/khmer.png"),
-                  //           fit: BoxFit.contain)),
-                  // ),
                   firstWidget: Image(
                     image: AssetImage("assets/icons/khmer.png"),
-                    width: 70,
-                    height: 45,
+                    width: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 70.0,
+                        onTablet: 140.0),
+                    height: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 45.0,
+                        onTablet: 90.0),
                     fit: BoxFit.cover,
                   ),
-                  firstHeight: 45,
+                  firstHeight: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 45.0,
+                      onTablet: 90.0),
                   secondWidget: Image(
                     image: AssetImage("assets/icons/english.png"),
-                    width: 70,
-                    height: 45,
+                    width: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 70.0,
+                        onTablet: 140.0),
+                    height: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 45.0,
+                        onTablet: 90.0),
                     fit: BoxFit.cover,
                   ),
-                  secondHeight: 45,
+                  secondHeight: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 45.0,
+                      onTablet: 90.0),
                   details: lang['applanguage_text'],
                   onActionButtonPressed: () {
                     onSwitchLanguage(LANGUAGE_KHMER);
@@ -87,10 +110,16 @@ class ProfileScreenUI extends StatelessWidget {
           context: context,
           builder: (ctx) => Center(
                 child: CustomAlertDialog(
+                  appProvider: appProvider,
+                  mq: mq,
                   title: lang['log_out'],
                   icon: Icon(
                     Icons.logout,
-                    size: 60,
+                    size: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 60.0,
+                        onTablet: 120.0),
                     color: Color(0xFFD31145),
                   ),
                   details: lang['logout_text'],
@@ -116,10 +145,18 @@ class ProfileScreenUI extends StatelessWidget {
               child: Center(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                      maxHeight: 400,
+                      maxHeight: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 400.0,
+                          onTablet: 800.0),
                       minHeight: 300,
                       minWidth: 250,
-                      maxWidth: 300),
+                      maxWidth: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 300.0,
+                          onTablet: 600.0)),
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                     decoration: BoxDecoration(
@@ -134,19 +171,36 @@ class ProfileScreenUI extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Icon(
                               Icons.lock_outline_rounded,
-                              size: 60,
+                              size: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 60.0,
+                                  onTablet: 120.0),
                               color: Color(0xFFD31145),
                             )),
-                        SizedBox(height: 20),
+                        SizedBox(
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 20.0,
+                                onTablet: 40.0)),
                         Align(
                           alignment: Alignment.center,
                           child: Container(
-                            width: 180,
+                            width: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 180.0,
+                                onTablet: 360.0),
                             child: Text(
                               lang['change_pass'],
                               style: TextStyle(
                                   color: Color(0xFFD31145),
-                                  fontSize: 22,
+                                  fontSize: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 22.0,
+                                      onTablet: 44.0),
                                   fontFamily: "Kano",
                                   fontWeight: FontWeight.w600),
                               maxLines: 2,
@@ -155,7 +209,12 @@ class ProfileScreenUI extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 20.0,
+                                onTablet: 40.0)),
                         Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -163,16 +222,39 @@ class ProfileScreenUI extends StatelessWidget {
                                 lang['new_pass'] + ": ",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 14,
+                                    fontSize: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 14.0,
+                                        onTablet: 28.0),
                                     fontFamily: "Kano"),
                               ),
                               SizedBox(
-                                  width: appProvider.language == 'kh' ? 11 : 5),
+                                  width: appProvider.language == 'kh'
+                                      ? DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 11.0,
+                                          onTablet: 22.0)
+                                      : DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 5.0,
+                                          onTablet: 10.0)),
                               Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.only(left: 21),
+                                  margin: EdgeInsets.only(
+                                      left: DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 21.0,
+                                          onTablet: 42.0)),
                                   width: double.infinity,
-                                  height: 50,
+                                  height: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 50.0,
+                                      onTablet: 100.0),
                                   decoration: BoxDecoration(
                                       border:
                                           Border.all(color: Color(0xFFB8B8B8))),
@@ -190,18 +272,31 @@ class ProfileScreenUI extends StatelessWidget {
                                         hintText: lang['new_pass'],
                                         hintStyle: TextStyle(
                                             fontFamily: "Kano",
-                                            fontSize: 15,
+                                            fontSize: DeviceUtils.getResponsive(
+                                                mq: mq,
+                                                appProvider: appProvider,
+                                                onPhone: 15.0,
+                                                onTablet: 30.0),
                                             color:
                                                 Colors.black.withOpacity(0.5))),
                                     style: TextStyle(
                                         fontFamily: "Kano",
-                                        fontSize: 14,
+                                        fontSize: DeviceUtils.getResponsive(
+                                            mq: mq,
+                                            appProvider: appProvider,
+                                            onPhone: 14.0,
+                                            onTablet: 28.0),
                                         color: Colors.black),
                                   ),
                                 ),
                               ),
                             ]),
-                        SizedBox(height: 10),
+                        SizedBox(
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 10.0,
+                                onTablet: 20.0)),
                         Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -209,14 +304,27 @@ class ProfileScreenUI extends StatelessWidget {
                                 lang['confirm_pass'] + ": ",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 14,
+                                    fontSize: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 14.0,
+                                        onTablet: 28.0),
                                     fontFamily: "Kano"),
                               ),
-                              SizedBox(width: 5),
+                              SizedBox(
+                                  width: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 5.0,
+                                      onTablet: 10.0)),
                               Expanded(
                                 child: Container(
                                   width: double.infinity,
-                                  height: 50,
+                                  height: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 50.0,
+                                      onTablet: 100.0),
                                   decoration: BoxDecoration(
                                       border:
                                           Border.all(color: Color(0xFFB8B8B8))),
@@ -234,23 +342,40 @@ class ProfileScreenUI extends StatelessWidget {
                                         hintText: lang['confirm_pass'],
                                         hintStyle: TextStyle(
                                             fontFamily: "Kano",
-                                            fontSize: 15,
+                                            fontSize: DeviceUtils.getResponsive(
+                                                mq: mq,
+                                                appProvider: appProvider,
+                                                onPhone: 15.0,
+                                                onTablet: 30.0),
                                             color:
                                                 Colors.black.withOpacity(0.5))),
                                     style: TextStyle(
                                         fontFamily: "Kano",
-                                        fontSize: 14,
+                                        fontSize: DeviceUtils.getResponsive(
+                                            mq: mq,
+                                            appProvider: appProvider,
+                                            onPhone: 14.0,
+                                            onTablet: 28.0),
                                         color: Colors.black),
                                   ),
                                 ),
                               ),
                             ]),
-                        SizedBox(height: 20),
+                        SizedBox(
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 20.0,
+                                onTablet: 40.0)),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: 50,
+                                height: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 50.0,
+                                    onTablet: 100.0),
                                 child: FlatButton(
                                   color: Color(0xFFD31145),
                                   onPressed: () {
@@ -259,22 +384,39 @@ class ProfileScreenUI extends StatelessWidget {
                                   child: Text(
                                     lang['cancel'],
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: DeviceUtils.getResponsive(
+                                            mq: mq,
+                                            appProvider: appProvider,
+                                            onPhone: 16.0,
+                                            onTablet: 32.0),
                                         fontFamily: "Kano",
                                         color: Colors.white),
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 10),
                               SizedBox(
-                                height: 50,
+                                  width: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 10.0,
+                                      onTablet: 20.0)),
+                              SizedBox(
+                                height: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 50.0,
+                                    onTablet: 100.0),
                                 child: FlatButton(
                                   color: Color(0xFF8AB84B),
                                   onPressed: () => onChangePassword(context),
                                   child: Text(
                                     lang['confirm'],
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: DeviceUtils.getResponsive(
+                                            mq: mq,
+                                            appProvider: appProvider,
+                                            onPhone: 16.0,
+                                            onTablet: 32.0),
                                         fontFamily: "Kano",
                                         color: Colors.white),
                                   ),
@@ -296,10 +438,18 @@ class ProfileScreenUI extends StatelessWidget {
                 child: Center(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxHeight: 280,
+                        maxHeight: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 300.0,
+                            onTablet: 600.0),
                         minHeight: 250,
                         minWidth: 250,
-                        maxWidth: 300),
+                        maxWidth: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 300.0,
+                            onTablet: 600.0)),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
@@ -316,18 +466,35 @@ class ProfileScreenUI extends StatelessWidget {
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            height: 40,
-                            width: 125,
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 40.0,
+                                onTablet: 80.0),
+                            width: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 125.0,
+                                onTablet: 250.0),
                           ),
                           Text(
                             lang['about'],
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 15,
+                                fontSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 15.0,
+                                    onTablet: 30.0),
                                 fontFamily: "Kano"),
                           ),
-                          SizedBox(height: 25),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 25.0,
+                                  onTablet: 50.0)),
                           Container(
                             padding: EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 25),
@@ -338,14 +505,22 @@ class ProfileScreenUI extends StatelessWidget {
                                   lang['phone'],
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 18,
+                                      fontSize: DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 18.0,
+                                          onTablet: 36.0),
                                       fontFamily: "Kano"),
                                 ),
                                 Text(
                                   "(+855) 23 885 077 / 066",
                                   style: TextStyle(
                                       color: Colors.grey,
-                                      fontSize: 12.5,
+                                      fontSize: DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 12.5,
+                                          onTablet: 25.0),
                                       fontFamily: "Kano"),
                                 ),
                               ],
@@ -361,14 +536,22 @@ class ProfileScreenUI extends StatelessWidget {
                                   lang['fax'],
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 18,
+                                      fontSize: DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 18.0,
+                                          onTablet: 36.0),
                                       fontFamily: "Kano"),
                                 ),
                                 Text(
                                   "(+855) 23 986 922",
                                   style: TextStyle(
                                       color: Colors.grey,
-                                      fontSize: 12.5,
+                                      fontSize: DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 12.5,
+                                          onTablet: 25.0),
                                       fontFamily: "Kano"),
                                 ),
                               ],
@@ -384,20 +567,33 @@ class ProfileScreenUI extends StatelessWidget {
                                   lang['email'],
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 18,
+                                      fontSize: DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 18.0,
+                                          onTablet: 36.0),
                                       fontFamily: "Kano"),
                                 ),
                                 Text(
                                   "info@fortelifeassurance.com",
                                   style: TextStyle(
                                       color: Colors.grey,
-                                      fontSize: 12.5,
+                                      fontSize: DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 12.5,
+                                          onTablet: 25.0),
                                       fontFamily: "Kano"),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 15.0,
+                                  onTablet: 30.0)),
                           FlatButton(
                             splashColor: Colors.blueAccent.withOpacity(0.16),
                             highlightColor: Colors.transparent,
@@ -407,7 +603,12 @@ class ProfileScreenUI extends StatelessWidget {
                             child: Text(
                               "OK",
                               style: TextStyle(
-                                  fontSize: 16, color: Colors.blueAccent),
+                                  fontSize: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 16.0,
+                                      onTablet: 32.0),
+                                  color: Colors.blueAccent),
                             ),
                           ),
                         ],
@@ -431,7 +632,11 @@ class ProfileScreenUI extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [Color(0xFF92C04A), Color(0xFF6ABFBC)])),
-              height: 400,
+              height: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 400.0,
+                  onTablet: 600.0),
               width: mq.size.width,
             ),
           ),
@@ -439,16 +644,21 @@ class ProfileScreenUI extends StatelessWidget {
             child: Container(
               key: mainContainer,
               margin: EdgeInsets.symmetric(horizontal: 30),
-              padding: EdgeInsets.only(top: 15),
+              padding: EdgeInsets.only(
+                  top: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 15.0,
+                      onTablet: 30.0)),
               width: DeviceUtils.getResponsive(
                   mq: mq,
                   appProvider: appProvider,
                   onPhone: 300.0,
-                  onTablet: 550.0),
+                  onTablet: 600.0),
               height: DeviceUtils.getResponsive(
                   mq: mq,
                   appProvider: appProvider,
-                  onPhone: 280.0,
+                  onPhone: 300.0,
                   onTablet: 600.0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7.5),
@@ -466,7 +676,13 @@ class ProfileScreenUI extends StatelessWidget {
                   Text(
                     "Username: ${appProvider.userName}",
                     style: TextStyle(
-                        color: Colors.grey, fontSize: 15, fontFamily: "Kano"),
+                        color: Colors.grey,
+                        fontSize: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 15.0,
+                            onTablet: 30.0),
+                        fontFamily: "Kano"),
                   ),
                   SizedBox(height: 10),
                   Divider(
@@ -485,15 +701,30 @@ class ProfileScreenUI extends StatelessWidget {
                             lang['language'],
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 18,
+                                fontSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 18.0,
+                                    onTablet: 36.0),
                                 fontFamily: "Kano"),
                           ),
-                          Icon(Icons.language, color: Color(0xFF92C04A))
+                          Icon(Icons.language,
+                              color: Color(0xFF92C04A),
+                              size: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 21.0,
+                                  onTablet: 42.0))
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(
+                      height: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 20.0,
+                          onTablet: 40.0)),
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: _showChangePassword,
@@ -506,15 +737,32 @@ class ProfileScreenUI extends StatelessWidget {
                             lang['change_pass'],
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 18,
+                                fontSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 18.0,
+                                    onTablet: 36.0),
                                 fontFamily: "Kano"),
                           ),
-                          Icon(Icons.lock_outline, color: Color(0xFF92C04A))
+                          Icon(
+                            Icons.lock_outline,
+                            color: Color(0xFF92C04A),
+                            size: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 21.0,
+                                onTablet: 42.0),
+                          )
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(
+                      height: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 20.0,
+                          onTablet: 40.0)),
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: _showContactDialog,
@@ -529,16 +777,30 @@ class ProfileScreenUI extends StatelessWidget {
                             lang['contact_us'],
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 18,
+                                fontSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 18.0,
+                                    onTablet: 36.0),
                                 fontFamily: "Kano"),
                           ),
                           Icon(Icons.contact_page_outlined,
-                              color: Color(0xFF92C04A))
+                              color: Color(0xFF92C04A),
+                              size: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 21.0,
+                                  onTablet: 42.0))
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(
+                      height: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 20.0,
+                          onTablet: 40.0)),
                   RaisedButton(
                       onPressed: _showExitDialog,
                       padding: EdgeInsets.all(8.5),
@@ -552,15 +814,28 @@ class ProfileScreenUI extends StatelessWidget {
                           Text(
                             lang['log_out'],
                             style: TextStyle(
-                                fontSize: 17.5,
+                                fontSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 17.5,
+                                    onTablet: 35.0),
                                 color: Colors.white,
                                 fontFamily: "Kano",
                                 fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(width: 10),
+                          SizedBox(
+                              width: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 10.0,
+                                  onTablet: 20.0)),
                           Icon(
                             Icons.logout,
-                            size: 21,
+                            size: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 21.0,
+                                onTablet: 42.0),
                             color: Colors.white,
                           )
                         ],

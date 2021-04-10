@@ -20,36 +20,30 @@ class CustomDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 60, minHeight: 40),
-      child: Stack(children: [
-        Container(
-          child: Padding(
-            padding: EdgeInsets.only(left: 5),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                  iconSize: 17.5,
-                  value: value,
-                  isExpanded: true,
-                  itemHeight: appProvider.language == 'kh' ? 55 : 53,
-                  hint: Text(
-                    title,
-                    style: TextStyle(
-                        fontFamily: "Kano",
-                        fontSize: 15,
-                        color: Colors.black.withOpacity(0.5)),
-                  ),
-                  items: items,
-                  onChanged: onChange),
-            ),
-          ),
-          decoration: BoxDecoration(
-              border: Border.all(
-                  color: isRequired == false
-                      ? Color(0xFFB8B8B8)
-                      : Color(0xFFD31145))),
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.only(left: 5, top: 5, bottom: 5),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+              iconSize: 17.5,
+              value: value,
+              isExpanded: true,
+              itemHeight: appProvider.language == 'kh' ? 55 : 53,
+              hint: Text(
+                title,
+                style: TextStyle(
+                    fontFamily: "Kano",
+                    fontSize: 15,
+                    color: Colors.black.withOpacity(0.5)),
+              ),
+              items: items,
+              onChanged: onChange),
         ),
-      ]),
+      ),
+      decoration: BoxDecoration(
+          border: Border.all(
+              color:
+                  isRequired == false ? Color(0xFFB8B8B8) : Color(0xFFD31145))),
     );
   }
 }
