@@ -5,6 +5,7 @@ import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/utils/device_utils.dart';
+import 'package:forte_life/widgets/custom_alert_dialog.dart';
 import 'package:open_file/open_file.dart';
 import '../../notification_plugin.dart';
 import 'package:path_provider/path_provider.dart';
@@ -138,19 +139,35 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
                   await notificationPlugin.showNotification();
                   Navigator.of(context).pop();
                   showDialog(
+                    barrierDismissible: false,
                     context: context,
                     builder: (BuildContext context) {
-                      return AlertDialog(
-                          title: Image.asset("assets/icons/check.png",
-                              width: 60, height: 60),
-                          content: Text(
-                            "File Named $newFileName Saved Successfully",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontFamily: "Kano",
-                            ),
-                          ));
+                      return CustomAlertDialog(
+                        appProvider: appProvider,
+                        mq: mq,
+                        title: "Saved",
+                        isPrompt: true,
+                        icon: Image.asset("assets/icons/check.png",
+                            width: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 60.0,
+                                onTablet: 120.0),
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 60.0,
+                                onTablet: 120.0)),
+                        details: "File Named $newFileName Saved Successfully",
+                        actionButtonTitle: "Open File",
+                        actionButtonTitleTwo: "Close",
+                        onActionButtonPressed: () {
+                          OpenFile.open(newFilePath);
+                        },
+                        onActionButtonPressedTwo: () {
+                          Navigator.of(context).pop();
+                        },
+                      );
                     },
                   );
                 }

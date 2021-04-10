@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:forte_life/notification_plugin.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/utils/device_utils.dart';
+import 'package:forte_life/widgets/custom_alert_dialog.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
 
   onNotificationLowerVersion(ReceivedNotification receivedNotification) {}
   onNotificationClicked(String payload) {
+    print("PAYLOAD" + payload);
     OpenFile.open(payload);
   }
 
@@ -208,37 +210,41 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                   );
                 } else {
                   savePDF(newFile, widget.pdf);
+                  print("NewFilePath:" + newFilePath);
                   await notificationPlugin.setOnSelectNotification(
                       onNotificationClicked(newFilePath));
                   await notificationPlugin.showNotification();
                   Navigator.of(context).pop();
                   showDialog(
+                    barrierDismissible: false,
                     context: context,
                     builder: (BuildContext context) {
-                      return AlertDialog(
-                          title: Image.asset("assets/icons/check.png",
-                              width: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 60.0,
-                                  onTablet: 120.0),
-                              height: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 60.0,
-                                  onTablet: 120.0)),
-                          content: Text(
-                            "File Named $newFileName Saved Successfully",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 22.0,
-                                  onTablet: 44.0),
-                              fontFamily: "Kano",
-                            ),
-                          ));
+                      return CustomAlertDialog(
+                        appProvider: appProvider,
+                        mq: mq,
+                        title: "Saved",
+                        isPrompt: true,
+                        icon: Image.asset("assets/icons/check.png",
+                            width: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 60.0,
+                                onTablet: 120.0),
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 60.0,
+                                onTablet: 120.0)),
+                        details: "File Named $newFileName Saved Successfully",
+                        actionButtonTitle: "Open File",
+                        actionButtonTitleTwo: "Close",
+                        onActionButtonPressed: () {
+                          OpenFile.open(newFilePath);
+                        },
+                        onActionButtonPressedTwo: () {
+                          Navigator.of(context).pop();
+                        },
+                      );
                     },
                   );
                 }

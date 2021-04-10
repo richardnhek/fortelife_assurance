@@ -15,41 +15,36 @@ class DisabledField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.12),
           border: Border.all(color: Color(0xFFB8B8B8))),
-      child: TextFormField(
-        readOnly: true,
-        textAlignVertical: TextAlignVertical.bottom,
-        controller: formController,
-        decoration: InputDecoration(
-            disabledBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            contentPadding: EdgeInsets.only(
-                left: 5,
-                top: DeviceUtils.getResponsive(
-                    appProvider: appProvider,
-                    mq: mq,
-                    onPhone: 10.0,
-                    onTablet: 15.0),
-                bottom: 10),
-            isDense: true,
-            hintText: title,
-            labelText: title,
-            labelStyle: TextStyle(
-                fontFamily: "Kano",
-                fontSize: 15,
-                color: Colors.black.withOpacity(0.5)),
-            hintStyle: TextStyle(
-                fontFamily: "Kano",
-                fontSize: 15,
-                color: Colors.black.withOpacity(0.5))),
-        keyboardType: TextInputType.number,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 15,
-          fontFamily: "Kano",
+      child: Center(
+        child: TextFormField(
+          readOnly: true,
+          textAlignVertical: TextAlignVertical.bottom,
+          controller: formController,
+          decoration: InputDecoration(
+              disabledBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              contentPadding: EdgeInsets.only(left: 5, bottom: 5),
+              isDense: true,
+              hintText: title,
+              labelText: title,
+              labelStyle: TextStyle(
+                  fontFamily: "Kano",
+                  fontSize: 15,
+                  color: Colors.black.withOpacity(0.5)),
+              hintStyle: TextStyle(
+                  fontFamily: "Kano",
+                  fontSize: 15,
+                  color: Colors.black.withOpacity(0.5))),
+          keyboardType: TextInputType.number,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 15,
+            fontFamily: "Kano",
+          ),
+          autovalidateMode: AutovalidateMode.always,
         ),
-        autovalidateMode: AutovalidateMode.always,
       ),
     );
   }

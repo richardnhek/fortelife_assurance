@@ -22,22 +22,25 @@ class CustomDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: EdgeInsets.only(left: 5, top: 5, bottom: 5),
+      padding: EdgeInsets.only(left: 5),
+      child: Center(
         child: DropdownButtonHideUnderline(
-          child: DropdownButton(
-              iconSize: 17.5,
-              value: value,
-              isExpanded: true,
-              hint: Text(
-                title,
-                style: TextStyle(
-                    fontFamily: "Kano",
-                    fontSize: 15,
-                    color: Colors.black.withOpacity(0.5)),
-              ),
-              items: items,
-              onChanged: onChange),
+          child: Center(
+            child: DropdownButton(
+                iconSize: 15,
+                itemHeight: 50,
+                value: value,
+                isExpanded: true,
+                hint: Text(
+                  title,
+                  style: TextStyle(
+                      fontFamily: "Kano",
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.5)),
+                ),
+                items: items,
+                onChanged: onChange),
+          ),
         ),
       ),
       decoration: BoxDecoration(

@@ -374,6 +374,11 @@ class ProfileScreenUI extends StatelessWidget {
                                     appProvider: appProvider,
                                     onPhone: 50.0,
                                     onTablet: 100.0),
+                                width: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 100.0,
+                                    onTablet: 200.0),
                                 child: FlatButton(
                                   color: Color(0xFFD31145),
                                   onPressed: () {
@@ -404,6 +409,11 @@ class ProfileScreenUI extends StatelessWidget {
                                     appProvider: appProvider,
                                     onPhone: 50.0,
                                     onTablet: 100.0),
+                                width: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 100.0,
+                                    onTablet: 200.0),
                                 child: FlatButton(
                                   color: Color(0xFF8AB84B),
                                   onPressed: () => onChangePassword(context),
@@ -449,11 +459,14 @@ class ProfileScreenUI extends StatelessWidget {
                             onPhone: 300.0,
                             onTablet: 600.0)),
                     child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
                         color: Colors.white,
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 10),
@@ -487,15 +500,7 @@ class ProfileScreenUI extends StatelessWidget {
                                     onTablet: 30.0),
                                 fontFamily: "Kano"),
                           ),
-                          SizedBox(
-                              height: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 25.0,
-                                  onTablet: 50.0)),
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 25),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -525,8 +530,6 @@ class ProfileScreenUI extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 25),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -556,8 +559,6 @@ class ProfileScreenUI extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 25),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -656,8 +657,8 @@ class ProfileScreenUI extends StatelessWidget {
               height: DeviceUtils.getResponsive(
                   mq: mq,
                   appProvider: appProvider,
-                  onPhone: 300.0,
-                  onTablet: 600.0),
+                  onPhone: 320.0,
+                  onTablet: 640.0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7.5),
                   color: Color(0xFFFFFFFF),
@@ -669,7 +670,8 @@ class ProfileScreenUI extends StatelessWidget {
                         offset: Offset(3, 6)),
                   ]),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     "Username: ${appProvider.userName}",
@@ -682,11 +684,9 @@ class ProfileScreenUI extends StatelessWidget {
                             onTablet: 30.0),
                         fontFamily: "Kano"),
                   ),
-                  SizedBox(height: 10),
                   Divider(
                     color: Colors.grey.withOpacity(0.5),
                   ),
-                  SizedBox(height: appProvider.language == "kh" ? 10.0 : 30.0),
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: _showSwitchLanguageDialog,
@@ -717,13 +717,6 @@ class ProfileScreenUI extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                      height: DeviceUtils.getResponsive(
-                          mq: mq,
-                          appProvider: appProvider,
-                          onPhone: 20.0,
-                          onTablet:
-                              appProvider.language == "kh" ? 40.0 : 60.0)),
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: _showChangePassword,
@@ -756,13 +749,6 @@ class ProfileScreenUI extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                      height: DeviceUtils.getResponsive(
-                          mq: mq,
-                          appProvider: appProvider,
-                          onPhone: 20.0,
-                          onTablet:
-                              appProvider.language == "kh" ? 40.0 : 60.0)),
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: _showContactDialog,
@@ -795,16 +781,10 @@ class ProfileScreenUI extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                      height: DeviceUtils.getResponsive(
-                          mq: mq,
-                          appProvider: appProvider,
-                          onPhone: 20.0,
-                          onTablet:
-                              appProvider.language == "kh" ? 40.0 : 80.0)),
                   RaisedButton(
                       onPressed: _showExitDialog,
-                      padding: EdgeInsets.all(8.5),
+                      padding: EdgeInsets.all(
+                          appProvider.language == "kh" ? 10 : 15),
                       disabledColor: Color(0xFFD31145),
                       color: Color(0xFFD31145),
                       disabledElevation: 2.5,
@@ -819,19 +799,12 @@ class ProfileScreenUI extends StatelessWidget {
                                     mq: mq,
                                     appProvider: appProvider,
                                     onPhone: 17.5,
-                                    onTablet: appProvider.language == "kh"
-                                        ? 35.0
-                                        : 40.0),
+                                    onTablet: 35.0),
                                 color: Colors.white,
                                 fontFamily: "Kano",
                                 fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(
-                              width: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 10.0,
-                                  onTablet: 20.0)),
+                          SizedBox(width: 10),
                           Icon(
                             Icons.logout,
                             size: DeviceUtils.getResponsive(

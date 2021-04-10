@@ -29,14 +29,7 @@ class CustomDatePicker extends StatelessWidget {
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               isDense: true,
-              contentPadding: EdgeInsets.only(
-                  left: 5,
-                  top: DeviceUtils.getResponsive(
-                      appProvider: appProvider,
-                      mq: mq,
-                      onPhone: 10.0,
-                      onTablet: 15.0),
-                  bottom: 10),
+              contentPadding: EdgeInsets.only(left: 5, bottom: 5),
               hintText: title,
               labelText: title,
               labelStyle: TextStyle(

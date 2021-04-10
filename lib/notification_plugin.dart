@@ -65,7 +65,7 @@ class NotificationPlugin {
       "CHANNEL_ID",
       "CHANNEL_NAME",
       "CHANNEL_DESCRIPTION",
-      importance: Importance.low,
+      importance: Importance.max,
       priority: Priority.max,
       timeoutAfter: 6000,
     );

@@ -36,7 +36,7 @@ class _MainFlowState extends State<MainFlow> {
       final offlineDateString = prefs.getString(OFFLINE_DATE);
       final offlineDate = DateTime.parse(offlineDateString);
       final currentDate = DateTime.now();
-      final offlineDuration = currentDate.difference(offlineDate).inSeconds;
+      final offlineDuration = currentDate.difference(offlineDate).inHours;
       print(offlineDuration);
       if (offlineDuration >= 24) {
         prefs.setString("OFFLINE_STATUS", OFFLINE_STATUS);

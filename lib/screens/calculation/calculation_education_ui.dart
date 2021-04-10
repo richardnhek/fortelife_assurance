@@ -467,6 +467,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                   onPhone: 10.0,
                                   onTablet: 20.0)),
                           Container(
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 65.0,
+                                onTablet: 75.0),
                             width: mq.size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -511,6 +516,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                   onPhone: 5.0,
                                   onTablet: 10.0)),
                           Container(
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 65.0,
+                                onTablet: 75.0),
                             width: mq.size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -551,6 +561,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                   onPhone: 5.0,
                                   onTablet: 10.0)),
                           Container(
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 65.0,
+                                onTablet: 75.0),
                             child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -621,6 +636,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               onPhone: 10.0,
                               onTablet: 20.0)),
                       Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -665,6 +685,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               onPhone: 5.0,
                               onTablet: 10.0)),
                       Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -709,6 +734,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               onPhone: 5.0,
                               onTablet: 10.0)),
                       Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -755,6 +785,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               onPhone: 5.0,
                               onTablet: 10.0)),
                       Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -802,30 +837,37 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               appProvider: appProvider,
                               onPhone: 5.0,
                               onTablet: 10.0)),
-                      CustomTextField(
-                        appProvider: appProvider,
-                        mq: mq,
-                        formLabel: lang['premium'],
-                        formInputType: TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        formController: premium,
-                        maxLength: 9,
-                        isRequired: true,
-                        errorVisible: false,
-                        onChange: (text) {
-                          if (int.parse(policyYear.text) != null) {
-                            if (text == "") {
-                              sumAssured.text = "";
-                            } else
-                              premiumNum = double.parse(text);
-                            sumAssured.text =
-                                (double.parse(policyYear.text) * premiumNum)
-                                    .toStringAsFixed(2);
-                            sumAssuredNum = double.parse(sumAssured.text);
-                          } else {
-                            sumAssured.text = null;
-                          }
-                        },
+                      Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
+                        child: CustomTextField(
+                          appProvider: appProvider,
+                          mq: mq,
+                          formLabel: lang['premium'],
+                          formInputType: TextInputType.numberWithOptions(
+                              signed: true, decimal: true),
+                          formController: premium,
+                          maxLength: 9,
+                          isRequired: true,
+                          errorVisible: false,
+                          onChange: (text) {
+                            if (int.parse(policyYear.text) != null) {
+                              if (text == "") {
+                                sumAssured.text = "";
+                              } else
+                                premiumNum = double.parse(text);
+                              sumAssured.text =
+                                  (double.parse(policyYear.text) * premiumNum)
+                                      .toStringAsFixed(2);
+                              sumAssuredNum = double.parse(sumAssured.text);
+                            } else {
+                              sumAssured.text = null;
+                            }
+                          },
+                        ),
                       ),
                       SizedBox(
                           height: DeviceUtils.getResponsive(
@@ -833,30 +875,37 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               appProvider: appProvider,
                               onPhone: 5.0,
                               onTablet: 10.0)),
-                      CustomTextField(
-                        appProvider: appProvider,
-                        mq: mq,
-                        formLabel: lang['sum_assured'],
-                        formInputType: TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        formController: sumAssured,
-                        isRequired: true,
-                        maxLength: 9,
-                        errorVisible: false,
-                        onChange: (text) {
-                          if (int.parse(policyYear.text) != null) {
-                            if (text == "") {
-                              premium.text = "";
-                            } else
-                              premiumNum = (double.parse(text) /
-                                  double.parse(policyYear.text));
-                            premium.text = premiumNum.toStringAsFixed(2);
-                            sumAssuredNum = double.parse(text);
-                            premiumNum = double.parse(premium.text);
-                          } else {
-                            premium.text = null;
-                          }
-                        },
+                      Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
+                        child: CustomTextField(
+                          appProvider: appProvider,
+                          mq: mq,
+                          formLabel: lang['sum_assured'],
+                          formInputType: TextInputType.numberWithOptions(
+                              signed: true, decimal: true),
+                          formController: sumAssured,
+                          isRequired: true,
+                          maxLength: 9,
+                          errorVisible: false,
+                          onChange: (text) {
+                            if (int.parse(policyYear.text) != null) {
+                              if (text == "") {
+                                premium.text = "";
+                              } else
+                                premiumNum = (double.parse(text) /
+                                    double.parse(policyYear.text));
+                              premium.text = premiumNum.toStringAsFixed(2);
+                              sumAssuredNum = double.parse(text);
+                              premiumNum = double.parse(premium.text);
+                            } else {
+                              premium.text = null;
+                            }
+                          },
+                        ),
                       ),
                     ],
                   ),

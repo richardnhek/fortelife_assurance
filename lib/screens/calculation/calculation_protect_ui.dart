@@ -594,6 +594,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                     onTablet: 20.0)),
                             Container(
                               width: mq.size.width,
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 65.0,
+                                  onTablet: 75.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -638,6 +643,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                     onPhone: 5.0,
                                     onTablet: 10.0)),
                             Container(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 65.0,
+                                  onTablet: 75.0),
                               width: mq.size.width,
                               child: Row(
                                 mainAxisAlignment:
@@ -679,6 +689,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                     onPhone: 5.0,
                                     onTablet: 10.0)),
                             Container(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 65.0,
+                                  onTablet: 75.0),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -752,6 +767,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               onPhone: 10.0,
                               onTablet: 20.0)),
                       Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -796,6 +816,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               onPhone: 5.0,
                               onTablet: 10.0)),
                       Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -836,6 +861,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               onPhone: 5.0,
                               onTablet: 10.0)),
                       Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -886,6 +916,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               onPhone: 5.0,
                               onTablet: 10.0)),
                       Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -958,28 +993,36 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               appProvider: appProvider,
                               onPhone: 5.0,
                               onTablet: 10.0)),
-                      CustomTextField(
-                        appProvider: appProvider,
-                        mq: mq,
-                        formLabel: lang['premium'],
-                        formInputType: TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        formController: premium,
-                        maxLength: 9,
-                        isRequired: true,
-                        errorVisible: emptyPremiumField,
-                        onChange: (text) {
-                          if (selectedYear != null) {
-                            if (text == "") {
-                              sumAssured.text = "";
-                            } else
-                              premiumNum = double.parse(text);
-                            sumAssuredNum = premiumNum * selectedYear;
-                            sumAssured.text = sumAssuredNum.toStringAsFixed(2);
-                          } else {
-                            sumAssured.text = null;
-                          }
-                        },
+                      Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
+                        child: CustomTextField(
+                          appProvider: appProvider,
+                          mq: mq,
+                          formLabel: lang['premium'],
+                          formInputType: TextInputType.numberWithOptions(
+                              signed: true, decimal: true),
+                          formController: premium,
+                          maxLength: 9,
+                          isRequired: true,
+                          errorVisible: emptyPremiumField,
+                          onChange: (text) {
+                            if (selectedYear != null) {
+                              if (text == "") {
+                                sumAssured.text = "";
+                              } else
+                                premiumNum = double.parse(text);
+                              sumAssuredNum = premiumNum * selectedYear;
+                              sumAssured.text =
+                                  sumAssuredNum.toStringAsFixed(2);
+                            } else {
+                              sumAssured.text = null;
+                            }
+                          },
+                        ),
                       ),
                       SizedBox(
                           height: DeviceUtils.getResponsive(
@@ -987,28 +1030,35 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               appProvider: appProvider,
                               onPhone: 5.0,
                               onTablet: 10.0)),
-                      CustomTextField(
-                        appProvider: appProvider,
-                        mq: mq,
-                        formLabel: lang['sum_assured'],
-                        formInputType: TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        formController: sumAssured,
-                        isRequired: true,
-                        maxLength: 10,
-                        errorVisible: emptySumField,
-                        onChange: (text) {
-                          if (selectedYear != null) {
-                            if (text.toString().isEmpty) {
+                      Container(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 65.0,
+                            onTablet: 75.0),
+                        child: CustomTextField(
+                          appProvider: appProvider,
+                          mq: mq,
+                          formLabel: lang['sum_assured'],
+                          formInputType: TextInputType.numberWithOptions(
+                              signed: true, decimal: true),
+                          formController: sumAssured,
+                          isRequired: true,
+                          maxLength: 10,
+                          errorVisible: emptySumField,
+                          onChange: (text) {
+                            if (selectedYear != null) {
+                              if (text.toString().isEmpty) {
+                                premium.clear();
+                              } else
+                                sumAssuredNum = double.parse(text);
+                              premiumNum = sumAssuredNum / selectedYear;
+                              premium.text = premiumNum.toStringAsFixed(2);
+                            } else {
                               premium.clear();
-                            } else
-                              sumAssuredNum = double.parse(text);
-                            premiumNum = sumAssuredNum / selectedYear;
-                            premium.text = premiumNum.toStringAsFixed(2);
-                          } else {
-                            premium.clear();
-                          }
-                        },
+                            }
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -1017,8 +1067,8 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     height: DeviceUtils.getResponsive(
                         mq: mq,
                         appProvider: appProvider,
-                        onPhone: 0.0,
-                        onTablet: 10.0)),
+                        onPhone: 5.0,
+                        onTablet: 20.0)),
                 CustomSwitch(
                   appProvider: appProvider,
                   mq: mq,
@@ -1058,7 +1108,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                          flex: 3,
+                          flex: 4,
                           child: Text(lang['language'],
                               style: TextStyle(
                                   fontFamily: "Kano",
