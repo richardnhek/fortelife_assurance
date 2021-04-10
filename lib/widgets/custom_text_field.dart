@@ -1,20 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({
-    this.formLabel,
-    this.formInputType,
-    this.formController,
-    this.onChange,
-    this.onSaved,
-    this.validateFunc,
-    this.errorVisible,
-    this.isRequired,
-    this.onSubmitted,
-    this.maxLength,
-  });
+  CustomTextField(
+      {this.formLabel,
+      this.formInputType,
+      this.formController,
+      this.onChange,
+      this.onSaved,
+      this.validateFunc,
+      this.errorVisible,
+      this.isRequired,
+      this.onSubmitted,
+      this.maxLength,
+      this.appProvider,
+      this.mq});
 
   final String formLabel;
   final TextInputType formInputType;
@@ -26,6 +29,8 @@ class CustomTextField extends StatelessWidget {
   final bool errorVisible;
   final bool isRequired;
   final int maxLength;
+  final AppProvider appProvider;
+  final MediaQueryData mq;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +58,14 @@ class CustomTextField extends StatelessWidget {
               enabledBorder: InputBorder.none,
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 5, top: 10, bottom: 10),
+              contentPadding: EdgeInsets.only(
+                  left: 5,
+                  top: DeviceUtils.getResponsive(
+                      appProvider: appProvider,
+                      mq: mq,
+                      onPhone: 10.0,
+                      onTablet: 15.0),
+                  bottom: 10),
               isDense: true,
               labelText: formLabel,
               labelStyle: TextStyle(

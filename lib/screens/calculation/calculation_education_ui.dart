@@ -137,22 +137,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   //
 
   List<Widget> customDialogChildren = List();
-  List<DropdownMenuItem> languageSI = [
-    DropdownMenuItem(
-        child: Image(
-          image: AssetImage("assets/icons/english.png"),
-          width: 45,
-          height: 30,
-        ),
-        value: false),
-    DropdownMenuItem(
-        child: Image(
-          image: AssetImage("assets/icons/khmer.png"),
-          width: 45,
-          height: 30,
-        ),
-        value: true)
-  ];
 
   List<DropdownMenuItem> genderTypes = [
     DropdownMenuItem(
@@ -203,6 +187,38 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     Map<String, dynamic> lang = appProvider.lang;
     final mq = MediaQuery.of(context);
+    List<DropdownMenuItem> languageSI = [
+      DropdownMenuItem(
+          child: Image(
+            image: AssetImage("assets/icons/english.png"),
+            width: DeviceUtils.getResponsive(
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 45.0,
+                onTablet: 90.0),
+            height: DeviceUtils.getResponsive(
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 30.0,
+                onTablet: 60.0),
+          ),
+          value: false),
+      DropdownMenuItem(
+          child: Image(
+            image: AssetImage("assets/icons/khmer.png"),
+            width: DeviceUtils.getResponsive(
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 45.0,
+                onTablet: 90.0),
+            height: DeviceUtils.getResponsive(
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 30.0,
+                onTablet: 60.0),
+          ),
+          value: true)
+    ];
     showAlertDialog(BuildContext context) {
       showDialog(
           context: context,
@@ -211,7 +227,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                 type: MaterialType.transparency,
                 child: Center(
                   child: Container(
-                      width: 300,
+                      width: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 300.0,
+                          onTablet: 600.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
                         color: Colors.white,
@@ -223,19 +243,41 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                         children: [
                           Align(
                             child: Image.asset("assets/icons/wrong.png",
-                                width: 60, height: 60),
+                                width: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 60.0,
+                                    onTablet: 120.0),
+                                height: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 60.0,
+                                    onTablet: 120.0)),
                             alignment: Alignment.center,
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 20.0,
+                                  onTablet: 40.0)),
                           Align(
                             alignment: Alignment.center,
                             child: Container(
-                              width: 150,
+                              width: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 150.0,
+                                  onTablet: 300.0),
                               child: Text(
                                 "Error Inputs",
                                 style: TextStyle(
                                     color: Color(0xFFD31145),
-                                    fontSize: 22,
+                                    fontSize: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 22.0,
+                                        onTablet: 44.0),
                                     fontFamily: "Kano",
                                     fontWeight: FontWeight.w600),
                                 maxLines: 2,
@@ -244,13 +286,23 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 10.0,
+                                  onTablet: 20.0)),
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: customDialogChildren,
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 20.0,
+                                  onTablet: 40.0)),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -264,12 +316,21 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                   child: Text(
                                     "INFO",
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: DeviceUtils.getResponsive(
+                                            mq: mq,
+                                            appProvider: appProvider,
+                                            onPhone: 16.0,
+                                            onTablet: 32.0),
                                         fontFamily: "Kano",
                                         color: Colors.blueAccent),
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                SizedBox(
+                                    width: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 10.0,
+                                        onTablet: 20.0)),
                                 FlatButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
@@ -277,7 +338,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                   child: Text(
                                     "OK",
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: DeviceUtils.getResponsive(
+                                            mq: mq,
+                                            appProvider: appProvider,
+                                            onPhone: 16.0,
+                                            onTablet: 32.0),
                                         fontFamily: "Kano",
                                         color: Colors.blueAccent),
                                   ),
@@ -395,7 +460,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 onTablet: 42.0),
                             fieldTitle: lang['payor'],
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 10.0,
+                                  onTablet: 20.0)),
                           Container(
                             width: mq.size.width,
                             child: Row(
@@ -403,6 +473,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               children: [
                                 Expanded(
                                   child: CustomTextField(
+                                    appProvider: appProvider,
+                                    mq: mq,
                                     formLabel: lang['first_name'],
                                     formInputType: TextInputType.name,
                                     formController: pFirstName,
@@ -411,9 +483,16 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                     errorVisible: false,
                                   ),
                                 ),
-                                SizedBox(width: 5),
+                                SizedBox(
+                                    width: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 5.0,
+                                        onTablet: 10.0)),
                                 Expanded(
                                   child: CustomTextField(
+                                    appProvider: appProvider,
+                                    mq: mq,
                                     formLabel: lang['last_name'],
                                     maxLength: 10,
                                     formInputType: TextInputType.name,
@@ -425,7 +504,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 5),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 5.0,
+                                  onTablet: 10.0)),
                           Container(
                             width: mq.size.width,
                             child: Row(
@@ -434,13 +518,22 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 Expanded(
                                     flex: 1,
                                     child: DisabledField(
+                                      appProvider: appProvider,
+                                      mq: mq,
                                       formController: pAge,
                                       title: lang['age'],
                                     )),
-                                SizedBox(width: 5),
+                                SizedBox(
+                                    width: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 5.0,
+                                        onTablet: 10.0)),
                                 Expanded(
                                     flex: 2,
                                     child: CustomDatePicker(
+                                      appProvider: appProvider,
+                                      mq: mq,
                                       title: lang['dob'],
                                       focusNode: AlwaysDisabledFocusNode(),
                                       dob: pDob,
@@ -451,7 +544,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 5),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 5.0,
+                                  onTablet: 10.0)),
                           Container(
                             child: Row(
                                 mainAxisAlignment:
@@ -460,6 +558,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 children: [
                                   Expanded(
                                       child: CustomDropDown(
+                                    appProvider: appProvider,
                                     title: lang['gender'],
                                     value: pSelectedGender,
                                     errorVisible: false,
@@ -474,10 +573,17 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                       });
                                     },
                                   )),
-                                  SizedBox(width: 5),
+                                  SizedBox(
+                                      width: DeviceUtils.getResponsive(
+                                          mq: mq,
+                                          appProvider: appProvider,
+                                          onPhone: 5.0,
+                                          onTablet: 10.0)),
                                   Expanded(
                                     flex: 2,
                                     child: CustomTextField(
+                                      appProvider: appProvider,
+                                      mq: mq,
                                       formInputType: TextInputType.text,
                                       formLabel: lang['occupation'],
                                       maxLength: 22,
@@ -489,7 +595,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 ]),
                           )
                         ])),
-                SizedBox(height: 15),
+                SizedBox(
+                    height: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 15.0,
+                        onTablet: 30.0)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 5),
                   child: Column(
@@ -503,7 +614,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             onTablet: 42.0),
                         fieldTitle: lang['life_proposed_edu'],
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(
+                          height: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 10.0,
+                              onTablet: 20.0)),
                       Container(
                         width: mq.size.width,
                         child: Row(
@@ -511,6 +627,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           children: [
                             Expanded(
                               child: CustomTextField(
+                                appProvider: appProvider,
+                                mq: mq,
                                 formLabel: lang['first_name'],
                                 formInputType: TextInputType.name,
                                 maxLength: 10,
@@ -519,9 +637,16 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 errorVisible: false,
                               ),
                             ),
-                            SizedBox(width: 5),
+                            SizedBox(
+                                width: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 5.0,
+                                    onTablet: 10.0)),
                             Expanded(
                               child: CustomTextField(
+                                appProvider: appProvider,
+                                mq: mq,
                                 formLabel: lang['last_name'],
                                 formInputType: TextInputType.name,
                                 formController: lastName,
@@ -533,7 +658,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(
+                          height: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 5.0,
+                              onTablet: 10.0)),
                       Container(
                         width: mq.size.width,
                         child: Row(
@@ -543,13 +673,22 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             Expanded(
                                 flex: 1,
                                 child: DisabledField(
+                                  appProvider: appProvider,
+                                  mq: mq,
                                   formController: age,
                                   title: lang['age'],
                                 )),
-                            SizedBox(width: 5),
+                            SizedBox(
+                                width: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 5.0,
+                                    onTablet: 10.0)),
                             Expanded(
                                 flex: 2,
                                 child: CustomDatePicker(
+                                  appProvider: appProvider,
+                                  mq: mq,
                                   title: lang['dob'],
                                   focusNode: AlwaysDisabledFocusNode(),
                                   dob: dob,
@@ -563,7 +702,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(
+                          height: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 5.0,
+                              onTablet: 10.0)),
                       Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -571,6 +715,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           children: [
                             Expanded(
                                 child: CustomDropDown(
+                              appProvider: appProvider,
                               title: lang['gender'],
                               value: lSelectedGender,
                               isRequired: true,
@@ -585,10 +730,17 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 });
                               },
                             )),
-                            SizedBox(width: 5),
+                            SizedBox(
+                                width: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 5.0,
+                                    onTablet: 10.0)),
                             Expanded(
                               flex: 2,
                               child: DisabledField(
+                                appProvider: appProvider,
+                                mq: mq,
                                 formController: lOccupation,
                                 title: lang['occupation'],
                               ),
@@ -596,7 +748,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(
+                          height: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 5.0,
+                              onTablet: 10.0)),
                       Container(
                         width: mq.size.width,
                         child: Row(
@@ -606,6 +763,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             Expanded(
                               flex: 1,
                               child: CustomDropDown(
+                                appProvider: appProvider,
                                 title: "Payment Mode",
                                 value: selectedMode,
                                 isRequired: true,
@@ -621,18 +779,32 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 },
                               ),
                             ),
-                            SizedBox(width: 5),
+                            SizedBox(
+                                width: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 5.0,
+                                    onTablet: 10.0)),
                             Expanded(
                                 flex: 1,
                                 child: DisabledField(
+                                  appProvider: appProvider,
+                                  mq: mq,
                                   title: lang['policy_year'],
                                   formController: policyYear,
                                 )),
                           ],
                         ),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(
+                          height: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 5.0,
+                              onTablet: 10.0)),
                       CustomTextField(
+                        appProvider: appProvider,
+                        mq: mq,
                         formLabel: lang['premium'],
                         formInputType: TextInputType.numberWithOptions(
                             signed: true, decimal: true),
@@ -655,8 +827,15 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           }
                         },
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(
+                          height: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 5.0,
+                              onTablet: 10.0)),
                       CustomTextField(
+                        appProvider: appProvider,
+                        mq: mq,
                         formLabel: lang['sum_assured'],
                         formInputType: TextInputType.numberWithOptions(
                             signed: true, decimal: true),
@@ -682,7 +861,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                     ],
                   ),
                 ),
-                SizedBox(height: 5),
+                SizedBox(
+                    height: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 5.0,
+                        onTablet: 10.0)),
                 Padding(
                   padding: EdgeInsets.all(5),
                   child: Row(
@@ -690,15 +874,20 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                     children: [
                       Expanded(
                           flex: 3,
-                          child: Text("Language",
+                          child: Text(lang['language'],
                               style: TextStyle(
                                   fontFamily: "Kano",
-                                  fontSize: 15,
+                                  fontSize: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 15.0,
+                                      onTablet: 30.0),
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black.withOpacity(0.5)))),
                       Expanded(
                         flex: 1,
                         child: CustomDropDown(
+                          appProvider: appProvider,
                           title: "Language",
                           errorVisible: false,
                           isRequired: false,

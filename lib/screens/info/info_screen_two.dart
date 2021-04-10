@@ -22,9 +22,13 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
 
     List<InfoTableRow> tableChildren = [
       InfoTableRow(
+          appProvider: appProvider,
+          mq: mq,
           leadingString: lang['row_1_lead'],
           trailingString: lang['row_1_trial']),
       InfoTableRow(
+          appProvider: appProvider,
+          mq: mq,
           leadingString: lang['row_2_lead'],
           trailingString: lang['row_1_trial']),
     ];
@@ -48,7 +52,12 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
                 fieldTitle: lang['for_life_assured'],
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 10.0,
+                    onTablet: 20.0)),
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -61,15 +70,24 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
               child: Column(
                 children: [
                   BulletPoint(
+                    appProvider: appProvider,
+                    mq: mq,
                     bulletTitle: lang['line_1_edu'],
                   ),
                   BulletPoint(
+                    appProvider: appProvider,
+                    mq: mq,
                     bulletTitle: lang['line_2_edu'],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 20.0,
+                    onTablet: 40.0)),
             FieldTitle(
               fontSize: DeviceUtils.getResponsive(
                   mq: mq,
@@ -78,7 +96,12 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
                   onTablet: 42.0),
               fieldTitle: lang['for_payor'],
             ),
-            SizedBox(height: 10),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 10.0,
+                    onTablet: 20.0)),
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -91,15 +114,24 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
               child: Column(
                 children: [
                   BulletPoint(
+                    appProvider: appProvider,
+                    mq: mq,
                     bulletTitle: lang['line_3_edu'],
                   ),
                   BulletPoint(
+                    appProvider: appProvider,
+                    mq: mq,
                     bulletTitle: lang['line_3'],
                   )
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 20.0,
+                    onTablet: 40.0)),
             FieldTitle(
               fontSize: DeviceUtils.getResponsive(
                   mq: mq,
@@ -108,37 +140,76 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
                   onTablet: 42.0),
               fieldTitle: lang['benefits'],
             ),
-            SizedBox(height: 15),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 15.0,
+                    onTablet: 30.0)),
             Text(
               lang['for_life_assured'],
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 18.0,
+                      onTablet: 36.0),
                   fontFamily: "Kano",
                   decoration: TextDecoration.underline,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFFD31145)),
             ),
-            SizedBox(height: 10),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 10.0,
+                    onTablet: 20.0)),
             InfoTable(
               tableChildren: tableChildren,
             ),
-            SizedBox(height: 15),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 15.0,
+                    onTablet: 30.0)),
             Text(
               lang['for_payor'],
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 18.0,
+                      onTablet: 36.0),
                   fontFamily: "Kano",
                   decoration: TextDecoration.underline,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFFD31145)),
             ),
-            SizedBox(height: 10),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 10.0,
+                    onTablet: 20.0)),
             Text(
               lang['waive_edu'],
               style: TextStyle(
-                  fontSize: 15, fontFamily: "Kano", color: Colors.black),
+                  fontSize: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 15.0,
+                      onTablet: 30.0),
+                  fontFamily: "Kano",
+                  color: Colors.black),
             ),
-            SizedBox(height: 20),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 20.0,
+                    onTablet: 40.0)),
             FieldTitle(
               fontSize: DeviceUtils.getResponsive(
                   mq: mq,
@@ -147,7 +218,12 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
                   onTablet: 42.0),
               fieldTitle: lang['maturity_benefits'],
             ),
-            SizedBox(height: 10),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 10.0,
+                    onTablet: 20.0)),
             Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -159,7 +235,11 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
                     lang['maturity_benefits_details'],
                     style: TextStyle(
                         color: Color(0xFF4D4D4D),
-                        fontSize: 15,
+                        fontSize: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 15.0,
+                            onTablet: 30.0),
                         fontFamily: "Kano"),
                   ),
                 )),

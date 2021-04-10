@@ -208,20 +208,26 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
         alignment: Alignment.bottomRight,
         moveVerticallyByContainerWidth: -0.1,
         moveHorizontallyByChildHeight: -0.25,
-        child: FloatingActionButton(
-          child: Icon(
-            Icons.save_alt_outlined,
-            size: DeviceUtils.getResponsive(
-                mq: mq,
-                appProvider: appProvider,
-                onPhone: 24.0,
-                onTablet: 48.0),
-            color: Colors.white,
+        child: SizedBox(
+          height: DeviceUtils.getResponsive(
+              mq: mq, appProvider: appProvider, onPhone: 40.0, onTablet: 80.0),
+          width: DeviceUtils.getResponsive(
+              mq: mq, appProvider: appProvider, onPhone: 40.0, onTablet: 80.0),
+          child: FloatingActionButton(
+            child: Icon(
+              Icons.save_alt_outlined,
+              size: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 24.0,
+                  onTablet: 48.0),
+              color: Colors.white,
+            ),
+            backgroundColor: Color(0xFF8AB84B),
+            onPressed: () {
+              showAlertDialog(context);
+            },
           ),
-          backgroundColor: Color(0xFF8AB84B),
-          onPressed: () {
-            showAlertDialog(context);
-          },
         ),
       ),
     ]);

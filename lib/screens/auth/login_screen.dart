@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forte_life/constants/constants.dart';
 import 'package:forte_life/models/user.dart';
+import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/providers/auth_provider.dart';
 import 'package:forte_life/widgets/error_dialog.dart';
 import 'package:forte_life/widgets/loading_modal.dart';
@@ -24,10 +25,14 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _showErrorDialog(String message) {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    final mq = MediaQuery.of(context);
     showDialog(
         context: context,
         builder: (ctx) => Center(
               child: ErrorDialog(
+                appProvider: appProvider,
+                mq: mq,
                 details: message,
                 onActionButtonPressed: () => Navigator.of(context).pop(),
               ),

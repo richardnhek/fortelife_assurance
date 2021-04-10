@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 
 class DisabledField extends StatelessWidget {
-  DisabledField({this.formController, this.title});
+  DisabledField({this.formController, this.title, this.mq, this.appProvider});
 
   final TextEditingController formController;
   final String title;
+  final AppProvider appProvider;
+  final MediaQueryData mq;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +24,14 @@ class DisabledField extends StatelessWidget {
             enabledBorder: InputBorder.none,
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
-            contentPadding: EdgeInsets.only(left: 5, top: 10, bottom: 10),
+            contentPadding: EdgeInsets.only(
+                left: 5,
+                top: DeviceUtils.getResponsive(
+                    appProvider: appProvider,
+                    mq: mq,
+                    onPhone: 10.0,
+                    onTablet: 15.0),
+                bottom: 10),
             isDense: true,
             hintText: title,
             labelText: title,

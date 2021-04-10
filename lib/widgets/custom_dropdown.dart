@@ -9,7 +9,8 @@ class CustomDropDown extends StatelessWidget {
       this.onChange,
       this.title,
       this.errorVisible,
-      this.isRequired});
+      this.isRequired,
+      this.appProvider});
 
   final dynamic value;
   final List<dynamic> items;
@@ -17,9 +18,9 @@ class CustomDropDown extends StatelessWidget {
   final String title;
   final bool errorVisible;
   final bool isRequired;
+  final AppProvider appProvider;
   @override
   Widget build(BuildContext context) {
-    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
     return Container(
       child: Padding(
         padding: EdgeInsets.only(left: 5, top: 5, bottom: 5),
@@ -28,7 +29,6 @@ class CustomDropDown extends StatelessWidget {
               iconSize: 17.5,
               value: value,
               isExpanded: true,
-              itemHeight: appProvider.language == 'kh' ? 55 : 53,
               hint: Text(
                 title,
                 style: TextStyle(

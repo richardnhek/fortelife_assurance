@@ -5,6 +5,7 @@ import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:forte_life/notification_plugin.dart';
 import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -50,11 +51,22 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
   Widget build(BuildContext context) {
     TextEditingController fileName = new TextEditingController();
     AppProvider appProvider = Provider.of<AppProvider>(context);
+    final mq = MediaQuery.of(context);
     Map<String, dynamic> lang = appProvider.lang;
     file = File("${appProvider.rootPath}/fortelife.pdf");
     showAlertDialog(BuildContext context) {
       AlertDialog alert = AlertDialog(
-        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+        contentPadding: EdgeInsets.symmetric(
+            horizontal: DeviceUtils.getResponsive(
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 15.0,
+                onTablet: 100.0),
+            vertical: DeviceUtils.getResponsive(
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 30.0,
+                onTablet: 100.0)),
         title: Center(
             child: Container(
                 child: Text(
@@ -62,7 +74,11 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
           style: TextStyle(
               color: Color(0xFF8AB84B),
               fontFamily: "Kano",
-              fontSize: 18,
+              fontSize: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 18.0,
+                  onTablet: 36.0),
               fontWeight: FontWeight.bold),
         ))),
         content: Column(
@@ -73,13 +89,32 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                 Text(
                   lang['file_name'] + ": ",
                   style: TextStyle(
-                      color: Colors.black, fontSize: 14, fontFamily: "Kano"),
+                      color: Colors.black,
+                      fontSize: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 14.0,
+                          onTablet: 28.0),
+                      fontFamily: "Kano"),
                 ),
-                SizedBox(width: 5),
+                SizedBox(
+                    width: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 5.0,
+                        onTablet: 10.0)),
                 Expanded(
                   child: Container(
-                    width: double.infinity,
-                    height: 50,
+                    width: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: double.infinity,
+                        onTablet: 240.0),
+                    height: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 50.0,
+                        onTablet: 100.0),
                     decoration: BoxDecoration(
                         border: Border.all(color: Color(0xFFB8B8B8))),
                     child: TextFormField(
@@ -90,16 +125,34 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                           enabledBorder: InputBorder.none,
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(left: 5, top: 15),
+                          contentPadding: EdgeInsets.only(
+                              left: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 5.0,
+                                  onTablet: 10.0),
+                              top: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 15.0,
+                                  onTablet: 30.0)),
                           isDense: true,
                           hintText: "ForteLife's PDF",
                           hintStyle: TextStyle(
                               fontFamily: "Kano",
-                              fontSize: 15,
+                              fontSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 15.0,
+                                  onTablet: 30.0),
                               color: Colors.black.withOpacity(0.5))),
                       style: TextStyle(
                           fontFamily: "Kano",
-                          fontSize: 14,
+                          fontSize: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 14.0,
+                              onTablet: 28.0),
                           color: Colors.black),
                     ),
                   ),
@@ -108,7 +161,15 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
             ]),
         actions: [
           FlatButton(
-            child: Text(lang['save']),
+            child: Text(
+              lang['save'],
+              style: TextStyle(
+                  fontSize: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 15.0,
+                      onTablet: 30.0)),
+            ),
             onPressed: () async {
               if (fileName.text.isNotEmpty) {
                 final saveDir = await _getDownloadDirectory();
@@ -121,12 +182,25 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                     builder: (BuildContext context) {
                       return AlertDialog(
                           title: Image.asset("assets/icons/attention.png",
-                              width: 60, height: 60),
+                              width: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 60.0,
+                                  onTablet: 120.0),
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 60.0,
+                                  onTablet: 120.0)),
                           content: Text(
                             "File Named $newFileName Already Exists",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 22.0,
+                                  onTablet: 44.0),
                               fontFamily: "Kano",
                             ),
                           ));
@@ -143,12 +217,25 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                     builder: (BuildContext context) {
                       return AlertDialog(
                           title: Image.asset("assets/icons/check.png",
-                              width: 60, height: 60),
+                              width: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 60.0,
+                                  onTablet: 120.0),
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 60.0,
+                                  onTablet: 120.0)),
                           content: Text(
                             "File Named $newFileName Saved Successfully",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 22.0,
+                                  onTablet: 44.0),
                               fontFamily: "Kano",
                             ),
                           ));
@@ -161,12 +248,25 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                         title: Image.asset("assets/icons/attention.png",
-                            width: 60, height: 60),
+                            width: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 60.0,
+                                onTablet: 120.0),
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 60.0,
+                                onTablet: 120.0)),
                         content: Text(
                           "File Name Can't Be Empty",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 22.0,
+                                onTablet: 44.0),
                             fontFamily: "Kano",
                           ),
                         ));
@@ -175,7 +275,13 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
             },
           ),
           FlatButton(
-            child: Text(lang['cancel']),
+            child: Text(lang['cancel'],
+                style: TextStyle(
+                    fontSize: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 15.0,
+                        onTablet: 30.0))),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -207,18 +313,29 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
       ),
       AlignPositioned(
         alignment: Alignment.bottomRight,
-        moveVerticallyByContainerWidth: -0.1,
+        moveVerticallyByContainerWidth: DeviceUtils.getResponsive(
+            mq: mq, appProvider: appProvider, onPhone: -0.1, onTablet: -0.025),
         moveHorizontallyByChildHeight: -0.25,
-        child: FloatingActionButton(
-          child: Icon(
-            Icons.save_alt_outlined,
-            size: 24,
-            color: Colors.white,
+        child: SizedBox(
+          height: DeviceUtils.getResponsive(
+              mq: mq, appProvider: appProvider, onPhone: 40.0, onTablet: 80.0),
+          width: DeviceUtils.getResponsive(
+              mq: mq, appProvider: appProvider, onPhone: 40.0, onTablet: 80.0),
+          child: FloatingActionButton(
+            child: Icon(
+              Icons.save_alt_outlined,
+              size: DeviceUtils.getResponsive(
+                  mq: mq,
+                  appProvider: appProvider,
+                  onPhone: 24.0,
+                  onTablet: 48.0),
+              color: Colors.white,
+            ),
+            backgroundColor: Color(0xFF8AB84B),
+            onPressed: () {
+              showAlertDialog(context);
+            },
           ),
-          backgroundColor: Color(0xFF8AB84B),
-          onPressed: () {
-            showAlertDialog(context);
-          },
         ),
       ),
     ]);

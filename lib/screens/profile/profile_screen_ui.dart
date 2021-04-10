@@ -230,17 +230,15 @@ class ProfileScreenUI extends StatelessWidget {
                                     fontFamily: "Kano"),
                               ),
                               SizedBox(
-                                  width: appProvider.language == 'kh'
-                                      ? DeviceUtils.getResponsive(
-                                          mq: mq,
-                                          appProvider: appProvider,
-                                          onPhone: 11.0,
-                                          onTablet: 22.0)
-                                      : DeviceUtils.getResponsive(
-                                          mq: mq,
-                                          appProvider: appProvider,
-                                          onPhone: 5.0,
-                                          onTablet: 10.0)),
+                                  width: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: appProvider.language == "kh"
+                                          ? 11.0
+                                          : 5.0,
+                                      onTablet: appProvider.language == "kh"
+                                          ? 22.0
+                                          : 10.0)),
                               Expanded(
                                 child: Container(
                                   margin: EdgeInsets.only(
@@ -688,7 +686,7 @@ class ProfileScreenUI extends StatelessWidget {
                   Divider(
                     color: Colors.grey.withOpacity(0.5),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: appProvider.language == "kh" ? 10.0 : 30.0),
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: _showSwitchLanguageDialog,
@@ -724,7 +722,8 @@ class ProfileScreenUI extends StatelessWidget {
                           mq: mq,
                           appProvider: appProvider,
                           onPhone: 20.0,
-                          onTablet: 40.0)),
+                          onTablet:
+                              appProvider.language == "kh" ? 40.0 : 60.0)),
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: _showChangePassword,
@@ -762,7 +761,8 @@ class ProfileScreenUI extends StatelessWidget {
                           mq: mq,
                           appProvider: appProvider,
                           onPhone: 20.0,
-                          onTablet: 40.0)),
+                          onTablet:
+                              appProvider.language == "kh" ? 40.0 : 60.0)),
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: _showContactDialog,
@@ -800,7 +800,8 @@ class ProfileScreenUI extends StatelessWidget {
                           mq: mq,
                           appProvider: appProvider,
                           onPhone: 20.0,
-                          onTablet: 40.0)),
+                          onTablet:
+                              appProvider.language == "kh" ? 40.0 : 80.0)),
                   RaisedButton(
                       onPressed: _showExitDialog,
                       padding: EdgeInsets.all(8.5),
@@ -818,7 +819,9 @@ class ProfileScreenUI extends StatelessWidget {
                                     mq: mq,
                                     appProvider: appProvider,
                                     onPhone: 17.5,
-                                    onTablet: 35.0),
+                                    onTablet: appProvider.language == "kh"
+                                        ? 35.0
+                                        : 40.0),
                                 color: Colors.white,
                                 fontFamily: "Kano",
                                 fontWeight: FontWeight.w600),

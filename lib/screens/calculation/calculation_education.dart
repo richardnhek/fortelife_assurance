@@ -29,9 +29,20 @@ class _CalculationEducationState extends State<CalculationEducation> {
           context: context,
           builder: (context) => Center(
                 child: CustomAlertDialog(
+                  appProvider: appProvider,
+                  mq: mq,
                   title: lang['exit'],
                   icon: Image.asset("assets/icons/attention.png",
-                      width: 60, height: 60),
+                      width: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 60.0,
+                          onTablet: 120.0),
+                      height: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 60.0,
+                          onTablet: 120.0)),
                   details: lang['exit_page'],
                   isPrompt: true,
                   actionButtonTitle: lang['no'],
@@ -133,7 +144,7 @@ class _CalculationEducationState extends State<CalculationEducation> {
                 mq: mq,
                 appProvider: appProvider,
                 onPhone: 32.0,
-                onTablet: 48.0),
+                onTablet: 64.0),
           ),
           onPressed: () {
             _showExitDialog(_scaffoldKey.currentContext);

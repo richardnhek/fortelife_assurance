@@ -20,17 +20,25 @@ class _InfoScreenState extends State<InfoScreen> {
     Map<String, dynamic> lang = appProvider.lang;
     List<InfoTableRow> tableChildren = [
       InfoTableRow(
+          appProvider: appProvider,
+          mq: mq,
           leadingString: lang['row_1_lead'],
           trailingString: lang['row_1_trial']),
       InfoTableRow(
+        appProvider: appProvider,
+        mq: mq,
         leadingString: lang['row_2_lead'],
         trailingString: lang['row_1_trial'],
       ),
       InfoTableRow(
+        appProvider: appProvider,
+        mq: mq,
         leadingString: lang['row_3_lead'],
         trailingString: lang['row_3_trial'],
       ),
       InfoTableRow(
+          appProvider: appProvider,
+          mq: mq,
           leadingString: lang['row_4_lead'],
           trailingString: lang['row_3_trial']),
     ];
@@ -53,7 +61,12 @@ class _InfoScreenState extends State<InfoScreen> {
                 fieldTitle: lang['for_life_proposed'],
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 10.0,
+                    onTablet: 20.0)),
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -66,12 +79,18 @@ class _InfoScreenState extends State<InfoScreen> {
               child: Column(
                 children: [
                   BulletPoint(
+                    appProvider: appProvider,
+                    mq: mq,
                     bulletTitle: lang['line_1'],
                   ),
                   BulletPoint(
+                    appProvider: appProvider,
+                    mq: mq,
                     bulletTitle: lang['line_2'],
                   ),
                   BulletPoint(
+                    appProvider: appProvider,
+                    mq: mq,
                     bulletTitle: lang['line_3'],
                   )
                 ],
@@ -86,11 +105,21 @@ class _InfoScreenState extends State<InfoScreen> {
                   onTablet: 42.0),
               fieldTitle: lang['benefits'],
             ),
-            SizedBox(height: 10),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 10.0,
+                    onTablet: 20.0)),
             InfoTable(
               tableChildren: tableChildren,
             ),
-            SizedBox(height: 20),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 20.0,
+                    onTablet: 40.0)),
             FieldTitle(
               fontSize: DeviceUtils.getResponsive(
                   mq: mq,
@@ -99,7 +128,12 @@ class _InfoScreenState extends State<InfoScreen> {
                   onTablet: 42.0),
               fieldTitle: lang['maturity_benefits'],
             ),
-            SizedBox(height: 10),
+            SizedBox(
+                height: DeviceUtils.getResponsive(
+                    mq: mq,
+                    appProvider: appProvider,
+                    onPhone: 10.0,
+                    onTablet: 20.0)),
             Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -111,7 +145,11 @@ class _InfoScreenState extends State<InfoScreen> {
                     lang['maturity_benefits_details'],
                     style: TextStyle(
                         color: Color(0xFF4D4D4D),
-                        fontSize: 15,
+                        fontSize: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 15.0,
+                            onTablet: 30.0),
                         fontFamily: "Kano"),
                   ),
                 )),

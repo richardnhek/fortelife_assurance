@@ -36,7 +36,7 @@ class _MainFlowState extends State<MainFlow> {
       final offlineDateString = prefs.getString(OFFLINE_DATE);
       final offlineDate = DateTime.parse(offlineDateString);
       final currentDate = DateTime.now();
-      final offlineDuration = currentDate.difference(offlineDate).inHours;
+      final offlineDuration = currentDate.difference(offlineDate).inSeconds;
       print(offlineDuration);
       if (offlineDuration >= 24) {
         prefs.setString("OFFLINE_STATUS", OFFLINE_STATUS);
@@ -45,6 +45,9 @@ class _MainFlowState extends State<MainFlow> {
     }
 
     if (prefs.containsKey("OFFLINE_STATUS")) {
+      AppProvider appProvider =
+          Provider.of<AppProvider>(context, listen: false);
+      final mq = MediaQuery.of(context);
       showDialog(
           barrierDismissible: false,
           context: context,
@@ -56,9 +59,19 @@ class _MainFlowState extends State<MainFlow> {
                         context, '/', (route) => false);
                   },
                   child: CustomAlertDialog(
+                    appProvider: appProvider,
                     title: "Exit",
                     icon: Image.asset("assets/icons/off.png",
-                        width: 60, height: 60),
+                        width: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 60.0,
+                            onTablet: 120.0),
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 60.0,
+                            onTablet: 120.0)),
                     details:
                         "You've Been Offline For 24 Hours Please Log In Again",
                     actionButtonTitle: "No",
@@ -89,9 +102,20 @@ class _MainFlowState extends State<MainFlow> {
           context: context,
           builder: (context) => Center(
                 child: CustomAlertDialog(
+                  appProvider: appProvider,
+                  mq: mq,
                   title: lang['exit'],
                   icon: Image.asset("assets/icons/attention.png",
-                      width: 60, height: 60),
+                      width: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 60.0,
+                          onTablet: 120.0),
+                      height: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 60.0,
+                          onTablet: 120.0)),
                   details: lang['exit_page'],
                   actionButtonTitle: lang['no'],
                   actionButtonTitleTwo: lang['yes'],
@@ -112,9 +136,20 @@ class _MainFlowState extends State<MainFlow> {
           context: context,
           builder: (context) => Center(
                 child: CustomAlertDialog(
+                  appProvider: appProvider,
+                  mq: mq,
                   title: lang['exit'],
                   icon: Image.asset("assets/icons/off.png",
-                      width: 60, height: 60),
+                      width: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 60.0,
+                          onTablet: 120.0),
+                      height: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 60.0,
+                          onTablet: 120.0)),
                   details: lang['exit_app'],
                   actionButtonTitle: lang['no'],
                   actionButtonTitleTwo: lang['yes'],
