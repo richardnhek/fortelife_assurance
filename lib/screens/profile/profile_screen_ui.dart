@@ -95,6 +95,7 @@ class ProfileScreenUI extends StatelessWidget {
                   details: lang['applanguage_text'],
                   onActionButtonPressed: () {
                     onSwitchLanguage(LANGUAGE_KHMER);
+
                     Navigator.of(context).pop();
                   },
                   onActionButtonPressedTwo: () {

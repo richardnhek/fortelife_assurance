@@ -65,6 +65,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   Future<void> getValues() async {
     final prefs = await SharedPreferences.getInstance();
+
     print(sumAssuredNum);
     String fName = prefs.getString("fName");
     String lName = prefs.getString("lName");
@@ -198,42 +199,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   List<Widget> customDialogChildren = List();
 
-  List<DropdownMenuItem> genderTypes = [
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Male",
-        ),
-        value: "Male"),
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Female",
-        ),
-        value: "Female")
-  ];
-
-  List<DropdownMenuItem> paymentMode = [
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Yearly",
-        ),
-        value: "Yearly"),
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Half-yearly",
-        ),
-        value: "Half-yearly"),
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Quarterly",
-        ),
-        value: "Quarterly"),
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Monthly",
-        ),
-        value: "Monthly")
-  ];
-
   List<DropdownMenuItem> policyYears = [
     DropdownMenuItem(child: DropDownText(title: "10"), value: 10),
     DropdownMenuItem(child: DropDownText(title: "15"), value: 15),
@@ -255,37 +220,39 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         Provider.of<AppProvider>(widget.scaffoldKey.currentContext);
     Map<String, dynamic> lang = appProvider.lang;
     final mq = MediaQuery.of(context);
-    List<DropdownMenuItem> languageSI = [
+    List<DropdownMenuItem> paymentMode = [
       DropdownMenuItem(
-          child: Image(
-            image: AssetImage("assets/icons/english.png"),
-            width: DeviceUtils.getResponsive(
-                mq: mq,
-                appProvider: appProvider,
-                onPhone: 45.0,
-                onTablet: 90.0),
-            height: DeviceUtils.getResponsive(
-                mq: mq,
-                appProvider: appProvider,
-                onPhone: 30.0,
-                onTablet: 60.0),
+          child: DropDownText(
+            title: lang['yearly'],
           ),
-          value: false),
+          value: "Yearly"),
       DropdownMenuItem(
-          child: Image(
-            image: AssetImage("assets/icons/khmer.png"),
-            width: DeviceUtils.getResponsive(
-                mq: mq,
-                appProvider: appProvider,
-                onPhone: 45.0,
-                onTablet: 90.0),
-            height: DeviceUtils.getResponsive(
-                mq: mq,
-                appProvider: appProvider,
-                onPhone: 30.0,
-                onTablet: 60.0),
+          child: DropDownText(
+            title: lang['half_yearly'],
           ),
-          value: true)
+          value: "Half-yearly"),
+      DropdownMenuItem(
+          child: DropDownText(
+            title: lang['quarterly'],
+          ),
+          value: "Quarterly"),
+      DropdownMenuItem(
+          child: DropDownText(
+            title: lang['monthly'],
+          ),
+          value: "Monthly")
+    ];
+    List<DropdownMenuItem> genderTypes = [
+      DropdownMenuItem(
+          child: DropDownText(
+            title: lang['male'],
+          ),
+          value: "Male"),
+      DropdownMenuItem(
+          child: DropDownText(
+            title: lang['female'],
+          ),
+          value: "Female")
     ];
     showAlertDialog(BuildContext context) {
       showDialog(
@@ -1082,7 +1049,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                 ),
                 Visibility(
                     visible: appProvider.addRider,
-                    child: Padding(
+                    child: Container(
+                      height: DeviceUtils.getResponsive(
+                          mq: mq,
+                          appProvider: appProvider,
+                          onPhone: 65.0,
+                          onTablet: 75.0),
                       padding: EdgeInsets.only(left: 5, right: 5, bottom: 5),
                       child: CustomTextField(
                         appProvider: appProvider,
@@ -1102,42 +1074,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                         appProvider: appProvider,
                         onPhone: 0.0,
                         onTablet: 10.0)),
-                Padding(
-                  padding: EdgeInsets.all(5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                          flex: 4,
-                          child: Text(lang['language'],
-                              style: TextStyle(
-                                  fontFamily: "Kano",
-                                  fontSize: DeviceUtils.getResponsive(
-                                      mq: mq,
-                                      appProvider: appProvider,
-                                      onPhone: 15.0,
-                                      onTablet: 30.0),
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black.withOpacity(0.5)))),
-                      Expanded(
-                        flex: 1,
-                        child: CustomDropDown(
-                          appProvider: appProvider,
-                          title: "Language",
-                          errorVisible: false,
-                          isRequired: false,
-                          value: isKhmer,
-                          items: languageSI,
-                          onChange: (value) async {
-                            setState(() {
-                              isKhmer = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(
                     height: DeviceUtils.getResponsive(
                         mq: mq,

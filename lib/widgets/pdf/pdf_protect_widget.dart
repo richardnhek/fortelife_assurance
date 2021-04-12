@@ -36,12 +36,15 @@ class PDFWidget {
         File('$rootPath/LiberationSans-Bold.ttf').readAsBytesSync();
     final Uint8List khmerFont =
         File("$rootPath/Kantumruy-Regular.ttf").readAsBytesSync();
+    final Uint8List khmerFont1 = File("$rootPath/lmns7.ttf").readAsBytesSync();
     final regularData = regularFont.buffer.asByteData();
     final boldData = boldFont.buffer.asByteData();
     final khmerData = khmerFont.buffer.asByteData();
+    final khmerData1 = khmerFont1.buffer.asByteData();
     final regularF = Font.ttf(regularData);
     final boldF = Font.ttf(boldData);
     final khmerF = Font.ttf(khmerData);
+    final khmerF1 = Font.ttf(khmerData1);
     var myFormat = DateFormat('dd /MM /yyyy');
     var dateNow = DateTime.now();
     final currentDate = myFormat.format(dateNow);

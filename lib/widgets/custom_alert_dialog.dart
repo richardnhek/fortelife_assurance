@@ -123,8 +123,8 @@ class CustomAlertDialog extends StatelessWidget {
                     width: DeviceUtils.getResponsive(
                         mq: mq,
                         appProvider: appProvider,
-                        onPhone: 100.0,
-                        onTablet: 200.0),
+                        onPhone: 110.0,
+                        onTablet: 220.0),
                     child: FlatButton(
                       color: Color(0xFF8AB84B),
                       onPressed: onActionButtonPressed,
@@ -156,8 +156,8 @@ class CustomAlertDialog extends StatelessWidget {
                     width: DeviceUtils.getResponsive(
                         mq: mq,
                         appProvider: appProvider,
-                        onPhone: 100.0,
-                        onTablet: 200.0),
+                        onPhone: 110.0,
+                        onTablet: 220.0),
                     child: FlatButton(
                       color: Color(0xFFD31145),
                       onPressed: onActionButtonPressedTwo,

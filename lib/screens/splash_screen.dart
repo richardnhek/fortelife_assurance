@@ -156,15 +156,19 @@ class _SplashScreenState extends State<SplashScreen>
         await rootBundle.load("assets/fonts/LiberationSans-Bold.ttf");
     final khmerData3 =
         await rootBundle.load("assets/fonts/Kantumruy-Regular.ttf");
+    final khmerData4 = await rootBundle.load("assets/fonts/lmns7.ttf");
     final font = new File("$rootPath/LiberationSans-Regular.ttf");
     final fontBold = new File("$rootPath/LiberationSans-Bold.ttf");
     final khmerFont3 = new File("$rootPath/Kantumruy-Regular.ttf");
+    final khmerFont4 = new File("$rootPath/lmns7.ttf");
     await font.writeAsBytes(
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
     await fontBold.writeAsBytes(dataBold.buffer
         .asUint8List(dataBold.offsetInBytes, dataBold.lengthInBytes));
     await khmerFont3.writeAsBytes(khmerData3.buffer
         .asUint8List(khmerData3.offsetInBytes, khmerData3.lengthInBytes));
+    await khmerFont4.writeAsBytes(khmerData4.buffer
+        .asUint8List(khmerData4.offsetInBytes, khmerData4.lengthInBytes));
   }
 
   void runAppInitialization() async {

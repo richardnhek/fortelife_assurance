@@ -29,6 +29,7 @@ dependencies:
   pdf: ^2.0.0
   path_provider: 1.6.27
   syncfusion_flutter_pdfviewer: ^18.4.32-beta
+  syncfusion_localizations: ^18.4.32
   flutter_datetime_picker: ^1.5.0
   intl: ^0.16.1
   toggle_switch: ^0.1.8
@@ -115,6 +116,9 @@ flutter:
     - family: Kantumruy-Regular
       fonts:
         - asset: assets/fonts/Kantumruy-Regular.ttf
+    - family: Limon-F7
+      fonts:
+        - asset: assets/fonts/lmns7.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

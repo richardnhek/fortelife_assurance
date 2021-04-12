@@ -297,22 +297,17 @@ class PDFWidgetEdu {
                   Padding(
                     padding: EdgeInsets.only(top: 20),
                     child: Flexible(
-                        child: isKhmer == false
-                            ? Text(
-                                "Forte Life Assurance (Cambodia) Plc." +
-                                    "\n" +
-                                    "Vattanac Capital, Level 18 No.66 Monivong Blvd, Sangkat Wat Phnom," +
-                                    "\n" +
-                                    "Khan Daun Penh, Phnom Penh, Cambodia." +
-                                    "\n" +
-                                    "Tel: (+855) 23 885 077/ 066 Fax: (+855) 23 986 922" +
-                                    "\n" +
-                                    "Email: info@fortelifeassurance.com",
-                                style: TextStyle(fontSize: 6.5, font: regularF))
-                            : Text(
-                                "៖ តារាងសម្គាល់បង្ហាញពីផលិតផលនេះនឹងត្រូវអស់សុពលភាពរយៈពេល៣០ថ្ងៃក្រោយកាលប",
-                                style: TextStyle(fontSize: 7, font: khmerF3),
-                              )),
+                        child: Text(
+                            "Forte Life Assurance (Cambodia) Plc." +
+                                "\n" +
+                                "Vattanac Capital, Level 18 No.66 Monivong Blvd, Sangkat Wat Phnom," +
+                                "\n" +
+                                "Khan Daun Penh, Phnom Penh, Cambodia." +
+                                "\n" +
+                                "Tel: (+855) 23 885 077/ 066 Fax: (+855) 23 986 922" +
+                                "\n" +
+                                "Email: info@fortelifeassurance.com",
+                            style: TextStyle(fontSize: 6.5, font: regularF))),
                   ),
                 ]),
                 SizedBox(height: 20),

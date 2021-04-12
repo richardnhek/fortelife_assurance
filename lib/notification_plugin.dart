@@ -66,8 +66,10 @@ class NotificationPlugin {
       "CHANNEL_NAME",
       "CHANNEL_DESCRIPTION",
       importance: Importance.max,
-      priority: Priority.max,
+      priority: Priority.high,
       timeoutAfter: 6000,
+      styleInformation: DefaultStyleInformation(true, true),
+      playSound: true,
     );
     var iosChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(

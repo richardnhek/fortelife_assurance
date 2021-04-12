@@ -124,7 +124,7 @@ class AppProvider extends ChangeNotifier {
       print("language found: $appLanguage");
     } catch (e) {
       print("undefined language, set to english");
-      _language = LANGUAGE_KHMER;
+      _language = LANGUAGE_ENGLISH;
     }
     // _language = LANGUAGE_ENGLISH;
     notifyListeners();

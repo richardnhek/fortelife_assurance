@@ -114,7 +114,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   final sumAssured = TextEditingController();
   final premium = TextEditingController();
   final gender = TextEditingController();
-  final lOccupation = TextEditingController(text: "Child");
   final policyYear = TextEditingController();
   final riderAdded = TextEditingController();
   //
@@ -138,43 +137,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
 
   List<Widget> customDialogChildren = List();
 
-  List<DropdownMenuItem> genderTypes = [
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Male",
-        ),
-        value: "Male"),
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Female",
-        ),
-        value: "Female")
-  ];
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  List<DropdownMenuItem> paymentMode = [
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Yearly",
-        ),
-        value: "Yearly"),
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Half-yearly",
-        ),
-        value: "Half-yearly"),
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Quarterly",
-        ),
-        value: "Quarterly"),
-    DropdownMenuItem(
-        child: DropDownText(
-          title: "Monthly",
-        ),
-        value: "Monthly")
-  ];
 
   DateTime _selectedDate;
   DateTime _currentDate = DateTime.now();
@@ -187,37 +151,40 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     Map<String, dynamic> lang = appProvider.lang;
     final mq = MediaQuery.of(context);
-    List<DropdownMenuItem> languageSI = [
+    final lOccupation = TextEditingController(text: lang['child']);
+    List<DropdownMenuItem> paymentMode = [
       DropdownMenuItem(
-          child: Image(
-            image: AssetImage("assets/icons/english.png"),
-            width: DeviceUtils.getResponsive(
-                mq: mq,
-                appProvider: appProvider,
-                onPhone: 45.0,
-                onTablet: 90.0),
-            height: DeviceUtils.getResponsive(
-                mq: mq,
-                appProvider: appProvider,
-                onPhone: 30.0,
-                onTablet: 60.0),
+          child: DropDownText(
+            title: lang['yearly'],
           ),
-          value: false),
+          value: "Yearly"),
       DropdownMenuItem(
-          child: Image(
-            image: AssetImage("assets/icons/khmer.png"),
-            width: DeviceUtils.getResponsive(
-                mq: mq,
-                appProvider: appProvider,
-                onPhone: 45.0,
-                onTablet: 90.0),
-            height: DeviceUtils.getResponsive(
-                mq: mq,
-                appProvider: appProvider,
-                onPhone: 30.0,
-                onTablet: 60.0),
+          child: DropDownText(
+            title: lang['half_yearly'],
           ),
-          value: true)
+          value: "Half-yearly"),
+      DropdownMenuItem(
+          child: DropDownText(
+            title: lang['quarterly'],
+          ),
+          value: "Quarterly"),
+      DropdownMenuItem(
+          child: DropDownText(
+            title: lang['monthly'],
+          ),
+          value: "Monthly")
+    ];
+    List<DropdownMenuItem> genderTypes = [
+      DropdownMenuItem(
+          child: DropDownText(
+            title: lang['male'],
+          ),
+          value: "Male"),
+      DropdownMenuItem(
+          child: DropDownText(
+            title: lang['female'],
+          ),
+          value: "Female")
     ];
     showAlertDialog(BuildContext context) {
       showDialog(
@@ -916,42 +883,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                         appProvider: appProvider,
                         onPhone: 5.0,
                         onTablet: 10.0)),
-                Padding(
-                  padding: EdgeInsets.all(5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                          flex: 3,
-                          child: Text(lang['language'],
-                              style: TextStyle(
-                                  fontFamily: "Kano",
-                                  fontSize: DeviceUtils.getResponsive(
-                                      mq: mq,
-                                      appProvider: appProvider,
-                                      onPhone: 15.0,
-                                      onTablet: 30.0),
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black.withOpacity(0.5)))),
-                      Expanded(
-                        flex: 1,
-                        child: CustomDropDown(
-                          appProvider: appProvider,
-                          title: "Language",
-                          errorVisible: false,
-                          isRequired: false,
-                          value: isKhmer,
-                          items: languageSI,
-                          onChange: (value) async {
-                            setState(() {
-                              isKhmer = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

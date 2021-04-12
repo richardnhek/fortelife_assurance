@@ -66,6 +66,8 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_KHMER: "ថ្ងៃខែ​ឆ្នាំ​កំណើត"
   },
   "gender": {LANGUAGE_ENGLISH: "Gender", LANGUAGE_KHMER: "ភេទ"},
+  "male": {LANGUAGE_ENGLISH: "Male", LANGUAGE_KHMER: "បុរស"},
+  "female": {LANGUAGE_ENGLISH: "Female", LANGUAGE_KHMER: "ស្រី"},
   "occupation": {LANGUAGE_ENGLISH: "Occupation", LANGUAGE_KHMER: "មុខរបរ"},
   "yearly": {LANGUAGE_ENGLISH: "Yearly", LANGUAGE_KHMER: "ប្រចាំឆ្នាំ"},
   "half_yearly": {
@@ -124,6 +126,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Policy Year",
     LANGUAGE_KHMER: "កាលកំណត់ធានារ៉ាប់រង"
   },
+  "child": {LANGUAGE_ENGLISH: "Child", LANGUAGE_KHMER: "កូន"},
   //
 
   //Profile Screen
@@ -165,7 +168,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   "line_2": {
     LANGUAGE_ENGLISH: "Entry Age From:  1 Years Old \nTo:  59 Years Old",
     LANGUAGE_KHMER:
-        "អាយុចាប់ផ្តើមធានាចាប់ពី:        1ឆ្នាំ \nទៅ: 59ឆ្នាំ (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ) "
+        "អាយុចាប់ផ្តើមធានាចាប់ពី: 1ឆ្នាំ \nទៅ: 59ឆ្នាំ (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)"
   },
   "line_3": {
     LANGUAGE_ENGLISH: "Maximum Maturity Age:\n69 Years Old",
@@ -239,5 +242,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_KHMER:
         "លើកលែងការបង់បុព្វលាភធានារ៉ាប់រងប្រសិនអ្នកបង់បុព្វលាភធានារ៉ាប់រងទទួលមរណភាពឬពិការភាពបណ្តាលមកពីគ្រប់មូលហេតុ"
   },
+  "country_one": {LANGUAGE_ENGLISH: "Country", LANGUAGE_KHMER: "ប្រទេស"},
+  "country_two": {LANGUAGE_ENGLISH: "Country Two", LANGUAGE_KHMER: "ប្រទេស"},
   //
 };

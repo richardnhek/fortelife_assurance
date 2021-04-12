@@ -324,9 +324,9 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
         moveHorizontallyByChildHeight: -0.25,
         child: SizedBox(
           height: DeviceUtils.getResponsive(
-              mq: mq, appProvider: appProvider, onPhone: 40.0, onTablet: 80.0),
+              mq: mq, appProvider: appProvider, onPhone: 50.0, onTablet: 100.0),
           width: DeviceUtils.getResponsive(
-              mq: mq, appProvider: appProvider, onPhone: 40.0, onTablet: 80.0),
+              mq: mq, appProvider: appProvider, onPhone: 50.0, onTablet: 100.0),
           child: FloatingActionButton(
             child: Icon(
               Icons.save_alt_outlined,
