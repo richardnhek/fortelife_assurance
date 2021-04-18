@@ -84,6 +84,10 @@ flutter:
     - assets/icons/wrong.png
     - assets/icons/english.png
     - assets/icons/khmer.png
+    - assets/pictures/si/money.png
+    - assets/pictures/si/piggybank.png
+    - assets/pictures/si/stats.png
+    - assets/pictures/si/umbrella.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

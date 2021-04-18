@@ -667,16 +667,11 @@ class ProfileScreenUI extends StatelessWidget {
               width: mq.size.width,
             ),
           ),
-          Align(
+          Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: DeviceUtils.getResponsive(
-                      mq: mq,
-                      appProvider: appProvider,
-                      onPhone: 80.0,
-                      onTablet: 160.0),
                   width: mq.size.width,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

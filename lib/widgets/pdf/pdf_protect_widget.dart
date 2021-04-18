@@ -36,7 +36,7 @@ class PDFWidget {
         File('$rootPath/LiberationSans-Bold.ttf').readAsBytesSync();
     final Uint8List khmerFont = File("$rootPath/lmns7.ttf").readAsBytesSync();
     final Uint8List khmerBoldFont =
-        File("$rootPath/LMNS4_0.ttf").readAsBytesSync();
+        File("$rootPath/LMNS4_0.TTF").readAsBytesSync();
 
     final regularData = regularFont.buffer.asByteData();
     final boldData = boldFont.buffer.asByteData();

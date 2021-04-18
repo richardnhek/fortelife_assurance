@@ -66,7 +66,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_KHMER: "ថ្ងៃខែ​ឆ្នាំ​កំណើត"
   },
   "gender": {LANGUAGE_ENGLISH: "Gender", LANGUAGE_KHMER: "ភេទ"},
-  "male": {LANGUAGE_ENGLISH: "Male", LANGUAGE_KHMER: "បុរស"},
+  "male": {LANGUAGE_ENGLISH: "Male", LANGUAGE_KHMER: "ប្រុស"},
   "female": {LANGUAGE_ENGLISH: "Female", LANGUAGE_KHMER: "ស្រី"},
   "occupation": {LANGUAGE_ENGLISH: "Occupation", LANGUAGE_KHMER: "មុខរបរ"},
   "yearly": {LANGUAGE_ENGLISH: "Yearly", LANGUAGE_KHMER: "ប្រចាំឆ្នាំ"},

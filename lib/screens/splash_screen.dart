@@ -140,13 +140,46 @@ class _SplashScreenState extends State<SplashScreen>
     appProvider.rootPath = prefs.getString("ROOT_PATH");
   }
 
-  Future<void> getImageFileFromAssets(String path) async {
+  Future<void> getImageFileFromAssets() async {
+    final path = "assets/pictures/android/logo/logo.png";
+    final path1 = "assets/pictures/si/money.png";
+    final path2 = "assets/pictures/si/piggybank.png";
+    final path3 = "assets/pictures/si/stats.png";
+    final path4 = "assets/pictures/si/umbrella.png";
     final byteData = await rootBundle.load(path);
+    final byteData1 = await rootBundle.load(path1);
+    final byteData2 = await rootBundle.load(path2);
+    final byteData3 = await rootBundle.load(path3);
+    final byteData4 = await rootBundle.load(path4);
+
     final prefs = await SharedPreferences.getInstance();
     final rootPath = prefs.getString("ROOT_PATH");
     final file = new File("$rootPath/logo.png");
-    await file.writeAsBytes(byteData.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    final file1 = new File("$rootPath/money.png");
+    final file2 = new File("$rootPath/piggybank.png");
+    final file3 = new File("$rootPath/stats.png");
+    final file4 = new File("$rootPath/umbrella.png");
+
+    if (await file.exists() != true) {
+      await file.writeAsBytes(byteData.buffer
+          .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    }
+    if (await file1.exists() != true) {
+      await file1.writeAsBytes(byteData1.buffer
+          .asUint8List(byteData1.offsetInBytes, byteData1.lengthInBytes));
+    }
+    if (await file2.exists() != true) {
+      await file2.writeAsBytes(byteData2.buffer
+          .asUint8List(byteData2.offsetInBytes, byteData2.lengthInBytes));
+    }
+    if (await file3.exists() != true) {
+      await file3.writeAsBytes(byteData3.buffer
+          .asUint8List(byteData3.offsetInBytes, byteData3.lengthInBytes));
+    }
+    if (await file4.exists() != true) {
+      await file4.writeAsBytes(byteData4.buffer
+          .asUint8List(byteData4.offsetInBytes, byteData4.lengthInBytes));
+    }
   }
 
   Future<void> getFontFileFromAssets() async {
@@ -187,7 +220,7 @@ class _SplashScreenState extends State<SplashScreen>
     // await isFirstTime();
     await appProvider.getDeviceType(MediaQuery.of(context).size.shortestSide);
     await setExternalDirectory();
-    await getImageFileFromAssets("assets/pictures/android/logo/logo.png");
+    await getImageFileFromAssets();
     await getFontFileFromAssets();
     await appProvider.getLanguage();
     await notificationPlugin.init();
