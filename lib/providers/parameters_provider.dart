@@ -166,13 +166,4 @@ class ParametersProvider extends ChangeNotifier {
   }
   //
 
-  //Whether The SI is going to be generated in English or Khmer
-  bool _isKhmerSI = false;
-  bool get isKhmerSI => _isKhmerSI;
-
-  set isKhmerSI(bool i) {
-    _isKhmerSI = i;
-    notifyListeners();
-  }
-//
 }

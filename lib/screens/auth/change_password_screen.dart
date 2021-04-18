@@ -89,7 +89,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               Provider.of<AuthProvider>(context, listen: false);
           final prefs = await SharedPreferences.getInstance();
           final agentID = prefs.getString(AGENT_ID);
-          print(agentID);
           await authProvider.changePassword(_newPasswordController.text);
           await Future.delayed(new Duration(milliseconds: 500));
 

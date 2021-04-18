@@ -2,6 +2,7 @@ import 'package:excel/excel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:forte_life/constants/constants.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/providers/parameters_provider.dart';
 import 'package:forte_life/utils/device_utils.dart';
@@ -38,58 +39,65 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   }
 
   Future<void> initializeCalculator() async {
-    await getValues();
-    premium.addListener(getAmountValues);
-    sumAssured.addListener(getAmountValues);
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey("valueP") && !prefs.containsKey("valueLP")) {
+      await getAmountValues();
+      await getValues();
+    }
+    pFirstName.addListener(getAmountValues);
+    pLastName.addListener(getAmountValues);
+    pAge.addListener(getAmountValues);
+    pOccupation.addListener(getAmountValues);
+
     firstName.addListener(getAmountValues);
     lastName.addListener(getAmountValues);
     lOccupation.addListener(getAmountValues);
-    pFirstName.addListener(getAmountValues);
-    pLastName.addListener(getAmountValues);
-    pOccupation.addListener(getAmountValues);
+    age.addListener(getAmountValues);
+    premium.addListener(getAmountValues);
+    sumAssured.addListener(getAmountValues);
     riderAdded.addListener(getAmountValues);
-    await checkNullValues();
-  }
-
-  Future<void> checkNullValues() async {
-    if (sumAssuredNum == null || sumAssured.text == null) {
-      sumAssured.clear();
-    }
-    if (premiumNum == null || premium.text == null) {
-      premium.clear();
-    }
-    if (riderAdded.text == null) {
-      riderAdded.clear();
+    if (prefs.containsKey("valueP") && prefs.containsKey("valueLP")) {
+      await getValues();
     }
   }
 
   Future<void> getValues() async {
     final prefs = await SharedPreferences.getInstance();
-
-    print(sumAssuredNum);
-    String fName = prefs.getString("fName");
-    String lName = prefs.getString("lName");
-    String lOcc = prefs.getString("lOcc");
-    String premVal = prefs.getString("premVal");
-    String sumVal = prefs.getString("sumVal");
-    String riderVal = prefs.getString("riderVal");
-    String pName = prefs.getString("pName");
-    String pLName = prefs.getString("pLName");
-    String pOcc = prefs.getString("pOcc");
+    List<String> valueLP = prefs.getStringList("valueLP");
+    List<String> valueP = prefs.getStringList("valueP");
+    //
+    String fName = valueLP[0];
+    String lName = valueLP[1];
+    String ageProtect = valueLP[2];
+    String lOcc = valueLP[3];
+    String premVal = valueLP[4];
+    String sumVal = valueLP[5];
+    String riderVal = valueLP[6];
+    String pName = valueP[0];
+    String pLName = valueP[1];
+    String pAgeProtect = valueP[2];
+    String pOcc = valueP[3];
+    //
     String dobProtect = prefs.getString("lpDobProtect");
     String pDobProtect = prefs.getString("pDobProtect");
-    String pAgeProtect = prefs.getString("pAgeProtect");
     String dobProtectDate = prefs.getString("lpDobProtectDate");
-    String ageProtect = prefs.getString("ageProtect");
     String lpGenderProtect = prefs.getString("lpGenderProtect");
     String pGenderProtect = prefs.getString("pGenderProtect");
     String selectedModeProtect = prefs.getString("selectedModeProtect");
     int selYear = prefs.getInt("selYearInt");
+    //
+    //Rider Limit
+    riderLimit = prefs.getInt(RIDER_AMOUNT);
+    //
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
     lOccupation.text = lOcc == null ? '' : lOcc;
-    lSelectedGender = lpGenderProtect == null ? null : lpGenderProtect;
-    pSelectedGender = pGenderProtect == null ? null : pGenderProtect;
+    setState(() {
+      lSelectedGender = lpGenderProtect == null ? null : lpGenderProtect;
+    });
+    setState(() {
+      pSelectedGender = pGenderProtect == null ? null : pGenderProtect;
+    });
     dob.text = dobProtect == null ? '' : dobProtect;
     pDob.text = pDobProtect == null ? '' : pDobProtect;
     pAge.text = pAgeProtect == null ? '' : pAgeProtect;
@@ -106,17 +114,14 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
           ? selectedModeProtect
           : "Yearly";
     });
-    premium.text = premVal != null ? double.tryParse(premVal).toString() : null;
-    premiumNum = (premVal == null) ? null : double.tryParse(premVal);
-    sumAssured.text =
-        sumVal != null ? double.tryParse(sumVal).toString() : null;
-    sumAssuredNum =
-        (sumAssured.text == null) ? null : double.tryParse(sumAssured.text);
+    premium.text = premVal == null ? '' : premVal;
+    premiumNum = (premVal == null) ? '' : double.tryParse(premVal);
+    sumAssured.text = sumVal != null ? double.tryParse(sumVal).toString() : '';
+    sumAssuredNum = (sumVal == null) ? '' : double.tryParse(sumVal);
     if (sumAssuredNum == null) {
       sumAssured.clear();
     }
-    riderAdded.text =
-        riderVal != null ? double.tryParse(riderVal).toString() : null;
+    riderAdded.text = riderVal == null ? '' : riderVal;
     pFirstName.text = pName == null ? '' : pName;
     pLastName.text = pLName == null ? '' : pLName;
     pOccupation.text = pOcc == null ? '' : pOcc;
@@ -124,24 +129,20 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   Future<void> getAmountValues() async {
     final prefs = await SharedPreferences.getInstance();
-    if (premiumNum != null)
-      prefs.setString("premVal", premiumNum.toString());
-    else
-      prefs.setString("premVal", '');
-    if (sumAssuredNum != null)
-      prefs.setString("sumVal", sumAssuredNum.toString());
-    else
-      prefs.setString("sumVal", '');
+    prefs.setStringList("valueLP", [
+      firstName.text,
+      lastName.text,
+      age.text,
+      lOccupation.text,
+      premium.text,
+      sumAssured.text,
+      riderAdded.text
+    ]);
+    prefs.setStringList("valueP",
+        [pFirstName.text, pLastName.text, pAge.text, pOccupation.text]);
     prefs.setInt("selYearInt", selectedYear);
-    prefs.setString("riderVal", riderAdded.text);
-    prefs.setString("pGenderProtect", pSelectedGender);
     prefs.setString("lpGenderProtect", lSelectedGender);
-    prefs.setString("fName", firstName.text);
-    prefs.setString("lName", lastName.text);
-    prefs.setString("lOcc", lOccupation.text);
-    prefs.setString("pName", pFirstName.text);
-    prefs.setString("pLName", pLastName.text);
-    prefs.setString("pOcc", pOccupation.text);
+    prefs.setString("pGenderProtect", pSelectedGender);
   }
 
   FocusNode premiumFocusNode;
@@ -193,6 +194,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   double premiumNum;
   double sumAssuredNum;
   double premiumRider;
+  int riderLimit;
   DateTime lpBirthDate;
   bool isOnPolicy = false;
   bool isKhmer = false;
@@ -496,7 +498,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         appProvider.activeTabIndex = 1;
         appProvider.pdfScreenIndex = 0;
         appProvider.calculationPage = 0;
-        parametersProvider.isKhmerSI = isKhmer;
       });
       Navigator.pushNamedAndRemoveUntil(context, '/main_flow', (_) => false);
     }
@@ -682,6 +683,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                           prefs.setString(
                                               "pGenderProtect", value);
                                         });
+                                        if (!prefs.containsKey("valueP") &&
+                                            !prefs.containsKey("valueLP")) {
+                                          await getAmountValues();
+                                          await getValues();
+                                        }
                                       },
                                     )),
                                     SizedBox(
@@ -851,6 +857,8 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                 setState(() {
                                   lSelectedGender = value;
                                   prefs.setString("lpGenderProtect", value);
+                                  getAmountValues();
+                                  getValues();
                                 });
                               },
                             )),
@@ -928,9 +936,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                 isRequired: true,
                                 items: policyYears,
                                 errorVisible: false,
-                                onChange: (value) {
+                                onChange: (value) async {
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
                                   setState(() {
                                     selectedYear = value;
+                                    prefs.setInt("selYearInt", value);
                                     if ((premium.text.isNotEmpty ||
                                             sumAssured.text.isNotEmpty) &&
                                         selectedMode.isNotEmpty) {
@@ -981,7 +992,8 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               if (text == "") {
                                 sumAssured.text = "";
                               } else
-                                premiumNum = double.parse(text);
+                                premiumNum =
+                                    text != null ? double.parse(text) : 0;
                               sumAssuredNum = premiumNum * selectedYear;
                               sumAssured.text =
                                   sumAssuredNum.toStringAsFixed(2);
@@ -1107,7 +1119,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               counter = 0;
                               customDialogChildren.clear();
                               widget._formKey.currentState.save();
-                              await saveTextValues();
                               if (appProvider.differentPerson == true) {
                                 if (appProvider.addRider) {
                                   sumAssuredValidation(
@@ -1203,10 +1214,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             pLastName.clear();
                             pAge.clear();
                             pDob.clear();
-                            prefs.remove("pDobProtect");
-                            prefs.remove("pAgeProtect");
                             pGender.clear();
                             pOccupation.clear();
+                            prefs.remove("valueP");
                             //
 
                             //Life Proposed
@@ -1214,24 +1224,30 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             lastName.clear();
                             age.clear();
                             dob.clear();
-                            if (age.text.isNotEmpty) {
-                              prefs.remove("ageProtect");
-                            }
-                            if (dob.text.isNotEmpty) {
-                              prefs.remove("lpDobProtect");
-                            }
                             sumAssured.clear();
-                            sumAssuredNum = 0;
+                            sumAssuredNum = null;
                             premium.clear();
-                            premiumNum = 0;
+                            premiumNum = null;
                             gender.clear();
                             lOccupation.clear();
-
                             riderAdded.clear();
-
-                            lSelectedGender = "Male";
-                            pSelectedGender = "Male";
                             selectedYear = 10;
+                            prefs.remove("valueLP");
+                            //
+
+                            //
+                            setState(() {
+                              lSelectedGender = null;
+                              pSelectedGender = null;
+                              selectedMode = "Yearly";
+                            });
+                            prefs.remove("lpDobProtect");
+                            prefs.remove("pDobProtect");
+                            prefs.remove("lpDobProtectDate");
+                            prefs.remove("lpGenderProtect");
+                            prefs.remove("pGenderProtect");
+                            prefs.remove("selectedModeProtect");
+                            //
                           },
                         ))
                   ],
@@ -1248,24 +1264,22 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   _selectDate(BuildContext context, TextEditingController tec,
       TextEditingController tecAge, bool isLpAge) async {
     final prefs = await SharedPreferences.getInstance();
-    String premVal = prefs.getString("premVal");
-    String sumVal = prefs.getString("sumVal");
     if (premiumNum != null) {
-      prefs.setString("premVal", premiumNum.toString());
-      premVal = prefs.getString("premVal");
+      getAmountValues();
     }
     if (sumAssuredNum != null) {
-      prefs.setString("sumVal", sumAssuredNum.toString());
-      sumVal = prefs.getString("sumVal");
+      getAmountValues();
     }
     DateTime newSelectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
         firstDate: DateTime(1940),
         lastDate: DateTime.now(),
+        initialDatePickerMode: DatePickerMode.year,
         builder: (BuildContext context, Widget child) {
           return Theme(
-            data: ThemeData.dark().copyWith(
+            data: ThemeData.light().copyWith(
+              primaryColor: Color(0xFF8AB84B),
               colorScheme: ColorScheme.light(
                 primary: Color(0xFF8AB84B),
                 onPrimary: Colors.white,
@@ -1288,44 +1302,16 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       if (isLpAge) {
         prefs.setString("lpDobProtectDate", dateTime);
         prefs.setString("lpDobProtect", dob.text);
-        prefs.setString("ageProtect", age.text);
+        getAmountValues();
       } else {
         prefs.setString("pDobProtectDate", dateTime);
         prefs.setString("pDobProtect", pDob.text);
-        prefs.setString("pAgeProtect", pAge.text);
+        getAmountValues();
       }
-    }
-
-    premium.text = (premVal.isEmpty || premVal == null)
-        ? ''
-        : double.tryParse(premVal).toString();
-    if (premVal == null) {
-      premium.clear();
-    }
-    sumAssured.text = (sumVal.isEmpty || sumVal == null)
-        ? ''
-        : double.tryParse(sumVal).toString();
-    if (sumVal == null) {
-      sumAssured.clear();
     }
   }
 
 //
-
-  //Save Text Values
-  Future<void> saveTextValues() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString("fName", firstName.text);
-    prefs.setString("lName", lastName.text);
-    prefs.setString("lOcc", lOccupation.text);
-    prefs.setString("lpDobProtect", dob.text);
-    prefs.setString("premVal", premiumNum.toString());
-    prefs.setString("sumVal", sumAssuredNum.toString());
-    prefs.setString("pName", pFirstName.text);
-    prefs.setString("pLName", pLastName.text);
-    prefs.setString("pOcc", pOccupation.text);
-  }
-  //
 
 // Calculate age from datepicker
   calculateAge(DateTime birthDate, bool isLpAge) {
@@ -1459,7 +1445,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             description: "Rider must be at least 3600 USD",
           ));
         } else if (double.parse(riderAmount) >
-            (double.parse(sumAssuredAmount) * 5)) {
+            (double.parse(sumAssuredAmount) * riderLimit)) {
           customDialogChildren.add(CustomDialogText(
             description:
                 "Rider is currently limited, please check information page",

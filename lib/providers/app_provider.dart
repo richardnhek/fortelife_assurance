@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forte_life/configs/language.dart';
 import 'package:forte_life/constants/constants.dart';
+import 'package:forte_life/models/http_exception.dart';
+import 'package:forte_life/services/rider_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -121,9 +124,7 @@ class AppProvider extends ChangeNotifier {
       if (appLanguage == null) throw Exception("undefined language");
 
       _language = appLanguage;
-      print("language found: $appLanguage");
     } catch (e) {
-      print("undefined language, set to english");
       _language = LANGUAGE_ENGLISH;
     }
     // _language = LANGUAGE_ENGLISH;
@@ -159,6 +160,16 @@ class AppProvider extends ChangeNotifier {
   }
   //
 
+  //Get Username
+  String _lastLogin = " ";
+  String get lastLogin => _lastLogin;
+
+  set lastLogin(String i) {
+    _lastLogin = i;
+    notifyListeners();
+  }
+  //
+
   //Get Root Path
   String _rootPath = " ";
   String get rootPath => _rootPath;
@@ -167,6 +178,24 @@ class AppProvider extends ChangeNotifier {
     _rootPath = i;
     notifyListeners();
   }
-//
+  //
+
+  //Get Rider Limitation
+  Future<void> getRider() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final response = await RiderService.getRider();
+      notifyListeners();
+      prefs.setInt(RIDER_AMOUNT, response['amount']);
+    } on DioError catch (error) {
+      print(error.response);
+      if (error.response == null) {
+        throw HttpException(SERVICE_UNAVAILABLE_MESSAGE);
+      } else {
+        throw HttpException(error.response.data['message']);
+      }
+    }
+  }
+  //
 
 }

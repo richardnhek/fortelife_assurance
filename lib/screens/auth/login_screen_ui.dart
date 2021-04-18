@@ -23,6 +23,7 @@ class LoginScreenUI extends StatelessWidget {
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     AppProvider appProvider = Provider.of<AppProvider>(context);
+    Map<String, dynamic> lang = appProvider.lang;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -95,7 +96,7 @@ class LoginScreenUI extends StatelessWidget {
                       appProvider: appProvider,
                       onPhone: 15.0,
                       onTablet: 20.0),
-                  hintText: "Username",
+                  hintText: lang['username'],
                   tec: usernameController,
                 ),
                 SizedBox(
@@ -132,7 +133,7 @@ class LoginScreenUI extends StatelessWidget {
                       appProvider: appProvider,
                       onPhone: 15.0,
                       onTablet: 20.0),
-                  hintText: "Password",
+                  hintText: lang['password'],
                   tec: passwordController,
                 ),
                 SizedBox(
@@ -147,8 +148,8 @@ class LoginScreenUI extends StatelessWidget {
                   height: DeviceUtils.getResponsive(
                       mq: mq,
                       appProvider: appProvider,
-                      onPhone: 40.0,
-                      onTablet: 80.0),
+                      onPhone: 50.0,
+                      onTablet: 100.0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       gradient: LinearGradient(
@@ -163,7 +164,7 @@ class LoginScreenUI extends StatelessWidget {
                     color: Color(0xFF8AB84B),
                     onPressed: () => onSignInPress(context),
                     child: Text(
-                      "Login",
+                      lang['login'],
                       style: TextStyle(
                           fontSize: DeviceUtils.getResponsive(
                               mq: mq,

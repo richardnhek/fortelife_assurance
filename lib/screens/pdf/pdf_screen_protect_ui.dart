@@ -38,7 +38,6 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
 
   onNotificationLowerVersion(ReceivedNotification receivedNotification) {}
   onNotificationClicked(String payload) {
-    print("PAYLOAD" + payload);
     OpenFile.open(payload);
   }
 
@@ -210,7 +209,6 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                   );
                 } else {
                   savePDF(newFile, widget.pdf);
-                  print("NewFilePath:" + newFilePath);
                   await notificationPlugin.setOnSelectNotification(
                       onNotificationClicked(newFilePath));
                   await notificationPlugin.showNotification();

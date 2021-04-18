@@ -94,6 +94,7 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> determineInitialRoute() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String accessToken = prefs.getString(APP_ACCESS_TOKEN) ?? '';
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
 
     if (!prefs.containsKey(OFFLINE_DATE)) {
       if (accessToken.isEmpty) {
@@ -104,6 +105,7 @@ class _SplashScreenState extends State<SplashScreen>
 
         try {
           await authProvider.getCurrentUser(token: accessToken);
+          await appProvider.getRider();
           Navigator.pushNamedAndRemoveUntil(
               context, '/main_flow', (_) => false);
         } on DioError catch (error) {
@@ -154,21 +156,27 @@ class _SplashScreenState extends State<SplashScreen>
         await rootBundle.load("assets/fonts/LiberationSans-Regular.ttf");
     final dataBold =
         await rootBundle.load("assets/fonts/LiberationSans-Bold.ttf");
-    final khmerData3 =
+    final khmerData1 =
         await rootBundle.load("assets/fonts/Kantumruy-Regular.ttf");
-    final khmerData4 = await rootBundle.load("assets/fonts/lmns7.ttf");
+    final khmerDataBold = await rootBundle.load("assets/fonts/LMNS4_0.TTF");
+    final khmerData = await rootBundle.load("assets/fonts/lmns7.ttf");
+
     final font = new File("$rootPath/LiberationSans-Regular.ttf");
     final fontBold = new File("$rootPath/LiberationSans-Bold.ttf");
-    final khmerFont3 = new File("$rootPath/Kantumruy-Regular.ttf");
-    final khmerFont4 = new File("$rootPath/lmns7.ttf");
+    final khmerFont1 = new File("$rootPath/Kantumruy-Regular.ttf");
+    final khmerFontBold = new File("$rootPath/LMNS4_0.TTF");
+    final khmerFont = new File("$rootPath/lmns7.ttf");
+
     await font.writeAsBytes(
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
     await fontBold.writeAsBytes(dataBold.buffer
         .asUint8List(dataBold.offsetInBytes, dataBold.lengthInBytes));
-    await khmerFont3.writeAsBytes(khmerData3.buffer
-        .asUint8List(khmerData3.offsetInBytes, khmerData3.lengthInBytes));
-    await khmerFont4.writeAsBytes(khmerData4.buffer
-        .asUint8List(khmerData4.offsetInBytes, khmerData4.lengthInBytes));
+    await khmerFontBold.writeAsBytes(khmerDataBold.buffer
+        .asUint8List(khmerDataBold.offsetInBytes, khmerDataBold.lengthInBytes));
+    await khmerFont.writeAsBytes(khmerData.buffer
+        .asUint8List(khmerData.offsetInBytes, khmerData.lengthInBytes));
+    await khmerFont1.writeAsBytes(khmerData1.buffer
+        .asUint8List(khmerData1.offsetInBytes, khmerData1.lengthInBytes));
   }
 
   void runAppInitialization() async {

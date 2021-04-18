@@ -17,7 +17,7 @@ class NotificationPlugin {
 
   init() async {
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    print("notification initialized");
+
     if (Platform.isIOS) {
       _requestIOSPermission();
     }

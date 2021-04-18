@@ -34,17 +34,19 @@ class PDFWidget {
         File('$rootPath/LiberationSans-Regular.ttf').readAsBytesSync();
     final Uint8List boldFont =
         File('$rootPath/LiberationSans-Bold.ttf').readAsBytesSync();
-    final Uint8List khmerFont =
-        File("$rootPath/Kantumruy-Regular.ttf").readAsBytesSync();
-    final Uint8List khmerFont1 = File("$rootPath/lmns7.ttf").readAsBytesSync();
+    final Uint8List khmerFont = File("$rootPath/lmns7.ttf").readAsBytesSync();
+    final Uint8List khmerBoldFont =
+        File("$rootPath/LMNS4_0.ttf").readAsBytesSync();
+
     final regularData = regularFont.buffer.asByteData();
     final boldData = boldFont.buffer.asByteData();
     final khmerData = khmerFont.buffer.asByteData();
-    final khmerData1 = khmerFont1.buffer.asByteData();
+    final khmerBoldData = khmerBoldFont.buffer.asByteData();
+
     final regularF = Font.ttf(regularData);
     final boldF = Font.ttf(boldData);
     final khmerF = Font.ttf(khmerData);
-    final khmerF1 = Font.ttf(khmerData1);
+    final khmerBoldF = Font.ttf(khmerBoldData);
     var myFormat = DateFormat('dd /MM /yyyy');
     var dateNow = DateTime.now();
     final currentDate = myFormat.format(dateNow);
@@ -408,13 +410,24 @@ class PDFWidget {
                                       padding: EdgeInsets.only(left: 40),
                                       child: Container(width: 100),
                                     ),
-                                    PDFSubtitle(title: "Name", font: boldF),
-                                    PDFSubtitle(title: "Age", font: boldF),
-                                    PDFSubtitle(title: "Gender", font: boldF),
+                                    PDFSubtitle(
+                                        isKhmer: false,
+                                        title: "Name",
+                                        font: boldF),
+                                    PDFSubtitle(
+                                        isKhmer: false,
+                                        title: "Age",
+                                        font: boldF),
+                                    PDFSubtitle(
+                                        isKhmer: false,
+                                        title: "Gender",
+                                        font: boldF),
                                     Padding(
                                       padding: EdgeInsets.only(right: 5),
                                       child: PDFSubtitle(
-                                          title: "Occupation", font: boldF),
+                                          isKhmer: false,
+                                          title: "Occupation",
+                                          font: boldF),
                                     )
                                   ]))
                         ]),
@@ -435,14 +448,24 @@ class PDFWidget {
                                                     font: regularF,
                                                     fontSize: 8.25)))),
                                     SizedBox(width: 23.5),
-                                    PDFSubtitle(title: lpName, font: regularF),
-                                    PDFSubtitle(title: lpAge, font: regularF),
                                     PDFSubtitle(
-                                        title: lpGender, font: regularF),
+                                        isKhmer: false,
+                                        title: lpName,
+                                        font: regularF),
+                                    PDFSubtitle(
+                                        isKhmer: false,
+                                        title: lpAge,
+                                        font: regularF),
+                                    PDFSubtitle(
+                                        isKhmer: false,
+                                        title: lpGender,
+                                        font: regularF),
                                     Padding(
                                       padding: EdgeInsets.only(right: 5),
                                       child: PDFSubtitle(
-                                          title: lpOccupation, font: regularF),
+                                          isKhmer: false,
+                                          title: lpOccupation,
+                                          font: regularF),
                                     )
                                   ]),
                             ),
@@ -461,14 +484,24 @@ class PDFWidget {
                                                       font: regularF,
                                                       fontSize: 8.25)))),
                                       SizedBox(width: 23.5),
-                                      PDFSubtitle(title: pName, font: regularF),
-                                      PDFSubtitle(title: pAge, font: regularF),
                                       PDFSubtitle(
-                                          title: pGender, font: regularF),
+                                          isKhmer: false,
+                                          title: pName,
+                                          font: regularF),
+                                      PDFSubtitle(
+                                          isKhmer: false,
+                                          title: pAge,
+                                          font: regularF),
+                                      PDFSubtitle(
+                                          isKhmer: false,
+                                          title: pGender,
+                                          font: regularF),
                                       Padding(
                                         padding: EdgeInsets.only(right: 5),
                                         child: PDFSubtitle(
-                                            title: pOccupation, font: regularF),
+                                            isKhmer: false,
+                                            title: pOccupation,
+                                            font: regularF),
                                       )
                                     ]))
                           ])
@@ -488,14 +521,23 @@ class PDFWidget {
                                     padding: EdgeInsets.only(
                                         left: 40, bottom: 2.5, top: 2.5),
                                     child: PDFSubtitle(
-                                        title: "Sum Assured", font: boldF)),
-                                PDFSubtitle(title: "Policy Term", font: boldF),
+                                        isKhmer: false,
+                                        title: "Sum Assured",
+                                        font: boldF)),
                                 PDFSubtitle(
-                                    title: "Premium Paying Term", font: boldF),
+                                    isKhmer: false,
+                                    title: "Policy Term",
+                                    font: boldF),
+                                PDFSubtitle(
+                                    isKhmer: false,
+                                    title: "Premium Paying Term",
+                                    font: boldF),
                                 Padding(
                                   padding: EdgeInsets.only(right: 5),
                                   child: PDFSubtitle(
-                                      title: "Payment Mode", font: boldF),
+                                      isKhmer: false,
+                                      title: "Payment Mode",
+                                      font: boldF),
                                 )
                               ])
                         ]),
@@ -527,17 +569,20 @@ class PDFWidget {
                                             SizedBox(
                                                 width: 105,
                                                 child: PDFSubtitle(
+                                                    isKhmer: false,
                                                     title:
                                                         "USD ${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                                                     font: regularF)),
                                             Padding(
                                               padding: EdgeInsets.only(left: 6),
                                               child: PDFSubtitle(
+                                                  isKhmer: false,
                                                   title: policyTerm,
                                                   font: regularF),
                                             ),
                                             SizedBox(width: 12.5),
                                             PDFSubtitle(
+                                                isKhmer: false,
                                                 title: policyTerm,
                                                 font: regularF)
                                           ]),
@@ -564,15 +609,18 @@ class PDFWidget {
                                                                     8.25))),
                                                     SizedBox(width: 12.5),
                                                     PDFSubtitle(
+                                                        isKhmer: false,
                                                         title:
                                                             "USD $riderSAStr",
                                                         font: regularF),
                                                     SizedBox(width: 14),
                                                     PDFSubtitle(
+                                                        isKhmer: false,
                                                         title: policyTerm,
                                                         font: regularF),
                                                     SizedBox(width: 12),
                                                     PDFSubtitle(
+                                                        isKhmer: false,
                                                         title: policyTerm,
                                                         font: regularF)
                                                   ]))
@@ -581,7 +629,9 @@ class PDFWidget {
                                 Padding(
                                     padding: EdgeInsets.only(right: 3.5),
                                     child: PDFSubtitle(
-                                        title: paymentMode, font: regularF))
+                                        isKhmer: false,
+                                        title: paymentMode,
+                                        font: regularF))
                               ])
                         ]),
                         TableRow(children: [
@@ -634,12 +684,14 @@ class PDFWidget {
                                           MainAxisAlignment.start,
                                       children: [
                                         PDFSubtitle(
+                                            isKhmer: false,
                                             title:
                                                 "USD ${getPremiumPayment(paymentMode)[2].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                                             font: regularF),
                                         Padding(
                                             padding: EdgeInsets.only(top: 2.5),
                                             child: PDFSubtitle(
+                                                isKhmer: false,
                                                 title: addRider == true
                                                     ? "USD ${getPremiumPayment(paymentMode)[4].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
                                                     : "",
@@ -663,6 +715,7 @@ class PDFWidget {
                                 Padding(
                                   padding: EdgeInsets.only(left: 50),
                                   child: PDFSubtitle(
+                                      isKhmer: false,
                                       title:
                                           "USD ${getPremiumPayment(paymentMode)[3].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                                       font: regularF),
@@ -696,23 +749,38 @@ class PDFWidget {
                                   children: [
                                     Column(children: [
                                       PDFSubtitle(
-                                          title: "Yearly", font: regularF),
-                                      PDFSubtitle(title: "USD $totalPremiumStr")
+                                          isKhmer: false,
+                                          title: "Yearly",
+                                          font: regularF),
+                                      PDFSubtitle(
+                                          isKhmer: false,
+                                          title: "USD $totalPremiumStr")
                                     ]),
                                     Column(children: [
                                       PDFSubtitle(
-                                          title: "Half-yearly", font: regularF),
-                                      PDFSubtitle(title: "USD $halfP")
+                                          isKhmer: false,
+                                          title: "Half-yearly",
+                                          font: regularF),
+                                      PDFSubtitle(
+                                          isKhmer: false, title: "USD $halfP")
                                     ]),
                                     Column(children: [
                                       PDFSubtitle(
-                                          title: "Quarterly", font: regularF),
-                                      PDFSubtitle(title: "USD $quarterlyP")
+                                          isKhmer: false,
+                                          title: "Quarterly",
+                                          font: regularF),
+                                      PDFSubtitle(
+                                          isKhmer: false,
+                                          title: "USD $quarterlyP")
                                     ]),
                                     Column(children: [
                                       PDFSubtitle(
-                                          title: "Monthly", font: regularF),
-                                      PDFSubtitle(title: "USD $monthlyP")
+                                          isKhmer: false,
+                                          title: "Monthly",
+                                          font: regularF),
+                                      PDFSubtitle(
+                                          isKhmer: false,
+                                          title: "USD $monthlyP")
                                     ])
                                   ]))
                         ])

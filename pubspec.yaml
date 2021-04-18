@@ -107,18 +107,15 @@ flutter:
     - family: LiberationSans-Bold
       fonts:
         - asset: assets/fonts/LiberationSans-Bold.ttf
-    - family: KhmerOS
-      fonts:
-        - asset: assets/fonts/KhmerOS.ttf
-    - family: NiDAChenla
-      fonts:
-        - asset: assets/fonts/NiDAChenla.ttf
     - family: Kantumruy-Regular
       fonts:
         - asset: assets/fonts/Kantumruy-Regular.ttf
     - family: Limon-F7
       fonts:
         - asset: assets/fonts/lmns7.ttf
+    - family: LMNS4_0
+      fonts:
+        - asset: assets/fonts/LMNS4_0.TTF
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

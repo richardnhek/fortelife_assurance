@@ -30,14 +30,12 @@ class _MainFlowState extends State<MainFlow> {
   }
 
   void reLoginPrompt() async {
-    print("Relogin Prompt");
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(OFFLINE_DATE)) {
       final offlineDateString = prefs.getString(OFFLINE_DATE);
       final offlineDate = DateTime.parse(offlineDateString);
       final currentDate = DateTime.now();
       final offlineDuration = currentDate.difference(offlineDate).inHours;
-      print(offlineDuration);
       if (offlineDuration >= 24) {
         prefs.setString("OFFLINE_STATUS", OFFLINE_STATUS);
         prefs.remove(APP_ACCESS_TOKEN);

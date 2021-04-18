@@ -5,6 +5,7 @@ import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/providers/auth_provider.dart';
 import 'package:forte_life/widgets/error_dialog.dart';
 import 'package:forte_life/widgets/loading_modal.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_screen_ui.dart';
@@ -42,8 +43,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _onSignInPress(scaffoldContext) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    print('account : ' + _accountController.text);
-    print('password : ' + _passwordController.text);
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     BuildContext loadingModalContext;
@@ -66,7 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
             password: _passwordController.text);
         prefs.setString(AGENT_USERNAME, agent.username);
         prefs.setString(AGENT_ID, agent.id);
-        print(agent);
+        prefs.setString(
+            LOGIN_DATE, convertDateTimeDisplay(DateTime.now().toString()));
         if (_passwordController.text == "1234") {
           Navigator.popAndPushNamed(context, "/change_pass");
         } else {
@@ -80,6 +80,14 @@ class _LoginScreenState extends State<LoginScreen> {
         _showErrorDialog(error.message);
       }
     }
+  }
+
+  String convertDateTimeDisplay(String date) {
+    final DateFormat displayFormatter = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
+    final DateFormat serverFormatter = DateFormat('dd-MM-yyyy');
+    final DateTime displayDate = displayFormatter.parse(date);
+    final String formatted = serverFormatter.format(displayDate);
+    return formatted;
   }
 
   @override

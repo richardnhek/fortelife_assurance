@@ -61,7 +61,7 @@ class _PDFScreenEduState extends State<PDFScreenEdu> {
         parametersProvider.paymentMode,
         parametersProvider.annualP,
         parametersProvider.isOnPolicy,
-        parametersProvider.isKhmerSI,
+        appProvider.language,
         appProvider.rootPath);
     return Scaffold(
       key: scaffoldKey,

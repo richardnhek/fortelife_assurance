@@ -9,7 +9,6 @@ class DeviceUtils {
     dynamic onTablet,
   }) {
     if (appProvider.isTablet) {
-      print("On Tablet");
       return onTablet;
     }
     return onPhone;

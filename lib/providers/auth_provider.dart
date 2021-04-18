@@ -35,11 +35,11 @@ class AuthProvider extends ChangeNotifier {
         throw HttpException("This Account Has Been Suspended");
       }
 
-      if (password != "12345678") {
+      if (password != "1234") {
         final token = response['token'];
         sharedPreferences = await SharedPreferences.getInstance();
         sharedPreferences.setString(APP_ACCESS_TOKEN, token);
-        print("Token Set");
+
         _accessToken = response['token'];
       }
       notifyListeners();

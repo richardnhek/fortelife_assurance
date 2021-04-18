@@ -130,6 +130,10 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   //
 
   //Profile Screen
+  "app_settings": {
+    LANGUAGE_ENGLISH: "Application Settings",
+    LANGUAGE_KHMER: "ការកំណត់កម្មវិធី"
+  },
   "change_pass": {
     LANGUAGE_ENGLISH: "Change Password",
     LANGUAGE_KHMER: "ផ្លាស់ប្តូរពាក្យសម្ងាត់"
@@ -207,9 +211,15 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   //Maturity Benefits
   "maturity_benefits_details": {
     LANGUAGE_ENGLISH:
-        "Sum Assured + 2% of Sum Assured x Term\nIf Entry Age below 50\n\nSum Assured + 1% of Sum assured x Term\nIf entry age 50 or above",
+        "Sum Assured + 2% of Sum Assured x Term\nIf Life Assured's Entry Age is Below 50\n\nSum Assured + 1% of Sum assured x Term\nIf Life Assured's Entry Age is 50 or Above",
     LANGUAGE_KHMER:
-        "ទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង + 2%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង x កាលកំណត់ធានារ៉ាប់រង \nប្រសិនអាយុចាប់ផ្តើមធានារបស់អ្នកត្រូវបានធានារ៉ាប់រងលើអាយុជីវិតក្រោម 50ឆ្នាំ(គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ) \n\nទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង + 1%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង x កាលកំណត់ធានារ៉ាប់រង \nប្រសិនអាយុចាប់ផ្តើមធានារបស់អ្នកត្រូវបានធានារ៉ាប់រងលើអាយុជីវិតចាប់ពី 50ឆ្នាំ(គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)"
+        "ទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង + 2%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង x កាលកំណត់ធានារ៉ាប់រង\nប្រសិនអាយុចាប់ផ្តើមធានារបស់អ្នកត្រូវបានធានារ៉ាប់រងលើអាយុជីវិតក្រោម 50ឆ្នាំ (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)\n\nទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង + 1%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង x កាលកំណត់ធានារ៉ាប់រង\nប្រសិនអាយុចាប់ផ្តើមធានារបស់អ្នកត្រូវបានធានារ៉ាប់រងលើអាយុជីវិតចាប់ពី 50ឆ្នាំ (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)"
+  },
+  "maturity_benefits_details_edu": {
+    LANGUAGE_ENGLISH:
+        "Sum Assured + 2% of Sum Assured x Term\nIf Payor's Entry Age is Below 50\n\nSum Assured + 1% of Sum assured x Term\nIf Payor's Entry Age is 50 or Above",
+    LANGUAGE_KHMER:
+        "ទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង + 2%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង x កាលកំណត់ធានារ៉ាប់រង\nប្រសិនអាយុចាប់ផ្តើមធានារបស់អ្នកបង់បុព្វលាភធានារ៉ាប់រងលើអាយុជីវិតក្រោម 50ឆ្នាំ (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)\n\nទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង + 1%នៃទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង x កាលកំណត់ធានារ៉ាប់រង\nប្រសិនអាយុចាប់ផ្តើមធានារបស់អ្នកបង់បុព្វលាភធានារ៉ាប់រងលើអាយុជីវិតចាប់ពី 50ឆ្នាំ (គិតត្រឹមថ្ងៃខួបកំណើតចុងក្រោយ)"
   },
   //
   //
@@ -244,5 +254,11 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   },
   "country_one": {LANGUAGE_ENGLISH: "Country", LANGUAGE_KHMER: "ប្រទេស"},
   "country_two": {LANGUAGE_ENGLISH: "Country Two", LANGUAGE_KHMER: "ប្រទេស"},
+  //
+
+  //Login Page
+  "username": {LANGUAGE_ENGLISH: "Username", LANGUAGE_KHMER: "ឈ្មោះ​គណនី"},
+  "password": {LANGUAGE_ENGLISH: "Password", LANGUAGE_KHMER: "លេខសំងាត់"},
+  "login": {LANGUAGE_ENGLISH: "Login", LANGUAGE_KHMER: "ចូលគណនី"},
   //
 };

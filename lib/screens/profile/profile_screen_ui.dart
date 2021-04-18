@@ -32,9 +32,36 @@ class ProfileScreenUI extends StatelessWidget {
       final prefs = await SharedPreferences.getInstance();
       AppProvider appProvider =
           Provider.of<AppProvider>(context, listen: false);
-      print(languageCode);
+      if (appProvider.language != languageCode) {
+        //Education
+        prefs.remove("valueEduLp");
+        prefs.remove("valueEduP");
+        prefs.remove("pDobEdu");
+        prefs.remove("pDobDateEdu");
+        prefs.remove("dobEdu");
+        prefs.remove("lpDobEduDate");
+        prefs.remove("selectedModeEdu");
+        prefs.remove("lpGenderEdu");
+        prefs.remove("pGenderEdu");
+        //
+        //Protect
+        prefs.remove("valueLp");
+        prefs.remove("valueP");
+        prefs.remove("lpDobProtect");
+        prefs.remove("pDobProtect");
+        prefs.remove("lpDobProtectDate");
+        prefs.remove("lpGenderProtect");
+        prefs.remove("pGenderProtect");
+        prefs.remove("selectedModeProtect");
+        prefs.remove("selYearInt");
+        //
+      }
+
       prefs.setString(APP_LANGUAGE, languageCode);
       appProvider.language = languageCode;
+      //Education
+
+      //
     }
 
     void _showSwitchLanguageDialog() {
@@ -641,184 +668,244 @@ class ProfileScreenUI extends StatelessWidget {
             ),
           ),
           Align(
-            child: Container(
-              key: mainContainer,
-              margin: EdgeInsets.symmetric(horizontal: 30),
-              padding: EdgeInsets.only(
-                  top: DeviceUtils.getResponsive(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: DeviceUtils.getResponsive(
                       mq: mq,
                       appProvider: appProvider,
-                      onPhone: 15.0,
-                      onTablet: 30.0)),
-              width: DeviceUtils.getResponsive(
-                  mq: mq,
-                  appProvider: appProvider,
-                  onPhone: 300.0,
-                  onTablet: 600.0),
-              height: DeviceUtils.getResponsive(
-                  mq: mq,
-                  appProvider: appProvider,
-                  onPhone: 320.0,
-                  onTablet: 640.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7.5),
-                  color: Color(0xFFFFFFFF),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.16),
-                        blurRadius: 15,
-                        spreadRadius: 1,
-                        offset: Offset(3, 6)),
-                  ]),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Username: ${appProvider.userName}",
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: DeviceUtils.getResponsive(
+                      onPhone: 80.0,
+                      onTablet: 160.0),
+                  width: mq.size.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        lang['app_settings'],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Kano",
+                          fontWeight: FontWeight.w600,
+                          fontSize: DeviceUtils.getResponsive(
+                              mq: mq,
+                              appProvider: appProvider,
+                              onPhone: 24.0,
+                              onTablet: 56.0),
+                        ),
+                      ),
+                      Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: DeviceUtils.getResponsive(
                             mq: mq,
                             appProvider: appProvider,
-                            onPhone: 15.0,
-                            onTablet: 30.0),
-                        fontFamily: "Kano"),
+                            onPhone: 46.0,
+                            onTablet: 92.0),
+                      )
+                    ],
                   ),
-                  Divider(
-                    color: Colors.grey.withOpacity(0.5),
-                  ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: _showSwitchLanguageDialog,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            lang['language'],
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: DeviceUtils.getResponsive(
-                                    mq: mq,
-                                    appProvider: appProvider,
-                                    onPhone: 18.0,
-                                    onTablet: 36.0),
-                                fontFamily: "Kano"),
-                          ),
-                          Icon(Icons.language,
-                              color: Color(0xFF92C04A),
-                              size: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 21.0,
-                                  onTablet: 42.0))
-                        ],
+                ),
+                SizedBox(height: 20),
+                Container(
+                  key: mainContainer,
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  width: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 300.0,
+                      onTablet: 600.0),
+                  height: DeviceUtils.getResponsive(
+                      mq: mq,
+                      appProvider: appProvider,
+                      onPhone: 325.0,
+                      onTablet: 650.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7.5),
+                      color: Color(0xFFFFFFFF),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.16),
+                            blurRadius: 15,
+                            spreadRadius: 1,
+                            offset: Offset(3, 6)),
+                      ]),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 45.0,
+                            onTablet: 90.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "Username: ${appProvider.userName}",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 15.0,
+                                      onTablet: 30.0),
+                                  fontFamily: "Kano"),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              "Last Login: ${appProvider.lastLogin}",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 15.0,
+                                      onTablet: 30.0),
+                                  fontFamily: "Kano"),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: _showChangePassword,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            lang['change_pass'],
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: DeviceUtils.getResponsive(
-                                    mq: mq,
-                                    appProvider: appProvider,
-                                    onPhone: 18.0,
-                                    onTablet: 36.0),
-                                fontFamily: "Kano"),
-                          ),
-                          Icon(
-                            Icons.lock_outline,
-                            color: Color(0xFF92C04A),
-                            size: DeviceUtils.getResponsive(
-                                mq: mq,
-                                appProvider: appProvider,
-                                onPhone: 21.0,
-                                onTablet: 42.0),
-                          )
-                        ],
+                      Divider(
+                        color: Colors.grey.withOpacity(0.5),
                       ),
-                    ),
-                  ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: _showContactDialog,
-                    child: Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            lang['contact_us'],
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: DeviceUtils.getResponsive(
-                                    mq: mq,
-                                    appProvider: appProvider,
-                                    onPhone: 18.0,
-                                    onTablet: 36.0),
-                                fontFamily: "Kano"),
+                      GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: _showSwitchLanguageDialog,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                lang['language'],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 18.0,
+                                        onTablet: 36.0),
+                                    fontFamily: "Kano"),
+                              ),
+                              Icon(Icons.language,
+                                  color: Color(0xFF92C04A),
+                                  size: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 21.0,
+                                      onTablet: 42.0))
+                            ],
                           ),
-                          Icon(Icons.contact_page_outlined,
-                              color: Color(0xFF92C04A),
-                              size: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 21.0,
-                                  onTablet: 42.0))
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                  RaisedButton(
-                      onPressed: _showExitDialog,
-                      padding: EdgeInsets.all(
-                          appProvider.language == "kh" ? 10 : 15),
-                      disabledColor: Color(0xFFD31145),
-                      color: Color(0xFFD31145),
-                      disabledElevation: 2.5,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            lang['log_out'],
-                            style: TextStyle(
-                                fontSize: DeviceUtils.getResponsive(
+                      GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: _showChangePassword,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                lang['change_pass'],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 18.0,
+                                        onTablet: 36.0),
+                                    fontFamily: "Kano"),
+                              ),
+                              Icon(
+                                Icons.lock_outline,
+                                color: Color(0xFF92C04A),
+                                size: DeviceUtils.getResponsive(
                                     mq: mq,
                                     appProvider: appProvider,
-                                    onPhone: 17.5,
-                                    onTablet: 35.0),
+                                    onPhone: 21.0,
+                                    onTablet: 42.0),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: _showContactDialog,
+                        child: Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(horizontal: 25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                lang['contact_us'],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 18.0,
+                                        onTablet: 36.0),
+                                    fontFamily: "Kano"),
+                              ),
+                              Icon(Icons.contact_page_outlined,
+                                  color: Color(0xFF92C04A),
+                                  size: DeviceUtils.getResponsive(
+                                      mq: mq,
+                                      appProvider: appProvider,
+                                      onPhone: 21.0,
+                                      onTablet: 42.0))
+                            ],
+                          ),
+                        ),
+                      ),
+                      RaisedButton(
+                          onPressed: _showExitDialog,
+                          padding: EdgeInsets.all(
+                              appProvider.language == "kh" ? 10 : 15),
+                          disabledColor: Color(0xFFD31145),
+                          color: Color(0xFFD31145),
+                          disabledElevation: 2.5,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                lang['log_out'],
+                                style: TextStyle(
+                                    fontSize: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 17.5,
+                                        onTablet: 35.0),
+                                    color: Colors.white,
+                                    fontFamily: "Kano",
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(width: 10),
+                              Icon(
+                                Icons.logout,
+                                size: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 21.0,
+                                    onTablet: 42.0),
                                 color: Colors.white,
-                                fontFamily: "Kano",
-                                fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(width: 10),
-                          Icon(
-                            Icons.logout,
-                            size: DeviceUtils.getResponsive(
-                                mq: mq,
-                                appProvider: appProvider,
-                                onPhone: 21.0,
-                                onTablet: 42.0),
-                            color: Colors.white,
-                          )
-                        ],
-                      ))
-                ],
-              ),
+                              )
+                            ],
+                          ))
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ]),

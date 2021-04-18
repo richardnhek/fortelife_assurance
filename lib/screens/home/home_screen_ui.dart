@@ -85,8 +85,8 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                           fontSize: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
-                              onPhone: 21.0,
-                              onTablet: 42.0),
+                              onPhone: 24.0,
+                              onTablet: 48.0),
                           fieldTitle: lang['forte_title'],
                         ),
                       ),
@@ -164,8 +164,8 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                           fontSize: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
-                              onPhone: 21.0,
-                              onTablet: 42.0),
+                              onPhone: 24.0,
+                              onTablet: 48.0),
                           fieldTitle: lang['forte_videos'],
                         ),
                       ),

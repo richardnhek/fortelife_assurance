@@ -33,31 +33,52 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   }
 
   Future<void> initializeCalculator() async {
-    await getValues();
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey("valueEduP") && !prefs.containsKey("valueEduLP")) {
+      await getAmountValues();
+      await getValues();
+    }
+    policyYear.addListener(getAmountValues);
+    pFirstName.addListener(getAmountValues);
+    pLastName.addListener(getAmountValues);
+    pAge.addListener(getAmountValues);
+    pOccupation.addListener(getAmountValues);
+
+    firstName.addListener(getAmountValues);
+    lastName.addListener(getAmountValues);
+    age.addListener(getAmountValues);
     policyYear.addListener(getAmountValues);
     premium.addListener(getAmountValues);
     sumAssured.addListener(getAmountValues);
+    if (prefs.containsKey("valueEduP") && prefs.containsKey("valueEduLP")) {
+      await getValues();
+    }
   }
 
   Future<void> getValues() async {
     final prefs = await SharedPreferences.getInstance();
-    String fName = prefs.getString("fNameEdu");
-    String lName = prefs.getString("lNameEdu");
-    String premVal = prefs.getString("premValEdu");
-    String sumVal = prefs.getString("sumValEdu");
-    String pName = prefs.getString("pNameEdu");
-    String pLName = prefs.getString("pLNameEdu");
-    String pOcc = prefs.getString("pOccEdu");
+    List<String> valueEduLP = prefs.getStringList("valueEduLP");
+    List<String> valueEduP = prefs.getStringList("valueEduP");
+    //
+    String fName = valueEduLP[0];
+    String lName = valueEduLP[1];
+    String premVal = valueEduLP[4];
+    String sumVal = valueEduLP[5];
+    String ageEdu = valueEduLP[2];
+    String selYear = valueEduLP[3];
+    String pName = valueEduP[0];
+    String pLName = valueEduP[1];
+    String pAgeEdu = valueEduP[2];
+    String pOcc = valueEduP[3];
+    //
     String pDobEdu = prefs.getString("pDobEdu");
     String pDobDateEdu = prefs.getString("pDobDateEdu");
-    String pAgeEdu = prefs.getString("pAgeEdu");
     String dobEdu = prefs.getString("dobEdu");
     String dobDateEdu = prefs.getString("lpDobEduDate");
-    String ageEdu = prefs.getString("ageEdu");
-    String selYear = prefs.getString("selYearIntEdu");
     String selectedModeEdu = prefs.get("selectedModeEdu");
     String lpGenderEdu = prefs.getString("lpGenderEdu");
     String pGenderEdu = prefs.getString("pGenderEdu");
+    //
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
     dob.text = dobEdu == null ? '' : dobEdu;
@@ -70,13 +91,14 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     lpBirthDate = dobDateEdu == null
         ? DateTime.tryParse('')
         : DateTime.tryParse(dobDateEdu);
+
     age.text = ageEdu == null ? '' : ageEdu;
     policyYear.text = (selYear == null) == false ? selYear : "";
     selectedMode =
         (selectedModeEdu == null) == false ? selectedModeEdu : "Yearly";
     premium.text = premVal == null ? '' : premVal;
     premiumNum = (premium.text == null) ? '' : double.tryParse(premium.text);
-    sumAssured.text = sumVal != null ? double.tryParse(sumVal).toString() : '';
+    sumAssured.text = sumVal == null ? '' : sumVal;
     sumAssuredNum =
         (sumAssured.text == null) ? '' : double.tryParse(sumAssured.text);
     pDob.text = pDobEdu == null ? '' : pDobEdu;
@@ -88,11 +110,16 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
 
   Future<void> getAmountValues() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString("dobEdu", dob.text);
-    prefs.setString("ageEdu", age.text);
-    prefs.setString("selYearIntEdu", policyYear.text);
-    prefs.setString("premValEdu", premium.text);
-    prefs.setString("sumValEdu", sumAssured.text);
+    prefs.setStringList("valueEduLP", [
+      firstName.text,
+      lastName.text,
+      age.text,
+      policyYear.text,
+      premium.text,
+      sumAssured.text
+    ]);
+    prefs.setStringList("valueEduP",
+        [pFirstName.text, pLastName.text, pAge.text, pOccupation.text]);
     prefs.setString("lpGenderEdu", lSelectedGender);
     prefs.setString("pGenderEdu", pSelectedGender);
   }
@@ -387,7 +414,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         appProvider.pdfScreenIndex = 1;
         appProvider.activeTabIndex = 1;
         appProvider.calculationPageEdu = 0;
-        parametersProvider.isKhmerSI = isKhmer;
       });
       Navigator.pushNamedAndRemoveUntil(context, '/main_flow', (_) => false);
     }
@@ -552,6 +578,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                       setState(() {
                                         pSelectedGender = value;
                                         prefs.setString("pGenderEdu", value);
+                                        getAmountValues();
+                                        getValues();
                                       });
                                     },
                                   )),
@@ -724,6 +752,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 setState(() {
                                   lSelectedGender = value;
                                   prefs.setString("lpGenderEdu", value);
+                                  getAmountValues();
+                                  getValues();
                                 });
                               },
                             )),
@@ -910,7 +940,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               counter = 0;
                               customDialogChildren.clear();
                               _formKey.currentState.save();
-                              await saveTextValues();
                               policyYearValidation(policyYear.text);
                               sumAssuredValidation(sumAssured.text,
                                   premium.text, policyYear.text);
@@ -950,7 +979,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               appProvider: appProvider,
                               onPhone: 50.0,
                               onTablet: 70.0),
-                          onPressed: () {
+                          onPressed: () async {
+                            final prefs = await SharedPreferences.getInstance();
                             //Proposer
                             pFirstName.clear();
                             pLastName.clear();
@@ -958,6 +988,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             pDob.clear();
                             pGender.clear();
                             pOccupation.clear();
+                            prefs.remove("valueEduLP");
                             //
 
                             //Life Proposed
@@ -968,14 +999,21 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             sumAssured.clear();
                             premium.clear();
                             gender.clear();
-                            lOccupation.clear();
                             policyYear.clear();
-
                             riderAdded.clear();
-
-                            lSelectedGender = "Male";
-                            pSelectedGender = "Male";
-                            policyYear.text = "10";
+                            setState(() {
+                              lSelectedGender = null;
+                              pSelectedGender = null;
+                              selectedMode = "Yearly";
+                            });
+                            prefs.remove("valueEduP");
+                            prefs.remove("pDobEdu");
+                            prefs.remove("pDobDateEdu");
+                            prefs.remove("dobEdu");
+                            prefs.remove("lpDobEduDate");
+                            prefs.remove("selectedModeEdu");
+                            prefs.remove("lpGenderEdu");
+                            prefs.remove("pGenderEdu");
                           },
                         ))
                   ],
@@ -999,9 +1037,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
         firstDate: DateTime(1940),
         lastDate: DateTime.now(),
+        initialDatePickerMode: DatePickerMode.year,
         builder: (BuildContext context, Widget child) {
           return Theme(
-            data: ThemeData.dark().copyWith(
+            data: ThemeData.light().copyWith(
+              primaryColor: Color(0xFF8AB84B),
               colorScheme: ColorScheme.light(
                 primary: Color(0xFF8AB84B),
                 onPrimary: Colors.white,
@@ -1028,14 +1068,14 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
             offset: dob.text.length, affinity: TextAffinity.upstream));
         tecAge.text = calculateAge(_selectedDate, isLpAge);
         if (!isLpAge) {
-          prefs.setString("pAgeEdu", tecAge.text);
+          getAmountValues();
           prefs.setString("pDobEdu", tec.text);
         }
       });
 
       if (int.tryParse(policyYear.text) > 0) {
         prefs.setString("dobEdu", dob.text);
-        prefs.setString("ageEdu", age.text);
+        getAmountValues();
         prefs.setString("selYearIntEdu", policyYear.text);
         if (sumVal.isNotEmpty || premVal.isNotEmpty) {
           if (premVal.isNotEmpty) {
@@ -1254,20 +1294,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         }
       }
     }
-  }
-  //
-
-  //Save Text Values
-  Future<void> saveTextValues() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString("fNameEdu", firstName.text);
-    prefs.setString("lNameEdu", lastName.text);
-    prefs.setString("lpDobEduDate", lpBirthDate.toString());
-    prefs.setString("premValEdu", premium.text);
-    prefs.setString("sumValEdu", sumAssured.text);
-    prefs.setString("pNameEdu", pFirstName.text);
-    prefs.setString("pLNameEdu", pLastName.text);
-    prefs.setString("pOccEdu", pOccupation.text);
   }
   //
 

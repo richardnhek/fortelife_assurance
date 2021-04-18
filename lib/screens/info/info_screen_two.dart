@@ -232,7 +232,7 @@ class _InfoScreenEduState extends State<InfoScreenEdu> {
                 ),
                 child: Center(
                   child: Text(
-                    lang['maturity_benefits_details'],
+                    lang['maturity_benefits_details_edu'],
                     style: TextStyle(
                         color: Color(0xFF4D4D4D),
                         fontSize: DeviceUtils.getResponsive(

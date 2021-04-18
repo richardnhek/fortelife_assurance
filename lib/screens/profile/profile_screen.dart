@@ -18,16 +18,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    getUsername();
+    initializeProfile();
   }
 
-  //TODO Change Language
+  Future<void> initializeProfile() async {
+    await getUsername();
+    await getLastLogin();
+  }
 
   Future<void> getUsername() async {
     final prefs = await SharedPreferences.getInstance();
     final appProvider = Provider.of<AppProvider>(context, listen: false);
     appProvider.userName = prefs.getString(AGENT_USERNAME);
-    print(appProvider.userName);
+  }
+
+  Future<void> getLastLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    appProvider.lastLogin = prefs.getString(LOGIN_DATE);
   }
 
   @override
@@ -119,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Provider.of<AuthProvider>(context, listen: false);
             final prefs = await SharedPreferences.getInstance();
             final agentID = prefs.getString(AGENT_ID);
-            print(agentID);
+
             await authProvider.changePassword(_newPasswordController.text);
             Navigator.of(context).pop();
             await Future.delayed(new Duration(milliseconds: 500));
