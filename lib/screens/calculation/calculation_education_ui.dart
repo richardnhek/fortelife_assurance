@@ -390,16 +390,18 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     //Calculate and Generate PDF
     void calculateAndPDF() {
       //Payor
-      parametersProvider.pName =
-          pFirstName.text.toString() + " " + pLastName.text.toString();
+      parametersProvider.pName = appProvider.language != 'kh'
+          ? pFirstName.text.toString() + " " + pLastName.text.toString()
+          : pLastName.text.toString() + " " + pFirstName.text.toString();
       parametersProvider.pAge = pAge.text.toString();
       parametersProvider.pGender = pSelectedGender.toString();
       parametersProvider.pOccupation = pOccupation.text.toString();
       //
 
       //Child
-      parametersProvider.lpName =
-          firstName.text.toString() + " " + lastName.text.toString();
+      parametersProvider.lpName = appProvider.language != 'kh'
+          ? firstName.text.toString() + " " + lastName.text.toString()
+          : lastName.text.toString() + " " + firstName.text.toString();
       parametersProvider.lpAge = age.text.toString();
       parametersProvider.lpGender = lSelectedGender.toString();
       parametersProvider.lpOccupation = lOccupation.text.toString();
