@@ -58,12 +58,20 @@ class PDFWidgetEdu {
     var dateNow = DateTime.now();
     final currentDate = myFormat.format(dateNow);
     RegExp regExpNum = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
-    final Map<int, TableColumnWidth> columnWidthVal = {
+    // final Map<int, TableColumnWidth> columnWidthVal = {
+    //   0: FlexColumnWidth(0.6),
+    //   1: FlexColumnWidth(1.85),
+    //   2: FlexColumnWidth(1.4),
+    //   3: FlexColumnWidth(0.825),
+    //   4: FlexColumnWidth(2.825)
+    // };
+    final Map<int, TableColumnWidth> columnWidthValKh = {
       0: FlexColumnWidth(0.6),
-      1: FlexColumnWidth(1.85),
-      2: FlexColumnWidth(1.4),
-      3: FlexColumnWidth(0.825),
-      4: FlexColumnWidth(2.825)
+      1: FlexColumnWidth(0.925),
+      2: FlexColumnWidth(0.925),
+      3: FlexColumnWidth(1.4),
+      4: FlexColumnWidth(0.825),
+      5: FlexColumnWidth(2.825)
     };
 
     //Doubles with no previous values
@@ -290,23 +298,162 @@ class PDFWidgetEdu {
       return dynamicRow;
     }
 
-    List<String> getDynamicHeaders() {
-      List<String> dynamicHeader = [
-        " End of \n Policy \n  Year",
-        "                Premium (USD)\n\n       Annualized     Accumulated",
-        "            Death/TPD (USD)\n\n                 All Causes",
-        "      Cash\n      Value",
-        "     Guaranteed           Guaranteed       Total Maturity" +
-            "\n" +
-            "  Maturity Benefit    Special Benefit         Benefit"
-      ];
+    List<List<dynamic>> getDynamicRowKh(
+        int policyYear, int age, String paymentMode) {
+      List<List<dynamic>> dynamicRow = List();
+      int i = 1;
+      double cashValPercentage = 0;
+      premiumNum = getPremiumPayment(paymentMode)[0];
+      accumulatedPremium += premiumNum;
+      accumulatedPremiumForCV += yearlyNum;
+      if (isOnPolicy == false) {
+        age += 1;
+      }
+      //All causes and accidents, List initialization
+      switch (age) {
+        case 1:
+          {
+            allCauses = basicSANum * 0.4;
+            dynamicRow = [
+              [
+                "$i",
+                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "-",
+                "  -                                -                                -"
+              ],
+            ];
+            i++;
+            allCauses = basicSANum * 0.6;
+            accumulatedPremium += premiumNum;
+            accumulatedPremiumForCV += yearlyNum;
+            dynamicRow.add([
+              "$i",
+              "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+              "${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+              "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+              "-",
+              "  -                                -                                -"
+            ]);
+            allCauses = basicSANum * 0.8;
+            break;
+          }
+        case 2:
+          {
+            allCauses = basicSANum * 0.6;
+            dynamicRow = [
+              [
+                "$i",
+                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "-",
+                "  -                                -                                -"
+              ],
+            ];
+            i++;
+            allCauses = basicSANum * 0.8;
+            accumulatedPremium += premiumNum;
+            accumulatedPremiumForCV += yearlyNum;
+            dynamicRow.add([
+              "$i",
+              "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+              "${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+              "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+              "-",
+              "  -                                -                                -"
+            ]);
+            allCauses = basicSANum;
+            break;
+          }
+        case 3:
+          {
+            allCauses = basicSANum * 0.8;
+            dynamicRow = [
+              [
+                "$i",
+                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "-",
+                "  -                                -                                -"
+              ],
+            ];
+            allCauses = basicSANum;
+            break;
+          }
 
-      return dynamicHeader;
+        default:
+          {
+            allCauses = basicSANum;
+            dynamicRow = [
+              [
+                "$i",
+                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                "-",
+                "  -                                -                                -"
+              ]
+            ];
+            break;
+          }
+      }
+      //
+      i++;
+      while (i <= policyYear) {
+        accumulatedPremium += premiumNum;
+        accumulatedPremiumForCV += yearlyNum;
+
+        if (i >= 3) {
+          if (i == 4) {
+            allCauses = basicSANum;
+          }
+          if (i <= 16) {
+            if (i <= 12)
+              cashValPercentage += 0.05;
+            else
+              cashValPercentage += 0.1;
+          }
+          cashValue = accumulatedPremiumForCV * cashValPercentage;
+          cashValueStr = cashValue
+              .toStringAsFixed(2)
+              .replaceAllMapped(regExpNum, (Match m) => '${m[1]},');
+        } else
+          cashValueStr = "-";
+        if (i < policyYear) {
+          dynamicRow.add([
+            "$i",
+            "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+            "${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+            "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+            cashValueStr,
+            "  -                                -                                -"
+          ]);
+          i++;
+        } else {
+          dynamicRow.add([
+            "$i",
+            "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+            "${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+            "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+            cashValue
+                .round()
+                .toStringAsFixed(2)
+                .replaceAllMapped(regExpNum, (Match m) => '${m[1]},'),
+            "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}           ${getGSB().toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}           ${(basicSANum + getGSB()).toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
+          ]);
+          i++;
+        }
+      }
+
+      return dynamicRow;
     }
 
     Document pdf = Document();
     pdf.addPage(MultiPage(
-        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+        margin: EdgeInsets.symmetric(horizontal: 15),
         pageFormat: PdfPageFormat.a4,
         build: (Context context) => <Widget>[
               Wrap(children: [
@@ -317,7 +464,7 @@ class PDFWidgetEdu {
                     Image(logo, width: 150, height: 80, fit: BoxFit.contain),
                     SizedBox(width: 15),
                     Padding(
-                      padding: EdgeInsets.only(top: lang != 'kh' ? 20 : 5),
+                      padding: EdgeInsets.only(top: 20),
                       child: Flexible(
                           child: lang != 'kh'
                               ? Text(
@@ -337,18 +484,18 @@ class PDFWidgetEdu {
                                   Text(
                                       "Rkúmh‘unFanar:ab;rgGayuCIvit hVtet LayhV_ GwsYruins_ exmbUDa mk",
                                       style: TextStyle(
-                                          fontSize: 12.5, font: khmerF)),
+                                          fontSize: 12, font: khmerF)),
                                   Padding(
                                       padding: EdgeInsets.only(top: 10),
                                       child: Text(
                                           "GKar vDÆn³ kaBItal; Can;TI18 GKar66 mhavifIRBHmunñIvgS sgáat;vtþPñM",
                                           style: TextStyle(
-                                              fontSize: 12.5, font: khmerF))),
+                                              fontSize: 12, font: khmerF))),
                                   Padding(
                                       padding: EdgeInsets.only(top: 20),
                                       child: Text("xNÐdUneBj raCFanIPñMeBj",
                                           style: TextStyle(
-                                              fontSize: 12.5, font: khmerF))),
+                                              fontSize: 12, font: khmerF))),
                                   Padding(
                                       padding: EdgeInsets.only(top: 30),
                                       child: Row(
@@ -357,11 +504,11 @@ class PDFWidgetEdu {
                                           children: [
                                             Text("TUrs½BÞ",
                                                 style: TextStyle(
-                                                    fontSize: 12.5,
+                                                    fontSize: 12,
                                                     font: khmerF)),
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(top: 4.1),
+                                                  EdgeInsets.only(top: 4.05),
                                               child: Text(
                                                   " : (+855) 23 885 077/ 066",
                                                   style: TextStyle(
@@ -370,11 +517,11 @@ class PDFWidgetEdu {
                                             ),
                                             Text(" TUrsar",
                                                 style: TextStyle(
-                                                    fontSize: 12.5,
+                                                    fontSize: 12,
                                                     font: khmerF)),
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(top: 4.1),
+                                                  EdgeInsets.only(top: 3.7),
                                               child: Text(
                                                   " : (+855) 23 986 922",
                                                   style: TextStyle(
@@ -390,11 +537,11 @@ class PDFWidgetEdu {
                                           children: [
                                             Text("sareGLicRtÚnic",
                                                 style: TextStyle(
-                                                    fontSize: 12.5,
+                                                    fontSize: 12,
                                                     font: khmerF)),
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(top: 3.8),
+                                                  EdgeInsets.only(top: 3.65),
                                               child: Text(
                                                   " : info@fortelifeassurance.com",
                                                   style: TextStyle(
@@ -713,7 +860,7 @@ class PDFWidgetEdu {
                                                     font: khmerBoldF),
                                                 Padding(
                                                     padding: EdgeInsets.only(
-                                                        top: 13.5),
+                                                        top: 10.5),
                                                     child: PDFSubtitle(
                                                         isKhmer: true,
                                                         title: "Fanar:ab;rg",
@@ -726,7 +873,7 @@ class PDFWidgetEdu {
                                                 font: khmerBoldF),
                                             Padding(
                                                 padding:
-                                                    EdgeInsets.only(top: 13.5),
+                                                    EdgeInsets.only(top: 10.5),
                                                 child: PDFSubtitle(
                                                     isKhmer: true,
                                                     title: "snüar:ab;rg",
@@ -739,7 +886,7 @@ class PDFWidgetEdu {
                                                 font: khmerBoldF),
                                             Padding(
                                                 padding:
-                                                    EdgeInsets.only(top: 13.5),
+                                                    EdgeInsets.only(top: 10.5),
                                                 child: PDFSubtitle(
                                                     isKhmer: true,
                                                     title: "r:ab;rg",
@@ -754,7 +901,7 @@ class PDFWidgetEdu {
                                                   font: khmerBoldF),
                                               Padding(
                                                   padding: EdgeInsets.only(
-                                                      top: 13.5),
+                                                      top: 10.5),
                                                   child: PDFSubtitle(
                                                       isKhmer: true,
                                                       title: "r:ab;rg",
@@ -789,7 +936,7 @@ class PDFWidgetEdu {
                                                                 font: regularF,
                                                                 fontSize:
                                                                     8.25)))),
-                                                SizedBox(width: 6.5),
+                                                SizedBox(width: 10),
                                                 SizedBox(
                                                     width: 100,
                                                     child: PDFSubtitle(
@@ -797,12 +944,12 @@ class PDFWidgetEdu {
                                                         title:
                                                             "USD ${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                                                         font: regularF)),
-                                                SizedBox(width: 6),
+                                                SizedBox(width: 7.5),
                                                 PDFSubtitle(
                                                     isKhmer: false,
                                                     title: policyTerm,
                                                     font: regularF),
-                                                SizedBox(width: 11),
+                                                SizedBox(width: 14.5),
                                                 PDFSubtitle(
                                                     isKhmer: false,
                                                     title: policyTerm,
@@ -839,8 +986,8 @@ class PDFWidgetEdu {
                                                         Padding(
                                                             padding:
                                                                 EdgeInsets.only(
-                                                                    top: 6.5),
-                                                            child: Text(": ",
+                                                                    top: 4.8),
+                                                            child: Text(" : ",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         8.25,
@@ -862,7 +1009,7 @@ class PDFWidgetEdu {
                                                     Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                top: 6),
+                                                                top: 5.25),
                                                         child: Text(
                                                             "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
                                                             style: TextStyle(
@@ -966,8 +1113,8 @@ class PDFWidgetEdu {
                                                     Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                top: 6.5),
-                                                        child: Text(": ",
+                                                                top: 4.8),
+                                                        child: Text(" : ",
                                                             style: TextStyle(
                                                                 fontSize: 8.25,
                                                                 font:
@@ -984,7 +1131,7 @@ class PDFWidgetEdu {
                                               children: [
                                                 Padding(
                                                     padding: EdgeInsets.only(
-                                                        top: 6, left: 70),
+                                                        top: 5.25, left: 70),
                                                     child: Text(
                                                         "${getPremiumPayment(paymentMode)[1].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
                                                         style: TextStyle(
@@ -1052,7 +1199,7 @@ class PDFWidgetEdu {
                                                     Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                top: 6),
+                                                                top: 5.25),
                                                         child: Text(
                                                             "${getPremiumPayment(paymentMode)[1].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
                                                             style: TextStyle(
@@ -1089,7 +1236,7 @@ class PDFWidgetEdu {
                                       style: TextStyle(
                                           font: khmerF, fontSize: 16)),
                                   Padding(
-                                      padding: EdgeInsets.only(top: 1.5),
+                                      padding: EdgeInsets.only(top: 1.35),
                                       child: Text(" :",
                                           style: TextStyle(
                                               fontSize: 8.25, font: regularF))),
@@ -1157,26 +1304,24 @@ class PDFWidgetEdu {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Stack(children: [
-                                            PDFSubtitle(
-                                                isKhmer: true,
-                                                title: "RbcaMqÒaM",
-                                                font: khmerF),
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 12.5),
-                                                child: Row(
+                                          Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                PDFSubtitle(
+                                                    isKhmer: true,
+                                                    title: "RbcaMqÒaM",
+                                                    font: khmerF),
+                                                Row(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
                                                     children: [
                                                       Padding(
                                                           padding:
                                                               EdgeInsets.only(
-                                                                  top: 6,
-                                                                  left: 15),
+                                                            top: 5.25,
+                                                          ),
                                                           child: Text(
                                                               "${getPremiumPayment(paymentMode)[1].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
                                                               style: TextStyle(
@@ -1188,28 +1333,25 @@ class PDFWidgetEdu {
                                                           style: TextStyle(
                                                               fontSize: 16,
                                                               font: khmerF)),
-                                                    ]))
-                                          ]),
-                                          Stack(children: [
-                                            PDFSubtitle(
-                                                isKhmer: true,
-                                                title: "RbcaMqmas",
-                                                font: khmerF),
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 12.5),
-                                                child: Row(
+                                                    ])
+                                              ]),
+                                          Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                PDFSubtitle(
+                                                    isKhmer: true,
+                                                    title: "RbcaMqmas",
+                                                    font: khmerF),
+                                                Row(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
                                                     children: [
                                                       Padding(
                                                           padding:
                                                               EdgeInsets.only(
-                                                                  top: 6,
-                                                                  left: 12.5),
+                                                                  top: 5.25),
                                                           child: Text("$halfP ",
                                                               style: TextStyle(
                                                                   fontSize:
@@ -1220,28 +1362,25 @@ class PDFWidgetEdu {
                                                           style: TextStyle(
                                                               fontSize: 16,
                                                               font: khmerF)),
-                                                    ]))
-                                          ]),
-                                          Stack(children: [
-                                            PDFSubtitle(
-                                                isKhmer: true,
-                                                title: "RbcaMRtImas",
-                                                font: khmerF),
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 12.5),
-                                                child: Row(
+                                                    ])
+                                              ]),
+                                          Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                PDFSubtitle(
+                                                    isKhmer: true,
+                                                    title: "RbcaMRtImas",
+                                                    font: khmerF),
+                                                Row(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
                                                     children: [
                                                       Padding(
                                                           padding:
                                                               EdgeInsets.only(
-                                                                  top: 6,
-                                                                  left: 12.5),
+                                                                  top: 5.25),
                                                           child: Text(
                                                               "$quarterlyP ",
                                                               style: TextStyle(
@@ -1253,28 +1392,25 @@ class PDFWidgetEdu {
                                                           style: TextStyle(
                                                               fontSize: 16,
                                                               font: khmerF)),
-                                                    ]))
-                                          ]),
-                                          Stack(children: [
-                                            PDFSubtitle(
-                                                isKhmer: true,
-                                                title: "RbcaMEx",
-                                                font: khmerF),
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 12.5),
-                                                child: Row(
+                                                    ])
+                                              ]),
+                                          Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                PDFSubtitle(
+                                                    isKhmer: true,
+                                                    title: "RbcaMEx",
+                                                    font: khmerF),
+                                                Row(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
                                                     children: [
                                                       Padding(
                                                           padding:
                                                               EdgeInsets.only(
-                                                                  top: 6,
-                                                                  left: 12.5),
+                                                                  top: 5.25),
                                                           child: Text(
                                                               "$monthlyP ",
                                                               style: TextStyle(
@@ -1286,42 +1422,355 @@ class PDFWidgetEdu {
                                                           style: TextStyle(
                                                               fontSize: 16,
                                                               font: khmerF)),
-                                                    ]))
-                                          ]),
+                                                    ])
+                                              ]),
                                         ])
                                   ])
                           ])
                         ]),
                     SizedBox(height: lang != 'kh' ? 12.5 : 8.5),
                     lang != 'kh'
-                        ? Table.fromTextArray(
-                            headers: getDynamicHeaders(),
-                            headerAlignment: Alignment.center,
-                            columnWidths: columnWidthVal,
-                            headerHeight: 20,
-                            headerPadding: const EdgeInsets.only(
-                                right: 1.5, bottom: 1.5, left: 1.5, top: 1.5),
-                            cellHeight: 0.1,
-                            cellPadding: EdgeInsets.only(
-                                top: 2, right: 2.5, left: 2.5, bottom: 1.5),
-                            headerStyle: TextStyle(font: boldF, fontSize: 8.25),
-                            cellStyle: TextStyle(font: regularF, fontSize: 7.6),
-                            cellAlignment: Alignment.topCenter,
-                            headerDecoration: BoxDecoration(
-                                border: Border(bottom: BorderSide())),
-                            border: TableBorder(
-                                verticalInside: BorderSide(),
-                                top: BorderSide(),
-                                bottom: BorderSide(),
-                                left: BorderSide(),
-                                right: BorderSide()),
-                            context: context,
-                            data: getDynamicRow(int.parse(policyTerm),
-                                int.parse(lpAge), paymentMode))
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                                Table(children: [
+                                  TableRow(
+                                      verticalAlignment:
+                                          TableCellVerticalAlignment.middle,
+                                      decoration: BoxDecoration(
+                                          border: TableBorder(
+                                              verticalInside: BorderSide(),
+                                              top: BorderSide(),
+                                              bottom: BorderSide(),
+                                              left: BorderSide(),
+                                              right: BorderSide())),
+                                      children: [
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2.5),
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  decoration: BoxDecoration(
+                                                      border: TableBorder(
+                                                          right: BorderSide())),
+                                                  width: 45.2,
+                                                  height: 95,
+                                                  child: Text(
+                                                      "End of\nPolicy\nYear",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: boldF,
+                                                          fontSize: 8.25))),
+                                              Container(
+                                                height: 95,
+                                                width: 139.36,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 2.5),
+                                                decoration: BoxDecoration(
+                                                    border: TableBorder(
+                                                        right: BorderSide())),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text("Premium (USD)",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: boldF,
+                                                              fontSize: 8.25)),
+                                                      Image(header1,
+                                                          width: 35,
+                                                          height: 45,
+                                                          fit: BoxFit.contain),
+                                                      Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 6),
+                                                              child: Text(
+                                                                  "Annualized",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            ),
+                                                            Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 10),
+                                                              child: Text(
+                                                                  "Accumulated",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            )
+                                                          ]),
+                                                    ]),
+                                              ),
+                                              Container(
+                                                height: 95,
+                                                width: 105.48,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 2.5),
+                                                decoration: BoxDecoration(
+                                                    border: TableBorder(
+                                                        right: BorderSide())),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text("Death/TPD (USD)",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: boldF,
+                                                              fontSize: 8.25)),
+                                                      Image(header2,
+                                                          width: 35,
+                                                          height: 45,
+                                                          fit: BoxFit.contain),
+                                                      Text("All Causes",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: boldF,
+                                                              fontSize: 8.25)),
+                                                    ]),
+                                              ),
+                                              Container(
+                                                height: 95,
+                                                width: 62.16,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 2.5),
+                                                decoration: BoxDecoration(
+                                                    border: TableBorder(
+                                                        right: BorderSide())),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text("Cash Value",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: boldF,
+                                                              fontSize: 8.25)),
+                                                      Image(header3,
+                                                          width: 30,
+                                                          height: 40,
+                                                          fit: BoxFit.contain),
+                                                      Text("(USD)",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: boldF,
+                                                              fontSize: 8.25)),
+                                                    ]),
+                                              ),
+                                              Container(
+                                                  height: 95,
+                                                  width: 212.82,
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2.5),
+                                                  child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Stack(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topCenter,
+                                                                  children: [
+                                                                    Text(
+                                                                        "Guaranteed",
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .center,
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                boldF,
+                                                                            fontSize:
+                                                                                8.25)),
+                                                                    Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                      child: Text(
+                                                                          "Maturity Benefit",
+                                                                          textAlign: TextAlign
+                                                                              .center,
+                                                                          style: TextStyle(
+                                                                              font: boldF,
+                                                                              fontSize: 8.25)),
+                                                                    )
+                                                                  ]),
+                                                              Text("(USD)",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            ]),
+                                                        Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Stack(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topCenter,
+                                                                  children: [
+                                                                    Text(
+                                                                        "Guaranteed",
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .center,
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                boldF,
+                                                                            fontSize:
+                                                                                8.25)),
+                                                                    Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                      child: Text(
+                                                                          "Special Benefit",
+                                                                          textAlign: TextAlign
+                                                                              .center,
+                                                                          style: TextStyle(
+                                                                              font: boldF,
+                                                                              fontSize: 8.25)),
+                                                                    )
+                                                                  ]),
+                                                              Image(header4,
+                                                                  width: 30,
+                                                                  height: 40,
+                                                                  fit: BoxFit
+                                                                      .contain),
+                                                              Text("(USD)",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            ]),
+                                                        Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Stack(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topCenter,
+                                                                  children: [
+                                                                    Text(
+                                                                        "Total Maturity",
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .center,
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                boldF,
+                                                                            fontSize:
+                                                                                8.25)),
+                                                                    Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                      child: Text(
+                                                                          "Benefit",
+                                                                          textAlign: TextAlign
+                                                                              .center,
+                                                                          style: TextStyle(
+                                                                              font: boldF,
+                                                                              fontSize: 8.25)),
+                                                                    )
+                                                                  ]),
+                                                              Text("(USD)",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            ]),
+                                                      ])),
+                                            ])
+                                      ]),
+                                ]),
+                                Table.fromTextArray(
+                                    headerAlignment: Alignment.topCenter,
+                                    columnWidths: columnWidthValKh,
+                                    headerHeight: 0.05,
+                                    headerPadding: const EdgeInsets.only(
+                                        top: 2,
+                                        right: 2.5,
+                                        left: 2.5,
+                                        bottom: 1.5),
+                                    cellHeight: 0.05,
+                                    cellPadding: EdgeInsets.only(
+                                        top: 2,
+                                        right: 2.5,
+                                        left: 2.5,
+                                        bottom: 1.5),
+                                    headerStyle: TextStyle(
+                                        font: regularF, fontSize: 7.6),
+                                    cellStyle: TextStyle(
+                                        font: regularF, fontSize: 7.6),
+                                    cellAlignment: Alignment.topCenter,
+                                    border: TableBorder(
+                                        verticalInside: BorderSide(),
+                                        top: BorderSide(),
+                                        bottom: BorderSide(),
+                                        left: BorderSide(),
+                                        right: BorderSide()),
+                                    context: context,
+                                    data: getDynamicRowKh(int.parse(policyTerm),
+                                        int.parse(lpAge), paymentMode))
+                              ])
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                                Table(columnWidths: columnWidthVal, children: [
+                                Table(children: [
                                   TableRow(
                                       verticalAlignment:
                                           TableCellVerticalAlignment.middle,
@@ -1417,13 +1866,13 @@ class PDFWidgetEdu {
                                                       Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .center,
+                                                                  .spaceAround,
                                                           children: [
                                                             Padding(
                                                                 padding: EdgeInsets
                                                                     .only(
                                                                         left:
-                                                                            5),
+                                                                            8.75),
                                                                 child: Text(
                                                                     "bg;RbcaMqñaM",
                                                                     style: TextStyle(
@@ -1431,7 +1880,6 @@ class PDFWidgetEdu {
                                                                             khmerBoldF,
                                                                         fontSize:
                                                                             16))),
-                                                            SizedBox(width: 15),
                                                             Padding(
                                                               padding: EdgeInsets
                                                                   .only(
@@ -1463,7 +1911,7 @@ class PDFWidgetEdu {
                                                               .topCenter,
                                                           children: [
                                                             Text(
-                                                                "GtßRbeyaCn_mrNPaBnigBi",
+                                                                "GtßRbeyaCn_mrNPaBnigBikarPaB",
                                                                 style: TextStyle(
                                                                     font:
                                                                         khmerBoldF,
@@ -1475,7 +1923,7 @@ class PDFWidgetEdu {
                                                                         top:
                                                                             12.5),
                                                                 child: Text(
-                                                                    "karPaBTaMgRsúgnigCaGciRnéþy_",
+                                                                    "TaMgRsúgnigCaGciéRnþy_¬duløar¦",
                                                                     style: TextStyle(
                                                                         font:
                                                                             khmerBoldF,
@@ -1486,8 +1934,7 @@ class PDFWidgetEdu {
                                                           width: 35,
                                                           height: 45,
                                                           fit: BoxFit.contain),
-                                                      Text(
-                                                          "RKb;mUlehtu¬duløar¦",
+                                                      Text("RKb;mUlehtu",
                                                           style: TextStyle(
                                                               font: khmerBoldF,
                                                               fontSize: 16)),
@@ -1543,7 +1990,7 @@ class PDFWidgetEdu {
                                                   child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
-                                                              .spaceEvenly,
+                                                              .spaceAround,
                                                       children: [
                                                         Column(
                                                             mainAxisAlignment:
@@ -1695,7 +2142,7 @@ class PDFWidgetEdu {
                                 ]),
                                 Table.fromTextArray(
                                     headerAlignment: Alignment.topCenter,
-                                    columnWidths: columnWidthVal,
+                                    columnWidths: columnWidthValKh,
                                     headerHeight: 0.05,
                                     headerPadding: const EdgeInsets.only(
                                         top: 2,
@@ -1720,7 +2167,7 @@ class PDFWidgetEdu {
                                         left: BorderSide(),
                                         right: BorderSide()),
                                     context: context,
-                                    data: getDynamicRow(int.parse(policyTerm),
+                                    data: getDynamicRowKh(int.parse(policyTerm),
                                         int.parse(lpAge), paymentMode))
                               ]),
                     lang != 'kh'
@@ -1748,113 +2195,97 @@ class PDFWidgetEdu {
                                     style: TextStyle(
                                         fontSize: 8.25, font: regularF))),
                           )
-                        : Stack(children: [
-                            Text(
-                                "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘unEdlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
-                                style: TextStyle(fontSize: 13.5, font: khmerF)),
-                            Padding(
-                              padding: EdgeInsets.only(top: 12.5),
-                              child: Text(
-                                  "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; @°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rg sRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayu",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 25),
-                              child: Text(
-                                  "enAeBlcab;epþImFanaeRkam%0qñaMKitRtwméf¶xYbkMeNItcugeRkayedayELksRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþIm",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 37.5),
-                              child: Text(
-                                  "Fanacab;BI %0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak;!°énTwkR)ak;Fanar:ab;rgKuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna.",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 50),
-                              child: Text(
-                                  "GtßRbeyaCn_BiessRtÚv)anFana nwgRtÚvTUTat;EteBldl;kalkMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 62.5),
-                              child: Text(
-                                  "¬K¦ GtßRbeyaCn_dl;kalkMNt;RtÚv)anFanaEdlmantémøesµIKñanwgTwkR)ak;RtÚv)anFanar:ab;rgsrubnwgRtÚv)anTUTat;enAcugbBa©b;énkalkMNt;énbNÑsnüar:ab;rg.",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 75),
-                              child: Text(
-                                  "¬X¦ bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic @qñaM.",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 87.5),
-                              child: Text(
-                                  "¬g¦ enAeBlkUnmanGayu !@qñaM R)ak;elIkTwkcitþsRmab;karsikSacMnYn !00duløar nwgRtÚv)anpþl;CUneTAm©as;bNÑsnüar:ab;rg. m©as;bNÑsnüar:ab;rgnwgmanCeRmIskñúg",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 100),
-                              child: Text(
-                                  "kardkR)ak; b¤epJIR)ak;TukedIm,IbgÁrR)ak;cMnYn !00duløar  bUkbBa©ÚlCamYytémøTwkR)ak;EdlmannigGtßRbeyaCn_dl;kalkMNt;EdlRtÚv)anFanaCamYynwgRkúmh‘un.",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 112.5),
-                              child: Text(
-                                  "¬c¦ kñúgkrNIEdlGñkbg;buBVlaPFanar:ab;rgTTYlmrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_buBVlaPFanar:ab;rgTaMgGs;naeBlGnaKtGnuelamtambNÑsnüar:ab;rgenH",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 125),
-                              child: Text("nwgminRtÚv)antRmÚv[bg;bnþeToteLIy.",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 137.5),
-                              child: Text(
-                                  "¬q¦ xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenA",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 150),
-                              child: Text("kñúgkic©snüar:ab;rg.",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 164.5),
-                              child: Text(
-                                  "sMKal;³ taragsmÁal;bgðajBIplitplenHnwgRtÚvGs;suBlPaBry³eBl30éf¶eRkaykalbriecäTe)aHBum<xageRkam.",
-                                  style:
-                                      TextStyle(fontSize: 13.5, font: khmerF)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 180),
-                              child: Row(children: [
-                                Text("kalbriecäTe)aHBum<        ",
-                                    style: TextStyle(
-                                        fontSize: 13.5, font: khmerF)),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 2.5),
-                                    child: Text(": $currentDate",
-                                        style: TextStyle(
-                                            fontSize: 8.25, font: boldF))),
-                              ]),
-                            ),
-                          ]),
+                        : Padding(
+                            padding: EdgeInsets.only(top: 5),
+                            child: Stack(children: [
+                              Text(
+                                  "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘unEdlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
+                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                              Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Text(
+                                    "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; @°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rg sRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFana",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 20),
+                                child: Text(
+                                    "eRkam%0qñaMKitRtwméf¶xYbkMeNItcugeRkayedayELksRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI %0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak;!°énTwkR)ak;Fanar:ab;rgKuNnwgcMnYn",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 30),
+                                child: Text(
+                                    "qñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna.GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kalkMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 40),
+                                child: Text(
+                                    "¬K¦ GtßRbeyaCn_dl;kalkMNt;RtÚv)anFanaEdlmantémøesµIKñanwgTwkR)ak;RtÚv)anFanar:ab;rgsrubnwgRtÚv)anTUTat;enAcugbBa©b;énkalkMNt;énbNÑsnüar:ab;rg.",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: Text(
+                                    "¬X¦ bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic @qñaM.",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 60),
+                                child: Text(
+                                    "¬g¦ enAeBlkUnmanGayu !@qñaM R)ak;elIkTwkcitþsRmab;karsikSacMnYn !00duløar nwgRtÚv)anpþl;CUneTAm©as;bNÑsnüar:ab;rg. m©as;bNÑsnüar:ab;rgnwgmanCeRmIskñúgkardkR)ak; b¤epJIR)ak;TukedIm,IbgÁrR)ak;cMnYn !00duløar",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 70),
+                                child: Text(
+                                    "bUkbBa©ÚlCamYytémøTwkR)ak;EdlmannigGtßRbeyaCn_dl;kalkMNt;EdlRtÚv)anFanaCamYynwgRkúmh‘un.",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 80),
+                                child: Text(
+                                    "¬c¦ kñúgkrNIEdlGñkbg;buBVlaPFanar:ab;rgTTYlmrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_buBVlaPFanar:ab;rgTaMgGs;naeBlGnaKtGnuelamtambNÑsnüar:ab;rgenHnwgminRtÚv)antRmÚv[bg;bnþeToteLIy.",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 90),
+                                child: Text(
+                                    "¬q¦ xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenAkñúgkic©snüar:ab;rg.",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 105),
+                                child: Text(
+                                    "sMKal;³ taragsmÁal;bgðajBIplitplenHnwgRtÚvGs;suBlPaBry³eBl30éf¶eRkaykalbriecäTe)aHBum<xageRkam.",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 120),
+                                child: Row(children: [
+                                  Text("kalbriecäTe)aHBum<        ",
+                                      style: TextStyle(
+                                          fontSize: 13, font: khmerF)),
+                                  Padding(
+                                      padding: EdgeInsets.only(top: 1),
+                                      child: Text(": $currentDate",
+                                          style: TextStyle(
+                                              fontSize: 6.5, font: boldF))),
+                                ]),
+                              ),
+                            ]),
+                          )
                   ]))
                 ]))),
                 // Padding(

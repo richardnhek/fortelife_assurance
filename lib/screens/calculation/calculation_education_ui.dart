@@ -849,7 +849,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           formInputType: TextInputType.numberWithOptions(
                               signed: true, decimal: true),
                           formController: premium,
-                          maxLength: 9,
+                          maxLength: 8,
                           isRequired: true,
                           errorVisible: false,
                           onChange: (text) {

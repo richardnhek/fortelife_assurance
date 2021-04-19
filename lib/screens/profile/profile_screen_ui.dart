@@ -730,42 +730,35 @@ class ProfileScreenUI extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: DeviceUtils.getResponsive(
-                            mq: mq,
-                            appProvider: appProvider,
-                            onPhone: 45.0,
-                            onTablet: 90.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              "Username: ${appProvider.userName}",
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: DeviceUtils.getResponsive(
-                                      mq: mq,
-                                      appProvider: appProvider,
-                                      onPhone: 15.0,
-                                      onTablet: 30.0),
-                                  fontFamily: "Kano"),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Last Login: ${appProvider.lastLogin}",
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: DeviceUtils.getResponsive(
-                                      mq: mq,
-                                      appProvider: appProvider,
-                                      onPhone: 15.0,
-                                      onTablet: 30.0),
-                                  fontFamily: "Kano"),
-                            ),
-                          ],
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            "Username: ${appProvider.userName}",
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 15.0,
+                                    onTablet: 30.0),
+                                fontFamily: "Kano"),
+                          ),
+                          Text(
+                            "Last Login: ${appProvider.lastLogin}",
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 15.0,
+                                    onTablet: 30.0),
+                                fontFamily: "Kano"),
+                          ),
+                        ],
                       ),
                       Divider(
+                        height: 0,
                         color: Colors.grey.withOpacity(0.5),
                       ),
                       GestureDetector(
