@@ -984,7 +984,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           formInputType: TextInputType.numberWithOptions(
                               signed: true, decimal: true),
                           formController: premium,
-                          maxLength: 9,
+                          maxLength: 8,
                           isRequired: true,
                           errorVisible: emptyPremiumField,
                           onChange: (text) {
@@ -1023,7 +1023,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               signed: true, decimal: true),
                           formController: sumAssured,
                           isRequired: true,
-                          maxLength: 10,
+                          maxLength: 9,
                           errorVisible: emptySumField,
                           onChange: (text) {
                             if (selectedYear != null) {

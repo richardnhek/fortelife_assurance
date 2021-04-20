@@ -66,6 +66,7 @@ class _PDFScreenProtectState extends State<PDFScreenProtect> {
         parametersProvider.premiumRider,
         parametersProvider.riderSA,
         parametersProvider.isOnPolicy,
+        appProvider.language,
         appProvider.rootPath);
     return Scaffold(
       key: scaffoldKey,

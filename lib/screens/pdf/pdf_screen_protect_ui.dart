@@ -37,9 +37,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
   }
 
   onNotificationLowerVersion(ReceivedNotification receivedNotification) {}
-  onNotificationClicked(String payload) {
-    OpenFile.open(payload);
-  }
+  onNotificationClicked(String payload) {}
 
   Future<Directory> _getDownloadDirectory() async {
     if (Platform.isAndroid) {

@@ -41,9 +41,7 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
   }
 
   onNotificationLowerVersion(ReceivedNotification receivedNotification) {}
-  onNotificationClicked(String payload) {
-    OpenFile.open(payload);
-  }
+  onNotificationClicked(String payload) {}
 
   @override
   Widget build(BuildContext context) {

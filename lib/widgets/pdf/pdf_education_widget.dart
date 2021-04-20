@@ -58,13 +58,7 @@ class PDFWidgetEdu {
     var dateNow = DateTime.now();
     final currentDate = myFormat.format(dateNow);
     RegExp regExpNum = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
-    // final Map<int, TableColumnWidth> columnWidthVal = {
-    //   0: FlexColumnWidth(0.6),
-    //   1: FlexColumnWidth(1.85),
-    //   2: FlexColumnWidth(1.4),
-    //   3: FlexColumnWidth(0.825),
-    //   4: FlexColumnWidth(2.825)
-    // };
+
     final Map<int, TableColumnWidth> columnWidthValKh = {
       0: FlexColumnWidth(0.6),
       1: FlexColumnWidth(0.925),
@@ -151,151 +145,6 @@ class PDFWidgetEdu {
       } else {
         return (basicSANum * double.parse(policyTerm) / 100);
       }
-    }
-
-    List<List<dynamic>> getDynamicRow(
-        int policyYear, int age, String paymentMode) {
-      List<List<dynamic>> dynamicRow = List();
-      int i = 1;
-      double cashValPercentage = 0;
-      premiumNum = getPremiumPayment(paymentMode)[0];
-      accumulatedPremium += premiumNum;
-      accumulatedPremiumForCV += yearlyNum;
-      if (isOnPolicy == false) {
-        age += 1;
-      }
-      //All causes and accidents, List initialization
-      switch (age) {
-        case 1:
-          {
-            allCauses = basicSANum * 0.4;
-            dynamicRow = [
-              [
-                "$i",
-                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                "-",
-                "          -                              -                             -         "
-              ],
-            ];
-            i++;
-            allCauses = basicSANum * 0.6;
-            accumulatedPremium += premiumNum;
-            accumulatedPremiumForCV += yearlyNum;
-            dynamicRow.add([
-              "$i",
-              "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-              "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-              "-",
-              "          -                              -                             -         "
-            ]);
-            allCauses = basicSANum * 0.8;
-            break;
-          }
-        case 2:
-          {
-            allCauses = basicSANum * 0.6;
-            dynamicRow = [
-              [
-                "$i",
-                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                "-",
-                "          -                              -                             -         "
-              ],
-            ];
-            i++;
-            allCauses = basicSANum * 0.8;
-            accumulatedPremium += premiumNum;
-            accumulatedPremiumForCV += yearlyNum;
-            dynamicRow.add([
-              "$i",
-              "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-              "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-              "-",
-              "          -                              -                             -         "
-            ]);
-            allCauses = basicSANum;
-            break;
-          }
-        case 3:
-          {
-            allCauses = basicSANum * 0.8;
-            dynamicRow = [
-              [
-                "$i",
-                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                "-",
-                "          -                              -                             -         "
-              ],
-            ];
-            allCauses = basicSANum;
-            break;
-          }
-
-        default:
-          {
-            allCauses = basicSANum;
-            dynamicRow = [
-              [
-                "$i",
-                "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                "-",
-                "          -                              -                             -         "
-              ]
-            ];
-            break;
-          }
-      }
-      //
-      i++;
-      while (i <= policyYear) {
-        accumulatedPremium += premiumNum;
-        accumulatedPremiumForCV += yearlyNum;
-
-        if (i >= 3) {
-          if (i == 4) {
-            allCauses = basicSANum;
-          }
-          if (i <= 16) {
-            if (i <= 12)
-              cashValPercentage += 0.05;
-            else
-              cashValPercentage += 0.1;
-          }
-          cashValue = accumulatedPremiumForCV * cashValPercentage;
-          cashValueStr = cashValue
-              .toStringAsFixed(2)
-              .replaceAllMapped(regExpNum, (Match m) => '${m[1]},');
-        } else
-          cashValueStr = "-";
-        if (i < policyYear) {
-          dynamicRow.add([
-            "$i",
-            "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-            "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-            cashValueStr,
-            "          -                              -                             -         "
-          ]);
-          i++;
-        } else {
-          dynamicRow.add([
-            "$i",
-            "${premiumNum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}            ${accumulatedPremium.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-            "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-            cashValue
-                .round()
-                .toStringAsFixed(2)
-                .replaceAllMapped(regExpNum, (Match m) => '${m[1]},'),
-            "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}           ${getGSB().toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}           ${(basicSANum + getGSB()).toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
-          ]);
-          i++;
-        }
-      }
-
-      return dynamicRow;
     }
 
     List<List<dynamic>> getDynamicRowKh(
@@ -442,7 +291,9 @@ class PDFWidgetEdu {
                 .round()
                 .toStringAsFixed(2)
                 .replaceAllMapped(regExpNum, (Match m) => '${m[1]},'),
-            "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}           ${getGSB().toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}           ${(basicSANum + getGSB()).toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
+            (basicSANum.toStringAsFixed(2).length >= 9)
+                ? " ${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}           ${getGSB().toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}           ${(basicSANum + getGSB()).toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} "
+                : "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}                     ${getGSB().toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}                      ${(basicSANum + getGSB()).toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
           ]);
           i++;
         }
@@ -453,6 +304,97 @@ class PDFWidgetEdu {
 
     Document pdf = Document();
     pdf.addPage(MultiPage(
+        footer: (Context context) => (lang == 'kh'
+            ? Row(children: [
+                Text("kalbriecäTe)aHBum<        ",
+                    style: TextStyle(fontSize: 13, font: khmerBoldF)),
+                Padding(
+                    padding: EdgeInsets.only(top: 1),
+                    child: Text(": $currentDate",
+                        style: TextStyle(fontSize: 6.5, font: boldF))),
+              ])
+            : Text("Print Date               : $currentDate",
+                style: TextStyle(font: boldF, fontSize: 8.25))),
+        header: (Context context) =>
+            (Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Image(logo, width: 150, height: 80, fit: BoxFit.contain),
+              SizedBox(width: 15),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Flexible(
+                    child: lang != 'kh'
+                        ? Text(
+                            "Forte Life Assurance (Cambodia) Plc." +
+                                "\n" +
+                                "Vattanac Capital, Level 18 No.66 Monivong Blvd, Sangkat Wat Phnom," +
+                                "\n" +
+                                "Khan Daun Penh, Phnom Penh, Cambodia." +
+                                "\n" +
+                                "Tel: (+855) 23 885 077/ 066 Fax: (+855) 23 986 922" +
+                                "\n" +
+                                "Email: info@fortelifeassurance.com",
+                            style: TextStyle(fontSize: 6.5, font: regularF))
+                        : Expanded(
+                            child: Stack(children: [
+                            Text(
+                                "Rkúmh‘unFanar:ab;rgGayuCIvit hVtet LayhV_ GwsYruins_ exmbUDa mk",
+                                style: TextStyle(fontSize: 12, font: khmerF)),
+                            Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Text(
+                                    "GKar vDÆn³ kaBItal; Can;TI18 GKar66 mhavifIRBHmunñIvgS sgáat;vtþPñM",
+                                    style:
+                                        TextStyle(fontSize: 12, font: khmerF))),
+                            Padding(
+                                padding: EdgeInsets.only(top: 20),
+                                child: Text("xNÐdUneBj raCFanIPñMeBj",
+                                    style:
+                                        TextStyle(fontSize: 12, font: khmerF))),
+                            Padding(
+                                padding: EdgeInsets.only(top: 30),
+                                child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text("TUrs½BÞ",
+                                          style: TextStyle(
+                                              fontSize: 12, font: khmerF)),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 4.05),
+                                        child: Text(" : (+855) 23 885 077/ 066",
+                                            style: TextStyle(
+                                                fontSize: 6.5, font: regularF)),
+                                      ),
+                                      Text(" TUrsar",
+                                          style: TextStyle(
+                                              fontSize: 12, font: khmerF)),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 3.7),
+                                        child: Text(" : (+855) 23 986 922",
+                                            style: TextStyle(
+                                                fontSize: 6.5, font: regularF)),
+                                      ),
+                                    ])),
+                            Padding(
+                                padding: EdgeInsets.only(top: 40),
+                                child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text("sareGLicRtÚnic",
+                                          style: TextStyle(
+                                              fontSize: 12, font: khmerF)),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 3.65),
+                                        child: Text(
+                                            " : info@fortelifeassurance.com",
+                                            style: TextStyle(
+                                                fontSize: 6.5, font: regularF)),
+                                      ),
+                                    ]))
+                          ]))),
+              ),
+            ])),
         margin: EdgeInsets.symmetric(horizontal: 15),
         pageFormat: PdfPageFormat.a4,
         build: (Context context) => <Widget>[
@@ -460,99 +402,6 @@ class PDFWidgetEdu {
                 Container(
                     child: Expanded(
                         child: Column(children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Image(logo, width: 150, height: 80, fit: BoxFit.contain),
-                    SizedBox(width: 15),
-                    Padding(
-                      padding: EdgeInsets.only(top: 20),
-                      child: Flexible(
-                          child: lang != 'kh'
-                              ? Text(
-                                  "Forte Life Assurance (Cambodia) Plc." +
-                                      "\n" +
-                                      "Vattanac Capital, Level 18 No.66 Monivong Blvd, Sangkat Wat Phnom," +
-                                      "\n" +
-                                      "Khan Daun Penh, Phnom Penh, Cambodia." +
-                                      "\n" +
-                                      "Tel: (+855) 23 885 077/ 066 Fax: (+855) 23 986 922" +
-                                      "\n" +
-                                      "Email: info@fortelifeassurance.com",
-                                  style:
-                                      TextStyle(fontSize: 6.5, font: regularF))
-                              : Expanded(
-                                  child: Stack(children: [
-                                  Text(
-                                      "Rkúmh‘unFanar:ab;rgGayuCIvit hVtet LayhV_ GwsYruins_ exmbUDa mk",
-                                      style: TextStyle(
-                                          fontSize: 12, font: khmerF)),
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 10),
-                                      child: Text(
-                                          "GKar vDÆn³ kaBItal; Can;TI18 GKar66 mhavifIRBHmunñIvgS sgáat;vtþPñM",
-                                          style: TextStyle(
-                                              fontSize: 12, font: khmerF))),
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 20),
-                                      child: Text("xNÐdUneBj raCFanIPñMeBj",
-                                          style: TextStyle(
-                                              fontSize: 12, font: khmerF))),
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 30),
-                                      child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text("TUrs½BÞ",
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    font: khmerF)),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 4.05),
-                                              child: Text(
-                                                  " : (+855) 23 885 077/ 066",
-                                                  style: TextStyle(
-                                                      fontSize: 6.5,
-                                                      font: regularF)),
-                                            ),
-                                            Text(" TUrsar",
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    font: khmerF)),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 3.7),
-                                              child: Text(
-                                                  " : (+855) 23 986 922",
-                                                  style: TextStyle(
-                                                      fontSize: 6.5,
-                                                      font: regularF)),
-                                            ),
-                                          ])),
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 40),
-                                      child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text("sareGLicRtÚnic",
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    font: khmerF)),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 3.65),
-                                              child: Text(
-                                                  " : info@fortelifeassurance.com",
-                                                  style: TextStyle(
-                                                      fontSize: 6.5,
-                                                      font: regularF)),
-                                            ),
-                                          ]))
-                                ]))),
-                    ),
-                  ]),
-                  SizedBox(height: lang != 'kh' ? 20 : 5),
                   lang != 'kh'
                       ? Text("SALES ILLUSTRATION",
                           style: TextStyle(
@@ -1742,16 +1591,16 @@ class PDFWidgetEdu {
                                     columnWidths: columnWidthValKh,
                                     headerHeight: 0.05,
                                     headerPadding: const EdgeInsets.only(
-                                        top: 2,
+                                        top: 1.25,
                                         right: 2.5,
                                         left: 2.5,
-                                        bottom: 1.5),
+                                        bottom: 1.25),
                                     cellHeight: 0.05,
                                     cellPadding: EdgeInsets.only(
-                                        top: 2,
+                                        top: 1.25,
                                         right: 2.5,
                                         left: 2.5,
-                                        bottom: 1.5),
+                                        bottom: 1.25),
                                     headerStyle: TextStyle(
                                         font: regularF, fontSize: 7.6),
                                     cellStyle: TextStyle(
@@ -2145,16 +1994,16 @@ class PDFWidgetEdu {
                                     columnWidths: columnWidthValKh,
                                     headerHeight: 0.05,
                                     headerPadding: const EdgeInsets.only(
-                                        top: 2,
+                                        top: 1.25,
                                         right: 2.5,
                                         left: 2.5,
-                                        bottom: 1.5),
+                                        bottom: 1.25),
                                     cellHeight: 0.05,
                                     cellPadding: EdgeInsets.only(
-                                        top: 2,
+                                        top: 1.25,
                                         right: 2.5,
                                         left: 2.5,
-                                        bottom: 1.5),
+                                        bottom: 1.25),
                                     headerStyle: TextStyle(
                                         font: regularF, fontSize: 7.6),
                                     cellStyle: TextStyle(
@@ -2271,46 +2120,10 @@ class PDFWidgetEdu {
                                     style:
                                         TextStyle(fontSize: 13, font: khmerF)),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 120),
-                                child: Row(children: [
-                                  Text("kalbriecäTe)aHBum<        ",
-                                      style: TextStyle(
-                                          fontSize: 13, font: khmerF)),
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 1),
-                                      child: Text(": $currentDate",
-                                          style: TextStyle(
-                                              fontSize: 6.5, font: boldF))),
-                                ]),
-                              ),
                             ]),
                           )
                   ]))
                 ]))),
-                // Padding(
-                //   padding: EdgeInsets.only(top: 100),
-                //   child: Flexible(
-                //       child: Text(
-                //           "1.	This is a Non-participating Endowment plan with premiums payable throughout the term of the policy." +
-                //               "\n" +
-                //               "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term for Payor with entry age below 50 years last birthday and 1% of Basic Sum Assured multiplied by the policy term for Payor age 50 years last birthday and above." +
-                //               "\n" +
-                //               "3.	The Guaranteed Maturity Benefit will be payable at the end of the policy term." +
-                //               "\n" +
-                //               "4. This policy will acquire a Cash Value after it has been in-force for a minimum of two (2) years" +
-                //               "\n" +
-                //               "5.	Upon the Life Assured attaining the age of 12, an Education Cash Allowance of USD 100 will be available to the policy owner." +
-                //               "\n" +
-                //               "6. Upon the death or total and permanent disablement (as defined in the policy) of the Payor and subject to the terms and conditions in the policy contract, all premiums will be waived until the policy matures." +
-                //               "\n" +
-                //               "7. The above are for illustration purposes only. The benefits described herein are subject to all the terms and conditions contained in the policy contract." +
-                //               "\n\n" +
-                //               "Note: This Sales Illustration shall be expired 30 days after print date below." +
-                //               "\n\n\n" +
-                //               "Print Date               : $currentDate",
-                //           style: TextStyle(fontSize: 8.25, font: regularF))),
-                // ),
               ])
             ]));
     return pdf;
