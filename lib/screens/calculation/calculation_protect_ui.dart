@@ -40,10 +40,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   Future<void> initializeCalculator() async {
     final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey("valueP") && !prefs.containsKey("valueLP")) {
-      await getAmountValues();
-      await getValues();
-    }
+    // if (!prefs.containsKey("valueP") && !prefs.containsKey("valueLP")) {
+    //   await getAmountValues();
+    //   await getValues();
+    // }
     pFirstName.addListener(getAmountValues);
     pLastName.addListener(getAmountValues);
     pAge.addListener(getAmountValues);
@@ -62,6 +62,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   }
 
   Future<void> getValues() async {
+    print("GET");
     final prefs = await SharedPreferences.getInstance();
     List<String> valueLP = prefs.getStringList("valueLP");
     List<String> valueP = prefs.getStringList("valueP");
@@ -78,6 +79,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     String pAgeProtect = valueP[2];
     String pOcc = valueP[3];
     //
+    //
     String dobProtect = prefs.getString("lpDobProtect");
     String pDobProtect = prefs.getString("pDobProtect");
     String dobProtectDate = prefs.getString("lpDobProtectDate");
@@ -92,6 +94,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
     lOccupation.text = lOcc == null ? '' : lOcc;
+    print(premVal);
     setState(() {
       lSelectedGender = lpGenderProtect == null ? null : lpGenderProtect;
     });
@@ -104,6 +107,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     lpBirthDate = dobProtectDate == null
         ? DateTime.tryParse('')
         : DateTime.tryParse(dobProtectDate);
+    print(premVal);
 
     age.text = ageProtect == null ? '' : ageProtect;
     setState(() {
@@ -115,9 +119,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
           : "Yearly";
     });
     premium.text = premVal == null ? '' : premVal;
-    premiumNum = (premVal == null) ? '' : double.tryParse(premVal);
-    sumAssured.text = sumVal != null ? double.tryParse(sumVal).toString() : '';
-    sumAssuredNum = (sumVal == null) ? '' : double.tryParse(sumVal);
+
+    premiumNum = (premium.text == null) ? '' : double.tryParse(premium.text);
+    sumAssured.text = sumVal == null ? '' : sumVal;
+    sumAssuredNum =
+        (sumAssured.text == null) ? '' : double.tryParse(sumAssured.text);
     if (sumAssuredNum == null) {
       sumAssured.clear();
     }
@@ -1264,12 +1270,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   _selectDate(BuildContext context, TextEditingController tec,
       TextEditingController tecAge, bool isLpAge) async {
     final prefs = await SharedPreferences.getInstance();
-    if (premiumNum != null) {
-      getAmountValues();
-    }
-    if (sumAssuredNum != null) {
-      getAmountValues();
-    }
+    String sumVal = sumAssured.text;
+    String premVal = premium.text;
+
     DateTime newSelectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
@@ -1293,22 +1296,36 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         });
 
     if (newSelectedDate != null) {
-      _selectedDate = newSelectedDate;
-      String dateTime = _selectedDate.toString();
-      tec.text = convertDateTimeDisplay(dateTime);
-      tec.selection = TextSelection.fromPosition(TextPosition(
-          offset: dob.text.length, affinity: TextAffinity.upstream));
-      tecAge.text = calculateAge(_selectedDate, isLpAge);
-      if (isLpAge) {
-        prefs.setString("lpDobProtectDate", dateTime);
-        prefs.setString("lpDobProtect", dob.text);
-        getAmountValues();
-      } else {
-        prefs.setString("pDobProtectDate", dateTime);
-        prefs.setString("pDobProtect", pDob.text);
-        getAmountValues();
-      }
+      setState(() {
+        _selectedDate = newSelectedDate;
+        String dateTime = _selectedDate.toString();
+        tec.text = convertDateTimeDisplay(dateTime);
+        tec.selection = TextSelection.fromPosition(TextPosition(
+            offset: dob.text.length, affinity: TextAffinity.upstream));
+        tecAge.text = calculateAge(_selectedDate, isLpAge);
+        if (isLpAge) {
+          prefs.setString("lpDobProtectDate", dateTime);
+          prefs.setString("lpDobProtect", tec.text);
+          getAmountValues();
+        } else {
+          prefs.setString("pDobProtectDate", dateTime);
+          prefs.setString("pDobProtect", tec.text);
+          getAmountValues();
+        }
+      });
     }
+    getAmountValues();
+    if (sumVal.isNotEmpty || premVal.isNotEmpty) {
+      if (premVal.isNotEmpty) {
+        sumVal = (double.parse(premVal) * selectedYear).toString();
+      } else {
+        premVal = (double.parse(sumVal) / selectedYear).toString();
+      }
+    } else if (sumVal.isNotEmpty && premVal.isNotEmpty) {
+      sumVal = (double.parse(premVal) * selectedYear).toString();
+    }
+    premium.text = premVal.isNotEmpty ? premVal : '';
+    sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
   }
 
 //

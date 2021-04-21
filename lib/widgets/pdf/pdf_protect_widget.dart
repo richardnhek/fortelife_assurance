@@ -142,6 +142,15 @@ class PDFWidget {
       }
     }
 
+    bool getPdfStatusKh() {
+      if (lang == 'kh') {
+        if (int.parse(policyTerm) > 25)
+          return true;
+        else
+          return false;
+      }
+    }
+
     List getPremiumPayment(String paymentMode) {
       double premiumPayment = 0;
       double truePremium = 0;
@@ -389,83 +398,78 @@ class PDFWidget {
             (Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Image(logo, width: 150, height: 80, fit: BoxFit.contain),
               SizedBox(width: 15),
-              Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Flexible(
-                    child: lang != 'kh'
-                        ? Text(
-                            "Forte Life Assurance (Cambodia) Plc." +
-                                "\n" +
-                                "Vattanac Capital, Level 18 No.66 Monivong Blvd, Sangkat Wat Phnom," +
-                                "\n" +
-                                "Khan Daun Penh, Phnom Penh, Cambodia." +
-                                "\n" +
-                                "Tel: (+855) 23 885 077/ 066 Fax: (+855) 23 986 922" +
-                                "\n" +
-                                "Email: info@fortelifeassurance.com",
-                            style: TextStyle(fontSize: 6.5, font: regularF))
-                        : Expanded(
-                            child: Stack(children: [
-                            Text(
-                                "Rkúmh‘unFanar:ab;rgGayuCIvit hVtet LayhV_ GwsYruins_ exmbUDa mk",
-                                style: TextStyle(fontSize: 12, font: khmerF)),
-                            Padding(
-                                padding: EdgeInsets.only(top: 10),
-                                child: Text(
-                                    "GKar vDÆn³ kaBItal; Can;TI18 GKar66 mhavifIRBHmunñIvgS sgáat;vtþPñM",
-                                    style:
-                                        TextStyle(fontSize: 12, font: khmerF))),
-                            Padding(
-                                padding: EdgeInsets.only(top: 20),
-                                child: Text("xNÐdUneBj raCFanIPñMeBj",
-                                    style:
-                                        TextStyle(fontSize: 12, font: khmerF))),
-                            Padding(
-                                padding: EdgeInsets.only(top: 30),
-                                child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("TUrs½BÞ",
+              Flexible(
+                  child: lang != 'kh'
+                      ? Text(
+                          "Forte Life Assurance (Cambodia) Plc." +
+                              "\n" +
+                              "Vattanac Capital, Level 18 No.66 Monivong Blvd, Sangkat Wat Phnom," +
+                              "\n" +
+                              "Khan Daun Penh, Phnom Penh, Cambodia." +
+                              "\n" +
+                              "Tel: (+855) 23 885 077/ 066 Fax: (+855) 23 986 922" +
+                              "\n" +
+                              "Email: info@fortelifeassurance.com",
+                          style: TextStyle(fontSize: 6.5, font: regularF))
+                      : Expanded(
+                          child: Stack(children: [
+                          Text(
+                              "Rkúmh‘unFanar:ab;rgGayuCIvit hVtet LayhV_ GwsYruins_ exmbUDa mk",
+                              style: TextStyle(fontSize: 12, font: khmerF)),
+                          Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Text(
+                                  "GKar vDÆn³ kaBItal; Can;TI18 GKar66 mhavifIRBHmunñIvgS sgáat;vtþPñM",
+                                  style:
+                                      TextStyle(fontSize: 12, font: khmerF))),
+                          Padding(
+                              padding: EdgeInsets.only(top: 20),
+                              child: Text("xNÐdUneBj raCFanIPñMeBj",
+                                  style:
+                                      TextStyle(fontSize: 12, font: khmerF))),
+                          Padding(
+                              padding: EdgeInsets.only(top: 30),
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("TUrs½BÞ",
+                                        style: TextStyle(
+                                            fontSize: 12, font: khmerF)),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 4.05),
+                                      child: Text(" : (+855) 23 885 077/ 066",
                                           style: TextStyle(
-                                              fontSize: 12, font: khmerF)),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 4.05),
-                                        child: Text(" : (+855) 23 885 077/ 066",
-                                            style: TextStyle(
-                                                fontSize: 6.5, font: regularF)),
-                                      ),
-                                      Text(" TUrsar",
+                                              fontSize: 6.5, font: regularF)),
+                                    ),
+                                    Text(" TUrsar",
+                                        style: TextStyle(
+                                            fontSize: 12, font: khmerF)),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 3.7),
+                                      child: Text(" : (+855) 23 986 922",
                                           style: TextStyle(
-                                              fontSize: 12, font: khmerF)),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 3.7),
-                                        child: Text(" : (+855) 23 986 922",
-                                            style: TextStyle(
-                                                fontSize: 6.5, font: regularF)),
-                                      ),
-                                    ])),
-                            Padding(
-                                padding: EdgeInsets.only(top: 40),
-                                child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("sareGLicRtÚnic",
+                                              fontSize: 6.5, font: regularF)),
+                                    ),
+                                  ])),
+                          Padding(
+                              padding: EdgeInsets.only(top: 40),
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("sareGLicRtÚnic",
+                                        style: TextStyle(
+                                            fontSize: 12, font: khmerF)),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 3.65),
+                                      child: Text(
+                                          " : info@fortelifeassurance.com",
                                           style: TextStyle(
-                                              fontSize: 12, font: khmerF)),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 3.65),
-                                        child: Text(
-                                            " : info@fortelifeassurance.com",
-                                            style: TextStyle(
-                                                fontSize: 6.5, font: regularF)),
-                                      ),
-                                    ]))
-                          ]))),
-              ),
+                                              fontSize: 6.5, font: regularF)),
+                                    ),
+                                  ]))
+                        ]))),
             ])),
-        margin: EdgeInsets.symmetric(horizontal: 15),
+        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         pageFormat: PdfPageFormat.a4,
         build: (Context context) => [
               Wrap(children: [
@@ -1630,390 +1634,713 @@ class PDFWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Table(children: [
-                            TableRow(
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                                decoration: BoxDecoration(
-                                    border: TableBorder(
-                                        verticalInside: BorderSide(),
-                                        top: BorderSide(),
-                                        bottom: BorderSide(),
-                                        left: BorderSide(),
-                                        right: BorderSide())),
-                                children: [
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            decoration: BoxDecoration(
-                                                border: TableBorder(
-                                                    right: BorderSide())),
-                                            width: 30,
-                                            height: 95,
-                                            child: Stack(
-                                                alignment: Alignment.topCenter,
-                                                children: [
-                                                  Text("enAcugqÒaM",
-                                                      style: TextStyle(
-                                                          font: khmerBoldF,
-                                                          fontSize: 16)),
-                                                  Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 12.5),
-                                                      child: Text("bNÑsnüa",
-                                                          style: TextStyle(
-                                                              font: khmerBoldF,
-                                                              fontSize: 16))),
-                                                  Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 25),
-                                                      child: Text("r:ab;rg",
-                                                          style: TextStyle(
-                                                              font: khmerBoldF,
-                                                              fontSize: 16)))
-                                                ])),
-                                        Container(
-                                          height: 95,
-                                          width: 133.9,
-                                          decoration: BoxDecoration(
-                                              border: TableBorder(
-                                                  right: BorderSide())),
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Stack(
-                                                    alignment:
-                                                        Alignment.topCenter,
-                                                    children: [
-                                                      Text("buBVlaPFanar:ab;rg",
-                                                          style: TextStyle(
-                                                              font: khmerBoldF,
-                                                              fontSize: 16)),
-                                                      Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 12.5),
-                                                          child: Text(
-                                                              "¬duløar¦",
-                                                              style: TextStyle(
-                                                                  font:
-                                                                      khmerBoldF,
-                                                                  fontSize:
-                                                                      16))),
-                                                    ]),
-                                                Image(header1,
-                                                    width: 35,
-                                                    height: 45,
-                                                    fit: BoxFit.contain),
-                                                Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceAround,
-                                                    children: [
-                                                      Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 8.75),
-                                                          child: Text(
-                                                              "bg;RbcaMqñaM",
-                                                              style: TextStyle(
-                                                                  font:
-                                                                      khmerBoldF,
-                                                                  fontSize:
-                                                                      16))),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 8),
-                                                        child: Text(
-                                                            "srubEdl)anbg;",
+                            lang == 'kh'
+                                ? TableRow(
+                                    verticalAlignment:
+                                        TableCellVerticalAlignment.middle,
+                                    decoration: BoxDecoration(
+                                        border: TableBorder(
+                                            verticalInside: BorderSide(),
+                                            top: BorderSide(),
+                                            bottom: BorderSide(),
+                                            left: BorderSide(),
+                                            right: BorderSide())),
+                                    children: [
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                      border: TableBorder(
+                                                          right: BorderSide())),
+                                                  width: 30,
+                                                  height: 95,
+                                                  child: Stack(
+                                                      alignment:
+                                                          Alignment.topCenter,
+                                                      children: [
+                                                        Text("enAcugqÒaM",
                                                             style: TextStyle(
                                                                 font:
                                                                     khmerBoldF,
                                                                 fontSize: 16)),
-                                                      )
-                                                    ]),
-                                              ]),
-                                        ),
-                                        Container(
-                                          height: 95,
-                                          width: 133.8,
-                                          decoration: BoxDecoration(
-                                              border: TableBorder(
-                                                  right: BorderSide())),
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Stack(
-                                                    alignment:
-                                                        Alignment.topCenter,
-                                                    children: [
-                                                      Text(
-                                                          "GtßRbeyaCn_mrNPaBnigBikarPaB",
-                                                          style: TextStyle(
-                                                              font: khmerBoldF,
-                                                              fontSize: 16)),
-                                                      Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 12.5),
-                                                          child: Text(
-                                                              "TaMgRsúgnigCaGciéRnþy_¬duløar¦",
-                                                              style: TextStyle(
-                                                                  font:
-                                                                      khmerBoldF,
-                                                                  fontSize:
-                                                                      16))),
-                                                    ]),
-                                                Image(header2,
-                                                    width: 35,
-                                                    height: 45,
-                                                    fit: BoxFit.contain),
-                                                Row(
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 12.5),
+                                                            child: Text(
+                                                                "bNÑsnüa",
+                                                                style: TextStyle(
+                                                                    font:
+                                                                        khmerBoldF,
+                                                                    fontSize:
+                                                                        16))),
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 25),
+                                                            child: Text(
+                                                                "r:ab;rg",
+                                                                style: TextStyle(
+                                                                    font:
+                                                                        khmerBoldF,
+                                                                    fontSize:
+                                                                        16)))
+                                                      ])),
+                                              Container(
+                                                height: 95,
+                                                width: 133.9,
+                                                decoration: BoxDecoration(
+                                                    border: TableBorder(
+                                                        right: BorderSide())),
+                                                child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .spaceAround,
+                                                            .spaceBetween,
                                                     children: [
-                                                      Text("RKb;mUlehtu",
-                                                          style: TextStyle(
-                                                              font: khmerBoldF,
-                                                              fontSize: 16)),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                right: 3),
-                                                        child: Text(
-                                                            "eRKaHfñak;",
-                                                            style: TextStyle(
-                                                                font:
-                                                                    khmerBoldF,
-                                                                fontSize: 16)),
-                                                      )
-                                                    ]),
-                                              ]),
-                                        ),
-                                        Container(
-                                          height: 95,
-                                          width: 62.16,
-                                          decoration: BoxDecoration(
-                                              border: TableBorder(
-                                                  right: BorderSide())),
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Stack(
-                                                    alignment:
-                                                        Alignment.topCenter,
-                                                    children: [
-                                                      Text("témø",
-                                                          style: TextStyle(
-                                                              font: khmerBoldF,
-                                                              fontSize: 16)),
-                                                      Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 12.5),
-                                                          child: Text(
-                                                              "sac;R)ak;",
-                                                              style: TextStyle(
-                                                                  font:
-                                                                      khmerBoldF,
-                                                                  fontSize:
-                                                                      16))),
-                                                    ]),
-                                                Image(header3,
-                                                    width: 30,
-                                                    height: 40,
-                                                    fit: BoxFit.contain),
-                                                Text("¬duløar¦",
-                                                    style: TextStyle(
-                                                        font: khmerBoldF,
-                                                        fontSize: 16)),
-                                              ]),
-                                        ),
-                                        Container(
-                                            height: 95,
-                                            width: 212.82,
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Stack(
-                                                            alignment: Alignment
-                                                                .topCenter,
-                                                            children: [
-                                                              Text(
-                                                                  "GtßRbeyaCn_dl;",
-                                                                  style: TextStyle(
-                                                                      font:
-                                                                          khmerBoldF,
-                                                                      fontSize:
-                                                                          16)),
-                                                              Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              12.5),
-                                                                  child: Text(
-                                                                      "kalkMNt;RtÚv)an",
-                                                                      style: TextStyle(
-                                                                          font:
-                                                                              khmerBoldF,
-                                                                          fontSize:
-                                                                              16))),
-                                                              Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              25),
-                                                                  child: Text(
-                                                                      "Fana",
-                                                                      style: TextStyle(
-                                                                          font:
-                                                                              khmerBoldF,
-                                                                          fontSize:
-                                                                              16))),
-                                                            ]),
-                                                        Text("¬duløar¦",
-                                                            style: TextStyle(
-                                                                font:
-                                                                    khmerBoldF,
-                                                                fontSize: 16))
-                                                      ]),
-                                                  Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Stack(
-                                                            alignment: Alignment
-                                                                .topCenter,
-                                                            children: [
-                                                              Text(
-                                                                  "GtßRbeyaCn_",
-                                                                  style: TextStyle(
-                                                                      font:
-                                                                          khmerBoldF,
-                                                                      fontSize:
-                                                                          16)),
-                                                              Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              12.5),
-                                                                  child: Text(
-                                                                      "BiessRtÚv)an",
-                                                                      style: TextStyle(
-                                                                          font:
-                                                                              khmerBoldF,
-                                                                          fontSize:
-                                                                              16))),
-                                                              Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              25),
-                                                                  child: Text(
-                                                                      "Fana",
-                                                                      style: TextStyle(
-                                                                          font:
-                                                                              khmerBoldF,
-                                                                          fontSize:
-                                                                              16))),
-                                                              Padding(
+                                                      Stack(
+                                                          alignment: Alignment
+                                                              .topCenter,
+                                                          children: [
+                                                            Text(
+                                                                "buBVlaPFanar:ab;rg",
+                                                                style: TextStyle(
+                                                                    font:
+                                                                        khmerBoldF,
+                                                                    fontSize:
+                                                                        16)),
+                                                            Padding(
                                                                 padding: EdgeInsets
                                                                     .only(
                                                                         top:
-                                                                            41),
-                                                                child: Image(
-                                                                    header4,
-                                                                    width: 32.5,
-                                                                    height: 40,
-                                                                    fit: BoxFit
-                                                                        .contain),
-                                                              )
-                                                            ]),
-                                                        Text("¬duløar¦",
-                                                            style: TextStyle(
-                                                                font:
-                                                                    khmerBoldF,
-                                                                fontSize: 16))
-                                                      ]),
-                                                  Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Stack(
-                                                            alignment: Alignment
-                                                                .topCenter,
-                                                            children: [
-                                                              Text(
-                                                                  "GtßRbeyaCn_dl;",
+                                                                            12.5),
+                                                                child: Text(
+                                                                    "¬duløar¦",
+                                                                    style: TextStyle(
+                                                                        font:
+                                                                            khmerBoldF,
+                                                                        fontSize:
+                                                                            16))),
+                                                          ]),
+                                                      Image(header1,
+                                                          width: 35,
+                                                          height: 45,
+                                                          fit: BoxFit.contain),
+                                                      Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        left:
+                                                                            8.75),
+                                                                child: Text(
+                                                                    "bg;RbcaMqñaM",
+                                                                    style: TextStyle(
+                                                                        font:
+                                                                            khmerBoldF,
+                                                                        fontSize:
+                                                                            16))),
+                                                            Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 8),
+                                                              child: Text(
+                                                                  "srubEdl)anbg;",
                                                                   style: TextStyle(
                                                                       font:
                                                                           khmerBoldF,
                                                                       fontSize:
                                                                           16)),
-                                                              Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              12.5),
-                                                                  child: Text(
-                                                                      "kalkMNt;bUknwg",
-                                                                      style: TextStyle(
-                                                                          font:
-                                                                              khmerBoldF,
-                                                                          fontSize:
-                                                                              16))),
-                                                              Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              25),
-                                                                  child: Text(
-                                                                      "GtßRbeyaCn_",
-                                                                      style: TextStyle(
-                                                                          font:
-                                                                              khmerBoldF,
-                                                                          fontSize:
-                                                                              16))),
-                                                              Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              37.5),
-                                                                  child: Text(
-                                                                      "Biess",
-                                                                      style: TextStyle(
-                                                                          font:
-                                                                              khmerBoldF,
-                                                                          fontSize:
-                                                                              16))),
+                                                            )
+                                                          ]),
+                                                    ]),
+                                              ),
+                                              Container(
+                                                height: 95,
+                                                width: 133.8,
+                                                decoration: BoxDecoration(
+                                                    border: TableBorder(
+                                                        right: BorderSide())),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Stack(
+                                                          alignment: Alignment
+                                                              .topCenter,
+                                                          children: [
+                                                            Text(
+                                                                "GtßRbeyaCn_mrNPaBnigBikarPaB",
+                                                                style: TextStyle(
+                                                                    font:
+                                                                        khmerBoldF,
+                                                                    fontSize:
+                                                                        16)),
+                                                            Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            12.5),
+                                                                child: Text(
+                                                                    "TaMgRsúgnigCaGciéRnþy_¬duløar¦",
+                                                                    style: TextStyle(
+                                                                        font:
+                                                                            khmerBoldF,
+                                                                        fontSize:
+                                                                            16))),
+                                                          ]),
+                                                      Image(header2,
+                                                          width: 35,
+                                                          height: 45,
+                                                          fit: BoxFit.contain),
+                                                      Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Text("RKb;mUlehtu",
+                                                                style: TextStyle(
+                                                                    font:
+                                                                        khmerBoldF,
+                                                                    fontSize:
+                                                                        16)),
+                                                            Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      right: 3),
+                                                              child: Text(
+                                                                  "eRKaHfñak;",
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          khmerBoldF,
+                                                                      fontSize:
+                                                                          16)),
+                                                            )
+                                                          ]),
+                                                    ]),
+                                              ),
+                                              Container(
+                                                height: 95,
+                                                width: 61.4,
+                                                decoration: BoxDecoration(
+                                                    border: TableBorder(
+                                                        right: BorderSide())),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Stack(
+                                                          alignment: Alignment
+                                                              .topCenter,
+                                                          children: [
+                                                            Text("témø",
+                                                                style: TextStyle(
+                                                                    font:
+                                                                        khmerBoldF,
+                                                                    fontSize:
+                                                                        16)),
+                                                            Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            12.5),
+                                                                child: Text(
+                                                                    "sac;R)ak;",
+                                                                    style: TextStyle(
+                                                                        font:
+                                                                            khmerBoldF,
+                                                                        fontSize:
+                                                                            16))),
+                                                          ]),
+                                                      Image(header3,
+                                                          width: 30,
+                                                          height: 40,
+                                                          fit: BoxFit.contain),
+                                                      Text("¬duløar¦",
+                                                          style: TextStyle(
+                                                              font: khmerBoldF,
+                                                              fontSize: 16)),
+                                                    ]),
+                                              ),
+                                              Container(
+                                                  height: 95,
+                                                  width: 212.82,
+                                                  child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      children: [
+                                                        Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Stack(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topCenter,
+                                                                  children: [
+                                                                    Text(
+                                                                        "GtßRbeyaCn_dl;",
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                khmerBoldF,
+                                                                            fontSize:
+                                                                                16)),
+                                                                    Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                12.5),
+                                                                        child: Text(
+                                                                            "kalkMNt;RtÚv)an",
+                                                                            style:
+                                                                                TextStyle(font: khmerBoldF, fontSize: 16))),
+                                                                    Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                25),
+                                                                        child: Text(
+                                                                            "Fana",
+                                                                            style:
+                                                                                TextStyle(font: khmerBoldF, fontSize: 16))),
+                                                                  ]),
+                                                              Text("¬duløar¦",
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          khmerBoldF,
+                                                                      fontSize:
+                                                                          16))
                                                             ]),
-                                                        Text("¬duløar¦",
-                                                            style: TextStyle(
-                                                                font:
-                                                                    khmerBoldF,
-                                                                fontSize: 16))
-                                                      ]),
-                                                ])),
+                                                        Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Stack(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topCenter,
+                                                                  children: [
+                                                                    Text(
+                                                                        "GtßRbeyaCn_",
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                khmerBoldF,
+                                                                            fontSize:
+                                                                                16)),
+                                                                    Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                12.5),
+                                                                        child: Text(
+                                                                            "BiessRtÚv)an",
+                                                                            style:
+                                                                                TextStyle(font: khmerBoldF, fontSize: 16))),
+                                                                    Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                25),
+                                                                        child: Text(
+                                                                            "Fana",
+                                                                            style:
+                                                                                TextStyle(font: khmerBoldF, fontSize: 16))),
+                                                                    Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 41),
+                                                                      child: Image(
+                                                                          header4,
+                                                                          width:
+                                                                              32.5,
+                                                                          height:
+                                                                              40,
+                                                                          fit: BoxFit
+                                                                              .contain),
+                                                                    )
+                                                                  ]),
+                                                              Text("¬duløar¦",
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          khmerBoldF,
+                                                                      fontSize:
+                                                                          16))
+                                                            ]),
+                                                        Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Stack(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topCenter,
+                                                                  children: [
+                                                                    Text(
+                                                                        "GtßRbeyaCn_dl;",
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                khmerBoldF,
+                                                                            fontSize:
+                                                                                16)),
+                                                                    Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                12.5),
+                                                                        child: Text(
+                                                                            "kalkMNt;bUknwg",
+                                                                            style:
+                                                                                TextStyle(font: khmerBoldF, fontSize: 16))),
+                                                                    Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                25),
+                                                                        child: Text(
+                                                                            "GtßRbeyaCn_",
+                                                                            style:
+                                                                                TextStyle(font: khmerBoldF, fontSize: 16))),
+                                                                    Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                37.5),
+                                                                        child: Text(
+                                                                            "Biess",
+                                                                            style:
+                                                                                TextStyle(font: khmerBoldF, fontSize: 16))),
+                                                                  ]),
+                                                              Text("¬duløar¦",
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          khmerBoldF,
+                                                                      fontSize:
+                                                                          16))
+                                                            ]),
+                                                      ])),
+                                            ])
                                       ])
-                                ]),
+                                : TableRow(
+                                    verticalAlignment:
+                                        TableCellVerticalAlignment.middle,
+                                    decoration: BoxDecoration(
+                                        border: TableBorder(
+                                            verticalInside: BorderSide(),
+                                            top: BorderSide(),
+                                            bottom: BorderSide(),
+                                            left: BorderSide(),
+                                            right: BorderSide())),
+                                    children: [
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2.5),
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  decoration: BoxDecoration(
+                                                      border: TableBorder(
+                                                          right: BorderSide())),
+                                                  width: 30,
+                                                  height: 95,
+                                                  child: Text(
+                                                      "End of\nPolicy\nYear",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: boldF,
+                                                          fontSize: 8.25))),
+                                              Container(
+                                                height: 95,
+                                                width: 133.9,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 2.5),
+                                                decoration: BoxDecoration(
+                                                    border: TableBorder(
+                                                        right: BorderSide())),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text("Premium (USD)",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: boldF,
+                                                              fontSize: 8.25)),
+                                                      Image(header1,
+                                                          width: 35,
+                                                          height: 45,
+                                                          fit: BoxFit.contain),
+                                                      Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 6),
+                                                              child: Text(
+                                                                  "Annualized",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            ),
+                                                            Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 10),
+                                                              child: Text(
+                                                                  "Accumulated",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            )
+                                                          ]),
+                                                    ]),
+                                              ),
+                                              Container(
+                                                height: 95,
+                                                width: 133.8,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 2.5),
+                                                decoration: BoxDecoration(
+                                                    border: TableBorder(
+                                                        right: BorderSide())),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text("Death/TPD (USD)",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: boldF,
+                                                              fontSize: 8.25)),
+                                                      Image(header2,
+                                                          width: 35,
+                                                          height: 45,
+                                                          fit: BoxFit.contain),
+                                                      Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Text("All Causes",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style: TextStyle(
+                                                                    font: boldF,
+                                                                    fontSize:
+                                                                        8.25)),
+                                                            Text("Accidents",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style: TextStyle(
+                                                                    font: boldF,
+                                                                    fontSize:
+                                                                        8.25)),
+                                                          ])
+                                                    ]),
+                                              ),
+                                              Container(
+                                                height: 95,
+                                                width: 61.4,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 2.5),
+                                                decoration: BoxDecoration(
+                                                    border: TableBorder(
+                                                        right: BorderSide())),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text("Cash Value",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: boldF,
+                                                              fontSize: 8.25)),
+                                                      Image(header3,
+                                                          width: 30,
+                                                          height: 40,
+                                                          fit: BoxFit.contain),
+                                                      Text("(USD)",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: boldF,
+                                                              fontSize: 8.25)),
+                                                    ]),
+                                              ),
+                                              Container(
+                                                  height: 95,
+                                                  width: 212.82,
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2.5),
+                                                  child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Stack(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topCenter,
+                                                                  children: [
+                                                                    Text(
+                                                                        "Guaranteed",
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .center,
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                boldF,
+                                                                            fontSize:
+                                                                                8.25)),
+                                                                    Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                      child: Text(
+                                                                          "Maturity Benefit",
+                                                                          textAlign: TextAlign
+                                                                              .center,
+                                                                          style: TextStyle(
+                                                                              font: boldF,
+                                                                              fontSize: 8.25)),
+                                                                    )
+                                                                  ]),
+                                                              Text("(USD)",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            ]),
+                                                        Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Stack(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topCenter,
+                                                                  children: [
+                                                                    Text(
+                                                                        "Guaranteed",
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .center,
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                boldF,
+                                                                            fontSize:
+                                                                                8.25)),
+                                                                    Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                      child: Text(
+                                                                          "Special Benefit",
+                                                                          textAlign: TextAlign
+                                                                              .center,
+                                                                          style: TextStyle(
+                                                                              font: boldF,
+                                                                              fontSize: 8.25)),
+                                                                    )
+                                                                  ]),
+                                                              Image(header4,
+                                                                  width: 30,
+                                                                  height: 40,
+                                                                  fit: BoxFit
+                                                                      .contain),
+                                                              Text("(USD)",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            ]),
+                                                        Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Stack(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topCenter,
+                                                                  children: [
+                                                                    Text(
+                                                                        "Total Maturity",
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .center,
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                boldF,
+                                                                            fontSize:
+                                                                                8.25)),
+                                                                    Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                      child: Text(
+                                                                          "Benefit",
+                                                                          textAlign: TextAlign
+                                                                              .center,
+                                                                          style: TextStyle(
+                                                                              font: boldF,
+                                                                              fontSize: 8.25)),
+                                                                    )
+                                                                  ]),
+                                                              Text("(USD)",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      font:
+                                                                          boldF,
+                                                                      fontSize:
+                                                                          8.25)),
+                                                            ]),
+                                                      ])),
+                                            ])
+                                      ]),
                           ]),
                           Table.fromTextArray(
                               columnWidths: columnWidthVal,
@@ -2026,7 +2353,7 @@ class PDFWidget {
                               headerHeight: 0.05,
                               cellHeight: 0.05,
                               headerPadding: const EdgeInsets.only(
-                                  top: 1.25,
+                                  top: 3.5,
                                   right: 2.5,
                                   left: 2.5,
                                   bottom: 1.25),
@@ -2060,16 +2387,175 @@ class PDFWidget {
                                             "\n" +
                                         "5.	Pays the earlier of either Death due to All Causes, TPD due to All Causes, Death due to Accident or TPD due to Accident." +
                                         "\n\n" +
-                                        "Note: This Sales Illustration shall be expired 30 days after print date below." +
-                                        "\n\n\n" +
-                                        "Print Date               : $currentDate",
+                                        "Note: This Sales Illustration shall be expired 30 days after print date below.",
                                     style: TextStyle(
                                         fontSize: 8.25, font: regularF))),
                           )
-                        : SizedBox(height: 0),
+                        : (int.parse(policyTerm) <= 30)
+                            ? (int.parse(policyTerm) < 30)
+                                ? Padding(
+                                    padding: EdgeInsets.only(top: 5),
+                                    child: Stack(children: [
+                                      Text(
+                                          "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘unEdlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
+                                          style: TextStyle(
+                                              fontSize: 13, font: khmerF)),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 10),
+                                        child: Text(
+                                            "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; @°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgsRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 20),
+                                        child: Text(
+                                            "%0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak; !°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna. GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kal",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 30),
+                                        child: Text(
+                                            "kMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 40),
+                                        child: Text(
+                                            "¬K¦ bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic @qñaM.",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 50),
+                                        child: Text(
+                                            "¬X¦ xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenAkñúgkic©snüar:ab;rg.",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 60),
+                                        child: Text(
+                                            "¬g¦ Rkúmh‘unGacTUTat;GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_bNþalmkBIRKb;mUlehtub¤GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_ bNþalmkBIeRKaHfñak;EtmYyb:ueNÑaH.",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 80),
+                                        child: Text(
+                                            "sMKal;³ taragsmÁal;bgðajBIplitplenHnwgRtÚvGs;suBlPaBry³eBl30éf¶eRkaykalbriecäTe)aHBum<xageRkam.",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      ),
+                                    ]),
+                                  )
+                                : Padding(
+                                    padding: EdgeInsets.only(top: 5),
+                                    child: Stack(children: [
+                                      Text(
+                                          "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘unEdlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
+                                          style: TextStyle(
+                                              fontSize: 13, font: khmerF)),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 10),
+                                        child: Text(
+                                            "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; @°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgsRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 20),
+                                        child: Text(
+                                            "%0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak; !°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna. GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kal",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 30),
+                                        child: Text(
+                                            "kMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
+                                            style: TextStyle(
+                                                fontSize: 13, font: khmerF)),
+                                      )
+                                    ]))
+                            : SizedBox(height: 0)
                   ]))
                 ])))
-              ])
+              ]),
+              getPdfStatusKh()
+                  ? (int.parse(policyTerm) > 30)
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 5),
+                          child: Stack(children: [
+                            Text(
+                                "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘unEdlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
+                                style: TextStyle(fontSize: 13, font: khmerF)),
+                            Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Text(
+                                  "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; @°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgsRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI",
+                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 20),
+                              child: Text(
+                                  "%0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak; !°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna. GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kal",
+                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 30),
+                              child: Text("kMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
+                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 40),
+                              child: Text(
+                                  "¬K¦ bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic @qñaM.",
+                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 50),
+                              child: Text(
+                                  "¬X¦ xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenAkñúgkic©snüar:ab;rg.",
+                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 60),
+                              child: Text(
+                                  "¬g¦ Rkúmh‘unGacTUTat;GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_bNþalmkBIRKb;mUlehtub¤GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_ bNþalmkBIeRKaHfñak;EtmYyb:ueNÑaH.",
+                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 80),
+                              child: Text(
+                                  "sMKal;³ taragsmÁal;bgðajBIplitplenHnwgRtÚvGs;suBlPaBry³eBl30éf¶eRkaykalbriecäTe)aHBum<xageRkam.",
+                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                            ),
+                          ]),
+                        )
+                      : Stack(children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 50),
+                            child: Text(
+                                "¬X¦ xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenAkñúgkic©snüar:ab;rg.",
+                                style: TextStyle(fontSize: 13, font: khmerF)),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 60),
+                            child: Text(
+                                "¬g¦ Rkúmh‘unGacTUTat;GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_bNþalmkBIRKb;mUlehtub¤GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_ bNþalmkBIeRKaHfñak;EtmYyb:ueNÑaH.",
+                                style: TextStyle(fontSize: 13, font: khmerF)),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 80),
+                            child: Text(
+                                "sMKal;³ taragsmÁal;bgðajBIplitplenHnwgRtÚvGs;suBlPaBry³eBl30éf¶eRkaykalbriecäTe)aHBum<xageRkam.",
+                                style: TextStyle(fontSize: 13, font: khmerF)),
+                          ),
+                        ])
+                  : SizedBox(height: 0),
             ]));
     return pdf;
   }

@@ -56,6 +56,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   }
 
   Future<void> getValues() async {
+    print("GET EDU");
     final prefs = await SharedPreferences.getInstance();
     List<String> valueEduLP = prefs.getStringList("valueEduLP");
     List<String> valueEduP = prefs.getStringList("valueEduP");
@@ -853,7 +854,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                           isRequired: true,
                           errorVisible: false,
                           onChange: (text) {
-                            if (int.parse(policyYear.text) != null) {
+                            if (int.tryParse(policyYear.text) != null) {
                               if (text == "") {
                                 sumAssured.text = "";
                               } else

@@ -2,14 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CalculatorButton extends StatelessWidget {
-  CalculatorButton(
-      {this.calculatorTitle,
-      this.calculatorImg,
-      this.calculatorDesc,
-      this.calculatorOnTap,
-      this.fontSize,
-      this.btnSize,
-      this.imgSize});
+  CalculatorButton({
+    this.calculatorTitle,
+    this.calculatorImg,
+    this.calculatorDesc,
+    this.calculatorOnTap,
+    this.fontSize,
+    this.btnSize,
+    this.imgSize,
+  });
 
   final String calculatorTitle;
   final AssetImage calculatorImg;
@@ -26,8 +27,8 @@ class CalculatorButton extends StatelessWidget {
       disabledColor: Colors.transparent,
       color: Colors.transparent,
       highlightColor: Colors.transparent,
-      elevation: 3.5,
-      highlightElevation: 15,
+      elevation: 0,
+      highlightElevation: 0,
       padding: EdgeInsets.zero,
       child: Container(
         padding: EdgeInsets.all(10),
@@ -39,7 +40,7 @@ class CalculatorButton extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                   color: Colors.black.withOpacity(0.16),
-                  spreadRadius: 0.5,
+                  spreadRadius: 2.5,
                   blurRadius: 10,
                   offset: Offset(3, 6))
             ]),
@@ -48,6 +49,7 @@ class CalculatorButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(calculatorTitle,
+                softWrap: false,
                 style: TextStyle(
                     fontSize: fontSize,
                     fontFamily: "Kano",

@@ -102,51 +102,58 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CalculatorButton(
-                              fontSize: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 14.0,
-                                  onTablet: 28.0),
-                              btnSize: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 140.0,
-                                  onTablet: 280.0),
-                              imgSize: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 60.0,
-                                  onTablet: 120.0),
-                              calculatorTitle: lang['forte_protect'],
-                              calculatorDesc: lang['insurance_plan'],
-                              calculatorOnTap: () =>
-                                  {appProvider.categoriesTabIndex = 1},
-                              calculatorImg:
-                                  AssetImage("assets/icons/shield.png"),
+                            Expanded(
+                              child: CalculatorButton(
+                                fontSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 12.75,
+                                    onTablet: 28.0),
+                                btnSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 140.0,
+                                    onTablet: 280.0),
+                                imgSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 60.0,
+                                    onTablet: 120.0),
+                                calculatorTitle: lang['forte_protect'],
+                                calculatorDesc: lang['insurance_plan'],
+                                calculatorOnTap: () =>
+                                    {appProvider.categoriesTabIndex = 1},
+                                calculatorImg:
+                                    AssetImage("assets/icons/shield.png"),
+                              ),
                             ),
-                            CalculatorButton(
-                              fontSize: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 14.0,
-                                  onTablet: 28.0),
-                              btnSize: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 140.0,
-                                  onTablet: 280.0),
-                              imgSize: DeviceUtils.getResponsive(
-                                  mq: mq,
-                                  appProvider: appProvider,
-                                  onPhone: 60.0,
-                                  onTablet: 120.0),
-                              calculatorTitle: lang['forte_edu'],
-                              calculatorDesc: lang['insurance_plan'],
-                              calculatorOnTap: () =>
-                                  {appProvider.categoriesTabIndex = 2},
-                              calculatorImg:
-                                  AssetImage("assets/icons/gradhat.png"),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: CalculatorButton(
+                                fontSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 12.75,
+                                    onTablet: 28.0),
+                                btnSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 140.0,
+                                    onTablet: 280.0),
+                                imgSize: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 60.0,
+                                    onTablet: 120.0),
+                                calculatorTitle: lang['forte_edu'],
+                                calculatorDesc: lang['insurance_plan'],
+                                calculatorOnTap: () =>
+                                    {appProvider.categoriesTabIndex = 2},
+                                calculatorImg:
+                                    AssetImage("assets/icons/gradhat.png"),
+                              ),
                             ),
                           ],
                         ),
