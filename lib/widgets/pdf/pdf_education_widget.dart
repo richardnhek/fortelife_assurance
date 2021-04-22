@@ -395,13 +395,14 @@ class PDFWidgetEdu {
                           ]))),
               ),
             ])),
-        margin: EdgeInsets.symmetric(horizontal: 15),
+        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         pageFormat: PdfPageFormat.a4,
         build: (Context context) => <Widget>[
               Wrap(children: [
                 Container(
                     child: Expanded(
                         child: Column(children: [
+                  SizedBox(height: lang != 'kh' ? 12.5 : 5),
                   lang != 'kh'
                       ? Text("SALES ILLUSTRATION",
                           style: TextStyle(
@@ -928,7 +929,7 @@ class PDFWidgetEdu {
                                             MainAxisAlignment.start,
                                         children: [
                                           Container(
-                                              width: 140,
+                                              width: 180,
                                               child: Text("Basic Plan : $title",
                                                   style: TextStyle(
                                                       font: regularF,
@@ -950,7 +951,7 @@ class PDFWidgetEdu {
                                         children: [
                                           Container(
                                               margin: EdgeInsets.only(left: 5),
-                                              width: 120,
+                                              width: 160,
                                               child: Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -1003,7 +1004,7 @@ class PDFWidgetEdu {
                                             padding: EdgeInsets.only(
                                                 left: 5, top: 2.5, bottom: 2.5),
                                             child: Container(
-                                                width: 120,
+                                                width: 160,
                                                 child: Text("Total Premium",
                                                     style: TextStyle(
                                                         font: boldF,
@@ -1025,7 +1026,7 @@ class PDFWidgetEdu {
                                           Padding(
                                               padding: EdgeInsets.only(left: 5),
                                               child: Container(
-                                                  width: 120,
+                                                  width: 160,
                                                   child: Row(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -1591,7 +1592,7 @@ class PDFWidgetEdu {
                                     columnWidths: columnWidthValKh,
                                     headerHeight: 0.05,
                                     headerPadding: const EdgeInsets.only(
-                                        top: 1.25,
+                                        top: 3.5,
                                         right: 2.5,
                                         left: 2.5,
                                         bottom: 1.25),
@@ -1994,7 +1995,7 @@ class PDFWidgetEdu {
                                     columnWidths: columnWidthValKh,
                                     headerHeight: 0.05,
                                     headerPadding: const EdgeInsets.only(
-                                        top: 1.25,
+                                        top: 3.5,
                                         right: 2.5,
                                         left: 2.5,
                                         bottom: 1.25),
@@ -2026,7 +2027,8 @@ class PDFWidgetEdu {
                                 child: Text(
                                     "1.	This is a Non-participating Endowment plan with premiums payable throughout the term of the policy." +
                                         "\n" +
-                                        "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term for Payor with entry age below 50 years last birthday and 1% of Basic Sum Assured multiplied by the policy term for Payor age 50 years last birthday and above." +
+                                        "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term for Payor with entry age below 50 years last" +
+                                        "\n     birthday and 1% of Basic Sum Assured multiplied by the policy term for Payor age 50 years last birthday and above." +
                                         "\n" +
                                         "3.	The Guaranteed Maturity Benefit will be payable at the end of the policy term." +
                                         "\n" +
@@ -2034,13 +2036,11 @@ class PDFWidgetEdu {
                                         "\n" +
                                         "5.	Upon the Life Assured attaining the age of 12, an Education Cash Allowance of USD 100 will be available to the policy owner." +
                                         "\n" +
-                                        "6. Upon the death or total and permanent disablement (as defined in the policy) of the Payor and subject to the terms and conditions in the policy contract, all premiums will be waived until the policy matures." +
+                                        "6. Upon the death or total and permanent disablement (as defined in the policy) of the Payor and subject to the terms and conditions in the policy contract, \n    all premiums will be waived until the policy matures." +
                                         "\n" +
                                         "7. The above are for illustration purposes only. The benefits described herein are subject to all the terms and conditions contained in the policy contract." +
                                         "\n\n" +
-                                        "Note: This Sales Illustration shall be expired 30 days after print date below." +
-                                        "\n\n\n" +
-                                        "Print Date               : $currentDate",
+                                        "Note: This Sales Illustration shall be expired 30 days after print date below.",
                                     style: TextStyle(
                                         fontSize: 8.25, font: regularF))),
                           )
@@ -2048,26 +2048,26 @@ class PDFWidgetEdu {
                             padding: EdgeInsets.only(top: 5),
                             child: Stack(children: [
                               Text(
-                                  "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘unEdlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
+                                  "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘un Edlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
                                   style: TextStyle(fontSize: 13, font: khmerF)),
                               Padding(
                                 padding: EdgeInsets.only(top: 10),
                                 child: Text(
-                                    "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; @°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rg sRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFana",
+                                    "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; 2°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rg sRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFana",
                                     style:
                                         TextStyle(fontSize: 13, font: khmerF)),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 20),
+                                padding: EdgeInsets.only(top: 20, left: 13.75),
                                 child: Text(
-                                    "eRkam%0qñaMKitRtwméf¶xYbkMeNItcugeRkayedayELksRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI %0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak;!°énTwkR)ak;Fanar:ab;rgKuNnwgcMnYn",
+                                    "eRkam 50qñaMKitRtwméf¶xYbkMeNItcugeRkayedayELksRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI %0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak;1°énTwkR)ak;Fanar:ab;rgKuNnwg",
                                     style:
                                         TextStyle(fontSize: 13, font: khmerF)),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 30),
+                                padding: EdgeInsets.only(top: 30, left: 13.75),
                                 child: Text(
-                                    "qñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna.GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kalkMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
+                                    "cMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna.GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kalkMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
                                     style:
                                         TextStyle(fontSize: 13, font: khmerF)),
                               ),
@@ -2080,20 +2080,26 @@ class PDFWidgetEdu {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 50),
-                                child: Text(
-                                    "¬X¦ bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic @qñaM.",
-                                    style:
-                                        TextStyle(fontSize: 13, font: khmerF)),
+                                child: Row(children: [
+                                  Text("¬X¦",
+                                      style: TextStyle(
+                                          fontSize: 13, font: khmerF)),
+                                  SizedBox(width: 2.5),
+                                  Text(
+                                      "bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic 2qñaM.",
+                                      style:
+                                          TextStyle(fontSize: 13, font: khmerF))
+                                ]),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 60),
                                 child: Text(
-                                    "¬g¦ enAeBlkUnmanGayu !@qñaM R)ak;elIkTwkcitþsRmab;karsikSacMnYn !00duløar nwgRtÚv)anpþl;CUneTAm©as;bNÑsnüar:ab;rg. m©as;bNÑsnüar:ab;rgnwgmanCeRmIskñúgkardkR)ak; b¤epJIR)ak;TukedIm,IbgÁrR)ak;cMnYn !00duløar",
+                                    "¬g¦ enAeBlkUnmanGayu 12qñaM R)ak;elIkTwkcitþsRmab;karsikSacMnYn 100duløarnwgRtÚv)anpþl;CUneTAm©as;bNÑsnüar:ab;rg. m©as;bNÑsnüar:ab;rgnwgmanCeRmIskñúgkardkR)ak; b¤epJIR)ak;TukedIm,IbgÁrR)ak;cMnYn 100duløar",
                                     style:
                                         TextStyle(fontSize: 13, font: khmerF)),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 70),
+                                padding: EdgeInsets.only(top: 70, left: 13.75),
                                 child: Text(
                                     "bUkbBa©ÚlCamYytémøTwkR)ak;EdlmannigGtßRbeyaCn_dl;kalkMNt;EdlRtÚv)anFanaCamYynwgRkúmh‘un.",
                                     style:
@@ -2102,7 +2108,7 @@ class PDFWidgetEdu {
                               Padding(
                                 padding: EdgeInsets.only(top: 80),
                                 child: Text(
-                                    "¬c¦ kñúgkrNIEdlGñkbg;buBVlaPFanar:ab;rgTTYlmrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_buBVlaPFanar:ab;rgTaMgGs;naeBlGnaKtGnuelamtambNÑsnüar:ab;rgenHnwgminRtÚv)antRmÚv[bg;bnþeToteLIy.",
+                                    "¬c¦ kñúgkrNIEdlGñkbg;buBVlaPFanar:ab;rgTTYlmrNPaBb¤BikarPaBTaMgRsúgnigCaGciéRnþy_buBVlaPFanar:ab;rgTaMgGs;naeBlGnaKtGnuelamtambNÑsnüar:ab;rgenHnwgminRtÚv)antRmÚv[bg;bnþeToteLIy.",
                                     style:
                                         TextStyle(fontSize: 13, font: khmerF)),
                               ),

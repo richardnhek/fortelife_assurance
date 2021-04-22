@@ -148,10 +148,12 @@ class PDFWidget {
           return true;
         else
           return false;
-      }
+      } else
+        return false;
     }
 
     List getPremiumPayment(String paymentMode) {
+      print(premium.length);
       double premiumPayment = 0;
       double truePremium = 0;
       double premiumWithR = 0;
@@ -234,7 +236,7 @@ class PDFWidget {
                 "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "${allAccidents.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "-",
-                "  -                                -                                -"
+                "    -                                -                              -"
               ],
             ];
             i++;
@@ -249,7 +251,7 @@ class PDFWidget {
               "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
               "${allAccidents.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
               "-",
-              "  -                                -                                -"
+              "    -                                -                              -"
             ]);
             allCauses = (basicSANum * 0.8) + riderSANum;
             allAccidents = (basicSANum * 1.2) + riderSANum;
@@ -267,7 +269,7 @@ class PDFWidget {
                 "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "${allAccidents.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "-",
-                "  -                                -                                -"
+                "    -                                -                              -"
               ],
             ];
             i++;
@@ -282,7 +284,7 @@ class PDFWidget {
               "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
               "${allAccidents.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
               "-",
-              "  -                                -                                -"
+              "    -                                -                              -"
             ]);
             allCauses = basicSANum + riderSANum;
             allAccidents = (basicSANum * 2) + riderSANum;
@@ -301,7 +303,7 @@ class PDFWidget {
                 "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "${allAccidents.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "-",
-                "  -                                -                                -"
+                "    -                                -                              -"
               ],
             ];
             allCauses = basicSANum + riderSANum;
@@ -321,7 +323,7 @@ class PDFWidget {
                 "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "${allAccidents.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
                 "-",
-                "  -                                -                                -"
+                "    -                                -                              -"
               ]
             ];
             break;
@@ -358,7 +360,7 @@ class PDFWidget {
             "${allCauses.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
             "${allAccidents.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
             cashValueStr,
-            "  -                                -                                -"
+            "    -                                -                              -"
           ]);
           i++;
         } else {
@@ -372,7 +374,9 @@ class PDFWidget {
                 .round()
                 .toStringAsFixed(2)
                 .replaceAllMapped(regExpNum, (Match m) => '${m[1]},'),
-            "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}       ${getGSB().toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}      ${(basicSANum + getGSB()).toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
+            (premium.length > 6)
+                ? "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}          ${getGSB().toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}          ${(basicSANum + getGSB()).toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
+                : "  ${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}                ${getGSB().toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}                  ${(basicSANum + getGSB()).toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}"
           ]);
           i++;
         }
@@ -469,7 +473,7 @@ class PDFWidget {
                                   ]))
                         ]))),
             ])),
-        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         pageFormat: PdfPageFormat.a4,
         build: (Context context) => [
               Wrap(children: [
@@ -582,7 +586,7 @@ class PDFWidget {
                                                         style: TextStyle(
                                                             font: regularF,
                                                             fontSize: 8.25)))),
-                                            SizedBox(width: 23.5),
+                                            SizedBox(width: 20.5),
                                             PDFSubtitle(
                                                 isKhmer: false,
                                                 title: lpName,
@@ -621,7 +625,7 @@ class PDFWidget {
                                                               font: regularF,
                                                               fontSize:
                                                                   8.25)))),
-                                              SizedBox(width: 23.5),
+                                              SizedBox(width: 20.5),
                                               PDFSubtitle(
                                                   isKhmer: false,
                                                   title: pName,
@@ -865,79 +869,91 @@ class PDFWidget {
                                                                 top: 2.5,
                                                                 bottom: 2.5),
                                                         child: SizedBox(
-                                                            width: 140,
-                                                            child: Text(
-                                                                "Basic Plan  : $title",
-                                                                style: TextStyle(
-                                                                    font:
-                                                                        regularF,
-                                                                    fontSize:
-                                                                        8.25)))),
-                                                    SizedBox(
-                                                        width: 105,
-                                                        child: PDFSubtitle(
-                                                            isKhmer: false,
-                                                            title:
-                                                                "USD ${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                                                            font: regularF)),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 6),
-                                                      child: PDFSubtitle(
+                                                            width: 150,
+                                                            child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                      "Basic Plan  : $title",
+                                                                      style: TextStyle(
+                                                                          font:
+                                                                              regularF,
+                                                                          fontSize:
+                                                                              8.25)),
+                                                                  addRider ==
+                                                                          true
+                                                                      ? Padding(
+                                                                          padding: EdgeInsets.only(
+                                                                              top:
+                                                                                  2.5),
+                                                                          child: Text(
+                                                                              "Rider          : $title" + " Plus",
+                                                                              style: TextStyle(font: regularF, fontSize: 8.25)))
+                                                                      : SizedBox(height: 0)
+                                                                ]))),
+                                                    Column(children: [
+                                                      PDFSubtitle(
+                                                          isKhmer: false,
+                                                          title:
+                                                              "USD ${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                                                          font: regularF),
+                                                      addRider == true
+                                                          ? Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 2.5),
+                                                              child: PDFSubtitle(
+                                                                  isKhmer:
+                                                                      false,
+                                                                  title:
+                                                                      "USD $riderSAStr",
+                                                                  font:
+                                                                      regularF))
+                                                          : SizedBox(height: 0)
+                                                    ]),
+                                                    SizedBox(width: 16.25),
+                                                    Column(children: [
+                                                      PDFSubtitle(
                                                           isKhmer: false,
                                                           title: policyTerm,
                                                           font: regularF),
-                                                    ),
-                                                    SizedBox(width: 12.5),
-                                                    PDFSubtitle(
-                                                        isKhmer: false,
-                                                        title: policyTerm,
-                                                        font: regularF)
+                                                      addRider == true
+                                                          ? Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 2.5),
+                                                              child: PDFSubtitle(
+                                                                  isKhmer:
+                                                                      false,
+                                                                  title:
+                                                                      policyTerm,
+                                                                  font:
+                                                                      regularF))
+                                                          : SizedBox(height: 0)
+                                                    ]),
+                                                    SizedBox(width: 15.25),
+                                                    Column(children: [
+                                                      PDFSubtitle(
+                                                          isKhmer: false,
+                                                          title: policyTerm,
+                                                          font: regularF),
+                                                      addRider == true
+                                                          ? Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 2.5),
+                                                              child: PDFSubtitle(
+                                                                  isKhmer:
+                                                                      false,
+                                                                  title:
+                                                                      policyTerm,
+                                                                  font:
+                                                                      regularF))
+                                                          : SizedBox(height: 0)
+                                                    ]),
                                                   ]),
-                                              addRider == true
-                                                  ? Padding(
-                                                      padding: EdgeInsets.only(
-                                                          bottom: 2.5),
-                                                      child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Container(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        left:
-                                                                            5),
-                                                                width: 140,
-                                                                child: Text(
-                                                                    "Rider          : $title" +
-                                                                        " Plus",
-                                                                    style: TextStyle(
-                                                                        font:
-                                                                            regularF,
-                                                                        fontSize:
-                                                                            8.25))),
-                                                            SizedBox(
-                                                                width: 12.5),
-                                                            PDFSubtitle(
-                                                                isKhmer: false,
-                                                                title:
-                                                                    "USD $riderSAStr",
-                                                                font: regularF),
-                                                            SizedBox(width: 14),
-                                                            PDFSubtitle(
-                                                                isKhmer: false,
-                                                                title:
-                                                                    policyTerm,
-                                                                font: regularF),
-                                                            SizedBox(width: 12),
-                                                            PDFSubtitle(
-                                                                isKhmer: false,
-                                                                title:
-                                                                    policyTerm,
-                                                                font: regularF)
-                                                          ]))
-                                                  : SizedBox(height: 0),
                                             ]),
                                         Padding(
                                             padding:
@@ -965,7 +981,7 @@ class PDFWidget {
                                                             margin:
                                                                 EdgeInsets.only(
                                                                     left: 5),
-                                                            width: 120,
+                                                            width: 180.5,
                                                             child: Row(
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
@@ -995,7 +1011,6 @@ class PDFWidget {
                                                                           font:
                                                                               khmerF))
                                                                 ])),
-                                                        SizedBox(width: 56.5),
                                                         SizedBox(
                                                           width: 90,
                                                           child: Row(
@@ -1049,7 +1064,7 @@ class PDFWidget {
                                                 Container(
                                                     margin: EdgeInsets.only(
                                                         left: 5),
-                                                    width: 120,
+                                                    width: 180.5,
                                                     child: Row(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -1076,7 +1091,6 @@ class PDFWidget {
                                                                   fontSize: 16,
                                                                   font: khmerF))
                                                         ])),
-                                                SizedBox(width: 56.5),
                                                 SizedBox(
                                                   width: 90,
                                                   child: Row(
@@ -2379,11 +2393,11 @@ class PDFWidget {
                                 child: Text(
                                     "1.	This is a Non-participating Endowment plan with premium payables throughout the term of the Policy." +
                                         "\n" +
-                                        "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term with entry age below 50 years last birthday and 1% of Basic Sum Assured multiplied by the policy term with age 50 years last birthday and above. The Guaranteed Special Benefit shall only be available upon maturity of the policy" +
+                                        "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term with entry age below 50 years last birthday and \n    1% of Basic Sum Assured multiplied by the policy term with age 50 years last birthday and above. The Guaranteed Special Benefit shall only be \n    available upon maturity of the policy" +
                                         "\n" +
                                         "3.	This Policy will acquire a Cash Value after it has been in-force for a minimum of two years." +
                                         "\n" +
-                                        "4. 	The above is for illustration purposes only. The benefits described herein are subject to all terms and conditions contained in the Policy contract."
+                                        "4. The above is for illustration purposes only. The benefits described herein are subject to all terms and conditions contained in the Policy contract."
                                             "\n" +
                                         "5.	Pays the earlier of either Death due to All Causes, TPD due to All Causes, Death due to Accident or TPD due to Accident." +
                                         "\n\n" +
@@ -2397,48 +2411,57 @@ class PDFWidget {
                                     padding: EdgeInsets.only(top: 5),
                                     child: Stack(children: [
                                       Text(
-                                          "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘unEdlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
+                                          "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘un Edlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
                                           style: TextStyle(
                                               fontSize: 13, font: khmerF)),
                                       Padding(
                                         padding: EdgeInsets.only(top: 10),
                                         child: Text(
-                                            "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; @°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgsRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI",
+                                            "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; 2°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rg sRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFana",
                                             style: TextStyle(
                                                 fontSize: 13, font: khmerF)),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(top: 20),
+                                        padding: EdgeInsets.only(
+                                            top: 20, left: 13.7),
                                         child: Text(
-                                            "%0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak; !°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna. GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kal",
-                                            style: TextStyle(
-                                                fontSize: 13, font: khmerF)),
+                                          "eRkam 50qñaMKitRtwméf¶xYbkMeNItcugeRkay edayELksRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI 50qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak;1°énTwkR)ak;Fanar:ab;rg",
+                                          style: TextStyle(
+                                              fontSize: 13, font: khmerF),
+                                        ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(top: 30),
+                                        padding: EdgeInsets.only(
+                                            top: 30, left: 13.7),
                                         child: Text(
-                                            "kMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
+                                            "KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna. GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kalkMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
                                             style: TextStyle(
                                                 fontSize: 13, font: khmerF)),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(top: 40),
                                         child: Text(
-                                            "¬K¦ bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic @qñaM.",
+                                            "¬K¦ bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic 2qñaM.",
                                             style: TextStyle(
                                                 fontSize: 13, font: khmerF)),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(top: 50),
-                                        child: Text(
-                                            "¬X¦ xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenAkñúgkic©snüar:ab;rg.",
-                                            style: TextStyle(
-                                                fontSize: 13, font: khmerF)),
+                                        child: Row(children: [
+                                          Text("¬X¦",
+                                              style: TextStyle(
+                                                  fontSize: 13, font: khmerF)),
+                                          SizedBox(width: 2.5),
+                                          Text(
+                                              "xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenAkñúgkic©snüar:ab;rg.",
+                                              style: TextStyle(
+                                                  fontSize: 13, font: khmerF))
+                                        ]),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(top: 60),
                                         child: Text(
-                                            "¬g¦ Rkúmh‘unGacTUTat;GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_bNþalmkBIRKb;mUlehtub¤GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_ bNþalmkBIeRKaHfñak;EtmYyb:ueNÑaH.",
+                                            "¬g¦ Rkúmh‘unGacTUTat;GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_bNþalmkBIRKb;mUlehtub¤GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciéRnþy_ bNþalmkBIeRKaHfñak;EtmYyb:ueNÑaH.",
                                             style: TextStyle(
                                                 fontSize: 13, font: khmerF)),
                                       ),
@@ -2451,80 +2474,61 @@ class PDFWidget {
                                       ),
                                     ]),
                                   )
-                                : Padding(
-                                    padding: EdgeInsets.only(top: 5),
-                                    child: Stack(children: [
-                                      Text(
-                                          "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘unEdlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
-                                          style: TextStyle(
-                                              fontSize: 13, font: khmerF)),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 10),
-                                        child: Text(
-                                            "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; @°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgsRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI",
-                                            style: TextStyle(
-                                                fontSize: 13, font: khmerF)),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 20),
-                                        child: Text(
-                                            "%0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak; !°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna. GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kal",
-                                            style: TextStyle(
-                                                fontSize: 13, font: khmerF)),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 30),
-                                        child: Text(
-                                            "kMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
-                                            style: TextStyle(
-                                                fontSize: 13, font: khmerF)),
-                                      )
-                                    ]))
+                                : SizedBox(height: 0)
                             : SizedBox(height: 0)
                   ]))
                 ])))
               ]),
               getPdfStatusKh()
-                  ? (int.parse(policyTerm) > 30)
+                  ? (int.parse(policyTerm) >= 30)
                       ? Padding(
                           padding: EdgeInsets.only(top: 5),
                           child: Stack(children: [
                             Text(
-                                "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘unEdlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
+                                "¬k¦ enHKWCaKeRmagFanar:ab;rgTayC¢TanEdlminmankarcUlrYmEbgEckPaKlaPCamYyRkúmh‘un Edlkarbg;buBVlaPFanar:ab;rgeTAtamkalkMNt;énbNÑsnüar:ab;rg.",
                                 style: TextStyle(fontSize: 13, font: khmerF)),
                             Padding(
                               padding: EdgeInsets.only(top: 10),
                               child: Text(
-                                  "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; @°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgsRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI",
+                                  "¬x¦ GtßRbeyaCn_BiessRtÚv)anFana RtÚv)anKNnaedayykGRtakarR)ak; 2°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rg sRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFana",
                                   style: TextStyle(fontSize: 13, font: khmerF)),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 20),
+                              padding: EdgeInsets.only(top: 20, left: 13.7),
                               child: Text(
-                                  "%0qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak; !°énTwkR)ak;Fanar:ab;rg KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna. GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kal",
-                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                                "eRkam 50qñaMKitRtwméf¶xYbkMeNItcugeRkay edayELksRmab;Gñkbg;buBVlaPFanar:ab;rgEdlmanGayuenAeBlcab;epþImFanacab;BI 50qñaMeLIgeTAKitRtwméf¶xYbkMeNItcugeRkayGRtakarR)ak;1°énTwkR)ak;Fanar:ab;rg",
+                                style: TextStyle(fontSize: 13, font: khmerF),
+                              ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 30),
-                              child: Text("kMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
+                              padding: EdgeInsets.only(top: 30, left: 13.7),
+                              child: Text(
+                                  "KuNnwgcMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna. GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kalkMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
                                   style: TextStyle(fontSize: 13, font: khmerF)),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 40),
                               child: Text(
-                                  "¬K¦ bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic @qñaM.",
+                                  "¬K¦ bNÑsnüar:ab;rgenHnwgTTYl)annUvtémøsac;R)ak; bnÞab;BIbNÑsnüar:ab;rgenHRtÚv)ancUlCaFrmankñúgry³eBly:agtic 2qñaM.",
                                   style: TextStyle(fontSize: 13, font: khmerF)),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 50),
-                              child: Text(
-                                  "¬X¦ xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenAkñúgkic©snüar:ab;rg.",
-                                  style: TextStyle(fontSize: 13, font: khmerF)),
+                              child: Row(children: [
+                                Text("¬X¦",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF)),
+                                SizedBox(width: 2.5),
+                                Text(
+                                    "xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenAkñúgkic©snüar:ab;rg.",
+                                    style:
+                                        TextStyle(fontSize: 13, font: khmerF))
+                              ]),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 60),
                               child: Text(
-                                  "¬g¦ Rkúmh‘unGacTUTat;GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_bNþalmkBIRKb;mUlehtub¤GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_ bNþalmkBIeRKaHfñak;EtmYyb:ueNÑaH.",
+                                  "¬g¦ Rkúmh‘unGacTUTat;GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_bNþalmkBIRKb;mUlehtub¤GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciéRnþy_ bNþalmkBIeRKaHfñak;EtmYyb:ueNÑaH.",
                                   style: TextStyle(fontSize: 13, font: khmerF)),
                             ),
                             Padding(
@@ -2535,26 +2539,7 @@ class PDFWidget {
                             ),
                           ]),
                         )
-                      : Stack(children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 50),
-                            child: Text(
-                                "¬X¦ xagelIenHCakarbgðajGMBIplitplFanar:ab;rgEtb:ueNÑaH. GtßRbeyaCn_Edl)anBiBN’naenATIenH KWRtÚvGnuelamtam x niglkçxNÐTaMgGs;EdlmanEcgenAkñúgkic©snüar:ab;rg.",
-                                style: TextStyle(fontSize: 13, font: khmerF)),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 60),
-                            child: Text(
-                                "¬g¦ Rkúmh‘unGacTUTat;GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_bNþalmkBIRKb;mUlehtub¤GtßRbeyaCn_mrNPaBb¤BikarPaBTaMgRsúgnigCaGciRnéþy_ bNþalmkBIeRKaHfñak;EtmYyb:ueNÑaH.",
-                                style: TextStyle(fontSize: 13, font: khmerF)),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 80),
-                            child: Text(
-                                "sMKal;³ taragsmÁal;bgðajBIplitplenHnwgRtÚvGs;suBlPaBry³eBl30éf¶eRkaykalbriecäTe)aHBum<xageRkam.",
-                                style: TextStyle(fontSize: 13, font: khmerF)),
-                          ),
-                        ])
+                      : SizedBox(height: 0)
                   : SizedBox(height: 0),
             ]));
     return pdf;

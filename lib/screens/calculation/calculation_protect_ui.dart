@@ -40,10 +40,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   Future<void> initializeCalculator() async {
     final prefs = await SharedPreferences.getInstance();
-    // if (!prefs.containsKey("valueP") && !prefs.containsKey("valueLP")) {
-    //   await getAmountValues();
-    //   await getValues();
-    // }
+    if (!prefs.containsKey("valueP") && !prefs.containsKey("valueLP")) {
+      await getAmountValues();
+      await getValues();
+    }
     pFirstName.addListener(getAmountValues);
     pLastName.addListener(getAmountValues);
     pAge.addListener(getAmountValues);
@@ -458,7 +458,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     void calculateAndPDF() {
       if (appProvider.differentPerson == false) {
         parametersProvider.pName = parametersProvider.lpName =
-            firstName.text.toString() + " " + lastName.text.toString();
+            appProvider.language != 'kh'
+                ? firstName.text.toString() + " " + lastName.text.toString()
+                : lastName.text.toString() + " " + firstName.text.toString();
         parametersProvider.pAge =
             parametersProvider.lpAge = age.text.toString();
         parametersProvider.pGender =
@@ -467,16 +469,18 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             parametersProvider.lpOccupation = lOccupation.text.toString();
       } else {
         //Proposer
-        parametersProvider.pName =
-            pFirstName.text.toString() + " " + pLastName.text.toString();
+        parametersProvider.pName = appProvider.language != 'kh'
+            ? pFirstName.text.toString() + " " + pLastName.text.toString()
+            : pLastName.text.toString() + " " + pFirstName.text.toString();
         parametersProvider.pAge = pAge.text.toString();
         parametersProvider.pGender = pSelectedGender.toString();
         parametersProvider.pOccupation = pOccupation.text.toString();
         //
 
         //Life Proposed
-        parametersProvider.lpName =
-            firstName.text.toString() + " " + lastName.text.toString();
+        parametersProvider.lpName = appProvider.language != 'kh'
+            ? firstName.text.toString() + " " + lastName.text.toString()
+            : lastName.text.toString() + " " + firstName.text.toString();
         parametersProvider.lpAge = age.text.toString();
         parametersProvider.lpGender = lSelectedGender.toString();
         parametersProvider.lpOccupation = lOccupation.text.toString();
@@ -558,7 +562,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                   appProvider: appProvider,
                                   onPhone: 21.0,
                                   onTablet: 42.0),
-                              fieldTitle: lang['proposer'],
+                              fieldTitle: lang['proposer_protect'],
                             ),
                             SizedBox(
                                 height: DeviceUtils.getResponsive(
@@ -1456,7 +1460,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         customDialogChildren.add(CustomDialogText(
           description: "Rider can't be 0 or a negative amount",
         ));
-      } else {
+      } else if (sumAssuredAmount.isEmpty) {
+        customDialogChildren.add(CustomDialogText(
+          description: "Sum Assured can't be empty",
+        ));
+      } else if (sumAssuredAmount.isNotEmpty) {
         if (double.parse(riderAmount) < 3600) {
           customDialogChildren.add(CustomDialogText(
             description: "Rider must be at least 3600 USD",

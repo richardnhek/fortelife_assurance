@@ -90,6 +90,10 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   //
 
   //Protect Calculator Screen
+  "proposer_protect": {
+    LANGUAGE_ENGLISH: "Proposer",
+    LANGUAGE_KHMER: "អ្នកស្នើសុំធានារ៉ាប់រង"
+  },
   "life_proposed": {
     LANGUAGE_ENGLISH: "Life Proposed",
     LANGUAGE_KHMER: "អ្នកត្រូវបានធានារ៉ាប់រងលើអាយុជីវិត"
@@ -260,5 +264,34 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   "username": {LANGUAGE_ENGLISH: "Username", LANGUAGE_KHMER: "ឈ្មោះ​គណនី"},
   "password": {LANGUAGE_ENGLISH: "Password", LANGUAGE_KHMER: "លេខសំងាត់"},
   "login": {LANGUAGE_ENGLISH: "Login", LANGUAGE_KHMER: "ចូលគណនី"},
+  //
+
+  //Error Messages
+  "error": {LANGUAGE_ENGLISH: "Error", LANGUAGE_KHMER: "មានបញ្ហា"},
+  "empty_creds": {
+    LANGUAGE_ENGLISH: "Username and Password Can’t Be Empty",
+    LANGUAGE_KHMER: "ឈ្មោះគណនី និង ពាក្យសម្ងាត់ មិនអាចទទេ"
+  },
+  "incorrect_creds": {
+    LANGUAGE_ENGLISH: "Incorrect Username or Password",
+    LANGUAGE_KHMER: "ឈ្មោះគណនី ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវ"
+  },
+  "server_disc": {
+    LANGUAGE_ENGLISH: "Unable to Connect to Server",
+    LANGUAGE_KHMER: "មិនអាចភ្ជាប់ទៅកាន់ ម៉ាស៊ីនមេ"
+  },
+  "four_char": {
+    LANGUAGE_ENGLISH: "Password must be at least 4 characters",
+    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ត្រូវចាប់ពី 4 តួឡើងទៅ"
+  },
+  "mismatch_creds": {
+    LANGUAGE_ENGLISH: "Passwords are not matched",
+    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ ត្រូវដូចគ្នា"
+  },
+  "default_creds": {
+    LANGUAGE_ENGLISH: "Password Cannot Be Default",
+    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ ត្រូវខុសពីពាក្យសម្ងាត់ដើម"
+  },
+
   //
 };
