@@ -62,6 +62,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     void _onChangePassword(scaffoldContext) async {
+      AppProvider appProvider =
+          Provider.of<AppProvider>(context, listen: false);
+      Map<String, dynamic> lang = appProvider.lang;
       if (_newPasswordController.text.isNotEmpty) {
         if (_newPasswordController.text == "1234" ||
             _newPasswordController.text != _confirmController.text ||
@@ -74,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: Image.asset("assets/icons/attention.png",
                         width: 60, height: 60),
                     content: Text(
-                      "Password Can't Be Default",
+                      lang['default_creds'],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: "Kano",
@@ -127,6 +130,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Provider.of<AuthProvider>(context, listen: false);
             final prefs = await SharedPreferences.getInstance();
             final agentID = prefs.getString(AGENT_ID);
+            AppProvider appProvider =
+                Provider.of<AppProvider>(context, listen: false);
+            Map<String, dynamic> lang = appProvider.lang;
 
             await authProvider.changePassword(_newPasswordController.text);
             Navigator.of(context).pop();
@@ -140,7 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: Image.asset("assets/icons/check.png",
                         width: 60, height: 60),
                     content: Text(
-                      "Password Changed Successfully",
+                      lang['change_passsuccess_1'],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 22,

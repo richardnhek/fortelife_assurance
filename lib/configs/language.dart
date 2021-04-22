@@ -268,10 +268,17 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
 
   //Error Messages
   "error": {LANGUAGE_ENGLISH: "Error", LANGUAGE_KHMER: "មានបញ្ហា"},
+  "error_inputs": {
+    LANGUAGE_ENGLISH: "Error Inputs",
+    LANGUAGE_KHMER: "ទិន្នន័យមានបញ្ហា"
+  },
+  "last_login": {LANGUAGE_ENGLISH: "Last Login", LANGUAGE_KHMER: "ចូលចុងក្រោយ"},
+
   "empty_creds": {
     LANGUAGE_ENGLISH: "Username and Password Can’t Be Empty",
     LANGUAGE_KHMER: "ឈ្មោះគណនី និង ពាក្យសម្ងាត់ មិនអាចទទេ"
   },
+
   "incorrect_creds": {
     LANGUAGE_ENGLISH: "Incorrect Username or Password",
     LANGUAGE_KHMER: "ឈ្មោះគណនី ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវ"
@@ -292,6 +299,184 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Password Cannot Be Default",
     LANGUAGE_KHMER: "ពាក្យសម្ងាត់ ត្រូវខុសពីពាក្យសម្ងាត់ដើម"
   },
+  "change_passsuccess": {
+    LANGUAGE_ENGLISH: "Password Changed Successfully, Please Log In Again",
+    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្តូរដោយជោគជ័យសូមចូលម្តងទៀត"
+  },
+  "change_passsuccess_1": {
+    LANGUAGE_ENGLISH: "Password Changed Successfully",
+    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្តូរដោយជោគជ័យ"
+  },
+  "ok": {LANGUAGE_ENGLISH: "OK", LANGUAGE_KHMER: "បន្ត"},
+  "info": {LANGUAGE_ENGLISH: "INFO", LANGUAGE_KHMER: "ពត៌មាន"},
+  "p_under18": {
+    LANGUAGE_ENGLISH: "Payor’s age is under 18, please check information page",
+    LANGUAGE_KHMER: "អាយុអ្នកបង់បុព្វលាភធានារ៉ាប់រង មិនអាចតិចជាង 18 ឆ្នាំ"
+  },
+  "p_limit": {
+    LANGUAGE_ENGLISH:
+        "Payor’s age limit exceeded, please check information page",
+    LANGUAGE_KHMER: "អាយុអ្នកបង់បុព្វលាភធានារ៉ាប់រង លើសអប្បបរមា"
+  },
+  "p_empty": {
+    LANGUAGE_ENGLISH: "Payor’s age cannot be empty",
+    LANGUAGE_KHMER: "អាយុអ្នកបង់បុព្វលាភធានារ៉ាប់រង មិនអាចទទេ"
+  },
+  "age_empty": {
+    LANGUAGE_ENGLISH: "Age field cannot be empty",
+    LANGUAGE_KHMER: "ទិន្នន័យអាយុ មិនអាចទទេ"
+  },
+  "gender_empty": {
+    LANGUAGE_ENGLISH: "Age field cannot be empty",
+    LANGUAGE_KHMER: "ទិន្នន័យភេទ មិនអាចទទេ"
+  },
+  "p_emptygender": {
+    LANGUAGE_ENGLISH: "Payor’s gender cannot be empty",
+    LANGUAGE_KHMER: "ភេទអ្នកបង់បុព្វលាភធានារ៉ាប់រង មិនអាចទទេ"
+  },
+  "lp_age": {
+    LANGUAGE_ENGLISH: "Life Proposed’s age",
+    LANGUAGE_KHMER: "អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត"
+  },
+  "invalid_1": {
+    LANGUAGE_ENGLISH: "invalid: Child's age must be at least 1 year old",
+    LANGUAGE_KHMER:
+        "គ្មានសុពលភាព៖ អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចតិចជាង 1 ឆ្នាំ"
+  },
+  "invalid_8": {
+    LANGUAGE_ENGLISH: "invalid: Child's age is limited to 8 years old",
+    LANGUAGE_KHMER:
+        "គ្មានសុពលភាព៖ អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត ត្រូវបានកំណត់ត្រឹមអាយុ ៨ ឆ្នាំ"
+  },
+  "invalid_10": {
+    LANGUAGE_ENGLISH: "គ្មានសុពលភាព៖ ត្រូវមានយ៉ាងហោចណាស់ ១០ ឆ្នាំ",
+    LANGUAGE_KHMER: ""
+  },
+  "lp_0": {
+    LANGUAGE_ENGLISH: "Life Proposed’s age must be at least 1 year old",
+    LANGUAGE_KHMER: "អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចតិចជាង 1 ឆ្នាំ"
+  },
+  "lp_exceeded8": {
+    LANGUAGE_ENGLISH: "Life Proposed’s age (8) exceeded",
+    LANGUAGE_KHMER: "អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចលើសពី 8​ ឆ្នាំ"
+  },
+  "lp_exceeded59": {
+    LANGUAGE_ENGLISH: "Life Proposed’s age (59) exceeded",
+    LANGUAGE_KHMER: "អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចលើសពី 59​ ឆ្នាំ"
+  },
+  "lp_empty": {
+    LANGUAGE_ENGLISH: "Life Proposed’s age​ cannot be empty",
+    LANGUAGE_KHMER: "អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចទទេ"
+  },
+  "lp_emptygender": {
+    LANGUAGE_ENGLISH: "Life Proposed’s gender​ cannot be empty",
+    LANGUAGE_KHMER: "ភេទអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចទទេ"
+  },
+  "policy_17": {
+    LANGUAGE_ENGLISH: "invalid: Policy Year is limited to at most 17 years",
+    LANGUAGE_KHMER:
+        "គ្មានសុពលភាព៖ កាលកំណត់នៃបណ្ណសន្យារ៉ាប់រង មិនអាចលើសពី 17 ឆ្នាំ"
+  },
+  "policy": {
+    LANGUAGE_ENGLISH: "Policy Year",
+    LANGUAGE_KHMER: "កាលកំណត់នៃបណ្ណសន្យារ៉ាប់រង"
+  },
+  "for_policy": {
+    LANGUAGE_ENGLISH: "For Policy Year",
+    LANGUAGE_KHMER: "សម្រាប់កាលកំណត់នៃបណ្ណសន្យារ៉ាប់រង"
+  },
 
+  "policy_10": {
+    LANGUAGE_ENGLISH: "Policy Year must be at least 10 years",
+    LANGUAGE_KHMER: "កាលកំណត់នៃបណ្ណសន្យារ៉ាប់រង មិនអាចតិចជាង 10 ឆ្នាំ"
+  },
+  "premium_240": {
+    LANGUAGE_ENGLISH: "Premium must be at least 240 USD",
+    LANGUAGE_KHMER: "ចំនួនបុព្វលាភ មិនអាចតិចជាង 240 ដុល្លារ"
+  },
+  "premium_0": {
+    LANGUAGE_ENGLISH: "Premium can't be 0 or a negative amount",
+    LANGUAGE_KHMER: "ចំនួនបុព្វលាភ មិនអាចជា ០ រឺចំនួនអវិជ្ជមាន"
+  },
+  "premium_num": {
+    LANGUAGE_ENGLISH: "Premium entered is not a number",
+    LANGUAGE_KHMER: "ទិន្នន័យចំនួនបុព្វលាភ មិនមែនជាលេខ"
+  },
+  "premium_empty": {
+    LANGUAGE_ENGLISH: "Premium can't be empty",
+    LANGUAGE_KHMER: "ចំនួនបុព្វលាភ មិនអាចទទេ"
+  },
+  "sumassured_0": {
+    LANGUAGE_ENGLISH: "Sum Assured can't be 0 or a negative amount",
+    LANGUAGE_KHMER:
+        "ចំនួនទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង មិនអាចជា ០ រឺចំនួនអវិជ្ជមាន"
+  },
+  "sumassured_least": {
+    LANGUAGE_ENGLISH: "Sum Assured must be at least",
+    LANGUAGE_KHMER: "ចំនួនទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង មិនអាចតិចជាង"
+  },
+  "sumassured_empty": {
+    LANGUAGE_ENGLISH: "Sum Assured can't be empty",
+    LANGUAGE_KHMER: "ចំនួនទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង មិនអាចទទេ"
+  },
+  "sumassured_num": {
+    LANGUAGE_ENGLISH: "Sum Assured entered is not a number",
+    LANGUAGE_KHMER: "ទិន្នន័យចំនួនទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង មិនមែនជាលេខ"
+  },
+  "pro_under18": {
+    LANGUAGE_ENGLISH:
+        "Proposer’s age is under 18, please check information page",
+    LANGUAGE_KHMER: "អាយុអ្នកស្នើសុំធានារ៉ាប់រង មិនអាចតិចជាង 18 ឆ្នាំ"
+  },
+  "pro_exceeded": {
+    LANGUAGE_ENGLISH:
+        "Proposer’s age limit exceeded, please check information page",
+    LANGUAGE_KHMER: "អាយុអ្នកស្នើសុំធានារ៉ាប់រង លើសអប្បបរមា"
+  },
+  "pro_empty": {
+    LANGUAGE_ENGLISH: "Proposer’s age cannot be empty",
+    LANGUAGE_KHMER: "អាយុអ្នកស្នើសុំធានារ៉ាប់រង មិនអាចទទេ"
+  },
+  "pro_emptygender": {
+    LANGUAGE_ENGLISH: "Proposer’s gender cannot be empty",
+    LANGUAGE_KHMER: "ភេទអ្នកស្នើសុំធានារ៉ាប់រង មិនអាចទទេ"
+  },
+  "rider_empty": {
+    LANGUAGE_ENGLISH: "Rider can't be empty",
+    LANGUAGE_KHMER: "ចំនួនបុព្វលាភផលិតផលបន្ថែម មិនអាចទទេ"
+  },
+  "rider_under3600": {
+    LANGUAGE_ENGLISH: "Rider must be at least 3600 USD",
+    LANGUAGE_KHMER: "ចំនួនបុព្វលាភផលិតផលបន្ថែម មិនអាចតិចជាង 3600 ដុល្លារ"
+  },
+  "rider_exceeded": {
+    LANGUAGE_ENGLISH: "Rider limit Exceeded",
+    LANGUAGE_KHMER: "ចំនួនបុព្វលាភផលិតផលបន្ថែម លើសអប្បបរមា"
+  },
+  "rider_0": {
+    LANGUAGE_ENGLISH: "Rider can't be 0 or a negative amount",
+    LANGUAGE_KHMER: "ចំនួនបុព្វលាភផលិតផលបន្ថែម មិនអាចជា ០ រឺចំនួនអវិជ្ជមាន"
+  },
+  "rider_num": {
+    LANGUAGE_ENGLISH: "Rider entered is not a number",
+    LANGUAGE_KHMER: "ទិន្នន័យចំនួនបុព្វលាភផលិតផលបន្ថែម មិនមែនជាលេខ"
+  },
+  "lp_rider": {
+    LANGUAGE_ENGLISH:
+        "Life Proposed’s age must be at least 18 years old to add Rider",
+    LANGUAGE_KHMER:
+        "អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចតិចជាង 18 ឆ្នាំ ពេលមានផលិតផលបន្ថែម"
+  },
+  "file_named": {
+    LANGUAGE_ENGLISH: "File Named",
+    LANGUAGE_KHMER: "ឈ្មោះឯកសារនេះ"
+  },
+  "exist": {LANGUAGE_ENGLISH: "Already Exists", LANGUAGE_KHMER: "មានរួចហើយ"},
+  "saved": {
+    LANGUAGE_ENGLISH: "Saved Successfully",
+    LANGUAGE_KHMER: "បានរក្សាទុកដោយជោគជ័យ"
+  },
+  "open_file": {LANGUAGE_ENGLISH: "Open File", LANGUAGE_KHMER: "បើក​ឯកសារ"},
+  "close": {LANGUAGE_ENGLISH: "Close", LANGUAGE_KHMER: "បិទ"},
   //
 };

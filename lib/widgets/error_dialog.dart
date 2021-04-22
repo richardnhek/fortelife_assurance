@@ -14,6 +14,7 @@ class ErrorDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> lang = appProvider.lang;
     return CustomAlertDialog(
       appProvider: appProvider,
       mq: mq,
@@ -25,10 +26,10 @@ class ErrorDialog extends StatelessWidget {
               appProvider: appProvider,
               onPhone: 60.0,
               onTablet: 120.0)),
-      title: "Error",
+      title: lang['error'],
       details: details,
       isPrompt: false,
-      actionButtonTitle: "OK",
+      actionButtonTitle: lang['ok'],
       actionButtonTitleTwo: " ",
       onActionButtonPressed: onActionButtonPressed,
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forte_life/constants/constants.dart';
+import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/providers/auth_provider.dart';
 import 'package:forte_life/widgets/loading_modal.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final _confirmController = new TextEditingController(text: '');
 
   void _onChangePassword(scaffoldContext) async {
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    Map<String, dynamic> lang = appProvider.lang;
+
     BuildContext loadingModalContext;
     if (_newPasswordController.text.isNotEmpty) {
       if (_newPasswordController.text == "1234" ||
@@ -28,7 +32,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   title: Image.asset("assets/icons/attention.png",
                       width: 60, height: 60),
                   content: Text(
-                    "Password Can't Be Default",
+                    lang['default_creds'],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Kano",
@@ -46,7 +50,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   title: Image.asset("assets/icons/attention.png",
                       width: 60, height: 60),
                   content: Text(
-                    "Password Must Be At Least\n4 Characters",
+                    lang['four_char'],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Kano",
@@ -64,7 +68,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   title: Image.asset("assets/icons/attention.png",
                       width: 60, height: 60),
                   content: Text(
-                    "Password Not\nMatched",
+                    lang['mismatch_creds'],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Kano",
@@ -101,7 +105,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   title: Image.asset("assets/icons/check.png",
                       width: 60, height: 60),
                   content: Text(
-                    "Password Changed Successfully, Please Log In Again",
+                    lang['change_passsuccess'],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,

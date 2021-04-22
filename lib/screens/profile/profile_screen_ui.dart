@@ -628,7 +628,7 @@ class ProfileScreenUI extends StatelessWidget {
                               Navigator.of(context).pop();
                             },
                             child: Text(
-                              "OK",
+                              lang['ok'],
                               style: TextStyle(
                                   fontSize: DeviceUtils.getResponsive(
                                       mq: mq,
@@ -734,7 +734,7 @@ class ProfileScreenUI extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            "Username: ${appProvider.userName}",
+                            lang['username'] + ": ${appProvider.userName}",
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: DeviceUtils.getResponsive(
@@ -745,7 +745,7 @@ class ProfileScreenUI extends StatelessWidget {
                                 fontFamily: "Kano"),
                           ),
                           Text(
-                            "Last Login: ${appProvider.lastLogin}",
+                            lang['last_login'] + ": ${appProvider.lastLogin}",
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: DeviceUtils.getResponsive(

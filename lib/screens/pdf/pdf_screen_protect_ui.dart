@@ -192,7 +192,9 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                                   onPhone: 60.0,
                                   onTablet: 120.0)),
                           content: Text(
-                            "File Named $newFileName Already Exists",
+                            lang['file_named'] +
+                                newFileName.toString() +
+                                lang['exist'],
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: DeviceUtils.getResponsive(
@@ -231,9 +233,11 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                                 appProvider: appProvider,
                                 onPhone: 60.0,
                                 onTablet: 120.0)),
-                        details: "File Named $newFileName Saved Successfully",
-                        actionButtonTitle: "Open File",
-                        actionButtonTitleTwo: "Close",
+                        details: lang['file_named'] +
+                            newFileName.toString() +
+                            lang['saved'],
+                        actionButtonTitle: lang['open_file'],
+                        actionButtonTitleTwo: lang['close'],
                         onActionButtonPressed: () {
                           OpenFile.open(newFilePath);
                         },

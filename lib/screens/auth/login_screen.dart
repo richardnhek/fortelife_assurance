@@ -44,6 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    Map<String, dynamic> lang = appProvider.lang;
 
     BuildContext loadingModalContext;
     showDialog(
@@ -57,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (_accountController.text.isEmpty || _passwordController.text.isEmpty) {
       Navigator.of(context).pop();
-      _showErrorDialog("Username and Password Can't Be Empty");
+      _showErrorDialog(lang['empty_creds']);
     } else {
       try {
         User agent = await authProvider.login(

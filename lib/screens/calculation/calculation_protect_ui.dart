@@ -313,7 +313,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                   onPhone: 150.0,
                                   onTablet: 300.0),
                               child: Text(
-                                "Error Inputs",
+                                lang['error_inputs'],
                                 style: TextStyle(
                                     color: Color(0xFFD31145),
                                     fontSize: DeviceUtils.getResponsive(
@@ -357,7 +357,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                     });
                                   },
                                   child: Text(
-                                    "INFO",
+                                    lang['info'],
                                     style: TextStyle(
                                         fontSize: DeviceUtils.getResponsive(
                                             mq: mq,
@@ -379,7 +379,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                     Navigator.of(context).pop();
                                   },
                                   child: Text(
-                                    "OK",
+                                    lang['ok'],
                                     style: TextStyle(
                                         fontSize: DeviceUtils.getResponsive(
                                             mq: mq,
@@ -941,7 +941,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               flex: 1,
                               child: CustomDropDown(
                                 appProvider: appProvider,
-                                title: "Policy Year",
+                                title: lang['policy'] + "",
                                 value: selectedYear,
                                 isRequired: true,
                                 items: policyYears,
@@ -1380,10 +1380,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   //Validate Age
   void ageValidation(String ageText, String pAgeText, int policyTerm,
       bool isDifferentPerson, bool isAddRider) {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    Map<String, dynamic> lang = appProvider.lang;
     if (isDifferentPerson == false) {
       if (ageText.isEmpty) {
         customDialogChildren.add(CustomDialogText(
-          description: "Age field can't be empty",
+          description: lang['age_empty'],
         ));
       } else {
         if ((int.parse(ageText) + policyTerm) > 69) {
@@ -1401,7 +1403,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     } else {
       if (ageText.isEmpty || pAgeText.isEmpty) {
         customDialogChildren.add(CustomDialogText(
-          description: "Age field can't be empty",
+          description: lang['age_empty'],
         ));
       } else {
         if (((int.parse(ageText) + policyTerm) > 69) ||
@@ -1421,19 +1423,19 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
           }
           if (isAddRider == false && (int.parse(ageText) < 1)) {
             customDialogChildren.add(CustomDialogText(
-              description: "Life Proposed's age must be at least 1 year old",
+              description: lang['lp_age'] + " must be at least 1 year old",
             ));
           }
           if (isAddRider == true && (int.parse(ageText) < 18)) {
             customDialogChildren.add(CustomDialogText(
-              description:
-                  "Life Proposed's age must be at least 18 years old to add rider",
+              description: lang['lp_age'] +
+                  " must be at least 18 years old to add rider",
             ));
           }
           if (int.parse(ageText) > 59) {
             customDialogChildren.add(CustomDialogText(
               description:
-                  "Life Proposed's age is limited to at most 59 years old",
+                  lang['lp_age'] + " is limited to at most 59 years old",
             ));
           }
         } else {
@@ -1447,33 +1449,34 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   //Validate Added Rider
   void addedRiderValidation(String riderAmount, String sumAssuredAmount) {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    Map<String, dynamic> lang = appProvider.lang;
     if (riderAmount.isEmpty) {
       customDialogChildren.add(CustomDialogText(
-        description: "Rider can't be empty",
+        description: lang['rider_empty'],
       ));
     } else {
       if (regExpNum.hasMatch(riderAmount) == false) {
         customDialogChildren.add(CustomDialogText(
-          description: "Rider entered is not a number",
+          description: lang['rider_num'],
         ));
       } else if (double.parse(riderAmount) < 0) {
         customDialogChildren.add(CustomDialogText(
-          description: "Rider can't be 0 or a negative amount",
+          description: lang['rider_0'],
         ));
       } else if (sumAssuredAmount.isEmpty) {
         customDialogChildren.add(CustomDialogText(
-          description: "Sum Assured can't be empty",
+          description: lang['rider_empty'],
         ));
       } else if (sumAssuredAmount.isNotEmpty) {
         if (double.parse(riderAmount) < 3600) {
           customDialogChildren.add(CustomDialogText(
-            description: "Rider must be at least 3600 USD",
+            description: lang['rider_under3600'],
           ));
         } else if (double.parse(riderAmount) >
             (double.parse(sumAssuredAmount) * riderLimit)) {
           customDialogChildren.add(CustomDialogText(
-            description:
-                "Rider is currently limited, please check information page",
+            description: lang['rider_exceeded'],
           ));
         } else
           counter++;
@@ -1484,18 +1487,20 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   //Validate Sum Assured
   void sumAssuredValidation(String sumAssuredAmount, int policyTerm) {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    Map<String, dynamic> lang = appProvider.lang;
     if (sumAssuredAmount.isEmpty) {
       customDialogChildren.add(CustomDialogText(
-        description: "Sum Assured can't be empty",
+        description: lang['sumassured_empty'],
       ));
     } else {
       if (regExpNum.hasMatch(sumAssuredAmount) == false) {
         customDialogChildren.add(CustomDialogText(
-          description: "Sum Assured entered is not a number",
+          description: lang['sumassured_num'],
         ));
       } else if (double.parse(sumAssuredAmount) < 0) {
         customDialogChildren.add(CustomDialogText(
-          description: "Sum Assured can't be 0 or a negative amount",
+          description: lang['sumassured_0'],
         ));
       } else {
         switch (policyTerm) {
@@ -1503,8 +1508,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             {
               if (double.parse(sumAssuredAmount) < 2400) {
                 customDialogChildren.add(CustomDialogText(
-                  description:
-                      "For Policy Term (10): Sum Assured must be at least 2400 USD",
+                  description: lang['for_policy'] +
+                      "(10):" +
+                      lang['sumassured_least'] +
+                      " 2400 USD",
                 ));
               } else
                 counter++;
@@ -1514,8 +1521,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             {
               if (double.parse(sumAssuredAmount) < 3600) {
                 customDialogChildren.add(CustomDialogText(
-                  description:
-                      "For Policy Term (15): Sum Assured must be at least 3600 USD",
+                  description: lang['for_policy'] +
+                      "(15):" +
+                      lang['sumassured_least'] +
+                      " 3600 USD",
                 ));
               } else
                 counter++;
@@ -1526,8 +1535,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             {
               if (double.parse(sumAssuredAmount) < 4800) {
                 customDialogChildren.add(CustomDialogText(
-                  description:
-                      "For Policy Term (20): Sum Assured must be at least 4800 USD",
+                  description: lang['for_policy'] +
+                      "(20):" +
+                      lang['sumassured_least'] +
+                      " 4800 USD",
                 ));
               } else
                 counter++;
@@ -1537,8 +1548,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             {
               if (double.parse(sumAssuredAmount) < 6000) {
                 customDialogChildren.add(CustomDialogText(
-                  description:
-                      "For Policy Term (25): Sum Assured must be at least 6000 USD",
+                  description: lang['for_policy'] +
+                      "(25):" +
+                      lang['sumassured_least'] +
+                      " 6000 USD",
                 ));
               } else
                 counter++;
@@ -1549,8 +1562,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             {
               if (double.parse(sumAssuredAmount) < 7200) {
                 customDialogChildren.add(CustomDialogText(
-                  description:
-                      "For Policy Term (30): Sum Assured must be at least 7200 USD",
+                  description: lang['for_policy'] +
+                      "(30):" +
+                      lang['sumassured_least'] +
+                      " 7200 USD",
                 ));
               } else
                 counter++;
@@ -1561,8 +1576,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             {
               if (double.parse(sumAssuredAmount) < 8400) {
                 customDialogChildren.add(CustomDialogText(
-                  description:
-                      "For Policy Term (35): Sum Assured must be at least 8400 USD",
+                  description: lang['for_policy'] +
+                      "(35):" +
+                      lang['sumassured_least'] +
+                      " 8400 USD",
                 ));
               } else
                 counter++;
@@ -1577,28 +1594,30 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
   //Validate Sum Assured
   void premiumValidation(String premiumAmount) {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    Map<String, dynamic> lang = appProvider.lang;
     if (premiumAmount.isEmpty || premiumAmount == null) {
       if (premiumAmount.isEmpty) {
         customDialogChildren.add(CustomDialogText(
-          description: "Premium can't be empty",
+          description: lang['premium_empty'],
         ));
       } else
         customDialogChildren.add(CustomDialogText(
-          description: "Premium can't be null",
+          description: lang['premium_empty'],
         ));
     } else {
       if (regExpNum.hasMatch(premiumAmount) == false) {
         customDialogChildren.add(CustomDialogText(
-          description: "Premium entered is not a number",
+          description: lang['premium_num'],
         ));
       } else if (double.parse(premiumAmount) <= 0) {
         customDialogChildren.add(CustomDialogText(
-          description: "Premium can't be 0 or a negative amount",
+          description: lang['premium_0'],
         ));
       } else if (((double.parse(premiumAmount) > 0) &&
           (double.parse(premiumAmount) < 240))) {
         customDialogChildren.add(CustomDialogText(
-          description: "Premium must be at least 240 USD",
+          description: lang['premium_240'],
         ));
       } else
         counter++;
@@ -1609,17 +1628,19 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   //Gender Emptiness Validation
   void genderValidation(
       String lGenderText, String pGenderText, bool isDifferentPerson) {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    Map<String, dynamic> lang = appProvider.lang;
     if (isDifferentPerson) {
       if (lGenderText == null || pGenderText == null) {
         customDialogChildren.add(CustomDialogText(
-          description: "Gender field can't be empty",
+          description: lang['gender_empty'],
         ));
       } else
         counter++;
     } else {
       if (lGenderText == null) {
         customDialogChildren.add(CustomDialogText(
-          description: "Gender field can't be empty",
+          description: lang['gender_empty'],
         ));
       } else
         counter++;
