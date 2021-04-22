@@ -851,109 +851,98 @@ class PDFWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                        Column(
+                                        Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Padding(
+                                              Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 5,
+                                                      top: 2.5,
+                                                      bottom: 2.5),
+                                                  child: SizedBox(
+                                                      width: 150,
+                                                      child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                                "Basic Plan  : $title",
+                                                                style: TextStyle(
+                                                                    font:
+                                                                        regularF,
+                                                                    fontSize:
+                                                                        8.25)),
+                                                            addRider == true
+                                                                ? Padding(
+                                                                    padding: EdgeInsets
+                                                                        .only(
+                                                                            top:
+                                                                                2.5),
+                                                                    child: Text(
+                                                                        "Rider          : $title" +
+                                                                            " Plus",
+                                                                        style: TextStyle(
+                                                                            font:
+                                                                                regularF,
+                                                                            fontSize:
+                                                                                8.25)))
+                                                                : SizedBox(
+                                                                    height: 0)
+                                                          ]))),
+                                              Column(children: [
+                                                PDFSubtitle(
+                                                    isKhmer: false,
+                                                    title:
+                                                        "USD ${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                                                    font: regularF),
+                                                addRider == true
+                                                    ? Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                left: 5,
-                                                                top: 2.5,
-                                                                bottom: 2.5),
-                                                        child: SizedBox(
-                                                            width: 150,
-                                                            child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                      "Basic Plan  : $title",
-                                                                      style: TextStyle(
-                                                                          font:
-                                                                              regularF,
-                                                                          fontSize:
-                                                                              8.25)),
-                                                                  addRider ==
-                                                                          true
-                                                                      ? Padding(
-                                                                          padding: EdgeInsets.only(
-                                                                              top:
-                                                                                  2.5),
-                                                                          child: Text(
-                                                                              "Rider          : $title" + " Plus",
-                                                                              style: TextStyle(font: regularF, fontSize: 8.25)))
-                                                                      : SizedBox(height: 0)
-                                                                ]))),
-                                                    Column(children: [
-                                                      PDFSubtitle(
-                                                          isKhmer: false,
-                                                          title:
-                                                              "USD ${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                                                          font: regularF),
-                                                      addRider == true
-                                                          ? Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      top: 2.5),
-                                                              child: PDFSubtitle(
-                                                                  isKhmer:
-                                                                      false,
-                                                                  title:
-                                                                      "USD $riderSAStr",
-                                                                  font:
-                                                                      regularF))
-                                                          : SizedBox(height: 0)
-                                                    ]),
-                                                    SizedBox(width: 16.25),
-                                                    Column(children: [
-                                                      PDFSubtitle(
-                                                          isKhmer: false,
-                                                          title: policyTerm,
-                                                          font: regularF),
-                                                      addRider == true
-                                                          ? Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      top: 2.5),
-                                                              child: PDFSubtitle(
-                                                                  isKhmer:
-                                                                      false,
-                                                                  title:
-                                                                      policyTerm,
-                                                                  font:
-                                                                      regularF))
-                                                          : SizedBox(height: 0)
-                                                    ]),
-                                                    SizedBox(width: 15.25),
-                                                    Column(children: [
-                                                      PDFSubtitle(
-                                                          isKhmer: false,
-                                                          title: policyTerm,
-                                                          font: regularF),
-                                                      addRider == true
-                                                          ? Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      top: 2.5),
-                                                              child: PDFSubtitle(
-                                                                  isKhmer:
-                                                                      false,
-                                                                  title:
-                                                                      policyTerm,
-                                                                  font:
-                                                                      regularF))
-                                                          : SizedBox(height: 0)
-                                                    ]),
-                                                  ]),
+                                                                top: 2.5),
+                                                        child: PDFSubtitle(
+                                                            isKhmer: false,
+                                                            title:
+                                                                "USD $riderSAStr",
+                                                            font: regularF))
+                                                    : SizedBox(height: 0)
+                                              ]),
+                                              SizedBox(width: 16.25),
+                                              Column(children: [
+                                                PDFSubtitle(
+                                                    isKhmer: false,
+                                                    title: policyTerm,
+                                                    font: regularF),
+                                                addRider == true
+                                                    ? Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 2.5),
+                                                        child: PDFSubtitle(
+                                                            isKhmer: false,
+                                                            title: policyTerm,
+                                                            font: regularF))
+                                                    : SizedBox(height: 0)
+                                              ]),
+                                              SizedBox(width: 15.25),
+                                              Column(children: [
+                                                PDFSubtitle(
+                                                    isKhmer: false,
+                                                    title: policyTerm,
+                                                    font: regularF),
+                                                addRider == true
+                                                    ? Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 2.5),
+                                                        child: PDFSubtitle(
+                                                            isKhmer: false,
+                                                            title: policyTerm,
+                                                            font: regularF))
+                                                    : SizedBox(height: 0)
+                                              ]),
                                             ]),
                                         Padding(
                                             padding:
@@ -967,178 +956,197 @@ class PDFWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                        Stack(children: [
-                                          addRider == true
-                                              ? Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 14.5),
-                                                  child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Container(
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    left: 5),
-                                                            width: 180.5,
-                                                            child: Row(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                      "plitplbEnßm",
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              16,
-                                                                          font:
-                                                                              khmerF)),
-                                                                  Padding(
-                                                                      padding: EdgeInsets.only(
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 5),
+                                                  child: SizedBox(
+                                                      width: 165.75,
+                                                      child: Stack(children: [
+                                                        Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                  "KeRmagmUldæan",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          16,
+                                                                      font:
+                                                                          khmerF)),
+                                                              Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
                                                                           top:
                                                                               4.8),
-                                                                      child: Text(
-                                                                          " : ",
-                                                                          style: TextStyle(
-                                                                              fontSize: 8.25,
-                                                                              font: regularF))),
-                                                                  Text(
-                                                                      "GayuCIvitmankalkMNt;",
+                                                                  child: Text(
+                                                                      " : ",
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              16,
+                                                                              8.25,
                                                                           font:
-                                                                              khmerF))
-                                                                ])),
-                                                        SizedBox(
-                                                          width: 90,
+                                                                              regularF))),
+                                                              Text(
+                                                                  "GayuCIvitelIKeRmagKaMBar",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          16,
+                                                                      font:
+                                                                          khmerF))
+                                                            ]),
+                                                        addRider == true
+                                                            ? Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            14.5),
+                                                                child: Row(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                          "plitplbEnßm",
+                                                                          style: TextStyle(
+                                                                              fontSize: 16,
+                                                                              font: khmerF)),
+                                                                      Padding(
+                                                                          padding: EdgeInsets.only(
+                                                                              top:
+                                                                                  4.8),
+                                                                          child: Text(
+                                                                              " : ",
+                                                                              style: TextStyle(fontSize: 8.25, font: regularF))),
+                                                                      Text(
+                                                                          "GayuCIvitmankalkMNt;",
+                                                                          style: TextStyle(
+                                                                              fontSize: 16,
+                                                                              font: khmerF))
+                                                                    ]))
+                                                            : SizedBox(
+                                                                height: 0)
+                                                      ]))),
+                                              Stack(
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 90,
+                                                      child: Center(
                                                           child: Row(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
                                                               children: [
-                                                                Padding(
-                                                                    padding: EdgeInsets
-                                                                        .only(
-                                                                            top:
-                                                                                5.25),
-                                                                    child: Text(
-                                                                        "$riderSAStr ",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8.25,
-                                                                            font:
-                                                                                regularF))),
-                                                                Text("duløar",
+                                                            Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            5.25),
+                                                                child: Text(
+                                                                    "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
                                                                     style: TextStyle(
                                                                         fontSize:
-                                                                            16,
+                                                                            8.25,
                                                                         font:
-                                                                            khmerF)),
-                                                              ]),
-                                                        ),
-                                                        PDFSubtitle(
-                                                            isKhmer: true,
-                                                            title: policyTerm +
-                                                                "qñaM",
-                                                            font: khmerF),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 10),
-                                                          child: PDFSubtitle(
-                                                              isKhmer: true,
-                                                              title:
-                                                                  policyTerm +
-                                                                      "qñaM",
-                                                              font: khmerF),
-                                                        )
-                                                      ]))
-                                              : SizedBox(height: 0),
-                                          Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 5),
-                                                    width: 180.5,
-                                                    child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text("KeRmagmUldæan",
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  font:
-                                                                      khmerF)),
-                                                          Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      top: 4.8),
-                                                              child: Text(" : ",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          8.25,
-                                                                      font:
-                                                                          regularF))),
-                                                          Text(
-                                                              "GayuCIvitelIKeRmagKaMBar",
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  font: khmerF))
-                                                        ])),
-                                                SizedBox(
-                                                  width: 90,
-                                                  child: Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 5.25),
-                                                            child: Text(
-                                                                "${basicSANum.toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
+                                                                            regularF))),
+                                                            Text("duløar",
                                                                 style: TextStyle(
                                                                     fontSize:
-                                                                        8.25,
+                                                                        16,
                                                                     font:
-                                                                        regularF))),
-                                                        Text("duløar",
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                font: khmerF)),
-                                                      ]),
-                                                ),
+                                                                        khmerF)),
+                                                          ])),
+                                                    ),
+                                                    addRider == true
+                                                        ? Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 14.5),
+                                                            child: SizedBox(
+                                                              width: 90,
+                                                              child: Center(
+                                                                  child: Row(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                    Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                5.25),
+                                                                        child: Text(
+                                                                            "$riderSAStr ",
+                                                                            style:
+                                                                                TextStyle(fontSize: 8.25, font: regularF))),
+                                                                    Text(
+                                                                        "duløar",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                16,
+                                                                            font:
+                                                                                khmerF)),
+                                                                  ])),
+                                                            ),
+                                                          )
+                                                        : SizedBox(height: 0)
+                                                  ]),
+                                              SizedBox(width: 10.25),
+                                              Stack(children: [
                                                 PDFSubtitle(
                                                     isKhmer: true,
                                                     title: policyTerm + "qñaM",
                                                     font: khmerF),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 10),
-                                                  child: PDFSubtitle(
-                                                      isKhmer: true,
-                                                      title:
-                                                          policyTerm + "qñaM",
-                                                      font: khmerF),
-                                                )
-                                              ])
-                                        ]),
+                                                addRider == true
+                                                    ? Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 14.5),
+                                                        child: PDFSubtitle(
+                                                            isKhmer: true,
+                                                            title: policyTerm +
+                                                                "qñaM",
+                                                            font: khmerF))
+                                                    : SizedBox(height: 0)
+                                              ]),
+                                              SizedBox(width: 10.25),
+                                              Stack(children: [
+                                                PDFSubtitle(
+                                                    isKhmer: true,
+                                                    title: policyTerm + "qñaM",
+                                                    font: khmerF),
+                                                addRider == true
+                                                    ? Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 14.5),
+                                                        child: PDFSubtitle(
+                                                            isKhmer: true,
+                                                            title: policyTerm +
+                                                                "qñaM",
+                                                            font: khmerF))
+                                                    : SizedBox(height: 0)
+                                              ]),
+                                            ]),
                                         Padding(
-                                          padding: EdgeInsets.only(right: 5),
-                                          child: PDFSubtitle(
-                                              isKhmer: true,
-                                              title: getPremiumPayment(
-                                                  paymentMode)[5],
-                                              font: khmerF),
-                                        )
-                                      ])
+                                            padding:
+                                                EdgeInsets.only(right: 3.5),
+                                            child: PDFSubtitle(
+                                                isKhmer: true,
+                                                title: getPremiumPayment(
+                                                    paymentMode)[5],
+                                                font: khmerF))
+                                      ]),
                           ]),
                           TableRow(children: [
                             lang != 'kh'
@@ -1183,7 +1191,7 @@ class PDFWidget {
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Container(
-                                                    width: 140,
+                                                    width: 200,
                                                     child: Text(
                                                         "Basic Plan  : $title",
                                                         style: TextStyle(
@@ -1193,7 +1201,7 @@ class PDFWidget {
                                                     ? Container(
                                                         margin: EdgeInsets.only(
                                                             top: 2.5),
-                                                        width: 140,
+                                                        width: 200,
                                                         child: Text(
                                                             "Rider          : $title" +
                                                                 " Plus",
@@ -1225,141 +1233,151 @@ class PDFWidget {
                                               ])
                                         ]),
                                   )
-                                : Stack(children: [
-                                    addRider == true
-                                        ? Padding(
-                                            padding: EdgeInsets.only(top: 14.5),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 5),
-                                                      width: 120,
-                                                      child: Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text("plitplbEnßm",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    font:
-                                                                        khmerF)),
+                                : Row(children: [
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 5),
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                  width: 240,
+                                                  child: Stack(children: [
+                                                    Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text("KeRmagmUldæan",
+                                                              style: TextStyle(
+                                                                  fontSize: 16,
+                                                                  font:
+                                                                      khmerF)),
+                                                          Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 4.8),
+                                                              child: Text(" : ",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          8.25,
+                                                                      font:
+                                                                          regularF))),
+                                                          Text(
+                                                              "GayuCIvitelIKeRmagKaMBar",
+                                                              style: TextStyle(
+                                                                  fontSize: 16,
+                                                                  font: khmerF))
+                                                        ]),
+                                                    addRider == true
+                                                        ? Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 14.5),
+                                                            child: Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                      "plitplbEnßm",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                          font:
+                                                                              khmerF)),
+                                                                  Padding(
+                                                                      padding: EdgeInsets.only(
+                                                                          top:
+                                                                              4.8),
+                                                                      child: Text(
+                                                                          " : ",
+                                                                          style: TextStyle(
+                                                                              fontSize: 8.25,
+                                                                              font: regularF))),
+                                                                  Text(
+                                                                      "GayuCIvitmankalkMNt;",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                          font:
+                                                                              khmerF))
+                                                                ]))
+                                                        : SizedBox(height: 0)
+                                                  ])),
+                                              Stack(
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 90,
+                                                      child: Center(
+                                                          child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
                                                             Padding(
                                                                 padding: EdgeInsets
                                                                     .only(
                                                                         top:
-                                                                            4.8),
+                                                                            5.25),
                                                                 child: Text(
-                                                                    " : ",
+                                                                    "${getPremiumPayment(paymentMode)[2].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             8.25,
                                                                         font:
                                                                             regularF))),
-                                                            Text(
-                                                                "GayuCIvitmankalkMNt;",
+                                                            Text("duløar",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         16,
                                                                     font:
-                                                                        khmerF))
+                                                                        khmerF)),
                                                           ])),
-                                                  Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 140),
-                                                      child: SizedBox(
-                                                          width: 90,
-                                                          child: Center(
-                                                              child: Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                Padding(
-                                                                    padding: EdgeInsets
-                                                                        .only(
-                                                                            top:
-                                                                                5.25),
-                                                                    child: Text(
-                                                                        "${getPremiumPayment(paymentMode)[4].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8.25,
-                                                                            font:
-                                                                                regularF))),
-                                                                Text("duløar",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            16,
-                                                                        font:
-                                                                            khmerF)),
-                                                              ]))))
-                                                ]),
-                                          )
-                                        : SizedBox(width: 0),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              margin: EdgeInsets.only(left: 5),
-                                              width: 120,
-                                              child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text("KeRmagmUldæan",
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            font: khmerF)),
-                                                    Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 4.8),
-                                                        child: Text(" : ",
-                                                            style: TextStyle(
-                                                                fontSize: 8.25,
-                                                                font:
-                                                                    regularF))),
-                                                    Text(
-                                                        "GayuCIvitelIKeRmagKaMBar",
-                                                        style: TextStyle(
-                                                            fontSize: 16,
-                                                            font: khmerF))
-                                                  ])),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 135),
-                                              child: SizedBox(
-                                                  width: 90,
-                                                  child: Center(
-                                                      child: Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                        Padding(
+                                                    ),
+                                                    addRider == true
+                                                        ? Padding(
                                                             padding:
                                                                 EdgeInsets.only(
-                                                                    top: 5.25),
-                                                            child: Text(
-                                                                "${getPremiumPayment(paymentMode)[2].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        8.25,
-                                                                    font:
-                                                                        regularF))),
-                                                        Text("duløar",
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                font: khmerF)),
-                                                      ]))))
-                                        ]),
-                                  ])
+                                                                    top: 14.5),
+                                                            child: SizedBox(
+                                                              width: 90,
+                                                              child: Center(
+                                                                  child: Row(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                    Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                5.25),
+                                                                        child: Text(
+                                                                            "${getPremiumPayment(paymentMode)[4].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')} ",
+                                                                            style:
+                                                                                TextStyle(fontSize: 8.25, font: regularF))),
+                                                                    Text(
+                                                                        "duløar",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                16,
+                                                                            font:
+                                                                                khmerF)),
+                                                                  ])),
+                                                            ),
+                                                          )
+                                                        : SizedBox(height: 0)
+                                                  ]),
+                                            ]))
+                                  ]),
                           ]),
                           TableRow(children: [
                             lang != 'kh'
@@ -1370,7 +1388,7 @@ class PDFWidget {
                                             padding: EdgeInsets.only(
                                                 left: 5, top: 2.5, bottom: 2.5),
                                             child: Container(
-                                                width: 120,
+                                                width: 180,
                                                 child: Text("Total Premium",
                                                     style: TextStyle(
                                                         font: boldF,

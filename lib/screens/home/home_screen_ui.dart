@@ -107,7 +107,7 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                                 fontSize: DeviceUtils.getResponsive(
                                     mq: mq,
                                     appProvider: appProvider,
-                                    onPhone: 12.75,
+                                    onPhone: 13.5,
                                     onTablet: 28.0),
                                 btnSize: DeviceUtils.getResponsive(
                                     mq: mq,
@@ -135,7 +135,7 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                                 fontSize: DeviceUtils.getResponsive(
                                     mq: mq,
                                     appProvider: appProvider,
-                                    onPhone: 12.75,
+                                    onPhone: 13.5,
                                     onTablet: 28.0),
                                 btnSize: DeviceUtils.getResponsive(
                                     mq: mq,

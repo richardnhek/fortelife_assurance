@@ -31,7 +31,7 @@ class CalculatorButton extends StatelessWidget {
       highlightElevation: 0,
       padding: EdgeInsets.zero,
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
         height: btnSize,
         width: btnSize,
         decoration: BoxDecoration(
