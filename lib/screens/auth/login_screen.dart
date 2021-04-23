@@ -72,8 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
         if (_passwordController.text == "1234") {
           Navigator.popAndPushNamed(context, "/change_pass");
         } else {
+          await appProvider.getRider();
+
           Navigator.of(loadingModalContext).pop();
           Navigator.of(context).popUntil((route) => route.isFirst);
+
           Navigator.of(context).pushReplacementNamed('/main_flow');
         }
       } catch (error) {

@@ -185,8 +185,9 @@ class AppProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final response = await RiderService.getRider();
-      notifyListeners();
       prefs.setInt(RIDER_AMOUNT, response['amount']);
+      print(prefs.getInt(RIDER_AMOUNT));
+      notifyListeners();
     } on DioError catch (error) {
       print(error.response);
       if (error.response == null) {

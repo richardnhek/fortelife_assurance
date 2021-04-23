@@ -26,18 +26,21 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<dynamic> login({String username, String password}) async {
+    sharedPreferences = await SharedPreferences.getInstance();
+
     try {
       final response =
           await AuthService.login(username: username, password: password);
       _user = UserModel.User.fromMap(response['data']);
 
       if (!_user.isActive) {
+        sharedPreferences.remove(APP_ACCESS_TOKEN);
+
         throw HttpException("This Account Has Been Suspended");
       }
 
       if (password != "1234") {
         final token = response['token'];
-        sharedPreferences = await SharedPreferences.getInstance();
         sharedPreferences.setString(APP_ACCESS_TOKEN, token);
 
         _accessToken = response['token'];

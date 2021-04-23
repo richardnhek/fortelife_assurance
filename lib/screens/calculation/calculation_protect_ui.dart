@@ -90,6 +90,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     //
     //Rider Limit
     riderLimit = prefs.getInt(RIDER_AMOUNT);
+    print(prefs.getInt(RIDER_AMOUNT).toString() + "RIDER");
     //
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
@@ -127,6 +128,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     if (sumAssuredNum == null) {
       sumAssured.clear();
     }
+    print(sumAssuredNum.toString() + "NUM");
+    print(sumAssured.text + "TEXT");
+
     riderAdded.text = riderVal == null ? '' : riderVal;
     pFirstName.text = pName == null ? '' : pName;
     pLastName.text = pLName == null ? '' : pLName;
@@ -1455,6 +1459,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       customDialogChildren.add(CustomDialogText(
         description: lang['rider_empty'],
       ));
+    } else if (sumAssuredAmount.isEmpty) {
+      customDialogChildren.add(CustomDialogText(
+        description: lang['sumassured_empty'],
+      ));
     } else {
       if (regExpNum.hasMatch(riderAmount) == false) {
         customDialogChildren.add(CustomDialogText(
@@ -1464,17 +1472,17 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         customDialogChildren.add(CustomDialogText(
           description: lang['rider_0'],
         ));
-      } else if (sumAssuredAmount.isEmpty) {
-        customDialogChildren.add(CustomDialogText(
-          description: lang['rider_empty'],
-        ));
       } else if (sumAssuredAmount.isNotEmpty) {
+        print(double.tryParse(sumAssuredAmount));
+        print(double.tryParse(riderLimit.toString()));
+
         if (double.parse(riderAmount) < 3600) {
           customDialogChildren.add(CustomDialogText(
             description: lang['rider_under3600'],
           ));
-        } else if (double.parse(riderAmount) >
-            (double.parse(sumAssuredAmount) * riderLimit)) {
+        } else if (double.tryParse(riderAmount) >
+            (double.tryParse(sumAssuredAmount) *
+                double.tryParse(riderLimit.toString()))) {
           customDialogChildren.add(CustomDialogText(
             description: lang['rider_exceeded'],
           ));
