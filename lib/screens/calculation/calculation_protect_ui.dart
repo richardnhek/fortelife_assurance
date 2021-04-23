@@ -1196,7 +1196,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               }
                             } else {
                               customDialogChildren.add(CustomDialogText(
-                                description: "No Inputs",
+                                description: lang['no_input'],
                               ));
                               showAlertDialog(context);
                             }
@@ -1427,19 +1427,18 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
           }
           if (isAddRider == false && (int.parse(ageText) < 1)) {
             customDialogChildren.add(CustomDialogText(
-              description: lang['lp_age'] + " must be at least 1 year old",
+              description: lang['lp_age'] + "($age.text)" + lang['invalid_1lp'],
             ));
           }
           if (isAddRider == true && (int.parse(ageText) < 18)) {
             customDialogChildren.add(CustomDialogText(
-              description: lang['lp_age'] +
-                  " must be at least 18 years old to add rider",
+              description:
+                  lang['lp_age'] + "($age.text)" + lang['invalid_rider18'],
             ));
           }
           if (int.parse(ageText) > 59) {
             customDialogChildren.add(CustomDialogText(
-              description:
-                  lang['lp_age'] + " is limited to at most 59 years old",
+              description: lang['lp_age'] + "($age.text)" + lang['exceeded59'],
             ));
           }
         } else {

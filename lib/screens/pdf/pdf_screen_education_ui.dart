@@ -156,9 +156,10 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
                                 appProvider: appProvider,
                                 onPhone: 60.0,
                                 onTablet: 120.0)),
-                        details: "File Named $newFileName Saved Successfully",
-                        actionButtonTitle: "Open File",
-                        actionButtonTitleTwo: "Close",
+                        details:
+                            lang['file'] + " $newFileName " + lang['saved'],
+                        actionButtonTitle: lang['open_file'],
+                        actionButtonTitleTwo: lang['close'],
                         onActionButtonPressed: () {
                           OpenFile.open(newFilePath);
                         },

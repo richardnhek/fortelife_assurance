@@ -1180,7 +1180,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     Map<String, dynamic> lang = appProvider.lang;
     if (policyYearText.isEmpty) {
       customDialogChildren.add(CustomDialogText(
-        description: lang['policy'] + " can't be empty",
+        description: lang['policy'] + lang['empty'],
       ));
     } else {
       counter++;

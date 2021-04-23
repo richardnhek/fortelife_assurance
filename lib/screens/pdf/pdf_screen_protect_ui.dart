@@ -220,7 +220,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                       return CustomAlertDialog(
                         appProvider: appProvider,
                         mq: mq,
-                        title: "Saved",
+                        title: lang['saved_1'],
                         isPrompt: true,
                         icon: Image.asset("assets/icons/check.png",
                             width: DeviceUtils.getResponsive(
@@ -265,7 +265,7 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                                 onPhone: 60.0,
                                 onTablet: 120.0)),
                         content: Text(
-                          "File Name Can't Be Empty",
+                          lang['file_empty'],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: DeviceUtils.getResponsive(

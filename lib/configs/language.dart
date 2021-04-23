@@ -288,13 +288,14 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_KHMER: "មិនអាចភ្ជាប់ទៅកាន់ ម៉ាស៊ីនមេ"
   },
   "four_char": {
-    LANGUAGE_ENGLISH: "Password must be at least 4 characters",
+    LANGUAGE_ENGLISH: "Password Must Be At Least 4 Characters",
     LANGUAGE_KHMER: "ពាក្យសម្ងាត់ត្រូវចាប់ពី 4 តួឡើងទៅ"
   },
   "mismatch_creds": {
-    LANGUAGE_ENGLISH: "Passwords are not matched",
+    LANGUAGE_ENGLISH: "Passwords Are\nNot Matched",
     LANGUAGE_KHMER: "ពាក្យសម្ងាត់ ត្រូវដូចគ្នា"
   },
+
   "default_creds": {
     LANGUAGE_ENGLISH: "Password Cannot Be Default",
     LANGUAGE_KHMER: "ពាក្យសម្ងាត់ ត្រូវខុសពីពាក្យសម្ងាត់ដើម"
@@ -303,6 +304,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Password Changed Successfully, Please Log In Again",
     LANGUAGE_KHMER: "ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្តូរដោយជោគជ័យសូមចូលម្តងទៀត"
   },
+
   "change_passsuccess_1": {
     LANGUAGE_ENGLISH: "Password Changed Successfully",
     LANGUAGE_KHMER: "ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្តូរដោយជោគជ័យ"
@@ -326,6 +328,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Age field cannot be empty",
     LANGUAGE_KHMER: "ទិន្នន័យអាយុ មិនអាចទទេ"
   },
+  "empty": {LANGUAGE_ENGLISH: " cannot be empty", LANGUAGE_KHMER: " មិនអាចទទេ"},
   "gender_empty": {
     LANGUAGE_ENGLISH: "Age field cannot be empty",
     LANGUAGE_KHMER: "ទិន្នន័យភេទ មិនអាចទទេ"
@@ -343,15 +346,17 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_KHMER:
         "គ្មានសុពលភាព៖ អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចតិចជាង 1 ឆ្នាំ"
   },
+  "invalid_1lp": {
+    LANGUAGE_ENGLISH:
+        "invalid: Life Proposed's age must be at least 1 year old",
+    LANGUAGE_KHMER: "គ្មានសុពលភាព៖ មិនអាចតិចជាង 1 ឆ្នាំ"
+  },
   "invalid_8": {
     LANGUAGE_ENGLISH: "invalid: Child's age is limited to 8 years old",
     LANGUAGE_KHMER:
         "គ្មានសុពលភាព៖ អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត ត្រូវបានកំណត់ត្រឹមអាយុ ៨ ឆ្នាំ"
   },
-  "invalid_10": {
-    LANGUAGE_ENGLISH: "គ្មានសុពលភាព៖ ត្រូវមានយ៉ាងហោចណាស់ ១០ ឆ្នាំ",
-    LANGUAGE_KHMER: ""
-  },
+
   "lp_0": {
     LANGUAGE_ENGLISH: "Life Proposed’s age must be at least 1 year old",
     LANGUAGE_KHMER: "អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចតិចជាង 1 ឆ្នាំ"
@@ -363,6 +368,10 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   "lp_exceeded59": {
     LANGUAGE_ENGLISH: "Life Proposed’s age (59) exceeded",
     LANGUAGE_KHMER: "អាយុអ្នកត្រូវបានធានារ៉ាប់រងអាយុជីវិត មិនអាចលើសពី 59​ ឆ្នាំ"
+  },
+  "exceeded59": {
+    LANGUAGE_ENGLISH: "is limited to at most 59 years old",
+    LANGUAGE_KHMER: "មិនអាចលើសពី 59​ ឆ្នាំ"
   },
   "lp_empty": {
     LANGUAGE_ENGLISH: "Life Proposed’s age​ cannot be empty",
@@ -428,6 +437,11 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
         "Proposer’s age is under 18, please check information page",
     LANGUAGE_KHMER: "អាយុអ្នកស្នើសុំធានារ៉ាប់រង មិនអាចតិចជាង 18 ឆ្នាំ"
   },
+  "invalid_rider18": {
+    LANGUAGE_ENGLISH: "invalid: must be at least 18 years old to add rider",
+    LANGUAGE_KHMER:
+        "គ្មានសុពលភាព៖ មិនអាចតិចជាង 18 ឆ្នាំ ដេីម្បីថែមចំនួនបុព្វលាភផលិតផលបន្ថែម"
+  },
   "pro_exceeded": {
     LANGUAGE_ENGLISH:
         "Proposer’s age limit exceeded, please check information page",
@@ -471,12 +485,23 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "File Named",
     LANGUAGE_KHMER: "ឈ្មោះឯកសារនេះ"
   },
+  "file": {LANGUAGE_ENGLISH: "File Named", LANGUAGE_KHMER: "ឯកសារនេះ"},
+  "file_empty": {
+    LANGUAGE_ENGLISH: "File Name Can't Be Empty",
+    LANGUAGE_KHMER: "ឈ្មោះឯកសារមិនអាចទទេបានទេ"
+  },
   "exist": {LANGUAGE_ENGLISH: "Already Exists", LANGUAGE_KHMER: "មានរួចហើយ"},
   "saved": {
     LANGUAGE_ENGLISH: "Saved Successfully",
     LANGUAGE_KHMER: "បានរក្សាទុកដោយជោគជ័យ"
   },
+  "saved_1": {LANGUAGE_ENGLISH: "Saved", LANGUAGE_KHMER: "បានរក្សាទុក"},
   "open_file": {LANGUAGE_ENGLISH: "Open File", LANGUAGE_KHMER: "បើក​ឯកសារ"},
   "close": {LANGUAGE_ENGLISH: "Close", LANGUAGE_KHMER: "បិទ"},
+  "no_input": {LANGUAGE_ENGLISH: "No Input", LANGUAGE_KHMER: "គ្មាន​ទិន្នន័យ"},
+  "payment_mode": {
+    LANGUAGE_ENGLISH: "Payment Mode",
+    LANGUAGE_KHMER: "គ្មាន​ទិន្នន័យ"
+  },
   //
 };

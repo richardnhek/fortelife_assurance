@@ -95,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: Image.asset("assets/icons/attention.png",
                         width: 60, height: 60),
                     content: Text(
-                      "Password Not\nMatched",
+                      lang['mismatch_creds'],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: "Kano",
@@ -113,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: Image.asset("assets/icons/attention.png",
                         width: 60, height: 60),
                     content: Text(
-                      "Password Must Be At Least\n4 Characters",
+                      lang['four_char'],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: "Kano",
