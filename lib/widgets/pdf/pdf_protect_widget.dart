@@ -1410,7 +1410,7 @@ class PDFWidget {
                                           Padding(
                                               padding: EdgeInsets.only(left: 5),
                                               child: Container(
-                                                  width: 275.75,
+                                                  width: 272.5,
                                                   child: Row(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/utils/device_utils.dart';
+import 'package:provider/provider.dart';
 
 class CustomTextField extends StatelessWidget {
   CustomTextField(
@@ -34,6 +35,8 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    final mq = MediaQuery.of(context);
     return Container(
       decoration: BoxDecoration(
           border: Border.all(
@@ -63,17 +66,29 @@ class CustomTextField extends StatelessWidget {
               labelText: formLabel,
               labelStyle: TextStyle(
                   fontFamily: "Kano",
-                  fontSize: 15,
+                  fontSize: DeviceUtils.getResponsive(
+                      appProvider: appProvider,
+                      mq: mq,
+                      onPhone: 15.0,
+                      onTablet: 30.0),
                   color: Colors.black.withOpacity(0.5)),
               hintText: formLabel,
               hintStyle: TextStyle(
                   fontFamily: "Kano",
-                  fontSize: 15,
+                  fontSize: DeviceUtils.getResponsive(
+                      appProvider: appProvider,
+                      mq: mq,
+                      onPhone: 15.0,
+                      onTablet: 30.0),
                   color: Colors.black.withOpacity(0.5))),
           keyboardType: formInputType,
           style: TextStyle(
             color: Colors.black,
-            fontSize: 15,
+            fontSize: DeviceUtils.getResponsive(
+                appProvider: appProvider,
+                mq: mq,
+                onPhone: 15.0,
+                onTablet: 30.0),
             fontFamily: "Kano",
           ),
         ),

@@ -34,15 +34,29 @@ class CustomDatePicker extends StatelessWidget {
               labelText: title,
               labelStyle: TextStyle(
                   fontFamily: "Kano",
-                  fontSize: 15,
+                  fontSize: DeviceUtils.getResponsive(
+                      appProvider: appProvider,
+                      mq: mq,
+                      onPhone: 15.0,
+                      onTablet: 30.0),
                   color: Colors.black.withOpacity(0.5)),
               hintStyle: TextStyle(
                   fontFamily: "Kano",
-                  fontSize: 15,
+                  fontSize: DeviceUtils.getResponsive(
+                      appProvider: appProvider,
+                      mq: mq,
+                      onPhone: 15.0,
+                      onTablet: 30.0),
                   color: Colors.black.withOpacity(0.5))),
           focusNode: focusNode,
-          style:
-              TextStyle(color: Colors.black, fontSize: 15, fontFamily: "Kano"),
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: DeviceUtils.getResponsive(
+                  appProvider: appProvider,
+                  mq: mq,
+                  onPhone: 15.0,
+                  onTablet: 30.0),
+              fontFamily: "Kano"),
           controller: dob,
           onTap: onTap,
         ),

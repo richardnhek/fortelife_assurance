@@ -465,7 +465,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 mq: mq,
                                 appProvider: appProvider,
                                 onPhone: 65.0,
-                                onTablet: 75.0),
+                                onTablet: 130.0),
                             width: mq.size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -514,7 +514,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 mq: mq,
                                 appProvider: appProvider,
                                 onPhone: 65.0,
-                                onTablet: 75.0),
+                                onTablet: 130.0),
                             width: mq.size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -559,7 +559,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 mq: mq,
                                 appProvider: appProvider,
                                 onPhone: 65.0,
-                                onTablet: 75.0),
+                                onTablet: 130.0),
                             child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -636,7 +636,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -685,7 +685,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -734,7 +734,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -787,7 +787,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -840,7 +840,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         child: CustomTextField(
                           appProvider: appProvider,
                           mq: mq,
@@ -878,7 +878,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         child: CustomTextField(
                           appProvider: appProvider,
                           mq: mq,
@@ -925,17 +925,17 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 15.0,
-                              onTablet: 21.0),
+                              onTablet: 30.0),
                           btnWidth: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 100.0,
-                              onTablet: 140.0),
+                              onTablet: 200.0),
                           btnHeight: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 50.0,
-                              onTablet: 70.0),
+                              onTablet: 100.0),
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
                               counter = 0;
@@ -969,17 +969,17 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 15.0,
-                              onTablet: 21.0),
+                              onTablet: 30.0),
                           btnWidth: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 100.0,
-                              onTablet: 140.0),
+                              onTablet: 200.0),
                           btnHeight: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 50.0,
-                              onTablet: 70.0),
+                              onTablet: 100.0),
                           onPressed: () async {
                             final prefs = await SharedPreferences.getInstance();
                             //Proposer
@@ -1030,28 +1030,35 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   _selectDate(BuildContext context, TextEditingController tec,
       TextEditingController tecAge, bool isLpAge) async {
     final prefs = await SharedPreferences.getInstance();
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    final mq = MediaQuery.of(context);
+
     String sumVal = sumAssured.text;
     String premVal = premium.text;
     DateTime newSelectedDate = await showDatePicker(
         context: context,
-        initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
-        firstDate: DateTime(1940),
+        locale: appProvider.language != 'kh'
+            ? const Locale("en", "EN")
+            : const Locale("km", "KM"),
+        initialDate: DateTime.now(),
+        firstDate: isLpAge == true
+            ? DateTime(DateTime.now().year - 8)
+            : DateTime(1940),
         lastDate: DateTime.now(),
         initialDatePickerMode: DatePickerMode.year,
         builder: (BuildContext context, Widget child) {
           return Theme(
-            data: ThemeData.light().copyWith(
-              primaryColor: Color(0xFF8AB84B),
-              colorScheme: ColorScheme.light(
-                primary: Color(0xFF8AB84B),
-                onPrimary: Colors.white,
-                surface: Color(0xFF8AB84B),
-                onSurface: Colors.black,
+              data: ThemeData.light().copyWith(
+                primaryColor: Color(0xFF8AB84B),
+                colorScheme: ColorScheme.light(
+                  primary: Color(0xFF8AB84B),
+                  onPrimary: Colors.white,
+                  surface: Color(0xFF8AB84B),
+                  onSurface: Colors.black,
+                ),
+                dialogBackgroundColor: Colors.white,
               ),
-              dialogBackgroundColor: Colors.white,
-            ),
-            child: child,
-          );
+              child: child);
         });
 
     if (newSelectedDate != null) {
@@ -1212,9 +1219,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
               if (double.parse(sumAssuredAmount) < 2400) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(10): " +
-                      lang['sumassured_least'] +
-                      " 2,400 USD",
+                              "(10): " +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 2,400 USD"
+                      : " ២៤០០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1225,9 +1235,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
               if (double.parse(sumAssuredAmount) < 2640) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(11): " +
-                      lang['sumassured_least'] +
-                      " 2,640 USD",
+                              "(11): " +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 2,640 USD"
+                      : " ២៦៤០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1239,9 +1252,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
               if (double.parse(sumAssuredAmount) < 2880) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(12): " +
-                      lang['sumassured_least'] +
-                      " 2,880 USD",
+                              "(12): " +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 2,880 USD"
+                      : " ២៨៨០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1252,9 +1268,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
               if (double.parse(sumAssuredAmount) < 3120) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(13): " +
-                      lang['sumassured_least'] +
-                      " 3,120 USD",
+                              "(13): " +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 3,120 USD"
+                      : " ៣១២០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1265,9 +1284,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
               if (double.parse(sumAssuredAmount) < 3360) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(14): " +
-                      lang['sumassured_least'] +
-                      " 3,360 USD",
+                              "(14): " +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 3,360 USD"
+                      : " ៣៣៦០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1278,9 +1300,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
               if (double.parse(sumAssuredAmount) < 3600) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(15): " +
-                      lang['sumassured_least'] +
-                      " 3,600 USD",
+                              "(15): " +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 3,600 USD"
+                      : " ៣៦០០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1291,9 +1316,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
               if (double.parse(sumAssuredAmount) < 3840) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(16): " +
-                      lang['sumassured_least'] +
-                      " 3,840 USD",
+                              "(16): " +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 3,840 USD"
+                      : " ៣៨៤០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1304,9 +1332,12 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
               if (double.parse(sumAssuredAmount) < 4080) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(17): " +
-                      lang['sumassured_least'] +
-                      " 4,080 USD",
+                              "(17): " +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 4,080 USD"
+                      : " ៤០៨០ ដុល្លារ",
                 ));
               } else
                 counter++;

@@ -518,7 +518,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   "saved_1": {LANGUAGE_ENGLISH: "Saved", LANGUAGE_KHMER: "បានរក្សាទុក"},
   "open_file": {LANGUAGE_ENGLISH: "Open File", LANGUAGE_KHMER: "បើក​ឯកសារ"},
   "close": {LANGUAGE_ENGLISH: "Close", LANGUAGE_KHMER: "បិទ"},
-  "with": {LANGUAGE_ENGLISH: "With", LANGUAGE_KHMER: "និង"},
+  "with": {LANGUAGE_ENGLISH: "with", LANGUAGE_KHMER: "និង"},
   "no_input": {LANGUAGE_ENGLISH: "No Input", LANGUAGE_KHMER: "គ្មាន​ទិន្នន័យ"},
   "payment_mode": {
     LANGUAGE_ENGLISH: "Payment Mode",

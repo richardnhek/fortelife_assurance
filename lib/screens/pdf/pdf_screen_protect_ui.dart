@@ -92,8 +92,8 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                       fontSize: DeviceUtils.getResponsive(
                           mq: mq,
                           appProvider: appProvider,
-                          onPhone: 14.0,
-                          onTablet: 28.0),
+                          onPhone: 15.0,
+                          onTablet: 30.0),
                       fontFamily: "Kano"),
                 ),
                 SizedBox(
@@ -150,8 +150,8 @@ class _PDFScreenProtectUIState extends State<PDFScreenProtectUI> {
                           fontSize: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
-                              onPhone: 14.0,
-                              onTablet: 28.0),
+                              onPhone: 15.0,
+                              onTablet: 30.0),
                           color: Colors.black),
                     ),
                   ),

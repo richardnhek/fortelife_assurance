@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/screens/auth/change_password_screen.dart';
 import 'package:forte_life/utils/app_utils.dart';
@@ -35,6 +36,8 @@ class _AppControllerState extends State<AppController> {
       ),
     );
     return MaterialApp(
+        localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+        supportedLocales: [const Locale('en'), const Locale('km')],
         initialRoute: "/",
         onGenerateRoute: (RouteSettings settings) {
           Route screen;

@@ -98,8 +98,8 @@ class CustomAlertDialog extends StatelessWidget {
                     fontSize: DeviceUtils.getResponsive(
                         mq: mq,
                         appProvider: appProvider,
-                        onPhone: 14.0,
-                        onTablet: 28.0)),
+                        onPhone: 15.0,
+                        onTablet: 30.0)),
                 textAlign: TextAlign.center,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,

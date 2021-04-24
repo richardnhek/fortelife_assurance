@@ -70,7 +70,7 @@ class LoginScreenUI extends StatelessWidget {
                       mq: mq,
                       appProvider: appProvider,
                       onPhone: 50.0,
-                      onTablet: 75.0),
+                      onTablet: 100.0),
                   fieldWidth: DeviceUtils.getResponsive(
                       mq: mq,
                       appProvider: appProvider,
@@ -84,18 +84,14 @@ class LoginScreenUI extends StatelessWidget {
                   fontSize: DeviceUtils.getResponsive(
                       mq: mq,
                       appProvider: appProvider,
-                      onPhone: 14.0,
-                      onTablet: 24.0),
+                      onPhone: 15.0,
+                      onTablet: 30.0),
                   extraPad: DeviceUtils.getResponsive(
                       mq: mq,
                       appProvider: appProvider,
                       onPhone: 2.0,
                       onTablet: 4.0),
-                  ctnPadding: DeviceUtils.getResponsive(
-                      mq: mq,
-                      appProvider: appProvider,
-                      onPhone: 15.0,
-                      onTablet: 20.0),
+                  ctnPadding: 15.0,
                   hintText: lang['username'],
                   tec: usernameController,
                 ),
@@ -107,7 +103,7 @@ class LoginScreenUI extends StatelessWidget {
                       mq: mq,
                       appProvider: appProvider,
                       onPhone: 50.0,
-                      onTablet: 75.0),
+                      onTablet: 100.0),
                   fieldWidth: DeviceUtils.getResponsive(
                       mq: mq,
                       appProvider: appProvider,
@@ -121,8 +117,8 @@ class LoginScreenUI extends StatelessWidget {
                   fontSize: DeviceUtils.getResponsive(
                       mq: mq,
                       appProvider: appProvider,
-                      onPhone: 14.0,
-                      onTablet: 24.0),
+                      onPhone: 15.0,
+                      onTablet: 30.0),
                   extraPad: DeviceUtils.getResponsive(
                       mq: mq,
                       appProvider: appProvider,

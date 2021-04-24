@@ -128,6 +128,7 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> setExternalDirectory() async {
     Directory platformDirectory;
     final prefs = await SharedPreferences.getInstance();
+
     AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
     if (Platform.isAndroid) {
       platformDirectory = await getExternalStorageDirectory();

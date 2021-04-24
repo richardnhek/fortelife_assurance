@@ -580,7 +580,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                   mq: mq,
                                   appProvider: appProvider,
                                   onPhone: 65.0,
-                                  onTablet: 75.0),
+                                  onTablet: 130.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -629,7 +629,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                   mq: mq,
                                   appProvider: appProvider,
                                   onPhone: 65.0,
-                                  onTablet: 75.0),
+                                  onTablet: 130.0),
                               width: mq.size.width,
                               child: Row(
                                 mainAxisAlignment:
@@ -675,7 +675,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                   mq: mq,
                                   appProvider: appProvider,
                                   onPhone: 65.0,
-                                  onTablet: 75.0),
+                                  onTablet: 130.0),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -758,7 +758,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -807,7 +807,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -852,7 +852,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -909,7 +909,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         width: mq.size.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -990,7 +990,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         child: CustomTextField(
                           appProvider: appProvider,
                           mq: mq,
@@ -1028,7 +1028,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                             mq: mq,
                             appProvider: appProvider,
                             onPhone: 65.0,
-                            onTablet: 75.0),
+                            onTablet: 130.0),
                         child: CustomTextField(
                           appProvider: appProvider,
                           mq: mq,
@@ -1117,17 +1117,17 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 15.0,
-                              onTablet: 21.0),
+                              onTablet: 30.0),
                           btnWidth: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 100.0,
-                              onTablet: 140.0),
+                              onTablet: 200.0),
                           btnHeight: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 50.0,
-                              onTablet: 70.0),
+                              onTablet: 100.0),
                           onPressed: () async {
                             if (widget._formKey.currentState.validate()) {
                               counter = 0;
@@ -1210,17 +1210,17 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 15.0,
-                              onTablet: 21.0),
+                              onTablet: 30.0),
                           btnWidth: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 100.0,
-                              onTablet: 140.0),
+                              onTablet: 200.0),
                           btnHeight: DeviceUtils.getResponsive(
                               mq: mq,
                               appProvider: appProvider,
                               onPhone: 50.0,
-                              onTablet: 70.0),
+                              onTablet: 100.0),
                           onPressed: () async {
                             final prefs = await SharedPreferences.getInstance();
                             //Proposer
@@ -1278,13 +1278,23 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   _selectDate(BuildContext context, TextEditingController tec,
       TextEditingController tecAge, bool isLpAge) async {
     final prefs = await SharedPreferences.getInstance();
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
     String sumVal = sumAssured.text;
     String premVal = premium.text;
 
     DateTime newSelectedDate = await showDatePicker(
         context: context,
-        initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
-        firstDate: DateTime(1940),
+        locale: appProvider.language != 'kh'
+            ? const Locale("en", "EN")
+            : const Locale("km", "KM"),
+        initialDate: _selectedDate != null
+            ? _selectedDate
+            : isLpAge == true
+                ? DateTime(DateTime.now().year - (59 - selectedYear))
+                : DateTime.now(),
+        firstDate: isLpAge == true
+            ? DateTime(DateTime.now().year - (59 - selectedYear))
+            : DateTime(1940),
         lastDate: DateTime.now(),
         initialDatePickerMode: DatePickerMode.year,
         builder: (BuildContext context, Widget child) {
@@ -1397,6 +1407,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             description: lang['lp_age'] +
                 "($ageText) " +
                 lang['with'] +
+                " " +
                 lang['policy_year'] +
                 "($policyTerm) " +
                 lang['invalid_69'],
@@ -1422,7 +1433,13 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             (isAddRider == true && (int.parse(ageText) < 18))) {
           if ((int.parse(ageText) + policyTerm) > 69) {
             customDialogChildren.add(CustomDialogText(
-              description: lang['lp_age'] + "($ageText) " + lang['invalid_69'],
+              description: lang['lp_age'] +
+                  "($ageText) " +
+                  lang['with'] +
+                  " " +
+                  lang['policy_year'] +
+                  "($policyTerm) " +
+                  lang['invalid_69'],
             ));
           }
           if (int.parse(pAgeText) < 18) {
@@ -1521,9 +1538,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 2400) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(10):" +
-                      lang['sumassured_least'] +
-                      " 2400 USD",
+                              "(10):" +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 2400 USD"
+                      : " ២៤០០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1534,9 +1554,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 3600) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(15):" +
-                      lang['sumassured_least'] +
-                      " 3600 USD",
+                              "(15):" +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 3600 USD"
+                      : " ៣៦០០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1548,9 +1571,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 4800) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(20):" +
-                      lang['sumassured_least'] +
-                      " 4800 USD",
+                              "(20):" +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 4800 USD"
+                      : " ៤៨០០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1561,9 +1587,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 6000) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(25):" +
-                      lang['sumassured_least'] +
-                      " 6000 USD",
+                              "(25):" +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 6000 USD"
+                      : " ៦០០០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1575,9 +1604,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 7200) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(30):" +
-                      lang['sumassured_least'] +
-                      " 7200 USD",
+                              "(30):" +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 7200 USD"
+                      : " ៧២០០ ដុល្លារ",
                 ));
               } else
                 counter++;
@@ -1589,9 +1621,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 8400) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                      "(35):" +
-                      lang['sumassured_least'] +
-                      " 8400 USD",
+                              "(35):" +
+                              lang['sumassured_least'] +
+                              appProvider.language !=
+                          'kh'
+                      ? " 8400 USD"
+                      : " ៨៤០០ ដុល្លារ",
                 ));
               } else
                 counter++;

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:forte_life/providers/app_provider.dart';
+import 'package:forte_life/utils/device_utils.dart';
+import 'package:provider/provider.dart';
 
 class LoadingModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final double boxSize = 80;
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    final mq = MediaQuery.of(context);
+    final double boxSize = DeviceUtils.getResponsive(
+        appProvider: appProvider, mq: mq, onPhone: 80.0, onTablet: 160.0);
     final loadingSize = boxSize * 0.4;
     return Center(
       child: Container(

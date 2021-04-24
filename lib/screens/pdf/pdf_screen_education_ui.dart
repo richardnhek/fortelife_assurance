@@ -52,7 +52,28 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
     file = File("${appProvider.rootPath}/fortelife-education.pdf");
     showAlertDialog(BuildContext context) {
       AlertDialog alert = AlertDialog(
-        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+        contentPadding: EdgeInsets.symmetric(
+            horizontal: DeviceUtils.getResponsive(
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 15.0,
+                onTablet: 100.0),
+            vertical: DeviceUtils.getResponsive(
+                mq: mq,
+                appProvider: appProvider,
+                onPhone: 30.0,
+                onTablet: 100.0)),
+        insetPadding: EdgeInsets.symmetric(
+            horizontal: DeviceUtils.getResponsive(
+                appProvider: appProvider,
+                mq: mq,
+                onPhone: 30.0,
+                onTablet: 60.0),
+            vertical: DeviceUtils.getResponsive(
+                appProvider: appProvider,
+                mq: mq,
+                onPhone: 30.0,
+                onTablet: 60.0)),
         title: Center(
             child: Container(
                 child: Text(
@@ -60,53 +81,92 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
           style: TextStyle(
               color: Color(0xFF8AB84B),
               fontFamily: "Kano",
-              fontSize: 18,
+              fontSize: DeviceUtils.getResponsive(
+                  appProvider: appProvider,
+                  mq: mq,
+                  onPhone: 18.0,
+                  onTablet: 36.0),
               fontWeight: FontWeight.bold),
         ))),
         content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                Text(
-                  lang['file_name'] + ": ",
-                  style: TextStyle(
-                      color: Colors.black, fontSize: 14, fontFamily: "Kano"),
-                ),
-                SizedBox(width: 5),
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xFFB8B8B8))),
-                    child: TextFormField(
-                      controller: fileName,
-                      keyboardType: TextInputType.name,
-                      decoration: InputDecoration(
-                          disabledBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(left: 5, top: 15),
-                          isDense: true,
-                          hintText: "ForteLife's PDF",
-                          hintStyle: TextStyle(
-                              fontFamily: "Kano",
-                              fontSize: 15,
-                              color: Colors.black.withOpacity(0.5))),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      lang['file_name'] + ": ",
                       style: TextStyle(
-                          fontFamily: "Kano",
-                          fontSize: 14,
-                          color: Colors.black),
+                          color: Colors.black,
+                          fontSize: DeviceUtils.getResponsive(
+                              appProvider: appProvider,
+                              mq: mq,
+                              onPhone: 15.0,
+                              onTablet: 30.0),
+                          fontFamily: "Kano"),
                     ),
-                  ),
-                ),
-              ]),
+                    SizedBox(width: 5),
+                    Expanded(
+                      child: Container(
+                        width: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: double.infinity,
+                            onTablet: 240.0),
+                        height: DeviceUtils.getResponsive(
+                            appProvider: appProvider,
+                            mq: mq,
+                            onPhone: 50.0,
+                            onTablet: 100.0),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Color(0xFFB8B8B8))),
+                        child: Center(
+                          child: TextFormField(
+                            controller: fileName,
+                            keyboardType: TextInputType.name,
+                            decoration: InputDecoration(
+                                disabledBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                contentPadding: EdgeInsets.only(left: 5),
+                                isDense: true,
+                                hintText: "ForteLife's PDF",
+                                hintStyle: TextStyle(
+                                    fontFamily: "Kano",
+                                    fontSize: DeviceUtils.getResponsive(
+                                        appProvider: appProvider,
+                                        mq: mq,
+                                        onPhone: 15.0,
+                                        onTablet: 30.0),
+                                    color: Colors.black.withOpacity(0.5))),
+                            style: TextStyle(
+                                fontFamily: "Kano",
+                                fontSize: DeviceUtils.getResponsive(
+                                    appProvider: appProvider,
+                                    mq: mq,
+                                    onPhone: 15.0,
+                                    onTablet: 30.0),
+                                color: Colors.black),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
             ]),
         actions: [
           FlatButton(
-            child: Text(lang['save']),
+            child: Text(
+              lang['save'],
+              style: TextStyle(
+                  fontSize: DeviceUtils.getResponsive(
+                      appProvider: appProvider,
+                      mq: mq,
+                      onPhone: 15.0,
+                      onTablet: 30.0)),
+            ),
             onPressed: () async {
               if (fileName.text.isNotEmpty) {
                 final saveDir = await _getDownloadDirectory();
@@ -119,12 +179,25 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
                     builder: (BuildContext context) {
                       return AlertDialog(
                           title: Image.asset("assets/icons/attention.png",
-                              width: 60, height: 60),
+                              width: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 60.0,
+                                  onTablet: 120.0),
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 60.0,
+                                  onTablet: 120.0)),
                           content: Text(
-                            "File Named $newFileName Already Exists",
+                            lang['file'] + " $newFileName" + lang['exist'],
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: DeviceUtils.getResponsive(
+                                  appProvider: appProvider,
+                                  mq: mq,
+                                  onPhone: 22.0,
+                                  onTablet: 44.0),
                               fontFamily: "Kano",
                             ),
                           ));
@@ -176,12 +249,25 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                         title: Image.asset("assets/icons/attention.png",
-                            width: 60, height: 60),
+                            width: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 60.0,
+                                onTablet: 120.0),
+                            height: DeviceUtils.getResponsive(
+                                mq: mq,
+                                appProvider: appProvider,
+                                onPhone: 60.0,
+                                onTablet: 120.0)),
                         content: Text(
                           lang['file_empty'],
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: DeviceUtils.getResponsive(
+                                appProvider: appProvider,
+                                mq: mq,
+                                onPhone: 22.0,
+                                onTablet: 44.0),
                             fontFamily: "Kano",
                           ),
                         ));
@@ -190,7 +276,15 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
             },
           ),
           FlatButton(
-            child: Text(lang['cancel']),
+            child: Text(
+              lang['cancel'],
+              style: TextStyle(
+                  fontSize: DeviceUtils.getResponsive(
+                      appProvider: appProvider,
+                      mq: mq,
+                      onPhone: 15.0,
+                      onTablet: 30.0)),
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },
