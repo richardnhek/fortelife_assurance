@@ -955,7 +955,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 showAlertDialog(context);
                             } else {
                               customDialogChildren.add(CustomDialogText(
-                                description: "No Inputs",
+                                description: lang['no_input'],
                               ));
                               showAlertDialog(context);
                             }

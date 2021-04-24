@@ -243,8 +243,6 @@ class _SplashScreenState extends State<SplashScreen>
           opacity: animation,
           child: Image.asset(
             "assets/pictures/android/logo/logo.png",
-            width: 400,
-            height: 400,
           ),
         ),
       ),

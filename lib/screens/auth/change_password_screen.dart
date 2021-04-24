@@ -137,7 +137,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 title: Image.asset("assets/icons/attention.png",
                     width: 60, height: 60),
                 content: Text(
-                  "Password Can't Be Empty",
+                  lang['pass_empty'],
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: "Kano",
@@ -152,6 +152,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    Map<String, dynamic> lang = appProvider.lang;
     return Scaffold(
       body: Center(
         child: Form(
@@ -180,7 +182,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     child: Container(
                       width: 180,
                       child: Text(
-                        "Change Password",
+                        lang['change_pass'],
                         style: TextStyle(
                             color: Color(0xFFD31145),
                             fontSize: 22,
@@ -195,7 +197,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   SizedBox(height: 20),
                   Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                     Text(
-                      "New Password: ",
+                      lang['new_pass'] + ": ",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -219,7 +221,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               focusedBorder: InputBorder.none,
                               contentPadding: EdgeInsets.only(left: 5, top: 15),
                               isDense: true,
-                              hintText: "New Password",
+                              hintText: lang['new_pass'],
                               hintStyle: TextStyle(
                                   fontFamily: "Kano",
                                   fontSize: 15,
@@ -235,7 +237,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   SizedBox(height: 10),
                   Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                     Text(
-                      "Confirm Password: ",
+                      lang['confirm_pass'] + ": ",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -258,7 +260,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               focusedBorder: InputBorder.none,
                               contentPadding: EdgeInsets.only(left: 5, top: 15),
                               isDense: true,
-                              hintText: "Confirm Password",
+                              hintText: lang['confirm_pass'],
                               hintStyle: TextStyle(
                                   fontFamily: "Kano",
                                   fontSize: 15,
@@ -278,7 +280,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       color: Color(0xFF8AB84B),
                       onPressed: () => _onChangePassword(context),
                       child: Text(
-                        "Confirm",
+                        lang['confirm'],
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: "Kano",

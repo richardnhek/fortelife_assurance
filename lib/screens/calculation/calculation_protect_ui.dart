@@ -1394,11 +1394,16 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       } else {
         if ((int.parse(ageText) + policyTerm) > 69) {
           customDialogChildren.add(CustomDialogText(
-            description: "Age limit exceeded, please check information page.",
+            description: lang['lp_age'] +
+                "($ageText) " +
+                lang['with'] +
+                lang['policy_year'] +
+                "($policyTerm) " +
+                lang['invalid_69'],
           ));
         } else if (int.parse(ageText) < 18) {
           customDialogChildren.add(CustomDialogText(
-            description: "Age under 18, please check information page",
+            description: lang['lp_age'] + "($ageText) " + lang['under18'],
           ));
         } else {
           counter++;
@@ -1417,28 +1422,28 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             (isAddRider == true && (int.parse(ageText) < 18))) {
           if ((int.parse(ageText) + policyTerm) > 69) {
             customDialogChildren.add(CustomDialogText(
-              description: "Age limit exceeded, please check information page.",
+              description: lang['lp_age'] + "($ageText) " + lang['invalid_69'],
             ));
           }
           if (int.parse(pAgeText) < 18) {
             customDialogChildren.add(CustomDialogText(
-              description: "Age under 18, please check information page",
+              description: lang['p_age'] + pAgeText + lang['under18'],
             ));
           }
           if (isAddRider == false && (int.parse(ageText) < 1)) {
             customDialogChildren.add(CustomDialogText(
-              description: lang['lp_age'] + "($age.text)" + lang['invalid_1lp'],
+              description: lang['lp_age'] + "($ageText) " + lang['invalid_1lp'],
             ));
           }
           if (isAddRider == true && (int.parse(ageText) < 18)) {
             customDialogChildren.add(CustomDialogText(
               description:
-                  lang['lp_age'] + "($age.text)" + lang['invalid_rider18'],
+                  lang['lp_age'] + "($ageText) " + lang['invalid_rider18'],
             ));
           }
           if (int.parse(ageText) > 59) {
             customDialogChildren.add(CustomDialogText(
-              description: lang['lp_age'] + "($age.text)" + lang['exceeded59'],
+              description: lang['lp_age'] + "($ageText) " + lang['exceeded59'],
             ));
           }
         } else {

@@ -176,15 +176,22 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                           fieldTitle: lang['forte_videos'],
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: mq.size.height / 15),
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
+                      Container(
+                        height: DeviceUtils.getResponsive(
+                            appProvider: appProvider,
+                            mq: mq,
+                            onPhone: mq.size.height / 6,
+                            onTablet: mq.size.height / 12),
+                        child: Center(
                           child: Text(
-                            "Coming Soon",
+                            lang['coming_soon'],
                             style: TextStyle(
                                 color: Colors.grey.withOpacity(0.5),
-                                fontSize: 15,
+                                fontSize: DeviceUtils.getResponsive(
+                                    appProvider: appProvider,
+                                    mq: mq,
+                                    onPhone: 15.0,
+                                    onTablet: 30.0),
                                 fontFamily: "Kano"),
                           ),
                         ),

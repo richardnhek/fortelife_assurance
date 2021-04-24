@@ -1241,7 +1241,7 @@ class PDFWidget {
                                                 MainAxisAlignment.start,
                                             children: [
                                               SizedBox(
-                                                  width: 240,
+                                                  width: 253.5,
                                                   child: Stack(children: [
                                                     Row(
                                                         crossAxisAlignment:
@@ -1410,7 +1410,7 @@ class PDFWidget {
                                           Padding(
                                               padding: EdgeInsets.only(left: 5),
                                               child: Container(
-                                                  width: 120,
+                                                  width: 275.75,
                                                   child: Row(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -1423,13 +1423,14 @@ class PDFWidget {
                                                                 font:
                                                                     khmerBoldF)),
                                                       ]))),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 135),
-                                              child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
+                                          SizedBox(
+                                              width: 90,
+                                              child: Center(
+                                                  child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
                                                     Padding(
                                                         padding:
                                                             EdgeInsets.only(
@@ -1444,7 +1445,7 @@ class PDFWidget {
                                                         style: TextStyle(
                                                             fontSize: 16,
                                                             font: khmerF)),
-                                                  ]))
+                                                  ])))
                                         ])
                                   ])
                           ]),

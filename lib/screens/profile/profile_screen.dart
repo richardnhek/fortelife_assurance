@@ -174,7 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   title: Image.asset("assets/icons/attention.png",
                       width: 60, height: 60),
                   content: Text(
-                    "Password Can't Be Empty",
+                    lang['pass_empty'],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Kano",

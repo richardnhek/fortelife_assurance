@@ -143,7 +143,7 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
                       return CustomAlertDialog(
                         appProvider: appProvider,
                         mq: mq,
-                        title: "Saved",
+                        title: lang['saved_1'],
                         isPrompt: true,
                         icon: Image.asset("assets/icons/check.png",
                             width: DeviceUtils.getResponsive(
@@ -178,7 +178,7 @@ class _PDFScreenEducationUIState extends State<PDFScreenEducationUI> {
                         title: Image.asset("assets/icons/attention.png",
                             width: 60, height: 60),
                         content: Text(
-                          "File Name Can't Be Empty",
+                          lang['file_empty'],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 22,
