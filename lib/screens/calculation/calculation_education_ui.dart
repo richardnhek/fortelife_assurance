@@ -1072,50 +1072,50 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
       setState(() {
         _selectedDate = newSelectedDate;
         String dateTime = _selectedDate.toString();
-        tec.text = convertDateTimeDisplay(dateTime);
-        tec.selection = TextSelection.fromPosition(TextPosition(
-            offset: dob.text.length, affinity: TextAffinity.upstream));
-        tecAge.text = calculateAge(_selectedDate, isLpAge);
+
         if (isLpAge) {
           prefs.setString("lpDobEduDate", dateTime);
         } else {
           prefs.setString("pDobEduDate", dateTime);
         }
-
+        tec.text = convertDateTimeDisplay(dateTime);
+        tec.selection = TextSelection.fromPosition(TextPosition(
+            offset: dob.text.length, affinity: TextAffinity.upstream));
+        tecAge.text = calculateAge(_selectedDate, isLpAge);
         if (!isLpAge) {
           getAmountValues();
           prefs.setString("pDobEdu", tec.text);
         }
       });
 
-      // if (int.tryParse(policyYear.text) > 0) {
-      //   prefs.setString("dobEdu", dob.text);
-      //   getAmountValues();
-      //   prefs.setString("selYearIntEdu", policyYear.text);
-      //   if (sumVal.isNotEmpty || premVal.isNotEmpty) {
-      //     if (premVal.isNotEmpty) {
-      //       sumVal = (double.parse(premVal) * double.parse(policyYear.text))
-      //           .toString();
-      //     } else {
-      //       premVal = (double.parse(sumVal) / double.parse(policyYear.text))
-      //           .toString();
-      //     }
-      //   } else if (sumVal.isNotEmpty && premVal.isNotEmpty) {
-      //     sumVal = (double.parse(premVal) * double.parse(policyYear.text))
-      //         .toString();
-      //   }
-      //   sumAssuredNum = double.tryParse(sumVal);
-      //   premiumNum = double.tryParse(premVal);
-      //   prefs.setString("sumValEdu", sumVal);
-      //   prefs.setString("premValEdu", premVal);
-      //   premium.text = premVal.isNotEmpty ? premVal : '';
-      //   sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
-      // } else {
-      //   prefs.setString("sumValEdu", sumVal);
-      //   prefs.setString("premValEdu", premVal);
-      //   premium.text = premVal.isNotEmpty ? premVal : '';
-      //   sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
-      // }
+      if (int.tryParse(policyYear.text) > 0) {
+        prefs.setString("dobEdu", dob.text);
+        getAmountValues();
+        prefs.setString("selYearIntEdu", policyYear.text);
+        if (sumVal.isNotEmpty || premVal.isNotEmpty) {
+          if (premVal.isNotEmpty) {
+            sumVal = (double.parse(premVal) * double.parse(policyYear.text))
+                .toString();
+          } else {
+            premVal = (double.parse(sumVal) / double.parse(policyYear.text))
+                .toString();
+          }
+        } else if (sumVal.isNotEmpty && premVal.isNotEmpty) {
+          sumVal = (double.parse(premVal) * double.parse(policyYear.text))
+              .toString();
+        }
+        sumAssuredNum = double.tryParse(sumVal);
+        premiumNum = double.tryParse(premVal);
+        prefs.setString("sumValEdu", sumVal);
+        prefs.setString("premValEdu", premVal);
+        premium.text = premVal.isNotEmpty ? premVal : '';
+        sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
+      } else {
+        prefs.setString("sumValEdu", sumVal);
+        prefs.setString("premValEdu", premVal);
+        premium.text = premVal.isNotEmpty ? premVal : '';
+        sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
+      }
     }
   }
 //
