@@ -951,7 +951,7 @@ class PDFWidgetEdu {
                                         children: [
                                           Container(
                                               margin: EdgeInsets.only(left: 5),
-                                              width: 160,
+                                              width: 200,
                                               child: Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -1026,7 +1026,7 @@ class PDFWidgetEdu {
                                           Padding(
                                               padding: EdgeInsets.only(left: 5),
                                               child: Container(
-                                                  width: 160,
+                                                  width: 200,
                                                   child: Row(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment

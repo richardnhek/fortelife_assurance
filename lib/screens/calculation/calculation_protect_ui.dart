@@ -62,7 +62,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
   }
 
   Future<void> getValues() async {
-    print("GET");
     final prefs = await SharedPreferences.getInstance();
     List<String> valueLP = prefs.getStringList("valueLP");
     List<String> valueP = prefs.getStringList("valueP");
@@ -90,12 +89,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     //
     //Rider Limit
     riderLimit = prefs.getInt(RIDER_AMOUNT);
-    print(prefs.getInt(RIDER_AMOUNT).toString() + "RIDER");
     //
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
     lOccupation.text = lOcc == null ? '' : lOcc;
-    print(premVal);
     setState(() {
       lSelectedGender = lpGenderProtect == null ? null : lpGenderProtect;
     });
@@ -108,7 +105,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     lpBirthDate = dobProtectDate == null
         ? DateTime.tryParse('')
         : DateTime.tryParse(dobProtectDate);
-    print(premVal);
 
     age.text = ageProtect == null ? '' : ageProtect;
     setState(() {
@@ -128,8 +124,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     if (sumAssuredNum == null) {
       sumAssured.clear();
     }
-    print(sumAssuredNum.toString() + "NUM");
-    print(sumAssured.text + "TEXT");
 
     riderAdded.text = riderVal == null ? '' : riderVal;
     pFirstName.text = pName == null ? '' : pName;
@@ -1494,8 +1488,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
           description: lang['rider_0'],
         ));
       } else if (sumAssuredAmount.isNotEmpty) {
-        print(double.tryParse(sumAssuredAmount));
-        print(double.tryParse(riderLimit.toString()));
 
         if (double.parse(riderAmount) < 3600) {
           customDialogChildren.add(CustomDialogText(

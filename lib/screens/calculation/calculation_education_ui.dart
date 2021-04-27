@@ -56,7 +56,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
   }
 
   Future<void> getValues() async {
-    print("GET EDU");
     final prefs = await SharedPreferences.getInstance();
     List<String> valueEduLP = prefs.getStringList("valueEduLP");
     List<String> valueEduP = prefs.getStringList("valueEduP");
@@ -1031,7 +1030,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
       TextEditingController tecAge, bool isLpAge) async {
     final prefs = await SharedPreferences.getInstance();
     final appProvider = Provider.of<AppProvider>(context, listen: false);
-    final mq = MediaQuery.of(context);
 
     String sumVal = sumAssured.text;
     String premVal = premium.text;
@@ -1071,9 +1069,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
           prefs.setString("pDobEduDate", dateTime);
         }
         tec.text = convertDateTimeDisplay(dateTime);
+
         tec.selection = TextSelection.fromPosition(TextPosition(
             offset: dob.text.length, affinity: TextAffinity.upstream));
         tecAge.text = calculateAge(_selectedDate, isLpAge);
+
         if (!isLpAge) {
           getAmountValues();
           prefs.setString("pDobEdu", tec.text);

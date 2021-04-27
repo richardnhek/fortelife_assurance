@@ -153,7 +153,6 @@ class PDFWidget {
     }
 
     List getPremiumPayment(String paymentMode) {
-      print(premium.length);
       double premiumPayment = 0;
       double truePremium = 0;
       double premiumWithR = 0;

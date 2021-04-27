@@ -231,7 +231,7 @@ class _MainFlowState extends State<MainFlow> {
                 iconSize: DeviceUtils.getResponsive(
                     mq: mq,
                     appProvider: appProvider,
-                    onPhone: Platform.isIOS ? 25.0 : 25.0,
+                    onPhone: 25.0,
                     onTablet: 50.0),
                 items: [
                   BottomNavigationBarItem(
