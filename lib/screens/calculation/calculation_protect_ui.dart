@@ -214,7 +214,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     DropdownMenuItem(child: DropDownText(title: "35"), value: 35)
   ];
 
-  DateTime _selectedDate;
+  DateTime _selectedDate = DateTime.now();
   DateTime _currentDate = DateTime.now();
   //
 
@@ -1281,11 +1281,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         locale: appProvider.language != 'kh'
             ? const Locale("en", "EN")
             : const Locale("km", "KM"),
-        initialDate: _selectedDate != null
-            ? _selectedDate
-            : isLpAge == true
-                ? DateTime(DateTime.now().year - (59 - selectedYear))
-                : DateTime.now(),
+        initialDate: _selectedDate,
         firstDate: isLpAge == true
             ? DateTime(DateTime.now().year - (59 - selectedYear))
             : DateTime(1940),
@@ -1488,7 +1484,6 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
           description: lang['rider_0'],
         ));
       } else if (sumAssuredAmount.isNotEmpty) {
-
         if (double.parse(riderAmount) < 3600) {
           customDialogChildren.add(CustomDialogText(
             description: lang['rider_under3600'],

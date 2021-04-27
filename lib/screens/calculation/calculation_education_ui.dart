@@ -82,6 +82,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
     dob.text = dobEdu == null ? '' : dobEdu;
+    print(dob.text.toString());
+
     setState(() {
       lSelectedGender = (lpGenderEdu == null) == false ? lpGenderEdu : null;
     });
@@ -102,6 +104,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     sumAssuredNum =
         (sumAssured.text == null) ? '' : double.tryParse(sumAssured.text);
     pDob.text = pDobEdu == null ? '' : pDobEdu;
+    print(pDob.text.toString());
     pAge.text = pAgeEdu == null ? '' : pAgeEdu;
     pFirstName.text = pName == null ? '' : pName;
     pLastName.text = pLName == null ? '' : pLName;
@@ -1038,7 +1041,13 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         locale: appProvider.language != 'kh'
             ? const Locale("en", "EN")
             : const Locale("km", "KM"),
-        initialDate: DateTime.now(),
+        initialDate: _selectedDate != null
+            ? isLpAge == true
+                ? DateTime(DateTime.now().year - 8)
+                : _selectedDate
+            : isLpAge == true
+                ? DateTime(DateTime.now().year - 1)
+                : DateTime.now(),
         firstDate: isLpAge == true
             ? DateTime(DateTime.now().year - 8)
             : DateTime(1940),
@@ -1063,16 +1072,15 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
       setState(() {
         _selectedDate = newSelectedDate;
         String dateTime = _selectedDate.toString();
+        tec.text = convertDateTimeDisplay(dateTime);
+        tec.selection = TextSelection.fromPosition(TextPosition(
+            offset: dob.text.length, affinity: TextAffinity.upstream));
+        tecAge.text = calculateAge(_selectedDate, isLpAge);
         if (isLpAge) {
           prefs.setString("lpDobEduDate", dateTime);
         } else {
           prefs.setString("pDobEduDate", dateTime);
         }
-        tec.text = convertDateTimeDisplay(dateTime);
-
-        tec.selection = TextSelection.fromPosition(TextPosition(
-            offset: dob.text.length, affinity: TextAffinity.upstream));
-        tecAge.text = calculateAge(_selectedDate, isLpAge);
 
         if (!isLpAge) {
           getAmountValues();
@@ -1080,34 +1088,34 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
         }
       });
 
-      if (int.tryParse(policyYear.text) > 0) {
-        prefs.setString("dobEdu", dob.text);
-        getAmountValues();
-        prefs.setString("selYearIntEdu", policyYear.text);
-        if (sumVal.isNotEmpty || premVal.isNotEmpty) {
-          if (premVal.isNotEmpty) {
-            sumVal = (double.parse(premVal) * double.parse(policyYear.text))
-                .toString();
-          } else {
-            premVal = (double.parse(sumVal) / double.parse(policyYear.text))
-                .toString();
-          }
-        } else if (sumVal.isNotEmpty && premVal.isNotEmpty) {
-          sumVal = (double.parse(premVal) * double.parse(policyYear.text))
-              .toString();
-        }
-        sumAssuredNum = double.tryParse(sumVal);
-        premiumNum = double.tryParse(premVal);
-        prefs.setString("sumValEdu", sumVal);
-        prefs.setString("premValEdu", premVal);
-        premium.text = premVal.isNotEmpty ? premVal : '';
-        sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
-      } else {
-        prefs.setString("sumValEdu", sumVal);
-        prefs.setString("premValEdu", premVal);
-        premium.text = premVal.isNotEmpty ? premVal : '';
-        sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
-      }
+      // if (int.tryParse(policyYear.text) > 0) {
+      //   prefs.setString("dobEdu", dob.text);
+      //   getAmountValues();
+      //   prefs.setString("selYearIntEdu", policyYear.text);
+      //   if (sumVal.isNotEmpty || premVal.isNotEmpty) {
+      //     if (premVal.isNotEmpty) {
+      //       sumVal = (double.parse(premVal) * double.parse(policyYear.text))
+      //           .toString();
+      //     } else {
+      //       premVal = (double.parse(sumVal) / double.parse(policyYear.text))
+      //           .toString();
+      //     }
+      //   } else if (sumVal.isNotEmpty && premVal.isNotEmpty) {
+      //     sumVal = (double.parse(premVal) * double.parse(policyYear.text))
+      //         .toString();
+      //   }
+      //   sumAssuredNum = double.tryParse(sumVal);
+      //   premiumNum = double.tryParse(premVal);
+      //   prefs.setString("sumValEdu", sumVal);
+      //   prefs.setString("premValEdu", premVal);
+      //   premium.text = premVal.isNotEmpty ? premVal : '';
+      //   sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
+      // } else {
+      //   prefs.setString("sumValEdu", sumVal);
+      //   prefs.setString("premValEdu", premVal);
+      //   premium.text = premVal.isNotEmpty ? premVal : '';
+      //   sumAssured.text = sumVal.isNotEmpty ? sumVal : '';
+      // }
     }
   }
 //
