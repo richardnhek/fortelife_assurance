@@ -355,28 +355,23 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
           Provider.of<AppProvider>(context, listen: false);
       Map<String, dynamic> lang = appProvider.lang;
       customDialogChildren.clear();
+
       if (policy < 10) {
-        customDialogChildren.addAll([
-          CustomDialogText(
-            description: lang['policy'] + "($policy) " + lang['invalid_10'],
-          ),
+        customDialogChildren.add(
           CustomDialogText(
             description: lang['lp_age'] + "($childAge) " + lang['invalid_8'],
           ),
-        ]);
+        );
         showAlertDialog(context);
         policyYear.clear();
         age.clear();
         dob.clear();
       } else if (policy > 17) {
-        customDialogChildren.addAll([
-          CustomDialogText(
-            description: lang['policy'] + "($policy) " + lang['policy_17'],
-          ),
+        customDialogChildren.add(
           CustomDialogText(
             description: lang['lp_age'] + "($childAge) " + lang['invalid_1'],
           ),
-        ]);
+        );
         showAlertDialog(context);
         policyYear.clear();
         age.clear();
@@ -1210,6 +1205,8 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
       customDialogChildren.add(CustomDialogText(
         description: lang['sumassured_empty'],
       ));
+    } else if (premiumAmount.isEmpty) {
+    } else if (double.parse(premiumAmount) < 240) {
     } else {
       if (regExpNum.hasMatch(sumAssuredAmount) == false) {
         customDialogChildren.add(CustomDialogText(
@@ -1226,12 +1223,9 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
               if (double.parse(sumAssuredAmount) < 2400) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                              "(10): " +
-                              lang['sumassured_least'] +
-                              appProvider.language !=
-                          'kh'
-                      ? " 2,400 USD"
-                      : " ២៤០០ ដុល្លារ",
+                      "(10): " +
+                      lang['sumassured_least'] +
+                      " 2,400 USD",
                 ));
               } else
                 counter++;

@@ -404,6 +404,10 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Policy Year",
     LANGUAGE_KHMER: "កាលកំណត់នៃបណ្ណសន្យារ៉ាប់រង"
   },
+  "policy_null": {
+    LANGUAGE_ENGLISH: "Please select a day on the calendar",
+    LANGUAGE_KHMER: "សូមជ្រើសរើសថ្ងៃនៅលើប្រតិទិន"
+  },
   "policy_empty": {
     LANGUAGE_ENGLISH: "Policy Year Can't Be Empty!",
     LANGUAGE_KHMER: "សូមបំពេញកាលកំណត់នៃបណ្ណសន្យារ៉ាប់រង!"

@@ -1494,6 +1494,8 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       customDialogChildren.add(CustomDialogText(
         description: lang['sumassured_empty'],
       ));
+    } else if (premium.text.isEmpty) {
+    } else if (double.parse(premium.text.toString()) < 240) {
     } else {
       if (regExpNum.hasMatch(sumAssuredAmount) == false) {
         customDialogChildren.add(CustomDialogText(
@@ -1510,12 +1512,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 2400) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                              "(10):" +
-                              lang['sumassured_least'] +
-                              appProvider.language !=
-                          'kh'
-                      ? " 2400 USD"
-                      : " ២៤០០ ដុល្លារ",
+                      "(10):" +
+                      lang['sumassured_least'] +
+                      " 2400 USD",
                 ));
               } else
                 counter++;
@@ -1526,12 +1525,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 3600) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                              "(15):" +
-                              lang['sumassured_least'] +
-                              appProvider.language !=
-                          'kh'
-                      ? " 3600 USD"
-                      : " ៣៦០០ ដុល្លារ",
+                      "(15):" +
+                      lang['sumassured_least'] +
+                      " 3600 USD",
                 ));
               } else
                 counter++;
@@ -1543,12 +1539,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 4800) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                              "(20):" +
-                              lang['sumassured_least'] +
-                              appProvider.language !=
-                          'kh'
-                      ? " 4800 USD"
-                      : " ៤៨០០ ដុល្លារ",
+                      "(20):" +
+                      lang['sumassured_least'] +
+                      " 4800 USD",
                 ));
               } else
                 counter++;
@@ -1559,12 +1552,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 6000) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                              "(25):" +
-                              lang['sumassured_least'] +
-                              appProvider.language !=
-                          'kh'
-                      ? " 6000 USD"
-                      : " ៦០០០ ដុល្លារ",
+                      "(25):" +
+                      lang['sumassured_least'] +
+                      " 6000 USD",
                 ));
               } else
                 counter++;
@@ -1576,12 +1566,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 7200) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                              "(30):" +
-                              lang['sumassured_least'] +
-                              appProvider.language !=
-                          'kh'
-                      ? " 7200 USD"
-                      : " ៧២០០ ដុល្លារ",
+                      "(30):" +
+                      lang['sumassured_least'] +
+                      " 7200 USD",
                 ));
               } else
                 counter++;
@@ -1593,12 +1580,9 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
               if (double.parse(sumAssuredAmount) < 8400) {
                 customDialogChildren.add(CustomDialogText(
                   description: lang['for_policy'] +
-                              "(35):" +
-                              lang['sumassured_least'] +
-                              appProvider.language !=
-                          'kh'
-                      ? " 8400 USD"
-                      : " ៨៤០០ ដុល្លារ",
+                      "(35):" +
+                      lang['sumassured_least'] +
+                      " 8400 USD",
                 ));
               } else
                 counter++;
