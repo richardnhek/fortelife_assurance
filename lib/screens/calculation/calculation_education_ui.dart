@@ -12,6 +12,7 @@ import 'package:forte_life/widgets/custom_text_field.dart';
 import 'package:forte_life/widgets/dropdown_text.dart';
 import 'package:forte_life/widgets/field_title.dart';
 import 'package:forte_life/widgets/reset_button.dart';
+import 'dart:convert' show utf8;
 
 import 'package:intl/intl.dart';
 import 'package:forte_life/widgets/disabled_field.dart';
@@ -82,7 +83,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     firstName.text = fName == null ? '' : fName;
     lastName.text = lName == null ? '' : lName;
     dob.text = dobEdu == null ? '' : dobEdu;
-    print(dob.text.toString());
 
     setState(() {
       lSelectedGender = (lpGenderEdu == null) == false ? lpGenderEdu : null;
@@ -104,7 +104,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     sumAssuredNum =
         (sumAssured.text == null) ? '' : double.tryParse(sumAssured.text);
     pDob.text = pDobEdu == null ? '' : pDobEdu;
-    print(pDob.text.toString());
     pAge.text = pAgeEdu == null ? '' : pAgeEdu;
     pFirstName.text = pName == null ? '' : pName;
     pLastName.text = pLName == null ? '' : pLName;
@@ -1043,7 +1042,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
             : const Locale("km", "KM"),
         initialDate: _selectedDate != null
             ? isLpAge == true
-                ? DateTime(DateTime.now().year - 8)
+                ? DateTime(DateTime.now().year - 1)
                 : _selectedDate
             : isLpAge == true
                 ? DateTime(DateTime.now().year - 1)
@@ -1195,7 +1194,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     Map<String, dynamic> lang = appProvider.lang;
     if (policyYearText.isEmpty) {
       customDialogChildren.add(CustomDialogText(
-        description: lang['policy'] + lang['empty'],
+        description: lang['policy_empty'],
       ));
     } else {
       counter++;

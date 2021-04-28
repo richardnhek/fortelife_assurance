@@ -22,8 +22,8 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Insurance Plan",
     LANGUAGE_KHMER: "ផែនការធានារ៉ាប់រង"
   },
-  "yes": {LANGUAGE_ENGLISH: "Yes", LANGUAGE_KHMER: "បាទ / ចាស"},
-  "no": {LANGUAGE_ENGLISH: "No", LANGUAGE_KHMER: "ទេ"},
+  "yes": {LANGUAGE_ENGLISH: "Yes", LANGUAGE_KHMER: "យល់ព្រម"},
+  "no": {LANGUAGE_ENGLISH: "No", LANGUAGE_KHMER: "មិនយល់ព្រម"},
   "about": {LANGUAGE_ENGLISH: "About Us", LANGUAGE_KHMER: "អំពី​ពួក​យើង"},
   "phone": {LANGUAGE_ENGLISH: "Phone No", LANGUAGE_KHMER: "លេខទូរសព្ទ"},
   "fax": {LANGUAGE_ENGLISH: "Fax", LANGUAGE_KHMER: "ទូរសារ"},
@@ -160,7 +160,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Save PDF",
     LANGUAGE_KHMER: "រក្សាទុកឯកសារ PDF"
   },
-  "file_name": {LANGUAGE_ENGLISH: "File Name", LANGUAGE_KHMER: "ឈ្មោះ​ឯកសារ"},
+  "file_name": {LANGUAGE_ENGLISH: "File's Name", LANGUAGE_KHMER: "ឈ្មោះ​ឯកសារ"},
   "save": {LANGUAGE_ENGLISH: "Save", LANGUAGE_KHMER: "រក្សាទុក"},
   //
 
@@ -267,7 +267,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   //
 
   //Error Messages
-  "error": {LANGUAGE_ENGLISH: "Error", LANGUAGE_KHMER: "មានបញ្ហា"},
+  "error": {LANGUAGE_ENGLISH: "Error!", LANGUAGE_KHMER: "មានបញ្ហា!"},
   "error_inputs": {
     LANGUAGE_ENGLISH: "Error Inputs",
     LANGUAGE_KHMER: "ទិន្នន័យមានបញ្ហា"
@@ -275,30 +275,30 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   "last_login": {LANGUAGE_ENGLISH: "Last Login", LANGUAGE_KHMER: "ចូលចុងក្រោយ"},
 
   "empty_creds": {
-    LANGUAGE_ENGLISH: "Username and Password Can’t Be Empty",
-    LANGUAGE_KHMER: "ឈ្មោះគណនី និង ពាក្យសម្ងាត់ មិនអាចទទេ"
+    LANGUAGE_ENGLISH: "Username and Password Can’t Be Empty!",
+    LANGUAGE_KHMER: "សូមបំពេញឈ្មោះគណនី និង ពាក្យសម្ងាត់របស់អ្នក!"
   },
 
   "incorrect_creds": {
-    LANGUAGE_ENGLISH: "Incorrect Username or Password",
-    LANGUAGE_KHMER: "ឈ្មោះគណនី ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវ"
+    LANGUAGE_ENGLISH: "Incorrect Username or Password!",
+    LANGUAGE_KHMER: "ឈ្មោះគណនី ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវ!"
   },
   "server_disc": {
-    LANGUAGE_ENGLISH: "Unable to Connect to Server",
-    LANGUAGE_KHMER: "មិនអាចភ្ជាប់ទៅកាន់ ម៉ាស៊ីនមេ"
+    LANGUAGE_ENGLISH: "Unable to connect to ​server!",
+    LANGUAGE_KHMER: "មិនអាចភ្ជាប់ទៅកាន់ ម៉ាស៊ីន ស៊ឺ វឺរបាន!"
   },
   "four_char": {
-    LANGUAGE_ENGLISH: "Password Must Be At Least 4 Characters",
-    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ត្រូវចាប់ពី 4 តួឡើងទៅ"
+    LANGUAGE_ENGLISH: "Password must be at least 4 characters!",
+    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ត្រូវចាប់ពី 4 តួឡើងទៅ!"
   },
   "mismatch_creds": {
-    LANGUAGE_ENGLISH: "Passwords Are\nNot Matched",
-    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ ត្រូវដូចគ្នា"
+    LANGUAGE_ENGLISH: "Passwords do not match!",
+    LANGUAGE_KHMER: "ផ្ទៀងផ្ទាត់ពាក្យសម្ងាត់អ្នកម្ដងទៀត!"
   },
 
   "default_creds": {
-    LANGUAGE_ENGLISH: "Password Can't Be Default",
-    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ ត្រូវខុសពីពាក្យសម្ងាត់ដើម"
+    LANGUAGE_ENGLISH: "Password can’t be default!",
+    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ ត្រូវតែខុសពីពាក្យសម្ងាត់ដំបូង!"
   },
 
   "pass_empty": {
@@ -314,29 +314,27 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Password Changed Successfully",
     LANGUAGE_KHMER: "ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្តូរដោយជោគជ័យ"
   },
-  "ok": {LANGUAGE_ENGLISH: "OK", LANGUAGE_KHMER: "បន្ត"},
+  "ok": {LANGUAGE_ENGLISH: "OK", LANGUAGE_KHMER: "យល់ព្រម"},
   "info": {LANGUAGE_ENGLISH: "INFO", LANGUAGE_KHMER: "ពត៌មាន"},
   "p_under18": {
     LANGUAGE_ENGLISH: "Payor’s age is under 18, please check information page",
     LANGUAGE_KHMER: "អាយុអ្នកបង់បុព្វលាភធានារ៉ាប់រង មិនអាចតិចជាង 18 ឆ្នាំ"
   },
   "p_limit": {
-    LANGUAGE_ENGLISH:
-        "Payor’s age limit exceeded, please check information page",
-    LANGUAGE_KHMER: "អាយុអ្នកបង់បុព្វលាភធានារ៉ាប់រង លើសអប្បបរមា"
+    LANGUAGE_ENGLISH: "Age and term exceed limit!",
+    LANGUAGE_KHMER: "អាយុ​ និងកាលកំណត់បណ្ណសន្យារ៉ាប់រងលើសកម្រិតអតិបរិមា!"
   },
   "p_empty": {
     LANGUAGE_ENGLISH: "Payor’s age can't be empty",
     LANGUAGE_KHMER: "អាយុអ្នកបង់បុព្វលាភធានារ៉ាប់រង មិនអាចទទេ"
   },
   "age_empty": {
-    LANGUAGE_ENGLISH: "Age field can't be empty",
-    LANGUAGE_KHMER: "ទិន្នន័យអាយុ មិនអាចទទេ"
+    LANGUAGE_ENGLISH: "Age can’t be empty!",
+    LANGUAGE_KHMER: "សូមបំពេញព័ត៌មានអាយុ!"
   },
-  "empty": {LANGUAGE_ENGLISH: " can't be empty", LANGUAGE_KHMER: " មិនអាចទទេ"},
   "gender_empty": {
-    LANGUAGE_ENGLISH: "Gender field can't be empty",
-    LANGUAGE_KHMER: "ទិន្នន័យភេទ មិនអាចទទេ"
+    LANGUAGE_ENGLISH: "Gender can’t be empty!",
+    LANGUAGE_KHMER: "សូមបំពេញព័ត៌មានភេទ!"
   },
   "p_emptygender": {
     LANGUAGE_ENGLISH: "Payor’s gender can't be empty",
@@ -406,6 +404,10 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Policy Year",
     LANGUAGE_KHMER: "កាលកំណត់នៃបណ្ណសន្យារ៉ាប់រង"
   },
+  "policy_empty": {
+    LANGUAGE_ENGLISH: "Policy Year Can't Be Empty!",
+    LANGUAGE_KHMER: "សូមបំពេញកាលកំណត់នៃបណ្ណសន្យារ៉ាប់រង!"
+  },
   "for_policy": {
     LANGUAGE_ENGLISH: "For Policy Year",
     LANGUAGE_KHMER: "សម្រាប់កាលកំណត់នៃបណ្ណសន្យារ៉ាប់រង"
@@ -417,11 +419,11 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   },
   "premium_240": {
     LANGUAGE_ENGLISH: "Premium must be at least 240 USD",
-    LANGUAGE_KHMER: "ចំនួនបុព្វលាភធានារ៉ាប់រង មិនអាចតិចជាង 240 ដុល្លារ"
+    LANGUAGE_KHMER: "ចំនួនបុព្វលាភត្រូវចាប់ពី 240 ដុល្លារឡើងទៅ!"
   },
   "premium_0": {
-    LANGUAGE_ENGLISH: "Premium can't be 0 or a negative amount",
-    LANGUAGE_KHMER: "ចំនួនបុព្វលាភធានារ៉ាប់រង មិនអាចជា ០ រឺចំនួនអវិជ្ជមាន"
+    LANGUAGE_ENGLISH: "Premium can't be 0 or negative",
+    LANGUAGE_KHMER: "ចំនួនបុព្វលាភមិនអាចស្មើ 0 ឬ អវិជ្ជមានឡើយ!"
   },
   "premium_num": {
     LANGUAGE_ENGLISH: "Premium entered is not a number",
@@ -429,12 +431,11 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   },
   "premium_empty": {
     LANGUAGE_ENGLISH: "Premium can't be empty",
-    LANGUAGE_KHMER: "ចំនួនបុព្វលាភធានារ៉ាប់រង មិនអាចទទេ"
+    LANGUAGE_KHMER: "សូមបំពេញចំនួនបុព្វលាភ!"
   },
   "sumassured_0": {
-    LANGUAGE_ENGLISH: "Sum Assured can't be 0 or a negative amount",
-    LANGUAGE_KHMER:
-        "ចំនួនទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង មិនអាចជា ០ រឺចំនួនអវិជ្ជមាន"
+    LANGUAGE_ENGLISH: "Sum Assured can't be 0 or negative",
+    LANGUAGE_KHMER: "ចំនួនទឹកប្រាក់ធានាមិនអាចស្មើ 0 ឬ អវិជ្ជមានឡើយ!"
   },
   "sumassured_least": {
     LANGUAGE_ENGLISH: "Sum Assured must be at least",
@@ -442,16 +443,15 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   },
   "sumassured_empty": {
     LANGUAGE_ENGLISH: "Sum Assured can't be empty",
-    LANGUAGE_KHMER: "ចំនួនទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង មិនអាចទទេ"
+    LANGUAGE_KHMER: "សូមបំពេញចំនួនទឹកប្រាក់ធានា!"
   },
   "sumassured_num": {
     LANGUAGE_ENGLISH: "Sum Assured entered is not a number",
     LANGUAGE_KHMER: "ទិន្នន័យចំនួនទឹកប្រាក់ត្រូវបានធានារ៉ាប់រង មិនមែនជាលេខ"
   },
   "pro_under18": {
-    LANGUAGE_ENGLISH:
-        "Proposer’s age is under 18, please check information page",
-    LANGUAGE_KHMER: "អាយុអ្នកស្នើសុំធានារ៉ាប់រង មិនអាចតិចជាង 18 ឆ្នាំ"
+    LANGUAGE_ENGLISH: "Age must be at least 18 years old​!",
+    LANGUAGE_KHMER: "អាយុត្រូវចាប់ពី 18 ឆ្នាំឡើងទៅ!"
   },
   "under18": {
     LANGUAGE_ENGLISH: "invalid: Age under 18, please check information page",
@@ -463,9 +463,8 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
         "គ្មានសុពលភាព៖ មិនអាចតិចជាង 18 ឆ្នាំ ដេីម្បីថែមចំនួនបុព្វលាភផលិតផលបន្ថែម"
   },
   "pro_exceeded": {
-    LANGUAGE_ENGLISH:
-        "Proposer’s age limit exceeded, please check information page",
-    LANGUAGE_KHMER: "អាយុអ្នកស្នើសុំធានារ៉ាប់រង លើសអប្បបរមា"
+    LANGUAGE_ENGLISH: "Age can’t be more than 59 years old!",
+    LANGUAGE_KHMER: "អាយុមិនអាចលើសពី 59 ឆ្នាំ!"
   },
   "pro_empty": {
     LANGUAGE_ENGLISH: "Proposer’s age can't be empty",
@@ -476,20 +475,20 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_KHMER: "ភេទអ្នកស្នើសុំធានារ៉ាប់រង មិនអាចទទេ"
   },
   "rider_empty": {
-    LANGUAGE_ENGLISH: "Rider can't be empty",
-    LANGUAGE_KHMER: "ចំនួនបុព្វលាភផលិតផលបន្ថែម មិនអាចទទេ"
+    LANGUAGE_ENGLISH: "Rider Sum Assured can't be empty",
+    LANGUAGE_KHMER: "សូមបំពេញទឹកប្រាក់ធានាផលិតផលបន្ថែម!"
   },
   "rider_under3600": {
-    LANGUAGE_ENGLISH: "Rider must be at least 3600 USD",
-    LANGUAGE_KHMER: "ចំនួនបុព្វលាភផលិតផលបន្ថែម មិនអាចតិចជាង 3600 ដុល្លារ"
+    LANGUAGE_ENGLISH: "Rider Sum Assured must be at least 3600 USD",
+    LANGUAGE_KHMER: "ទឹកប្រាក់ធានាផលិតផលបន្ថែមត្រូវចាប់ពី 3600 ដុល្លារឡើងទៅ!"
   },
   "rider_exceeded": {
     LANGUAGE_ENGLISH: "Rider limit Exceeded",
     LANGUAGE_KHMER: "ចំនួនបុព្វលាភផលិតផលបន្ថែម លើសអប្បបរមា"
   },
   "rider_0": {
-    LANGUAGE_ENGLISH: "Rider can't be 0 or a negative amount",
-    LANGUAGE_KHMER: "ចំនួនបុព្វលាភផលិតផលបន្ថែម មិនអាចជា ០ រឺចំនួនអវិជ្ជមាន"
+    LANGUAGE_ENGLISH: "Rider Sum Assured can't be 0 or negative",
+    LANGUAGE_KHMER: "ទឹកប្រាក់ធានាផលិតផលបន្ថែម មិនអាចស្មើ 0 ឬ អវិជ្ជមាន!"
   },
   "rider_num": {
     LANGUAGE_ENGLISH: "Rider entered is not a number",
@@ -507,8 +506,8 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
   },
   "file": {LANGUAGE_ENGLISH: "File Named", LANGUAGE_KHMER: "ឯកសារនេះ"},
   "file_empty": {
-    LANGUAGE_ENGLISH: "File Name Can't Be Empty",
-    LANGUAGE_KHMER: "ឈ្មោះឯកសារមិនអាចទទេបានទេ"
+    LANGUAGE_ENGLISH: "File's Name Can't Be Empty",
+    LANGUAGE_KHMER: "សូមបំពេញឈ្មោះឯកសារ"
   },
   "exist": {LANGUAGE_ENGLISH: "Already Exists", LANGUAGE_KHMER: "មានរួចហើយ"},
   "saved": {

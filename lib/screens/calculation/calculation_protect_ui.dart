@@ -214,7 +214,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     DropdownMenuItem(child: DropDownText(title: "35"), value: 35)
   ];
 
-  DateTime _selectedDate = DateTime.now();
+  DateTime _selectedDate;
   DateTime _currentDate = DateTime.now();
   //
 
@@ -1281,10 +1281,8 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         locale: appProvider.language != 'kh'
             ? const Locale("en", "EN")
             : const Locale("km", "KM"),
-        initialDate: _selectedDate,
-        firstDate: isLpAge == true
-            ? DateTime(DateTime.now().year - (59 - selectedYear))
-            : DateTime(1940),
+        initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
+        firstDate: DateTime(1940),
         lastDate: DateTime.now(),
         initialDatePickerMode: DatePickerMode.year,
         builder: (BuildContext context, Widget child) {
@@ -1394,17 +1392,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       } else {
         if ((int.parse(ageText) + policyTerm) > 69) {
           customDialogChildren.add(CustomDialogText(
-            description: lang['lp_age'] +
-                "($ageText) " +
-                lang['with'] +
-                " " +
-                lang['policy_year'] +
-                "($policyTerm) " +
-                lang['invalid_69'],
+            description: lang['pro_exceeded'],
           ));
         } else if (int.parse(ageText) < 18) {
           customDialogChildren.add(CustomDialogText(
-            description: lang['lp_age'] + "($ageText) " + lang['under18'],
+            description: lang['pro_under18'],
           ));
         } else {
           counter++;
@@ -1423,34 +1415,27 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             (isAddRider == true && (int.parse(ageText) < 18))) {
           if ((int.parse(ageText) + policyTerm) > 69) {
             customDialogChildren.add(CustomDialogText(
-              description: lang['lp_age'] +
-                  "($ageText) " +
-                  lang['with'] +
-                  " " +
-                  lang['policy_year'] +
-                  "($policyTerm) " +
-                  lang['invalid_69'],
+              description: lang['pro_exceeded'],
             ));
           }
           if (int.parse(pAgeText) < 18) {
             customDialogChildren.add(CustomDialogText(
-              description: lang['p_age'] + pAgeText + lang['under18'],
+              description: lang['pro_under18'],
             ));
           }
           if (isAddRider == false && (int.parse(ageText) < 1)) {
             customDialogChildren.add(CustomDialogText(
-              description: lang['lp_age'] + "($ageText) " + lang['invalid_1lp'],
+              description: lang['pro_under18'],
             ));
           }
           if (isAddRider == true && (int.parse(ageText) < 18)) {
             customDialogChildren.add(CustomDialogText(
-              description:
-                  lang['lp_age'] + "($ageText) " + lang['invalid_rider18'],
+              description: lang['pro_under18'],
             ));
           }
           if (int.parse(ageText) > 59) {
             customDialogChildren.add(CustomDialogText(
-              description: lang['lp_age'] + "($ageText) " + lang['exceeded59'],
+              description: lang['pro_exceeded'],
             ));
           }
         } else {

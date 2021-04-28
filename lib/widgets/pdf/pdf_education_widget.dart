@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:forte_life/widgets/pdf/pdf_subtitle.dart';
@@ -45,15 +46,19 @@ class PDFWidgetEdu {
     final Uint8List khmerFont = File("$rootPath/lmns7.ttf").readAsBytesSync();
     final Uint8List khmerBoldFont =
         File("$rootPath/LMNS4_0.TTF").readAsBytesSync();
+    final Uint8List khmerFontTest =
+        File("$rootPath/Kantumruy-Regular.ttf").readAsBytesSync();
 
     final regularData = regularFont.buffer.asByteData();
     final boldData = boldFont.buffer.asByteData();
     final khmerData = khmerFont.buffer.asByteData();
     final khmerBoldData = khmerBoldFont.buffer.asByteData();
+    final khmerFontTestData = khmerFontTest.buffer.asByteData();
     final regularF = Font.ttf(regularData);
     final boldF = Font.ttf(boldData);
     final khmerF = Font.ttf(khmerData);
     final khmerBoldF = Font.ttf(khmerBoldData);
+    final khmerTestF = Font.ttf(khmerFontTestData);
     var myFormat = DateFormat('dd /MM /yyyy');
     var dateNow = DateTime.now();
     final currentDate = myFormat.format(dateNow);
