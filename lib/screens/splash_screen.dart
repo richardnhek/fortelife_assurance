@@ -160,7 +160,34 @@ class _SplashScreenState extends State<SplashScreen>
     final file2 = new File("$rootPath/piggybank.png");
     final file3 = new File("$rootPath/stats.png");
     final file4 = new File("$rootPath/umbrella.png");
-
+    final fileImg = File('$rootPath/word.png');
+    final fileImgLP = File('$rootPath/wordLP.png');
+    final fileImgOcc = File('$rootPath/wordOcc.png');
+    final fileImgPro = File('$rootPath/wordPro.png');
+    final fileImgLPPro = File('$rootPath/wordLPPro.png');
+    final fileImgOccPro = File('$rootPath/wordOccPro.png');
+    final fileImglOccPro = File('$rootPath/wordlOccPro.png');
+    if (await fileImgPro.exists() != true) {
+      fileImgPro.create();
+    }
+    if (await fileImgLPPro.exists() != true) {
+      fileImgLPPro.create();
+    }
+    if (await fileImgOccPro.exists() != true) {
+      fileImgOccPro.create();
+    }
+    if (await fileImglOccPro.exists() != true) {
+      fileImglOccPro.create();
+    }
+    if (await fileImg.exists() != true) {
+      fileImg.create();
+    }
+    if (await fileImgLP.exists() != true) {
+      fileImgLP.create();
+    }
+    if (await fileImgOcc.exists() != true) {
+      fileImgOcc.create();
+    }
     if (await file.exists() != true) {
       await file.writeAsBytes(byteData.buffer
           .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));

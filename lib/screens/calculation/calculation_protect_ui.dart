@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:excel/excel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,8 @@ import 'package:intl/intl.dart';
 import 'package:forte_life/widgets/disabled_field.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:ui' as ui;
+import 'dart:io';
 
 class CalculationProtectUI extends StatefulWidget {
   CalculationProtectUI({this.scaffoldKey});
@@ -226,6 +230,144 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
         Provider.of<AppProvider>(widget.scaffoldKey.currentContext);
     Map<String, dynamic> lang = appProvider.lang;
     final mq = MediaQuery.of(context);
+    Future<void> generateImage() async {
+      final appProvider = Provider.of<AppProvider>(context, listen: false);
+      final prefs = await SharedPreferences.getInstance();
+      String lpNameStr =
+          (lastName.text.toString() + " " + firstName.text.toString()).isEmpty
+              ? " "
+              : lastName.text.toString() + " " + firstName.text.toString();
+      String pNameStr = appProvider.differentPerson == false
+          ? (lastName.text.toString() + " " + firstName.text.toString()).isEmpty
+              ? " "
+              : lastName.text.toString() + " " + firstName.text.toString()
+          : (pLastName.text.toString() + " " + pFirstName.text.toString())
+                  .isEmpty
+              ? " "
+              : pLastName.text.toString() + " " + pFirstName.text.toString();
+
+      String lOccStr = lOccupation.text.toString().isEmpty
+          ? " "
+          : lOccupation.text.toString();
+      String pOccStr = appProvider.differentPerson == false
+          ? lOccupation.text.toString().isEmpty
+              ? " "
+              : lOccupation.text.toString()
+          : pOccupation.text.toString().isEmpty
+              ? " "
+              : pOccupation.text.toString();
+
+      final recorder = ui.PictureRecorder();
+      final recorderLP = ui.PictureRecorder();
+      final recorderOcc = ui.PictureRecorder();
+      final recorderlOcc = ui.PictureRecorder();
+      final canvas = Canvas(recorder);
+      final canvasLP = Canvas(recorderLP);
+      final canvasOcc = Canvas(recorderOcc);
+      final canvaslOcc = Canvas(recorderlOcc);
+      final fileImg = File('${appProvider.rootPath}/wordPro.png');
+      final fileImgLP = File('${appProvider.rootPath}/wordLPPro.png');
+      final fileImgOcc = File('${appProvider.rootPath}/wordOccPro.png');
+      final fileImglOcc = File('${appProvider.rootPath}/wordlOccPro.png');
+
+      TextSpan span = TextSpan(
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'KHMERKEP', fontSize: 25),
+          text: pNameStr);
+      TextSpan spanLP = TextSpan(
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'KHMERKEP', fontSize: 25),
+          text: lpNameStr);
+      TextSpan spanOcc = TextSpan(
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'KHMERKEP', fontSize: 25),
+          text: pOccStr);
+      TextSpan spanlOcc = TextSpan(
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'KHMERKEP', fontSize: 25),
+          text: lOccStr);
+      TextPainter tp = TextPainter(
+          text: span,
+          textAlign: TextAlign.center,
+          textDirection: ui.TextDirection.ltr);
+      TextPainter tpLP = TextPainter(
+          text: spanLP,
+          textAlign: TextAlign.center,
+          textDirection: ui.TextDirection.ltr);
+      TextPainter tpOcc = TextPainter(
+          text: spanOcc,
+          textAlign: TextAlign.center,
+          textDirection: ui.TextDirection.ltr);
+      TextPainter tplOcc = TextPainter(
+          text: spanlOcc,
+          textAlign: TextAlign.center,
+          textDirection: ui.TextDirection.ltr);
+      tp.layout();
+      tpLP.layout();
+      tpOcc.layout();
+      tplOcc.layout();
+      tp.paint(canvas, Offset(150 - (tp.width / 2), tp.height / 2));
+      tpLP.paint(canvasLP, Offset(150 - (tpLP.width / 2), tpLP.height / 2));
+      tpOcc.paint(canvasOcc, Offset(150 - (tpOcc.width / 2), tpOcc.height / 2));
+      tplOcc.paint(
+          canvaslOcc, Offset(150 - (tplOcc.width / 2), tplOcc.height / 2));
+
+      final picture = recorder.endRecording();
+      final pictureLP = recorderLP.endRecording();
+      final pictureOcc = recorderOcc.endRecording();
+      final picturelOcc = recorderlOcc.endRecording();
+      final img = await picture.toImage(300, 60);
+      final imgLP = await pictureLP.toImage(300, 60);
+      final imgOcc = await pictureOcc.toImage(300, 60);
+      final imglOcc = await picturelOcc.toImage(300, 60);
+
+      final pngBytes = await img.toByteData(format: ImageByteFormat.png);
+      final pngBytesLP = await imgLP.toByteData(format: ImageByteFormat.png);
+      final pngBytesOcc = await imgOcc.toByteData(format: ImageByteFormat.png);
+      final pngByteslOcc =
+          await imglOcc.toByteData(format: ImageByteFormat.png);
+
+      if (pNameStr.isEmpty) {
+      } else {
+        if (pNameStr != prefs.getString("pImg")) {
+          await fileImg.create();
+          await fileImg.writeAsBytes(pngBytes.buffer
+              .asUint8List(pngBytes.offsetInBytes, pngBytes.lengthInBytes));
+        }
+      }
+      if (lpNameStr.isEmpty) {
+      } else {
+        if (lpNameStr != prefs.getString("lpImg")) {
+          await fileImgLP.create();
+          await fileImgLP.writeAsBytes(pngBytesLP.buffer
+              .asUint8List(pngBytesLP.offsetInBytes, pngBytesLP.lengthInBytes));
+        }
+      }
+
+      if (pOccStr.isEmpty) {
+      } else {
+        if (pOccStr != prefs.getString("occImg")) {
+          await fileImgOcc.create();
+          await fileImgOcc.writeAsBytes(pngBytesOcc.buffer.asUint8List(
+              pngBytesOcc.offsetInBytes, pngBytesOcc.lengthInBytes));
+        }
+      }
+
+      if (lOccStr.isEmpty) {
+      } else {
+        if (lOccStr != prefs.getString("lOccImg")) {
+          await fileImglOcc.create();
+          await fileImglOcc.writeAsBytes(pngByteslOcc.buffer.asUint8List(
+              pngByteslOcc.offsetInBytes, pngByteslOcc.lengthInBytes));
+        }
+      }
+
+      prefs.setString("pImg", pNameStr);
+      prefs.setString("lpImg", lpNameStr);
+      prefs.setString("occImg", pOccStr);
+      prefs.setString("lOccImg", lOccStr);
+    }
+
     List<DropdownMenuItem> paymentMode = [
       DropdownMenuItem(
           child: DropDownText(
@@ -1124,6 +1266,11 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               onTablet: 100.0),
                           onPressed: () async {
                             if (widget._formKey.currentState.validate()) {
+                              if (appProvider.language == 'kh') {
+                                await generateImage();
+                                await Future.delayed(
+                                    const Duration(milliseconds: 100));
+                              }
                               counter = 0;
                               customDialogChildren.clear();
                               widget._formKey.currentState.save();

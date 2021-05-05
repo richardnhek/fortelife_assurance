@@ -1,4 +1,8 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forte_life/providers/app_provider.dart';
@@ -11,8 +15,10 @@ import 'package:forte_life/widgets/custom_dropdown.dart';
 import 'package:forte_life/widgets/custom_text_field.dart';
 import 'package:forte_life/widgets/dropdown_text.dart';
 import 'package:forte_life/widgets/field_title.dart';
+
 import 'package:forte_life/widgets/reset_button.dart';
 import 'dart:convert' show utf8;
+import 'dart:ui' as ui;
 
 import 'package:intl/intl.dart';
 import 'package:forte_life/widgets/disabled_field.dart';
@@ -26,7 +32,7 @@ class CalculationEducationUI extends StatefulWidget {
 
 class _CalculationEducationUIState extends State<CalculationEducationUI> {
   FocusNode premiumFocusNode;
-
+  ByteData imgBytes;
   @override
   void initState() {
     super.initState();
@@ -180,6 +186,101 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     Map<String, dynamic> lang = appProvider.lang;
     final mq = MediaQuery.of(context);
     final lOccupation = TextEditingController(text: lang['child']);
+    Future<void> generateImage() async {
+      final appProvider = Provider.of<AppProvider>(context, listen: false);
+      final prefs = await SharedPreferences.getInstance();
+      String pNameStr =
+          (pLastName.text.toString() + " " + pFirstName.text.toString()).isEmpty
+              ? " "
+              : pLastName.text.toString() + " " + pFirstName.text.toString();
+      String lpNameStr =
+          (lastName.text.toString() + " " + firstName.text.toString()).isEmpty
+              ? " "
+              : lastName.text.toString() + " " + firstName.text.toString();
+      String pOccStr = pOccupation.text.toString().isEmpty
+          ? " "
+          : pOccupation.text.toString();
+      final recorder = ui.PictureRecorder();
+      final recorderLP = ui.PictureRecorder();
+      final recorderOcc = ui.PictureRecorder();
+      final canvas = Canvas(recorder);
+      final canvasLP = Canvas(recorderLP);
+      final canvasOcc = Canvas(recorderOcc);
+      final fileImg = File('${appProvider.rootPath}/word.png');
+      final fileImgLP = File('${appProvider.rootPath}/wordLP.png');
+      final fileImgOcc = File('${appProvider.rootPath}/wordOcc.png');
+
+      TextSpan span = TextSpan(
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'KHMERKEP', fontSize: 25),
+          text: pNameStr);
+      TextSpan spanLP = TextSpan(
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'KHMERKEP', fontSize: 25),
+          text: lpNameStr);
+      TextSpan spanOcc = TextSpan(
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'KHMERKEP', fontSize: 25),
+          text: pOccStr);
+      TextPainter tp = TextPainter(
+          text: span,
+          textAlign: TextAlign.center,
+          textDirection: ui.TextDirection.ltr);
+      TextPainter tpLP = TextPainter(
+          text: spanLP,
+          textAlign: TextAlign.center,
+          textDirection: ui.TextDirection.ltr);
+      TextPainter tpOcc = TextPainter(
+          text: spanOcc,
+          textAlign: TextAlign.center,
+          textDirection: ui.TextDirection.ltr);
+      tp.layout();
+      tpLP.layout();
+      tpOcc.layout();
+      tp.paint(canvas, Offset(150 - (tp.width / 2), tp.height / 2));
+      tpLP.paint(canvasLP, Offset(150 - (tpLP.width / 2), tpLP.height / 2));
+      tpOcc.paint(canvasOcc, Offset(150 - (tpOcc.width / 2), tpOcc.height / 2));
+
+      final picture = recorder.endRecording();
+      final pictureLP = recorderLP.endRecording();
+      final pictureOcc = recorderOcc.endRecording();
+      final img = await picture.toImage(300, 60);
+      final imgLP = await pictureLP.toImage(300, 60);
+      final imgOcc = await pictureOcc.toImage(300, 60);
+      final pngBytes = await img.toByteData(format: ImageByteFormat.png);
+      final pngBytesLP = await imgLP.toByteData(format: ImageByteFormat.png);
+      final pngBytesOcc = await imgOcc.toByteData(format: ImageByteFormat.png);
+      if (pNameStr.isEmpty) {
+      } else {
+        if (pNameStr != prefs.getString("pImg")) {
+          await fileImg.create();
+          await fileImg.writeAsBytes(pngBytes.buffer
+              .asUint8List(pngBytes.offsetInBytes, pngBytes.lengthInBytes));
+        }
+      }
+      if (lpNameStr.isEmpty) {
+      } else {
+        if (lpNameStr != prefs.getString("lpImg")) {
+          await fileImgLP.create();
+          await fileImgLP.writeAsBytes(pngBytesLP.buffer
+              .asUint8List(pngBytesLP.offsetInBytes, pngBytesLP.lengthInBytes));
+        }
+      }
+
+      if (pOccStr.isEmpty) {
+      } else {
+        if (pOccStr != prefs.getString("occImg")) {
+          await fileImgOcc.create();
+          await fileImgOcc.writeAsBytes(pngBytesOcc.buffer.asUint8List(
+              pngBytesOcc.offsetInBytes, pngBytesOcc.lengthInBytes));
+        }
+      }
+
+      prefs.setString("pImg", pNameStr);
+      prefs.setString("lpImg", lpNameStr);
+      prefs.setString("occImg", pOccStr);
+    }
+
     List<DropdownMenuItem> paymentMode = [
       DropdownMenuItem(
           child: DropDownText(
@@ -933,7 +1034,16 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               onPhone: 50.0,
                               onTablet: 100.0),
                           onPressed: () async {
+                            final appProvider = Provider.of<AppProvider>(
+                                context,
+                                listen: false);
+
                             if (_formKey.currentState.validate()) {
+                              if (appProvider.language == 'kh') {
+                                await generateImage();
+                                await Future.delayed(
+                                    const Duration(milliseconds: 100));
+                              }
                               counter = 0;
                               customDialogChildren.clear();
                               _formKey.currentState.save();

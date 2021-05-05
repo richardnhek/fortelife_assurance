@@ -303,7 +303,7 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
 
   "pass_empty": {
     LANGUAGE_ENGLISH: "Password Can't Be Empty",
-    LANGUAGE_KHMER: "ពាក្យសម្ងាត់ មិនអាចទទេ"
+    LANGUAGE_KHMER: "សូមបំពេញពាក្យសម្ងាត់!"
   },
   "change_passsuccess": {
     LANGUAGE_ENGLISH: "Password Changed Successfully, Please Log In Again",

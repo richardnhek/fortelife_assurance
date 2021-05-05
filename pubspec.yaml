@@ -122,6 +122,9 @@ flutter:
     - family: LMNS4_0
       fonts:
         - asset: assets/fonts/LMNS4_0.TTF
+    - family: KHMERKEP
+      fonts:
+        - asset: assets/fonts/KHMERKEP.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

@@ -31,12 +31,18 @@ class PDFWidgetEdu {
     final file1 = File("$rootPath/piggybank.png").readAsBytesSync();
     final file3 = File("$rootPath/stats.png").readAsBytesSync();
     final file2 = File("$rootPath/umbrella.png").readAsBytesSync();
+    final pNameFile = File("$rootPath/word.png").readAsBytesSync();
+    final lPNameFile = File("$rootPath/wordLP.png").readAsBytesSync();
+    final occFile = File("$rootPath/wordOcc.png").readAsBytesSync();
 
     final logo = MemoryImage(file);
     final header1 = MemoryImage(file1);
     final header2 = MemoryImage(file2);
     final header3 = MemoryImage(file3);
     final header4 = MemoryImage(file4);
+    final pNameImg = MemoryImage(pNameFile);
+    final lpNameImg = MemoryImage(lPNameFile);
+    final occImg = MemoryImage(occFile);
 
     final Uint8List regularFont =
         File('$rootPath/LiberationSans-Regular.ttf').readAsBytesSync();
@@ -587,28 +593,59 @@ class PDFWidgetEdu {
                                                               font: khmerF,
                                                               fontSize: 16)))),
                                               SizedBox(width: 45),
-                                              PDFSubtitle(
-                                                  isKhmer: false,
-                                                  title: pName,
-                                                  font: regularF),
-                                              PDFSubtitle(
-                                                  isKhmer: true,
-                                                  title: pAge + "qñaM",
-                                                  font: khmerF),
-                                              PDFSubtitle(
-                                                  isKhmer: true,
-                                                  title: pGender == 'Male'
-                                                      ? "Rbús"
-                                                      : "RsI",
-                                                  font: khmerF),
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 5),
+                                              SizedBox(
+                                                  width: 90,
+                                                  child: Center(
+                                                      child: Image(pNameImg,
+                                                          height: 20,
+                                                          fit: BoxFit.cover))),
+                                              SizedBox(
+                                                  width: 90,
+                                                  child: Center(
+                                                      child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                              top: 5.25,
+                                                            ),
+                                                            child: Text(pAge,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        8.25,
+                                                                    font:
+                                                                        regularF))),
+                                                        Text("qñaM",
+                                                            style: TextStyle(
+                                                                fontSize: 16,
+                                                                font: khmerF)),
+                                                      ]))),
+                                              Center(
                                                 child: PDFSubtitle(
-                                                    isKhmer: false,
-                                                    title: pOccupation,
-                                                    font: regularF),
-                                              )
+                                                    isKhmer: true,
+                                                    title: pGender == 'Male'
+                                                        ? "Rbús"
+                                                        : "RsI",
+                                                    font: khmerF),
+                                              ),
+                                              Padding(
+                                                  padding:
+                                                      EdgeInsets.only(right: 5),
+                                                  child: Center(
+                                                      child: SizedBox(
+                                                          width: 90,
+                                                          child: Center(
+                                                              child: Image(
+                                                                  occImg,
+                                                                  height: 20,
+                                                                  fit: BoxFit
+                                                                      .cover)))))
                                             ])),
                                     Row(
                                         mainAxisAlignment:
@@ -624,14 +661,38 @@ class PDFWidgetEdu {
                                                           font: khmerF,
                                                           fontSize: 16)))),
                                           SizedBox(width: 45),
-                                          PDFSubtitle(
-                                              isKhmer: false,
-                                              title: lpName,
-                                              font: regularF),
-                                          PDFSubtitle(
-                                              isKhmer: true,
-                                              title: lpAge + "qñaM",
-                                              font: khmerF),
+                                          SizedBox(
+                                              width: 90,
+                                              child: Center(
+                                                  child: Image(lpNameImg,
+                                                      height: 20,
+                                                      fit: BoxFit.cover))),
+                                          SizedBox(
+                                              width: 90,
+                                              child: Center(
+                                                  child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                    Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          top: 5.25,
+                                                        ),
+                                                        child: Text(lpAge,
+                                                            style: TextStyle(
+                                                                fontSize: 8.25,
+                                                                font:
+                                                                    regularF))),
+                                                    Text("qñaM",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            font: khmerF)),
+                                                  ]))),
                                           PDFSubtitle(
                                               isKhmer: true,
                                               title: lpGender == 'Male'
@@ -854,7 +915,7 @@ class PDFWidgetEdu {
                                                                 fontSize: 16,
                                                                 font: khmerF))
                                                       ]))),
-                                          SizedBox(width: 25),
+                                          SizedBox(width: 22.75),
                                           SizedBox(
                                               width: 75,
                                               child: Row(
@@ -876,14 +937,58 @@ class PDFWidgetEdu {
                                                             fontSize: 16,
                                                             font: khmerF)),
                                                   ])),
-                                          PDFSubtitle(
-                                              isKhmer: true,
-                                              title: policyTerm + "qñaM",
-                                              font: khmerF),
-                                          PDFSubtitle(
-                                              isKhmer: true,
-                                              title: policyTerm + "qñaM",
-                                              font: khmerF),
+                                          SizedBox(
+                                              width: 90,
+                                              child: Center(
+                                                  child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                    Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          top: 5.25,
+                                                        ),
+                                                        child: Text(policyTerm,
+                                                            style: TextStyle(
+                                                                fontSize: 8.25,
+                                                                font:
+                                                                    regularF))),
+                                                    Text("qñaM",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            font: khmerF)),
+                                                  ]))),
+                                          SizedBox(
+                                              width: 90,
+                                              child: Center(
+                                                  child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                    Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          top: 5.25,
+                                                        ),
+                                                        child: Text(policyTerm,
+                                                            style: TextStyle(
+                                                                fontSize: 8.25,
+                                                                font:
+                                                                    regularF))),
+                                                    Text("qñaM",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            font: khmerF)),
+                                                  ]))),
                                           Padding(
                                               padding:
                                                   EdgeInsets.only(right: 5),
@@ -956,7 +1061,7 @@ class PDFWidgetEdu {
                                         children: [
                                           Container(
                                               margin: EdgeInsets.only(left: 5),
-                                              width: 200,
+                                              width: 214.5,
                                               child: Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -1031,7 +1136,7 @@ class PDFWidgetEdu {
                                           Padding(
                                               padding: EdgeInsets.only(left: 5),
                                               child: Container(
-                                                  width: 200,
+                                                  width: 214.5,
                                                   child: Row(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -1727,7 +1832,7 @@ class PDFWidgetEdu {
                                                                 padding: EdgeInsets
                                                                     .only(
                                                                         left:
-                                                                            8.75),
+                                                                            1.5),
                                                                 child: Text(
                                                                     "bg;RbcaMqñaM",
                                                                     style: TextStyle(
@@ -1738,9 +1843,10 @@ class PDFWidgetEdu {
                                                             Padding(
                                                               padding: EdgeInsets
                                                                   .only(
-                                                                      left: 10),
+                                                                      left:
+                                                                          1.5),
                                                               child: Text(
-                                                                  "srubEdl)anbg;",
+                                                                  "srubbUkbgÁr",
                                                                   style: TextStyle(
                                                                       font:
                                                                           khmerBoldF,
