@@ -283,6 +283,21 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Incorrect Username or Password!",
     LANGUAGE_KHMER: "ឈ្មោះគណនី ឬ ពាក្យសម្ងាត់ មិនត្រឹមត្រូវ!"
   },
+
+  "wrong_input_type": {
+    LANGUAGE_ENGLISH: "Only Allows English Characters and Numbers!",
+    LANGUAGE_KHMER: "អនុញ្ញាតតែអក្សរអង់គ្លេសនិងលេខប៉ុណ្ណោះ!"
+  },
+
+  "suspended": {
+    LANGUAGE_ENGLISH: "This Account Has Been Suspended!",
+    LANGUAGE_KHMER: "គណនីនេះត្រូវបានបិទហើយ!"
+  },
+
+  "unknown_error": {
+    LANGUAGE_ENGLISH: "Unknown Error Please Contact Your Tech Support!",
+    LANGUAGE_KHMER: "មានបញ្ហា សូមទាក់ទងអ្នកបច្ចេកទេស!"
+  },
   "server_disc": {
     LANGUAGE_ENGLISH: "Unable to connect to ​server!",
     LANGUAGE_KHMER: "មិនអាចភ្ជាប់ទៅកាន់ ម៉ាស៊ីន ស៊ឺ វឺរបាន!"

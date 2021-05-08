@@ -20,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = new TextEditingController(text: '');
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -38,6 +39,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 onActionButtonPressed: () => Navigator.of(context).pop(),
               ),
             ));
+  }
+
+  String getErrorMessage(String errorMsg) {
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    Map<String, dynamic> lang = appProvider.lang;
+    if (errorMsg == "Unable to connect to the server") {
+      return lang['server_disc'];
+    } else if (errorMsg == "Incorrect Username or Password") {
+      return lang['incorrect_creds'];
+    } else if (errorMsg == "This Account Has Been Suspended") {
+      return lang['suspended'];
+    } else {
+      return lang['unknown_error'];
+    }
   }
 
   Future<void> _onSignInPress(scaffoldContext) async {
@@ -82,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
       } catch (error) {
         print(error);
         Navigator.of(loadingModalContext).pop();
-        _showErrorDialog(error.message);
+        _showErrorDialog(getErrorMessage(error.message));
       }
     }
   }

@@ -1359,7 +1359,7 @@ class PDFWidget {
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Container(
-                                                    width: 200,
+                                                    width: 225.5,
                                                     child: Text(
                                                         "Basic Plan  : $title",
                                                         style: TextStyle(
@@ -1369,7 +1369,7 @@ class PDFWidget {
                                                     ? Container(
                                                         margin: EdgeInsets.only(
                                                             top: 2.5),
-                                                        width: 200,
+                                                        width: 225.5,
                                                         child: Text(
                                                             "Rider          : $title" +
                                                                 " Plus",
@@ -1556,19 +1556,17 @@ class PDFWidget {
                                             padding: EdgeInsets.only(
                                                 left: 5, top: 2.5, bottom: 2.5),
                                             child: Container(
-                                                width: 180,
+                                                width: 225.5,
                                                 child: Text("Total Premium",
                                                     style: TextStyle(
                                                         font: boldF,
                                                         fontSize: 8.25)))),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 50),
-                                          child: PDFSubtitle(
-                                              isKhmer: false,
-                                              title:
-                                                  "USD ${getPremiumPayment(paymentMode)[3].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                                              font: regularF),
-                                        )
+                                        SizedBox(width: 30),
+                                        PDFSubtitle(
+                                            isKhmer: false,
+                                            title:
+                                                "USD ${getPremiumPayment(paymentMode)[3].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                                            font: regularF)
                                       ])
                                 : Stack(children: [
                                     Row(

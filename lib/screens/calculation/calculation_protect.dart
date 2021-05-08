@@ -83,7 +83,7 @@ class _CalculationProtectState extends State<CalculationProtect> {
                   child: TabButton(
                     tabTitle: lang['calculator_screen'],
                     width: mq.size.width / 2,
-                    height: mq.size.height / 10,
+                    height: mq.size.height / 8,
                     icon: Icons.calculate_outlined,
                     fontSize: DeviceUtils.getResponsive(
                         mq: mq,
@@ -108,7 +108,7 @@ class _CalculationProtectState extends State<CalculationProtect> {
                 child: Container(
                   child: TabButton(
                     width: mq.size.width / 2,
-                    height: mq.size.height / 10,
+                    height: mq.size.height / 8,
                     tabTitle: lang['info_screen'],
                     icon: Icons.info_outline,
                     fontSize: DeviceUtils.getResponsive(

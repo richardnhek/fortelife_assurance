@@ -14,6 +14,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final _newPasswordController = new TextEditingController(text: '');
   final _confirmController = new TextEditingController(text: '');
+  final pwdRegex = RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]');
 
   @override
   void initState() {
@@ -114,6 +115,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         width: 60, height: 60),
                     content: Text(
                       lang['four_char'],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: "Kano",
+                        fontSize: 22,
+                        color: Color(0xFFD31145),
+                      ),
+                    ));
+              },
+            );
+          } else if (pwdRegex
+              .hasMatch(_newPasswordController.text.toString())) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                    title: Image.asset("assets/icons/attention.png",
+                        width: 60, height: 60),
+                    content: Text(
+                      lang['wrong_input_type'],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: "Kano",

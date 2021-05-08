@@ -18,7 +18,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   void _onChangePassword(scaffoldContext) async {
     final appProvider = Provider.of<AppProvider>(context, listen: false);
     Map<String, dynamic> lang = appProvider.lang;
-
     BuildContext loadingModalContext;
     if (_newPasswordController.text.isNotEmpty) {
       if (_newPasswordController.text == "1234" ||

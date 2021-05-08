@@ -35,7 +35,6 @@ class AuthProvider extends ChangeNotifier {
 
       if (!_user.isActive) {
         sharedPreferences.remove(APP_ACCESS_TOKEN);
-
         throw HttpException("This Account Has Been Suspended");
       }
 

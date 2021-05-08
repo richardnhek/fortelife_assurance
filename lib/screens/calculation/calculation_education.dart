@@ -78,7 +78,7 @@ class _CalculationEducationState extends State<CalculationEducation> {
                   child: TabButton(
                     tabTitle: lang['calculator_screen'],
                     width: mq.size.width / 2,
-                    height: mq.size.height / 10,
+                    height: mq.size.height / 8,
                     fontSize: DeviceUtils.getResponsive(
                         mq: mq,
                         appProvider: appProvider,
@@ -103,7 +103,7 @@ class _CalculationEducationState extends State<CalculationEducation> {
                 child: Container(
                   child: TabButton(
                     width: mq.size.width / 2,
-                    height: mq.size.height / 10,
+                    height: mq.size.height / 8,
                     tabTitle: lang['info_screen'],
                     icon: Icons.info_outline,
                     fontSize: DeviceUtils.getResponsive(

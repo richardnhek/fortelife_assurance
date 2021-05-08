@@ -1209,6 +1209,12 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                     });
                   },
                 ),
+                SizedBox(
+                    height: DeviceUtils.getResponsive(
+                        mq: mq,
+                        appProvider: appProvider,
+                        onPhone: 10.0,
+                        onTablet: 20.0)),
                 Visibility(
                     visible: appProvider.addRider,
                     child: Container(
@@ -1216,7 +1222,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                           mq: mq,
                           appProvider: appProvider,
                           onPhone: 65.0,
-                          onTablet: 75.0),
+                          onTablet: 130.0),
                       padding: EdgeInsets.only(left: 5, right: 5, bottom: 5),
                       child: CustomTextField(
                         appProvider: appProvider,

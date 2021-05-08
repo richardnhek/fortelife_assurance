@@ -185,281 +185,322 @@ class ProfileScreenUI extends StatelessWidget {
                           appProvider: appProvider,
                           onPhone: 300.0,
                           onTablet: 600.0)),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(3),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Align(
-                            alignment: Alignment.center,
-                            child: Icon(
-                              Icons.lock_outline_rounded,
-                              size: DeviceUtils.getResponsive(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.only(
+                        bottom: DeviceUtils.getResponsive(
+                            mq: mq,
+                            appProvider: appProvider,
+                            onPhone: 75.0,
+                            onTablet: 150.0)),
+                    reverse: true,
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.lock_outline_rounded,
+                                size: DeviceUtils.getResponsive(
+                                    mq: mq,
+                                    appProvider: appProvider,
+                                    onPhone: 60.0,
+                                    onTablet: 120.0),
+                                color: Color(0xFFD31145),
+                              )),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
                                   mq: mq,
                                   appProvider: appProvider,
-                                  onPhone: 60.0,
-                                  onTablet: 120.0),
-                              color: Color(0xFFD31145),
-                            )),
-                        SizedBox(
-                            height: DeviceUtils.getResponsive(
-                                mq: mq,
-                                appProvider: appProvider,
-                                onPhone: 20.0,
-                                onTablet: 40.0)),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            width: DeviceUtils.getResponsive(
-                                mq: mq,
-                                appProvider: appProvider,
-                                onPhone: 180.0,
-                                onTablet: 360.0),
-                            child: Text(
-                              lang['change_pass'],
-                              style: TextStyle(
-                                  color: Color(0xFFD31145),
-                                  fontSize: DeviceUtils.getResponsive(
-                                      mq: mq,
-                                      appProvider: appProvider,
-                                      onPhone: 22.0,
-                                      onTablet: 44.0),
-                                  fontFamily: "Kano",
-                                  fontWeight: FontWeight.w600),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
+                                  onPhone: 20.0,
+                                  onTablet: 40.0)),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 180.0,
+                                  onTablet: 360.0),
+                              child: Text(
+                                lang['change_pass'],
+                                style: TextStyle(
+                                    color: Color(0xFFD31145),
+                                    fontSize: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 22.0,
+                                        onTablet: 44.0),
+                                    fontFamily: "Kano",
+                                    fontWeight: FontWeight.w600),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 20.0,
+                                  onTablet: 40.0)),
+                          Container(
                             height: DeviceUtils.getResponsive(
-                                mq: mq,
                                 appProvider: appProvider,
-                                onPhone: 20.0,
-                                onTablet: 40.0)),
-                        Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                lang['new_pass'] + ": ",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: DeviceUtils.getResponsive(
-                                        mq: mq,
-                                        appProvider: appProvider,
-                                        onPhone: 14.0,
-                                        onTablet: 28.0),
-                                    fontFamily: "Kano"),
-                              ),
-                              SizedBox(
-                                  width: DeviceUtils.getResponsive(
-                                      mq: mq,
-                                      appProvider: appProvider,
-                                      onPhone: appProvider.language == "kh"
-                                          ? 11.0
-                                          : 5.0,
-                                      onTablet: appProvider.language == "kh"
-                                          ? 22.0
-                                          : 10.0)),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                      left: DeviceUtils.getResponsive(
-                                          mq: mq,
-                                          appProvider: appProvider,
-                                          onPhone: 21.0,
-                                          onTablet: 42.0)),
-                                  width: double.infinity,
+                                mq: mq,
+                                onPhone: 100.0,
+                                onTablet: 200.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 5,
+                                  child: Container(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          lang['new_pass'] + ": ",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize:
+                                                  DeviceUtils.getResponsive(
+                                                      mq: mq,
+                                                      appProvider: appProvider,
+                                                      onPhone: 14.0,
+                                                      onTablet: 28.0),
+                                              fontFamily: "Kano"),
+                                        ),
+                                        SizedBox(
+                                            height: DeviceUtils.getResponsive(
+                                                appProvider: appProvider,
+                                                mq: mq,
+                                                onPhone: 10.0,
+                                                onTablet: 20.0)),
+                                        Text(
+                                          lang['confirm_pass'] + ": ",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize:
+                                                  DeviceUtils.getResponsive(
+                                                      mq: mq,
+                                                      appProvider: appProvider,
+                                                      onPhone: 14.0,
+                                                      onTablet: 28.0),
+                                              fontFamily: "Kano"),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 6,
+                                  child: Container(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Color(0xFFB8B8B8))),
+                                            child: Center(
+                                              child: TextFormField(
+                                                controller:
+                                                    newPasswordController,
+                                                keyboardType:
+                                                    TextInputType.name,
+                                                decoration: InputDecoration(
+                                                    disabledBorder:
+                                                        InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
+                                                    border: InputBorder.none,
+                                                    focusedBorder:
+                                                        InputBorder.none,
+                                                    contentPadding:
+                                                        EdgeInsets.only(
+                                                            left: 5,
+                                                            top: 10,
+                                                            bottom: 10),
+                                                    isDense: true,
+                                                    hintText: lang['new_pass'],
+                                                    hintStyle: TextStyle(
+                                                        fontFamily: "Kano",
+                                                        fontSize: DeviceUtils
+                                                            .getResponsive(
+                                                                mq: mq,
+                                                                appProvider:
+                                                                    appProvider,
+                                                                onPhone: 15.0,
+                                                                onTablet: 30.0),
+                                                        color: Colors.black
+                                                            .withOpacity(0.5))),
+                                                style: TextStyle(
+                                                    fontFamily: "Kano",
+                                                    fontSize: DeviceUtils
+                                                        .getResponsive(
+                                                            mq: mq,
+                                                            appProvider:
+                                                                appProvider,
+                                                            onPhone: 14.0,
+                                                            onTablet: 28.0),
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            height: DeviceUtils.getResponsive(
+                                                appProvider: appProvider,
+                                                mq: mq,
+                                                onPhone: 10.0,
+                                                onTablet: 20.0)),
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Color(0xFFB8B8B8))),
+                                            child: Center(
+                                              child: TextFormField(
+                                                controller: confirmController,
+                                                keyboardType:
+                                                    TextInputType.name,
+                                                decoration: InputDecoration(
+                                                    disabledBorder:
+                                                        InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
+                                                    border: InputBorder.none,
+                                                    focusedBorder:
+                                                        InputBorder.none,
+                                                    contentPadding:
+                                                        EdgeInsets.only(
+                                                            left: 5,
+                                                            top: 10,
+                                                            bottom: 10),
+                                                    isDense: true,
+                                                    hintText:
+                                                        lang['confirm_pass'],
+                                                    hintStyle: TextStyle(
+                                                        fontFamily: "Kano",
+                                                        fontSize: DeviceUtils
+                                                            .getResponsive(
+                                                                mq: mq,
+                                                                appProvider:
+                                                                    appProvider,
+                                                                onPhone: 15.0,
+                                                                onTablet: 30.0),
+                                                        color: Colors.black
+                                                            .withOpacity(0.5))),
+                                                style: TextStyle(
+                                                    fontFamily: "Kano",
+                                                    fontSize: DeviceUtils
+                                                        .getResponsive(
+                                                            mq: mq,
+                                                            appProvider:
+                                                                appProvider,
+                                                            onPhone: 14.0,
+                                                            onTablet: 28.0),
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                              height: DeviceUtils.getResponsive(
+                                  mq: mq,
+                                  appProvider: appProvider,
+                                  onPhone: 20.0,
+                                  onTablet: 40.0)),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
                                   height: DeviceUtils.getResponsive(
                                       mq: mq,
                                       appProvider: appProvider,
                                       onPhone: 50.0,
                                       onTablet: 100.0),
-                                  decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: Color(0xFFB8B8B8))),
-                                  child: TextFormField(
-                                    controller: newPasswordController,
-                                    keyboardType: TextInputType.name,
-                                    decoration: InputDecoration(
-                                        disabledBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        contentPadding:
-                                            EdgeInsets.only(left: 5, top: 15),
-                                        isDense: true,
-                                        hintText: lang['new_pass'],
-                                        hintStyle: TextStyle(
-                                            fontFamily: "Kano",
-                                            fontSize: DeviceUtils.getResponsive(
-                                                mq: mq,
-                                                appProvider: appProvider,
-                                                onPhone: 15.0,
-                                                onTablet: 30.0),
-                                            color:
-                                                Colors.black.withOpacity(0.5))),
-                                    style: TextStyle(
-                                        fontFamily: "Kano",
-                                        fontSize: DeviceUtils.getResponsive(
-                                            mq: mq,
-                                            appProvider: appProvider,
-                                            onPhone: 14.0,
-                                            onTablet: 28.0),
-                                        color: Colors.black),
-                                  ),
-                                ),
-                              ),
-                            ]),
-                        SizedBox(
-                            height: DeviceUtils.getResponsive(
-                                mq: mq,
-                                appProvider: appProvider,
-                                onPhone: 10.0,
-                                onTablet: 20.0)),
-                        Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                lang['confirm_pass'] + ": ",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: DeviceUtils.getResponsive(
-                                        mq: mq,
-                                        appProvider: appProvider,
-                                        onPhone: 14.0,
-                                        onTablet: 28.0),
-                                    fontFamily: "Kano"),
-                              ),
-                              SizedBox(
                                   width: DeviceUtils.getResponsive(
                                       mq: mq,
                                       appProvider: appProvider,
-                                      onPhone: 5.0,
-                                      onTablet: 10.0)),
-                              Expanded(
-                                child: Container(
-                                  width: double.infinity,
+                                      onPhone: 100.0,
+                                      onTablet: 200.0),
+                                  child: FlatButton(
+                                    color: Color(0xFFD31145),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      lang['cancel'],
+                                      style: TextStyle(
+                                          fontSize: DeviceUtils.getResponsive(
+                                              mq: mq,
+                                              appProvider: appProvider,
+                                              onPhone: 16.0,
+                                              onTablet: 32.0),
+                                          fontFamily: "Kano",
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                    width: DeviceUtils.getResponsive(
+                                        mq: mq,
+                                        appProvider: appProvider,
+                                        onPhone: 10.0,
+                                        onTablet: 20.0)),
+                                SizedBox(
                                   height: DeviceUtils.getResponsive(
                                       mq: mq,
                                       appProvider: appProvider,
                                       onPhone: 50.0,
                                       onTablet: 100.0),
-                                  decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: Color(0xFFB8B8B8))),
-                                  child: TextFormField(
-                                    controller: confirmController,
-                                    keyboardType: TextInputType.name,
-                                    decoration: InputDecoration(
-                                        disabledBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        contentPadding:
-                                            EdgeInsets.only(left: 5, top: 15),
-                                        isDense: true,
-                                        hintText: lang['confirm_pass'],
-                                        hintStyle: TextStyle(
-                                            fontFamily: "Kano",
-                                            fontSize: DeviceUtils.getResponsive(
-                                                mq: mq,
-                                                appProvider: appProvider,
-                                                onPhone: 15.0,
-                                                onTablet: 30.0),
-                                            color:
-                                                Colors.black.withOpacity(0.5))),
-                                    style: TextStyle(
-                                        fontFamily: "Kano",
-                                        fontSize: DeviceUtils.getResponsive(
-                                            mq: mq,
-                                            appProvider: appProvider,
-                                            onPhone: 14.0,
-                                            onTablet: 28.0),
-                                        color: Colors.black),
-                                  ),
-                                ),
-                              ),
-                            ]),
-                        SizedBox(
-                            height: DeviceUtils.getResponsive(
-                                mq: mq,
-                                appProvider: appProvider,
-                                onPhone: 20.0,
-                                onTablet: 40.0)),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: DeviceUtils.getResponsive(
-                                    mq: mq,
-                                    appProvider: appProvider,
-                                    onPhone: 50.0,
-                                    onTablet: 100.0),
-                                width: DeviceUtils.getResponsive(
-                                    mq: mq,
-                                    appProvider: appProvider,
-                                    onPhone: 100.0,
-                                    onTablet: 200.0),
-                                child: FlatButton(
-                                  color: Color(0xFFD31145),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text(
-                                    lang['cancel'],
-                                    style: TextStyle(
-                                        fontSize: DeviceUtils.getResponsive(
-                                            mq: mq,
-                                            appProvider: appProvider,
-                                            onPhone: 16.0,
-                                            onTablet: 32.0),
-                                        fontFamily: "Kano",
-                                        color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
                                   width: DeviceUtils.getResponsive(
                                       mq: mq,
                                       appProvider: appProvider,
-                                      onPhone: 10.0,
-                                      onTablet: 20.0)),
-                              SizedBox(
-                                height: DeviceUtils.getResponsive(
-                                    mq: mq,
-                                    appProvider: appProvider,
-                                    onPhone: 50.0,
-                                    onTablet: 100.0),
-                                width: DeviceUtils.getResponsive(
-                                    mq: mq,
-                                    appProvider: appProvider,
-                                    onPhone: 100.0,
-                                    onTablet: 200.0),
-                                child: FlatButton(
-                                  color: Color(0xFF8AB84B),
-                                  onPressed: () => onChangePassword(context),
-                                  child: Text(
-                                    lang['confirm'],
-                                    style: TextStyle(
-                                        fontSize: DeviceUtils.getResponsive(
-                                            mq: mq,
-                                            appProvider: appProvider,
-                                            onPhone: 16.0,
-                                            onTablet: 32.0),
-                                        fontFamily: "Kano",
-                                        color: Colors.white),
+                                      onPhone: 100.0,
+                                      onTablet: 200.0),
+                                  child: FlatButton(
+                                    color: Color(0xFF8AB84B),
+                                    onPressed: () => onChangePassword(context),
+                                    child: Text(
+                                      lang['confirm'],
+                                      style: TextStyle(
+                                          fontSize: DeviceUtils.getResponsive(
+                                              mq: mq,
+                                              appProvider: appProvider,
+                                              onPhone: 16.0,
+                                              onTablet: 32.0),
+                                          fontFamily: "Kano",
+                                          color: Colors.white),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ]),
-                      ],
+                              ]),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -527,6 +568,13 @@ class ProfileScreenUI extends StatelessWidget {
                                     onPhone: 15.0,
                                     onTablet: 30.0),
                                 fontFamily: "Kano"),
+                          ),
+                          SizedBox(
+                            height: DeviceUtils.getResponsive(
+                                appProvider: appProvider,
+                                mq: mq,
+                                onPhone: 10.0,
+                                onTablet: 20.0),
                           ),
                           Container(
                             child: Row(
@@ -647,10 +695,9 @@ class ProfileScreenUI extends StatelessWidget {
     }
 
     return SingleChildScrollView(
-      physics: NeverScrollableScrollPhysics(),
       child: Container(
         height: mq.size.height,
-        child: Stack(alignment: Alignment.center, children: [
+        child: Stack(alignment: Alignment.topCenter, children: [
           Align(
             alignment: Alignment.topCenter,
             child: Container(

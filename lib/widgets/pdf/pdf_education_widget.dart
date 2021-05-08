@@ -1060,19 +1060,17 @@ class PDFWidgetEdu {
                                             MainAxisAlignment.start,
                                         children: [
                                           Container(
-                                              width: 180,
+                                              width: 225.5,
                                               child: Text("Basic Plan : $title",
                                                   style: TextStyle(
                                                       font: regularF,
                                                       fontSize: 8.25))),
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 50),
-                                            child: PDFSubtitle(
-                                                isKhmer: false,
-                                                title:
-                                                    "USD ${getPremiumPayment(paymentMode)[1].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                                                font: regularF),
-                                          )
+                                          SizedBox(width: 33.5),
+                                          PDFSubtitle(
+                                              isKhmer: false,
+                                              title:
+                                                  "USD ${getPremiumPayment(paymentMode)[1].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                                              font: regularF)
                                         ]),
                                   )
                                 : Stack(children: [
@@ -1160,19 +1158,17 @@ class PDFWidgetEdu {
                                             padding: EdgeInsets.only(
                                                 left: 5, top: 2.5, bottom: 2.5),
                                             child: Container(
-                                                width: 160,
+                                                width: 225.5,
                                                 child: Text("Total Premium",
                                                     style: TextStyle(
                                                         font: boldF,
                                                         fontSize: 8.25)))),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 70),
-                                          child: PDFSubtitle(
-                                              isKhmer: false,
-                                              title:
-                                                  "USD ${getPremiumPayment(paymentMode)[1].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
-                                              font: regularF),
-                                        )
+                                        SizedBox(width: 33.5),
+                                        PDFSubtitle(
+                                            isKhmer: false,
+                                            title:
+                                                "USD ${getPremiumPayment(paymentMode)[1].toStringAsFixed(2).replaceAllMapped(regExpNum, (Match m) => '${m[1]},')}",
+                                            font: regularF)
                                       ])
                                 : Stack(children: [
                                     Row(
@@ -2115,7 +2111,7 @@ class PDFWidgetEdu {
                                                                             top:
                                                                                 12.5),
                                                                         child: Text(
-                                                                            "kalkMNt;nig",
+                                                                            "kalkMNt;bUknig",
                                                                             style:
                                                                                 TextStyle(font: khmerBoldF, fontSize: 16))),
                                                                     Padding(
