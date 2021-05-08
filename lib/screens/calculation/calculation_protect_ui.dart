@@ -306,20 +306,20 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       tpLP.layout();
       tpOcc.layout();
       tplOcc.layout();
-      tp.paint(canvas, Offset(150 - (tp.width / 2), tp.height / 2));
-      tpLP.paint(canvasLP, Offset(150 - (tpLP.width / 2), tpLP.height / 2));
-      tpOcc.paint(canvasOcc, Offset(150 - (tpOcc.width / 2), tpOcc.height / 2));
+      tp.paint(canvas, Offset(175 - (tp.width / 2), tp.height / 2));
+      tpLP.paint(canvasLP, Offset(175 - (tpLP.width / 2), tpLP.height / 2));
+      tpOcc.paint(canvasOcc, Offset(175 - (tpOcc.width / 2), tpOcc.height / 2));
       tplOcc.paint(
-          canvaslOcc, Offset(150 - (tplOcc.width / 2), tplOcc.height / 2));
+          canvaslOcc, Offset(175 - (tplOcc.width / 2), tplOcc.height / 2));
 
       final picture = recorder.endRecording();
       final pictureLP = recorderLP.endRecording();
       final pictureOcc = recorderOcc.endRecording();
       final picturelOcc = recorderlOcc.endRecording();
-      final img = await picture.toImage(300, 60);
-      final imgLP = await pictureLP.toImage(300, 60);
-      final imgOcc = await pictureOcc.toImage(300, 60);
-      final imglOcc = await picturelOcc.toImage(300, 60);
+      final img = await picture.toImage(350, 60);
+      final imgLP = await pictureLP.toImage(350, 60);
+      final imgOcc = await pictureOcc.toImage(350, 60);
+      final imglOcc = await picturelOcc.toImage(350, 60);
 
       final pngBytes = await img.toByteData(format: ImageByteFormat.png);
       final pngBytesLP = await imgLP.toByteData(format: ImageByteFormat.png);
@@ -329,7 +329,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
       if (pNameStr.isEmpty) {
       } else {
-        if (pNameStr != prefs.getString("pImg")) {
+        if (pNameStr != prefs.getString("pImgPro")) {
           await fileImg.create();
           await fileImg.writeAsBytes(pngBytes.buffer
               .asUint8List(pngBytes.offsetInBytes, pngBytes.lengthInBytes));
@@ -337,7 +337,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       }
       if (lpNameStr.isEmpty) {
       } else {
-        if (lpNameStr != prefs.getString("lpImg")) {
+        if (lpNameStr != prefs.getString("lpImgPro")) {
           await fileImgLP.create();
           await fileImgLP.writeAsBytes(pngBytesLP.buffer
               .asUint8List(pngBytesLP.offsetInBytes, pngBytesLP.lengthInBytes));
@@ -346,7 +346,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
       if (pOccStr.isEmpty) {
       } else {
-        if (pOccStr != prefs.getString("occImg")) {
+        if (pOccStr != prefs.getString("occImgPro")) {
           await fileImgOcc.create();
           await fileImgOcc.writeAsBytes(pngBytesOcc.buffer.asUint8List(
               pngBytesOcc.offsetInBytes, pngBytesOcc.lengthInBytes));
@@ -355,17 +355,17 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
 
       if (lOccStr.isEmpty) {
       } else {
-        if (lOccStr != prefs.getString("lOccImg")) {
+        if (lOccStr != prefs.getString("lOccImgPro")) {
           await fileImglOcc.create();
           await fileImglOcc.writeAsBytes(pngByteslOcc.buffer.asUint8List(
               pngByteslOcc.offsetInBytes, pngByteslOcc.lengthInBytes));
         }
       }
 
-      prefs.setString("pImg", pNameStr);
-      prefs.setString("lpImg", lpNameStr);
-      prefs.setString("occImg", pOccStr);
-      prefs.setString("lOccImg", lOccStr);
+      prefs.setString("pImgPro", pNameStr);
+      prefs.setString("lpImgPro", lpNameStr);
+      prefs.setString("occImgPro", pOccStr);
+      prefs.setString("lOccImgPro", lOccStr);
     }
 
     List<DropdownMenuItem> paymentMode = [
@@ -729,7 +729,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                       formInputType: TextInputType.name,
                                       formController: pFirstName,
                                       isRequired: false,
-                                      maxLength: 10,
+                                      maxLength: 12,
                                       errorVisible: false,
                                     ),
                                   ),
@@ -907,7 +907,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                 formInputType: TextInputType.name,
                                 isRequired: false,
                                 formController: firstName,
-                                maxLength: 10,
+                                maxLength: 12,
                                 errorVisible: false,
                               ),
                             ),

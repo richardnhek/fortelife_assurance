@@ -2110,10 +2110,14 @@ class PDFWidgetEdu {
                                                                         padding: EdgeInsets.only(
                                                                             top:
                                                                                 12.5),
-                                                                        child: Text(
-                                                                            "kalkMNt;bUknig",
-                                                                            style:
-                                                                                TextStyle(font: khmerBoldF, fontSize: 16))),
+                                                                        child: Row(
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.center,
+                                                                            children: [
+                                                                              Text("kalkMNt;bUk", style: TextStyle(font: khmerBoldF, fontSize: 16)),
+                                                                              Text(" ", style: TextStyle(font: regularF, fontSize: 8.25)),
+                                                                              Text("nig", style: TextStyle(font: khmerBoldF, fontSize: 16)),
+                                                                            ])),
                                                                     Padding(
                                                                         padding: EdgeInsets.only(
                                                                             top:
@@ -2263,7 +2267,7 @@ class PDFWidgetEdu {
                               Padding(
                                 padding: EdgeInsets.only(top: 30, left: 13.75),
                                 child: Text(
-                                    "cMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna.GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kalkMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
+                                    "cMnYnqñaMénkalkMNt;énbNÑsnüar:ab;rgnwgRtÚv)anykmkKNna. GtßRbeyaCn_BiessRtÚv)anFananwgRtÚvTUTat;EteBldl;kalkMNt;énbNÑsnüar:ab;rgb:ueNÑaH.",
                                     style:
                                         TextStyle(fontSize: 13, font: khmerF)),
                               ),
@@ -2349,7 +2353,7 @@ class PDFWidgetEdu {
                               Padding(
                                 padding: EdgeInsets.only(top: 80),
                                 child: Text(
-                                    "¬c¦ kñúgkrNIEdlGñkbg;buBVlaPFanar:ab;rgTTYlmrNPaBb¤BikarPaBTaMgRsúg nigCaGciéRnþy_buBVlaPFanar:ab;rgTaMgGs;naeBlGnaKtGnuelamtambNÑsnüar:ab;rgenHnwgminRtÚv)antRmÚv[bg;bnþeToteLIy.",
+                                    "¬c¦ kñúgkrNIEdlGñkbg;buBVlaPFanar:ab;rgTTYlmrNPaB b¤BikarPaBTaMgRsúg nigCaGciéRnþy_buBVlaPFanar:ab;rgTaMgGs;naeBlGnaKtGnuelamtambNÑsnüar:ab;rgenHnwgminRtÚv)antRmÚv[bg;bnþeToteLIy.",
                                     style:
                                         TextStyle(fontSize: 13, font: khmerF)),
                               ),
@@ -2362,10 +2366,25 @@ class PDFWidgetEdu {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 105),
-                                child: Text(
-                                    "smÁal;³ taragsmÁal;bgðajBIplitplenHnwgRtÚvGs;suBlPaBry³eBl30éf¶eRkaykalbriecäTe)aHBum<xageRkam.",
-                                    style:
-                                        TextStyle(fontSize: 13, font: khmerF)),
+                                child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                          "smÁal;³ taragsmÁal;bgðajBIplitplenHnwgRtÚvGs;suBlPaBry³eBl",
+                                          style: TextStyle(
+                                              fontSize: 13, font: khmerF)),
+                                      Padding(
+                                          padding: EdgeInsets.only(top: 1.25),
+                                          child: Text("30",
+                                              style: TextStyle(
+                                                  fontSize: 6.25,
+                                                  font: regularF))),
+                                      Text(
+                                          "éf¶eRkaykalbriecäTe)aHBum<xageRkam.",
+                                          style: TextStyle(
+                                              fontSize: 13, font: khmerF)),
+                                    ]),
                               ),
                             ]),
                           )

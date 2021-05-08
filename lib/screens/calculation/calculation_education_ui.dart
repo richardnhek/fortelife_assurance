@@ -237,16 +237,16 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
       tp.layout();
       tpLP.layout();
       tpOcc.layout();
-      tp.paint(canvas, Offset(150 - (tp.width / 2), tp.height / 2));
-      tpLP.paint(canvasLP, Offset(150 - (tpLP.width / 2), tpLP.height / 2));
-      tpOcc.paint(canvasOcc, Offset(150 - (tpOcc.width / 2), tpOcc.height / 2));
+      tp.paint(canvas, Offset(175 - (tp.width / 2), tp.height / 2));
+      tpLP.paint(canvasLP, Offset(175 - (tpLP.width / 2), tpLP.height / 2));
+      tpOcc.paint(canvasOcc, Offset(175 - (tpOcc.width / 2), tpOcc.height / 2));
 
       final picture = recorder.endRecording();
       final pictureLP = recorderLP.endRecording();
       final pictureOcc = recorderOcc.endRecording();
-      final img = await picture.toImage(300, 60);
-      final imgLP = await pictureLP.toImage(300, 60);
-      final imgOcc = await pictureOcc.toImage(300, 60);
+      final img = await picture.toImage(350, 60);
+      final imgLP = await pictureLP.toImage(350, 60);
+      final imgOcc = await pictureOcc.toImage(350, 60);
       final pngBytes = await img.toByteData(format: ImageByteFormat.png);
       final pngBytesLP = await imgLP.toByteData(format: ImageByteFormat.png);
       final pngBytesOcc = await imgOcc.toByteData(format: ImageByteFormat.png);
@@ -574,7 +574,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                     formLabel: lang['first_name'],
                                     formInputType: TextInputType.name,
                                     formController: pFirstName,
-                                    maxLength: 10,
+                                    maxLength: 12,
                                     isRequired: false,
                                     errorVisible: false,
                                   ),
@@ -744,7 +744,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 mq: mq,
                                 formLabel: lang['first_name'],
                                 formInputType: TextInputType.name,
-                                maxLength: 10,
+                                maxLength: 12,
                                 isRequired: false,
                                 formController: firstName,
                                 errorVisible: false,
