@@ -277,8 +277,8 @@ class ProfileScreenUI extends StatelessWidget {
                                                   DeviceUtils.getResponsive(
                                                       mq: mq,
                                                       appProvider: appProvider,
-                                                      onPhone: 14.0,
-                                                      onTablet: 28.0),
+                                                      onPhone: 15.0,
+                                                      onTablet: 30.0),
                                               fontFamily: "Kano"),
                                         ),
                                         SizedBox(
@@ -295,8 +295,8 @@ class ProfileScreenUI extends StatelessWidget {
                                                   DeviceUtils.getResponsive(
                                                       mq: mq,
                                                       appProvider: appProvider,
-                                                      onPhone: 14.0,
-                                                      onTablet: 28.0),
+                                                      onPhone: 15.0,
+                                                      onTablet: 30.0),
                                               fontFamily: "Kano"),
                                         )
                                       ],
@@ -310,7 +310,7 @@ class ProfileScreenUI extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Expanded(
                                           child: Container(
@@ -356,8 +356,8 @@ class ProfileScreenUI extends StatelessWidget {
                                                             mq: mq,
                                                             appProvider:
                                                                 appProvider,
-                                                            onPhone: 14.0,
-                                                            onTablet: 28.0),
+                                                            onPhone: 15.0,
+                                                            onTablet: 30.0),
                                                     color: Colors.black),
                                               ),
                                             ),

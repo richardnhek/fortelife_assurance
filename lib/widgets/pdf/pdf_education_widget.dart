@@ -1912,25 +1912,63 @@ class PDFWidgetEdu {
                                                           alignment: Alignment
                                                               .topCenter,
                                                           children: [
-                                                            Text(
-                                                                "GtßRbeyaCn_mrNPaBnigBikarPaB",
-                                                                style: TextStyle(
-                                                                    font:
-                                                                        khmerBoldF,
-                                                                    fontSize:
-                                                                        16)),
+                                                            Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                      "GtßRbeyaCn_mrNPaB",
+                                                                      style: TextStyle(
+                                                                          font:
+                                                                              khmerBoldF,
+                                                                          fontSize:
+                                                                              16)),
+                                                                  Text(" ",
+                                                                      style: TextStyle(
+                                                                          font:
+                                                                              regularF,
+                                                                          fontSize:
+                                                                              8.25)),
+                                                                  Text(
+                                                                      "nigBikarPaB",
+                                                                      style: TextStyle(
+                                                                          font:
+                                                                              khmerBoldF,
+                                                                          fontSize:
+                                                                              16)),
+                                                                ]),
                                                             Padding(
                                                                 padding: EdgeInsets
                                                                     .only(
                                                                         top:
                                                                             12.5),
-                                                                child: Text(
-                                                                    "TaMgRsúgnigCaGciéRnþy_¬duløar¦",
-                                                                    style: TextStyle(
-                                                                        font:
-                                                                            khmerBoldF,
-                                                                        fontSize:
-                                                                            16))),
+                                                                child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                          "TaMgRsúg",
+                                                                          style: TextStyle(
+                                                                              font: khmerBoldF,
+                                                                              fontSize: 16)),
+                                                                      Text(" ",
+                                                                          style: TextStyle(
+                                                                              font: regularF,
+                                                                              fontSize: 8.25)),
+                                                                      Text(
+                                                                          "nigCaGciéRnþy_¬duløar¦",
+                                                                          style: TextStyle(
+                                                                              font: khmerBoldF,
+                                                                              fontSize: 16)),
+                                                                    ])),
                                                           ]),
                                                       Image(header2,
                                                           width: 35,
