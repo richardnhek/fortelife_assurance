@@ -4,6 +4,7 @@ import 'package:forte_life/providers/app_provider.dart';
 import 'package:forte_life/screens/pdf/pdf_screen_education.dart';
 import 'package:forte_life/screens/pdf/pdf_screen_protect.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PDFScreen extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class PDFScreen extends StatefulWidget {
 }
 
 class _PDFScreenState extends State<PDFScreen> {
-  final tabs = [PDFScreenProtect(), PDFScreenEdu()];
+  final tabs = [BlankPDF(), PDFScreenProtect(), PDFScreenEdu()];
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,16 @@ class _PDFScreenState extends State<PDFScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class BlankPDF extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.transparent,
+      child: Center(child: Text("Blank")),
     );
   }
 }

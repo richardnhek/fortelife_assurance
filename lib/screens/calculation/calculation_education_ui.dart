@@ -509,10 +509,11 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
       parametersProvider.basicSA = sumAssuredNum.toString();
       parametersProvider.isOnPolicy = isOnPolicy;
       setState(() {
-        appProvider.pdfScreenIndex = 1;
+        appProvider.pdfScreenIndex = 2;
         appProvider.activeTabIndex = 1;
         appProvider.calculationPageEdu = 0;
       });
+
       Navigator.pushNamedAndRemoveUntil(context, '/main_flow', (_) => false);
     }
     //
@@ -1055,6 +1056,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                   age.text, pAge.text, policyYear.text);
                               genderValidation(
                                   lSelectedGender, pSelectedGender);
+
                               if (counter == 5) {
                                 calculateAndPDF();
                               } else

@@ -646,7 +646,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
       parametersProvider.isOnPolicy = isOnPolicy;
       setState(() {
         appProvider.activeTabIndex = 1;
-        appProvider.pdfScreenIndex = 0;
+        appProvider.pdfScreenIndex = 1;
         appProvider.calculationPage = 0;
       });
       Navigator.pushNamedAndRemoveUntil(context, '/main_flow', (_) => false);
