@@ -1272,11 +1272,10 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                               onTablet: 100.0),
                           onPressed: () async {
                             if (widget._formKey.currentState.validate()) {
-                              if (appProvider.language == 'kh') {
-                                await generateImage();
-                                await Future.delayed(
-                                    const Duration(milliseconds: 100));
-                              }
+                              await generateImage();
+                              await Future.delayed(
+                                  const Duration(milliseconds: 100));
+
                               counter = 0;
                               customDialogChildren.clear();
                               widget._formKey.currentState.save();

@@ -2414,7 +2414,7 @@ class PDFWidgetEdu {
                                               fontSize: 13, font: khmerF)),
                                       Padding(
                                           padding: EdgeInsets.only(top: 1.25),
-                                          child: Text("30",
+                                          child: Text(" 30",
                                               style: TextStyle(
                                                   fontSize: 6.25,
                                                   font: regularF))),

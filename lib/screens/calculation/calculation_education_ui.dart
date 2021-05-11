@@ -1040,11 +1040,10 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 listen: false);
 
                             if (_formKey.currentState.validate()) {
-                              if (appProvider.language == 'kh') {
-                                await generateImage();
-                                await Future.delayed(
-                                    const Duration(milliseconds: 100));
-                              }
+                              await generateImage();
+                              await Future.delayed(
+                                  const Duration(milliseconds: 100));
+
                               counter = 0;
                               customDialogChildren.clear();
                               _formKey.currentState.save();

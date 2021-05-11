@@ -27,14 +27,6 @@ class _AppControllerState extends State<AppController> {
 
   @override
   Widget build(BuildContext context) {
-    AppProvider appProvider = Provider.of<AppProvider>(context);
-    Typography t = Typography.material2018();
-    ThemeData appTheme = ThemeData.from(
-      colorScheme: COLOR_SCHEME_LIGHT,
-      textTheme: t.black.apply(
-        fontFamily: AppUtils.getFontFamily(appProvider.language),
-      ),
-    );
     return MaterialApp(
         localizationsDelegates: [GlobalMaterialLocalizations.delegate],
         supportedLocales: [const Locale('en'), const Locale('km')],
