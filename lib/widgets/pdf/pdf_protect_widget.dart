@@ -2879,7 +2879,7 @@ class PDFWidget {
                                       ),
                                       Padding(
                                           padding: EdgeInsets.only(top: 1.25),
-                                          child: Text("1",
+                                          child: Text(" 1",
                                               style: TextStyle(
                                                   fontSize: 6.25,
                                                   font: regularF))),
