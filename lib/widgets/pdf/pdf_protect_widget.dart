@@ -2596,20 +2596,33 @@ class PDFWidget {
                                   right: 2.5,
                                   left: 2.5,
                                   bottom: 1.25),
-                              headerHeight: 0.05,
+                              headerHeight: 0,
+                              headers: [""],
                               cellHeight: 0.05,
-                              headerPadding: const EdgeInsets.only(
-                                  top: 3.5,
-                                  right: 2.5,
-                                  left: 2.5,
-                                  bottom: 1.25),
-                              headerStyle:
-                                  TextStyle(font: regularF, fontSize: 7.6),
+                              cellDecoration: (index, data, rowNum) {
+                                if (index == 1) {
+                                  return BoxDecoration(
+                                      border: TableBorder(left: BorderSide()));
+                                } else if (index == 3) {
+                                  return BoxDecoration(
+                                      border: TableBorder(left: BorderSide()));
+                                } else if (index == 5) {
+                                  return BoxDecoration(
+                                      border: TableBorder(left: BorderSide()));
+                                } else if (index == 6) {
+                                  return BoxDecoration(
+                                      border: TableBorder(left: BorderSide()));
+                                } else
+                                  return BoxDecoration(
+                                      border: Border.symmetric(
+                                          horizontal: BorderSide(
+                                              color: PdfColors.white)));
+                              },
+                              headerPadding: const EdgeInsets.all(0),
                               cellStyle:
                                   TextStyle(font: regularF, fontSize: 7.6),
                               cellAlignment: Alignment.topCenter,
                               border: TableBorder(
-                                  verticalInside: BorderSide(),
                                   top: BorderSide(),
                                   bottom: BorderSide(),
                                   left: BorderSide(),

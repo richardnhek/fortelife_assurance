@@ -27,8 +27,8 @@ dependencies:
     sdk: flutter
   provider: ^4.3.2+3
   smart_select: ^4.3.2
-  excel: ^1.1.5
-  pdf: ^2.0.0
+  excel: ^2.0.0-null-safety-3
+  pdf: ^3.3.0
   path_provider: 1.6.27
   syncfusion_flutter_pdfviewer: ^18.4.32-beta
   syncfusion_localizations: ^18.4.32
@@ -56,7 +56,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.8.1
+  flutter_launcher_icons: ^0.9.0
 flutter_icons:
   android: true
   ios: true

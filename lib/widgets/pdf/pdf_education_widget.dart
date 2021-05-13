@@ -1742,25 +1742,42 @@ class PDFWidgetEdu {
                                 Table.fromTextArray(
                                     headerAlignment: Alignment.topCenter,
                                     columnWidths: columnWidthValKh,
-                                    headerHeight: 0.05,
-                                    headerPadding: const EdgeInsets.only(
-                                        top: 3.5,
-                                        right: 2.5,
-                                        left: 2.5,
-                                        bottom: 1.25),
+                                    headerHeight: 0,
+                                    headers: [""],
+                                    headerPadding: const EdgeInsets.all(0),
                                     cellHeight: 0.05,
+                                    cellDecoration: (index, data, rowNum) {
+                                      if (index == 1) {
+                                        return BoxDecoration(
+                                            border: TableBorder(
+                                                left: BorderSide(width: 1.5)));
+                                      } else if (index == 3) {
+                                        return BoxDecoration(
+                                            border: TableBorder(
+                                                left: BorderSide(width: 1.5)));
+                                      } else if (index == 5) {
+                                        return BoxDecoration(
+                                            border: TableBorder(
+                                                left: BorderSide(width: 1.5)));
+                                      } else if (index == 6) {
+                                        return BoxDecoration(
+                                            border: TableBorder(
+                                                left: BorderSide(width: 1.5)));
+                                      } else
+                                        return BoxDecoration(
+                                            border: Border.symmetric(
+                                                horizontal: BorderSide(
+                                                    color: PdfColors.white)));
+                                    },
                                     cellPadding: EdgeInsets.only(
                                         top: 1.25,
                                         right: 2.5,
                                         left: 2.5,
                                         bottom: 1.25),
-                                    headerStyle: TextStyle(
-                                        font: regularF, fontSize: 7.6),
                                     cellStyle: TextStyle(
                                         font: regularF, fontSize: 7.6),
                                     cellAlignment: Alignment.topCenter,
                                     border: TableBorder(
-                                        verticalInside: BorderSide(),
                                         top: BorderSide(),
                                         bottom: BorderSide(),
                                         left: BorderSide(),
@@ -1792,7 +1809,7 @@ class PDFWidgetEdu {
                                                   decoration: BoxDecoration(
                                                       border: TableBorder(
                                                           right: BorderSide())),
-                                                  width: 45.2,
+                                                  width: 45.55,
                                                   height: 95,
                                                   child: Stack(
                                                       alignment:
@@ -1828,7 +1845,7 @@ class PDFWidgetEdu {
                                                       ])),
                                               Container(
                                                 height: 95,
-                                                width: 139.36,
+                                                width: 139.45,
                                                 decoration: BoxDecoration(
                                                     border: TableBorder(
                                                         right: BorderSide())),
@@ -2187,25 +2204,46 @@ class PDFWidgetEdu {
                                 Table.fromTextArray(
                                     headerAlignment: Alignment.topCenter,
                                     columnWidths: columnWidthValKh,
-                                    headerHeight: 0.05,
-                                    headerPadding: const EdgeInsets.only(
-                                        top: 3.5,
-                                        right: 2.5,
-                                        left: 2.5,
-                                        bottom: 1.25),
                                     cellHeight: 0.05,
+                                    headerHeight: 0,
+                                    headers: [""],
+                                    headerPadding: const EdgeInsets.all(0),
+                                    cellDecoration: (index, data, rowNum) {
+                                      if (index == 1) {
+                                        return BoxDecoration(
+                                            border: TableBorder(
+                                                left: BorderSide(width: 1.5)));
+                                      } else if (index == 3) {
+                                        return BoxDecoration(
+                                            border: TableBorder(
+                                                left: BorderSide(width: 1.5)));
+                                      } else if (index == 4) {
+                                        return BoxDecoration(
+                                            border: TableBorder(
+                                                left: BorderSide(width: 1.5)));
+                                      } else if (index == 5) {
+                                        return BoxDecoration(
+                                            border: TableBorder(
+                                                left: BorderSide(width: 1.5)));
+                                      } else if (index == 6) {
+                                        return BoxDecoration(
+                                            border: TableBorder(
+                                                left: BorderSide(width: 1.5)));
+                                      } else
+                                        return BoxDecoration(
+                                            border: Border.symmetric(
+                                                horizontal: BorderSide(
+                                                    color: PdfColors.white)));
+                                    },
                                     cellPadding: EdgeInsets.only(
                                         top: 1.25,
                                         right: 2.5,
                                         left: 2.5,
                                         bottom: 1.25),
-                                    headerStyle: TextStyle(
-                                        font: regularF, fontSize: 7.6),
                                     cellStyle: TextStyle(
                                         font: regularF, fontSize: 7.6),
                                     cellAlignment: Alignment.topCenter,
                                     border: TableBorder(
-                                        verticalInside: BorderSide(),
                                         top: BorderSide(),
                                         bottom: BorderSide(),
                                         left: BorderSide(),
