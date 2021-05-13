@@ -118,7 +118,7 @@ class PDFWidgetEdu {
           {
             truePremium = yearlyNum;
             premiumPayment = yearlyNum;
-            paymentModeStr = "RbcaMqÒaM";
+            paymentModeStr = "RbcaMqñaM";
             break;
           }
         case "Half-yearly":
@@ -1312,7 +1312,7 @@ class PDFWidgetEdu {
                                               children: [
                                                 PDFSubtitle(
                                                     isKhmer: true,
-                                                    title: "RbcaMqÒaM",
+                                                    title: "RbcaMqñaM",
                                                     font: khmerF),
                                                 Row(
                                                     crossAxisAlignment:
@@ -1798,7 +1798,7 @@ class PDFWidgetEdu {
                                                       alignment:
                                                           Alignment.topCenter,
                                                       children: [
-                                                        Text("enAcugqÒaM",
+                                                        Text("enAcugqñaM",
                                                             style: TextStyle(
                                                                 font:
                                                                     khmerBoldF,
