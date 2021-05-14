@@ -695,7 +695,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                       mq: mq,
                                       formInputType: TextInputType.text,
                                       formLabel: lang['occupation'],
-                                      maxLength: 22,
+                                      maxLength: 20,
                                       isRequired: false,
                                       formController: pOccupation,
                                       errorVisible: false,
@@ -1035,10 +1035,6 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                               onPhone: 50.0,
                               onTablet: 100.0),
                           onPressed: () async {
-                            final appProvider = Provider.of<AppProvider>(
-                                context,
-                                listen: false);
-
                             if (_formKey.currentState.validate()) {
                               await generateImage();
                               await Future.delayed(
