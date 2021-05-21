@@ -229,6 +229,7 @@ class PDFWidget {
       totalPremiumNum = (premiumNum + premiumRiderNum);
       accumulatedPremiumNoRider += yearlyNum;
       accumulatedPremium += totalPremiumNum;
+      print(lpName.length);
       if (isOnPolicy == false) {
         age += 1;
       }
@@ -595,80 +596,196 @@ class PDFWidget {
                             lang != 'kh'
                                 ? Column(children: [
                                     Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 2.5, bottom: 2.5),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 5),
-                                                child: Container(
-                                                    width: 100,
-                                                    child: Text("Life Proposed",
-                                                        style: TextStyle(
-                                                            font: regularF,
-                                                            fontSize: 8.25)))),
-                                            SizedBox(width: 20.5),
-                                            PDFSubtitle(
-                                                isKhmer: false,
-                                                title: lpName,
-                                                font: regularF),
-                                            PDFSubtitle(
-                                                isKhmer: false,
-                                                title: lpAge,
-                                                font: regularF),
-                                            PDFSubtitle(
-                                                isKhmer: false,
-                                                title: lpGender,
-                                                font: regularF),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 5),
-                                              child: PDFSubtitle(
-                                                  isKhmer: false,
-                                                  title: lpOccupation,
-                                                  font: regularF),
-                                            )
-                                          ]),
-                                    ),
+                                        padding: EdgeInsets.only(
+                                            top: 2.5, bottom: 2.5),
+                                        child:
+                                            // Row(
+                                            //     mainAxisAlignment:
+                                            //         MainAxisAlignment.spaceBetween,
+                                            //     children: [
+                                            //       Padding(
+                                            //           padding:
+                                            //               EdgeInsets.only(left: 5),
+                                            //           child: Container(
+                                            //               width: 100,
+                                            //               child: Text("Life Proposed",
+                                            //                   style: TextStyle(
+                                            //                       font: regularF,
+                                            //                       fontSize: 8.25)))),
+                                            //       SizedBox(width: 20.5),
+                                            //       PDFSubtitle(
+                                            //           isKhmer: false,
+                                            //           title: lpName,
+                                            //           font: regularF),
+                                            //       PDFSubtitle(
+                                            //           isKhmer: false,
+                                            //           title: lpAge,
+                                            //           font: regularF),
+                                            //       PDFSubtitle(
+                                            //           isKhmer: false,
+                                            //           title: lpGender,
+                                            //           font: regularF),
+                                            //       Padding(
+                                            //         padding:
+                                            //             EdgeInsets.only(right: 5),
+                                            //         child: PDFSubtitle(
+                                            //             isKhmer: false,
+                                            //             title: lpOccupation,
+                                            //             font: regularF),
+                                            //       )
+                                            //     ]),
+                                            Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                              Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 5,
+                                                      bottom: 2.5,
+                                                      top: 2.5),
+                                                  child: Container(
+                                                      width: 120,
+                                                      child: Text(
+                                                          "Life Proposed",
+                                                          style: TextStyle(
+                                                              font: regularF,
+                                                              fontSize:
+                                                                  8.25)))),
+                                              SizedBox(
+                                                  width: 150,
+                                                  child: Center(
+                                                      child: Text(lpName,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: regularF,
+                                                              fontSize:
+                                                                  8.25)))),
+                                              SizedBox(
+                                                  width: 62.5,
+                                                  child: Center(
+                                                      child: Text(lpAge,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: regularF,
+                                                              fontSize:
+                                                                  8.25)))),
+                                              SizedBox(
+                                                  width: 147.5,
+                                                  child: Center(
+                                                      child: Text(lpGender,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: regularF,
+                                                              fontSize:
+                                                                  8.25)))),
+                                              SizedBox(
+                                                  width: 65,
+                                                  child: Center(
+                                                      child: Text(lpOccupation,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: regularF,
+                                                              fontSize:
+                                                                  8.25)))),
+                                            ])),
                                     Padding(
                                         padding: EdgeInsets.only(bottom: 2.5),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
+                                        child:
+                                            // Row(
+                                            //     mainAxisAlignment:
+                                            //         MainAxisAlignment.spaceBetween,
+                                            //     children: [
+                                            //       Padding(
+                                            //           padding:
+                                            //               EdgeInsets.only(left: 5),
+                                            //           child: Container(
+                                            //               width: 100,
+                                            //               child: Text("Proposer",
+                                            //                   style: TextStyle(
+                                            //                       font: regularF,
+                                            //                       fontSize:
+                                            //                           8.25)))),
+                                            //       SizedBox(width: 20.5),
+                                            //       PDFSubtitle(
+                                            //           isKhmer: false,
+                                            //           title: pName,
+                                            //           font: regularF),
+                                            //       PDFSubtitle(
+                                            //           isKhmer: false,
+                                            //           title: pAge,
+                                            //           font: regularF),
+                                            //       PDFSubtitle(
+                                            //           isKhmer: false,
+                                            //           title: pGender,
+                                            //           font: regularF),
+                                            //       Padding(
+                                            //           padding:
+                                            //               EdgeInsets.only(right: 5),
+                                            //           child: PDFSubtitle(
+                                            //               isKhmer: false,
+                                            //               title: pOccupation,
+                                            //               font: regularF)),
+                                            //     ])
+                                            Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
                                               Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 5),
+                                                  padding: EdgeInsets.only(
+                                                      left: 5,
+                                                      bottom: 2.5,
+                                                      top: 2.5),
                                                   child: Container(
-                                                      width: 100,
+                                                      width: 120,
                                                       child: Text("Proposer",
                                                           style: TextStyle(
                                                               font: regularF,
                                                               fontSize:
                                                                   8.25)))),
-                                              SizedBox(width: 20.5),
-                                              PDFSubtitle(
-                                                  isKhmer: false,
-                                                  title: pName,
-                                                  font: regularF),
-                                              PDFSubtitle(
-                                                  isKhmer: false,
-                                                  title: pAge,
-                                                  font: regularF),
-                                              PDFSubtitle(
-                                                  isKhmer: false,
-                                                  title: pGender,
-                                                  font: regularF),
-                                              Padding(
-                                                  padding:
-                                                      EdgeInsets.only(right: 5),
-                                                  child: PDFSubtitle(
-                                                      isKhmer: false,
-                                                      title: pOccupation,
-                                                      font: regularF)),
+                                              SizedBox(
+                                                  width: 150,
+                                                  child: Center(
+                                                      child: Text(pName,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: regularF,
+                                                              fontSize:
+                                                                  8.25)))),
+                                              SizedBox(
+                                                  width: 62.5,
+                                                  child: Center(
+                                                      child: Text(pAge,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: regularF,
+                                                              fontSize:
+                                                                  8.25)))),
+                                              SizedBox(
+                                                  width: 147.5,
+                                                  child: Center(
+                                                      child: Text(pGender,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: regularF,
+                                                              fontSize:
+                                                                  8.25)))),
+                                              SizedBox(
+                                                  width: 65,
+                                                  child: Center(
+                                                      child: Text(pOccupation,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              font: regularF,
+                                                              fontSize:
+                                                                  8.25)))),
                                             ]))
                                   ])
                                 : Stack(children: [
@@ -2619,24 +2736,39 @@ class PDFWidget {
                                   int.parse(lpAge), paymentMode)),
                         ]),
                     lang != 'kh'
-                        ? Padding(
-                            padding: EdgeInsets.only(top: 5),
-                            child: Flexible(
-                                child: Text(
-                                    "1.	This is a Non-participating Endowment plan with premium payables throughout the term of the Policy." +
-                                        "\n" +
-                                        "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term with entry age below 50 years last birthday and \n    1% of Basic Sum Assured multiplied by the policy term with age 50 years last birthday and above. The Guaranteed Special Benefit shall only be \n    available upon maturity of the policy" +
-                                        "\n" +
-                                        "3.	This Policy will acquire a Cash Value after it has been in-force for a minimum of two years." +
-                                        "\n" +
-                                        "4. The above is for illustration purposes only. The benefits described herein are subject to all terms and conditions contained in the Policy contract."
+                        ? (addRider == true &&
+                                int.parse(policyTerm) > 30 &&
+                                lpName.length > 30)
+                            ? Padding(
+                                padding: EdgeInsets.only(top: 5),
+                                child: Flexible(
+                                    child: Text(
+                                        "1.	This is a Non-participating Endowment plan with premium payables throughout the term of the Policy." +
                                             "\n" +
-                                        "5.	Pays the earlier of either Death due to All Causes, TPD due to All Causes, Death due to Accident or TPD due to Accident." +
-                                        "\n\n" +
-                                        "Note: This Sales Illustration shall be expired 30 days after print date below.",
-                                    style: TextStyle(
-                                        fontSize: 8.25, font: regularF))),
-                          )
+                                            "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term with entry age below 50 years last birthday and \n    1% of Basic Sum Assured multiplied by the policy term with age 50 years last birthday and above. The Guaranteed Special Benefit shall only be \n    available upon maturity of the policy" +
+                                            "\n" +
+                                            "3.	This Policy will acquire a Cash Value after it has been in-force for a minimum of two years.",
+                                        style: TextStyle(
+                                            fontSize: 8.25, font: regularF))),
+                              )
+                            : Padding(
+                                padding: EdgeInsets.only(top: 5),
+                                child: Flexible(
+                                    child: Text(
+                                        "1.	This is a Non-participating Endowment plan with premium payables throughout the term of the Policy." +
+                                            "\n" +
+                                            "2.	The Guaranteed Special Benefit shall be equal to 2% of Basic Sum Assured multiplied by the Policy term with entry age below 50 years last birthday and \n    1% of Basic Sum Assured multiplied by the policy term with age 50 years last birthday and above. The Guaranteed Special Benefit shall only be \n    available upon maturity of the policy" +
+                                            "\n" +
+                                            "3.	This Policy will acquire a Cash Value after it has been in-force for a minimum of two years." +
+                                            "\n" +
+                                            "4. The above is for illustration purposes only. The benefits described herein are subject to all terms and conditions contained in the Policy contract." +
+                                            "\n" +
+                                            "5.	Pays the earlier of either Death due to All Causes, TPD due to All Causes, Death due to Accident or TPD due to Accident." +
+                                            "\n\n" +
+                                            "Note: This Sales Illustration shall be expired 30 days after print date below.",
+                                        style: TextStyle(
+                                            fontSize: 8.25, font: regularF))),
+                              )
                         : (int.parse(policyTerm) <= 30)
                             ? (int.parse(policyTerm) < 30)
                                 ? Padding(
@@ -2945,7 +3077,21 @@ class PDFWidget {
                           ]),
                         )
                       : SizedBox(height: 0)
-                  : SizedBox(height: 0),
+                  : (lpName.length > 30 &&
+                          addRider == true &&
+                          int.parse(policyTerm) > 30)
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 15),
+                          child: Flexible(
+                              child: Text(
+                                  "4. The above is for illustration purposes only. The benefits described herein are subject to all terms and conditions contained in the Policy contract." +
+                                      "\n" +
+                                      "5.	Pays the earlier of either Death due to All Causes, TPD due to All Causes, Death due to Accident or TPD due to Accident." +
+                                      "\n\n" +
+                                      "Note: This Sales Illustration shall be expired 30 days after print date below.",
+                                  style: TextStyle(
+                                      fontSize: 8.25, font: regularF))))
+                      : SizedBox(height: 0),
             ]));
     return pdf;
   }

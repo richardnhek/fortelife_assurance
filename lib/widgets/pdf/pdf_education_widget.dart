@@ -325,6 +325,7 @@ class PDFWidgetEdu {
           i++;
         }
       }
+      print("LP NAME LENGTH" + lpName.length.toString());
 
       return dynamicRow;
     }
@@ -522,7 +523,7 @@ class PDFWidgetEdu {
                                 ? Column(children: [
                                     Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.start,
                                         children: [
                                           Padding(
                                               padding: EdgeInsets.only(
@@ -530,65 +531,112 @@ class PDFWidgetEdu {
                                                   bottom: 2.5,
                                                   top: 2.5),
                                               child: Container(
-                                                  width: 100,
+                                                  width: 122.5,
                                                   child: Text("Life Proposed",
                                                       style: TextStyle(
                                                           font: regularF,
                                                           fontSize: 8.25)))),
-                                          SizedBox(width: 25),
-                                          PDFSubtitle(
-                                              isKhmer: false,
-                                              title: lpName,
-                                              font: regularF),
-                                          PDFSubtitle(
-                                              isKhmer: false,
-                                              title: lpAge,
-                                              font: regularF),
-                                          PDFSubtitle(
-                                              isKhmer: false,
-                                              title: lpGender,
-                                              font: regularF),
-                                          Padding(
-                                            padding: EdgeInsets.only(right: 5),
-                                            child: PDFSubtitle(
-                                                isKhmer: false,
-                                                title: lpOccupation,
-                                                font: regularF),
-                                          )
+
+                                          SizedBox(
+                                              width: 150,
+                                              child: Center(
+                                                  child: Text(lpName,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: regularF,
+                                                          fontSize: 8.25)))),
+
+                                          SizedBox(
+                                              width: 60,
+                                              child: Center(
+                                                  child: Text(lpAge,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: regularF,
+                                                          fontSize: 8.25)))),
+                                          SizedBox(
+                                              width: 150,
+                                              child: Center(
+                                                  child: Text(lpGender,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: regularF,
+                                                          fontSize: 8.25)))),
+                                          SizedBox(
+                                              width: 55,
+                                              child: Center(
+                                                  child: Text(lpOccupation,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: regularF,
+                                                          fontSize: 8.25)))),
+                                          // PDFSubtitle(
+                                          //     isKhmer: false,
+                                          //     title: lpGender,
+                                          //     font: regularF),
+                                          // Padding(
+                                          //   padding: EdgeInsets.only(right: 5),
+                                          //   child: PDFSubtitle(
+                                          //       isKhmer: false,
+                                          //       title: lpOccupation,
+                                          //       font: regularF),
+                                          // )
                                         ]),
                                     Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.start,
                                         children: [
                                           Padding(
                                               padding: EdgeInsets.only(
-                                                  left: 5, bottom: 2.5),
+                                                  left: 5,
+                                                  bottom: 2.5,
+                                                  top: 2.5),
                                               child: Container(
-                                                  width: 100,
+                                                  width: 122.5,
                                                   child: Text("Payor",
                                                       style: TextStyle(
                                                           font: regularF,
                                                           fontSize: 8.25)))),
-                                          SizedBox(width: 25),
-                                          PDFSubtitle(
-                                              isKhmer: false,
-                                              title: pName,
-                                              font: regularF),
-                                          PDFSubtitle(
-                                              isKhmer: false,
-                                              title: pAge,
-                                              font: regularF),
-                                          PDFSubtitle(
-                                              isKhmer: false,
-                                              title: pGender,
-                                              font: regularF),
-                                          Padding(
-                                            padding: EdgeInsets.only(right: 5),
-                                            child: PDFSubtitle(
-                                                isKhmer: false,
-                                                title: pOccupation,
-                                                font: regularF),
-                                          )
+                                          SizedBox(
+                                              width: 150,
+                                              child: Center(
+                                                  child: Text(pName,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: regularF,
+                                                          fontSize: 8.25)))),
+                                          SizedBox(
+                                              width: 60,
+                                              child: Center(
+                                                  child: Text(pAge,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: regularF,
+                                                          fontSize: 8.25)))),
+                                          SizedBox(
+                                              width: 150,
+                                              child: Center(
+                                                  child: Text(pGender,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: regularF,
+                                                          fontSize: 8.25)))),
+                                          SizedBox(
+                                              width: 55,
+                                              child: Center(
+                                                  child: Text(pOccupation,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          font: regularF,
+                                                          fontSize: 8.25)))),
                                         ])
                                   ])
                                 : Stack(children: [

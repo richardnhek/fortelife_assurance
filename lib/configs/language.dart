@@ -58,8 +58,8 @@ Map<String, Map<String, String>> LANGUAGE_MAP = {
     LANGUAGE_ENGLISH: "Information",
     LANGUAGE_KHMER: "ព័ត៌មានសង្ខេប"
   },
-  "first_name": {LANGUAGE_ENGLISH: "First Name", LANGUAGE_KHMER: "ឈ្មោះ"},
-  "last_name": {LANGUAGE_ENGLISH: "Last Name", LANGUAGE_KHMER: "នាមត្រកូល"},
+  "first_name": {LANGUAGE_ENGLISH: "First Name", LANGUAGE_KHMER: "នាមត្រកូល"},
+  "last_name": {LANGUAGE_ENGLISH: "Last Name", LANGUAGE_KHMER: "ឈ្មោះ"},
   "age": {LANGUAGE_ENGLISH: "Age", LANGUAGE_KHMER: "អាយុ"},
   "dob": {
     LANGUAGE_ENGLISH: "Date of Birth",

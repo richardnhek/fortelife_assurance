@@ -12,6 +12,7 @@ class PDFSubtitle extends StatelessWidget {
         width: 90,
         child: Center(
             child: Text(title,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: isKhmer == false ? 8.25 : 16, font: font))));
   }

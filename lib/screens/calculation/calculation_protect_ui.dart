@@ -598,9 +598,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
     void calculateAndPDF() {
       if (appProvider.differentPerson == false) {
         parametersProvider.pName = parametersProvider.lpName =
-            appProvider.language != 'kh'
-                ? firstName.text.toString() + " " + lastName.text.toString()
-                : lastName.text.toString() + " " + firstName.text.toString();
+            firstName.text.toString() + " " + lastName.text.toString();
         parametersProvider.pAge =
             parametersProvider.lpAge = age.text.toString();
         parametersProvider.pGender =
@@ -609,18 +607,17 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
             parametersProvider.lpOccupation = lOccupation.text.toString();
       } else {
         //Proposer
-        parametersProvider.pName = appProvider.language != 'kh'
-            ? pFirstName.text.toString() + " " + pLastName.text.toString()
-            : pLastName.text.toString() + " " + pFirstName.text.toString();
+        parametersProvider.pName =
+            pFirstName.text.toString() + " " + pLastName.text.toString();
+
         parametersProvider.pAge = pAge.text.toString();
         parametersProvider.pGender = pSelectedGender.toString();
         parametersProvider.pOccupation = pOccupation.text.toString();
         //
 
         //Life Proposed
-        parametersProvider.lpName = appProvider.language != 'kh'
-            ? firstName.text.toString() + " " + lastName.text.toString()
-            : lastName.text.toString() + " " + firstName.text.toString();
+        parametersProvider.lpName =
+            firstName.text.toString() + " " + lastName.text.toString();
         parametersProvider.lpAge = age.text.toString();
         parametersProvider.lpGender = lSelectedGender.toString();
         parametersProvider.lpOccupation = lOccupation.text.toString();
@@ -729,7 +726,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                       formInputType: TextInputType.name,
                                       formController: pFirstName,
                                       isRequired: false,
-                                      maxLength: 12,
+                                      maxLength: 10,
                                       errorVisible: false,
                                     ),
                                   ),
@@ -744,7 +741,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                       appProvider: appProvider,
                                       mq: mq,
                                       formLabel: lang['last_name'],
-                                      maxLength: 10,
+                                      maxLength: 30,
                                       isRequired: false,
                                       formInputType: TextInputType.name,
                                       formController: pLastName,
@@ -907,7 +904,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                 formInputType: TextInputType.name,
                                 isRequired: false,
                                 formController: firstName,
-                                maxLength: 12,
+                                maxLength: 10,
                                 errorVisible: false,
                               ),
                             ),
@@ -925,7 +922,7 @@ class _CalculationProtectUIState extends State<CalculationProtectUI> {
                                 formInputType: TextInputType.name,
                                 formController: lastName,
                                 isRequired: false,
-                                maxLength: 10,
+                                maxLength: 30,
                                 errorVisible: false,
                               ),
                             ),

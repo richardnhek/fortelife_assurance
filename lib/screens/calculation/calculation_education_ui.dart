@@ -486,18 +486,16 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
     //Calculate and Generate PDF
     void calculateAndPDF() {
       //Payor
-      parametersProvider.pName = appProvider.language != 'kh'
-          ? pFirstName.text.toString() + " " + pLastName.text.toString()
-          : pLastName.text.toString() + " " + pFirstName.text.toString();
+      parametersProvider.pName =
+          pFirstName.text.toString() + " " + pLastName.text.toString();
       parametersProvider.pAge = pAge.text.toString();
       parametersProvider.pGender = pSelectedGender.toString();
       parametersProvider.pOccupation = pOccupation.text.toString();
       //
 
       //Child
-      parametersProvider.lpName = appProvider.language != 'kh'
-          ? firstName.text.toString() + " " + lastName.text.toString()
-          : lastName.text.toString() + " " + firstName.text.toString();
+      parametersProvider.lpName =
+          firstName.text.toString() + " " + lastName.text.toString();
       parametersProvider.lpAge = age.text.toString();
       parametersProvider.lpGender = lSelectedGender.toString();
       parametersProvider.lpOccupation = lOccupation.text.toString();
@@ -575,7 +573,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                     formLabel: lang['first_name'],
                                     formInputType: TextInputType.name,
                                     formController: pFirstName,
-                                    maxLength: 12,
+                                    maxLength: 10,
                                     isRequired: false,
                                     errorVisible: false,
                                   ),
@@ -591,7 +589,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                     appProvider: appProvider,
                                     mq: mq,
                                     formLabel: lang['last_name'],
-                                    maxLength: 10,
+                                    maxLength: 30,
                                     formInputType: TextInputType.name,
                                     formController: pLastName,
                                     isRequired: false,
@@ -745,7 +743,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 mq: mq,
                                 formLabel: lang['first_name'],
                                 formInputType: TextInputType.name,
-                                maxLength: 12,
+                                maxLength: 10,
                                 isRequired: false,
                                 formController: firstName,
                                 errorVisible: false,
@@ -765,7 +763,7 @@ class _CalculationEducationUIState extends State<CalculationEducationUI> {
                                 formInputType: TextInputType.name,
                                 formController: lastName,
                                 isRequired: false,
-                                maxLength: 10,
+                                maxLength: 30,
                                 errorVisible: false,
                               ),
                             ),
