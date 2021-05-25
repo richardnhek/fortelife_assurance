@@ -229,7 +229,6 @@ class PDFWidget {
       totalPremiumNum = (premiumNum + premiumRiderNum);
       accumulatedPremiumNoRider += yearlyNum;
       accumulatedPremium += totalPremiumNum;
-      print(lpName.length);
       if (isOnPolicy == false) {
         age += 1;
       }
@@ -2738,7 +2737,7 @@ class PDFWidget {
                     lang != 'kh'
                         ? (addRider == true &&
                                 int.parse(policyTerm) > 30 &&
-                                lpName.length > 30)
+                                lpName.length > 25)
                             ? Padding(
                                 padding: EdgeInsets.only(top: 5),
                                 child: Flexible(
@@ -3077,7 +3076,7 @@ class PDFWidget {
                           ]),
                         )
                       : SizedBox(height: 0)
-                  : (lpName.length > 30 &&
+                  : (lpName.length > 25 &&
                           addRider == true &&
                           int.parse(policyTerm) > 30)
                       ? Padding(
